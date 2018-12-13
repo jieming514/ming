@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.system.dao.DeptDao">
+
+    <insert id="save" parameterType="com.ming.system.domain.DeptDO"
+            useGeneratedKeys="true" keyProperty="deptId">
+        insert into sys_dept (
+           dept_id,
+           parent_id,
+           name,
+           order_num,
+           del_flag
+        ) values (
+          #{deptId},
+          #{parentId},
+          #{name},
+          #{orderNum},
+          #{delFlag}
+        )
+    </insert>
+
+    <delete id="remove">
+        delete from sys_dept where dept_id = #{value}
+    </delete>
+
+    <update id="update" parameterType="com.ming.system.domain.DeptDO">
+        update sys_dept sd
+        <set>
+            <if test="parentId != null and parentId != ''"> sd.parent_id = #{parentId}, </if>
+            <if test="name != null and name != ''"> sd.name = #{name}, </if>
+            <if test="orderNum != null and orderNum != ''"> sd.order_num = #{orderNum}, </if>
+            <if test="delFlag != null and delFlag != ''"> sd.del_flag = #{delFlag} </if>
+        </set>
+        where sd.dept_id = #{deptId}
+    </update>
+
+    <select id="get" resultType="com.ming.system.domain.DeptDO">
+        select sd.dept_id,
+               sd.parent_id,
+               sd.name,
+               sd.order_num,
+               sd.del_flag
+          from sys_dept sd
+         where sd.dept_id = #{value}
+    </select>
+
+    <select id="list" resultType="com.ming.system.domain.DeptDO">
+        select sd.dept_id,
+               sd.parent_id,
+               sd.name,
+               sd.order_num,
+               sd.del_flag
+          from sys_dept sd
+         <where>
+             <if test="deptId != null and deptId != ''"> sd.dept_id = #{deptId}, </if>
+             <if test="parentId != null and parentId != ''"> sd.parent_id = #{parentId}, </if>
+             <if test="name != null and name != ''"> sd.name = #{name}, </if>
+             <if test="orderNum != null and orderNum != ''"> sd.order_num = #{orderNum}, </if>
+             <if test="delFlag != null and delFlag != ''"> sd.del_flag = #{delFlag} </if>
+         </where>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(1)
+        from sys_dept sd
+        <where>
+            <if test="deptId != null and deptId != ''"> sd.dept_id = #{deptId}, </if>
+            <if test="parentId != null and parentId != ''"> sd.parent_id = #{parentId}, </if>
+            <if test="name != null and name != ''"> sd.name = #{name}, </if>
+            <if test="orderNum != null and orderNum != ''"> sd.order_num = #{orderNum}, </if>
+            <if test="delFlag != null and delFlag != ''"> sd.del_flag = #{delFlag} </if>
+        </where>
+    </select>
+
+
+
+</mapper>
