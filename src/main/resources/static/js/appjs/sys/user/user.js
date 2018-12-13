@@ -58,7 +58,7 @@ function load(deptId) {
 						title : '姓名'
 					},
 					{
-						field : 'username',
+						field : 'userName',
 						title : '用户名'
 					},
 					{

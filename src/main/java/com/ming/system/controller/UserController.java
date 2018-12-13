@@ -53,6 +53,7 @@ public class UserController extends BaseController {
         return pageUtil;
     }
 
+
     @RequiresPermissions("sys:user:user")
     @GetMapping("/add")
     public String add() {
