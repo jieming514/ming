@@ -9,6 +9,8 @@ import com.ming.common.util.R;
 import com.ming.system.domain.UserDO;
 import com.ming.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +26,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/sys/user")
 public class UserController extends BaseController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final String PREFIX = "system/user";
     @Autowired
@@ -80,6 +84,34 @@ public class UserController extends BaseController {
         }
 
     }
+
+    /**
+     * 功能描述: 编辑页面
+     *
+     * @param: 用户ID
+     * @return: 编辑页面
+     * @auther: jie_ming514@163.com
+     * @date: 2018/12/16 23:03
+     */
+    @GetMapping("/edit/{pId}")
+    public String edit(ModelMap modelMap, @PathVariable("pId") Long pId) {
+        UserDO userDO = userService.get(pId);
+        logger.debug(userDO.toString());
+        modelMap.addAttribute("user",userDO);
+        return PREFIX + "/edit";
+    }
+
+    @RequiresPermissions("sys:user:edit")
+    @PostMapping("/update")
+    @ResponseBody
+    public R update(UserDO userDO) {
+        if(userService.update(userDO) > 0) {
+            return R.ok();
+        }else {
+            return R.error(500,"更新失败，未更新到数据！");
+        }
+    }
+
 
 
 

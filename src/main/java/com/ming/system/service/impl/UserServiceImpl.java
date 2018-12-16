@@ -53,4 +53,10 @@ public class UserServiceImpl implements UserService {
         return userDao.list(map).size() > 0;
     }
 
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    @Override
+    public int update(UserDO userDO) {
+        return userDao.update(userDO);
+    }
+
 }

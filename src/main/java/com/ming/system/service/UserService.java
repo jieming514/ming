@@ -16,4 +16,6 @@ public interface UserService {
     int save(UserDO userDO);
 
     boolean exit(Map<String, Object> map);
+
+    int update(UserDO userDO);
 }

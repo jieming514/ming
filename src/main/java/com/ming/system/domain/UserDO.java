@@ -1,6 +1,6 @@
 package com.ming.system.domain;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -16,6 +16,7 @@ public class UserDO implements Serializable {
     // 用户真实姓名
     private String name;
     // 密码
+    @JsonIgnore
     private String password;
     // 部门
     private Long deptId;
@@ -29,9 +30,9 @@ public class UserDO implements Serializable {
     // 创建用户id
     private Long userIdCreate;
     // 创建时间
-    private Date gmtCreate;
+    private Date createDate;
     // 修改时间
-    private Date gmtModified;
+    private Date updateDate = new Date();
     //角色
     private List<Long> roleIds;
     //性别
@@ -134,21 +135,6 @@ public class UserDO implements Serializable {
         this.userIdCreate = userIdCreate;
     }
 
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
 
     public List<Long> getRoleIds() {
         return roleIds;
@@ -222,21 +208,36 @@ public class UserDO implements Serializable {
         this.district = district;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UserDO{");
         sb.append("userId=").append(userId);
         sb.append(", userName='").append(userName).append('\'');
         sb.append(", name='").append(name).append('\'');
-        sb.append(", password='").append(password).append('\'');
         sb.append(", deptId=").append(deptId);
         sb.append(", deptName='").append(deptName).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", mobile='").append(mobile).append('\'');
         sb.append(", status='").append(status).append('\'');
         sb.append(", userIdCreate=").append(userIdCreate);
-        sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", gmtModified=").append(gmtModified);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", updateDate=").append(updateDate);
         sb.append(", roleIds=").append(roleIds);
         sb.append(", sex=").append(sex);
         sb.append(", birth=").append(birth);

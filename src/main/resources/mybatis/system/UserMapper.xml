@@ -136,7 +136,7 @@
 	<update id="update" parameterType="com.ming.system.domain.UserDO">
 		update sys_user 
 		<set>
-			<if test="user_name != null">`user_name` = #{user_name}, </if>
+			<if test="userName != null">`user_name` = #{userName}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="password != null">`password` = #{password}, </if>
 			<if test="deptId != null">`dept_id` = #{deptId}, </if>
@@ -144,8 +144,8 @@
 			<if test="mobile != null">`mobile` = #{mobile}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
-			<if test="gmtCreate != null">`gmt_create` = #{gmtCreate}, </if>
-			<if test="gmtModified != null">`gmt_modified` = #{gmtModified}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}, </if>
 			<if test="sex != null">`sex` = #{sex}, </if>
 			<if test="birth != null">`birth` = #{birth}, </if>
 			<if test="picId != null">`pic_id` = #{picId}, </if>

@@ -66,7 +66,7 @@ function validateRule() {
 			name : {
 				required : true
 			},
-			username : {
+			userame : {
 				required : true,
 				minlength : 2
 			},
@@ -92,7 +92,7 @@ function validateRule() {
 		messages : {
 
 			name : {
-				required : icon + "请输入姓名"
+				requireNd : icon + "请输入姓名"
 			},
 			username : {
 				required : icon + "请输入您的用户名",
