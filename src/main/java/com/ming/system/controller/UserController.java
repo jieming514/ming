@@ -2,11 +2,9 @@ package com.ming.system.controller;
 
 
 import com.ming.common.controller.BaseController;
-import com.ming.common.util.MD5Utils;
-import com.ming.common.util.PageUtils;
-import com.ming.common.util.Query;
-import com.ming.common.util.R;
+import com.ming.common.util.*;
 import com.ming.system.domain.UserDO;
+import com.ming.system.domain.UserVO;
 import com.ming.system.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -113,6 +111,58 @@ public class UserController extends BaseController {
     }
 
 
+    /**
+     * 功能描述: 修改密码页面
+     *
+     * @param: 用户ID
+     * @return: 修改密码页面
+     * @auther: jie_ming514@163.com
+     * @date: 2018/12/17 22:29
+     */
+    @GetMapping("/resetPwd/{pId}")
+    public String resetPwd(ModelMap modelMap, @PathVariable("pId") Long pId) {
+        UserDO userDO = userService.get(pId);
+        logger.debug(userDO.toString());
+        modelMap.addAttribute("user",userDO);
+        return PREFIX + "/reset_pwd";
+    }
+
+
+    @RequiresPermissions("sys:user:edit")
+    @PostMapping("/adminResetPwd")
+    @ResponseBody
+    public R adminResetPwd(UserVO userVO) {
+        int count = 0;
+        try {
+            count = userService.adminResetPwd(userVO);
+            if(count > 0) {
+                return R.ok("密码重置成功！");
+            }else {
+                return R.error(500,"未找到用户信息，密码重置失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error(501,e.getMessage());
+        }
+    }
+
+
+    @RequiresPermissions("sys:user:remove")
+    @PostMapping("/remove")
+    @ResponseBody
+    public R remove(Long id) {
+        try {
+            int count = userService.remove(id);
+            if ( count > 0) {
+                return R.ok("删除用户成功！");
+            } else {
+                return R.error(500, "未找到用户信息，删除用户失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.error(500, ErrorUtils.makeErrorCode() + e.getMessage());
+        }
+    }
 
 
 }

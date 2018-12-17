@@ -1,5 +1,8 @@
 package com.ming.common.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +10,8 @@ import java.util.Map;
  * 返回值
  */
 public class R extends HashMap<String, Object> {
+
+    private static final Logger logger = LoggerFactory.getLogger(R.class);
 
     public R() {
         this.put("code",0);
@@ -27,6 +32,7 @@ public class R extends HashMap<String, Object> {
     }
 
     public static R error(int code, String msg) {
+        logger.error(msg);
         R r = new R();
         r.put("code",code);
         r.put("msg",msg);

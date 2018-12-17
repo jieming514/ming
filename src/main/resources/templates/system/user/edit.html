@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -8,6 +8,7 @@
 			<div class="col-sm-12">
 				<div class="ibox-content">
 					<form class="form-horizontal m-t" id="signupForm">
+						<!--/*@thymesVar id="user" type="com.ming.system.domain.UserDO"*/-->
 						<input id="userId" name="userId" th:value="${user.userId}"
 							type="hidden">
 						<div class="form-group">
@@ -57,7 +58,9 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">角色</label>
 							<div class="col-sm-8">
+								<!--/*@thymesVar id="roles" type="java.util.List"*/-->
 								<label th:each="role:${roles}" class="checkbox-inline">
+									<!--/*@thymesVar id="role" type="com.ming.system.domain.RoleDO"*/-->
 									<input name="role" type="checkbox" th:value="${role.roleId}"
 									th:text="${role.roleName}" th:checked="${role.roleSign}">
 								</label>
