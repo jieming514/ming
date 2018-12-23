@@ -12,7 +12,7 @@ public class LogDO implements Serializable {
 
     //用户id
     private Long id;
-    private String user_id;
+    private String userId;
     //用户名
     private String username;
     //用户操作
@@ -26,7 +26,7 @@ public class LogDO implements Serializable {
     //IP地址
     private String ip;
     //创建时间
-    private Date create_date;
+    private Date gmtCreate;
 
     public Long getId() {
         return id;
@@ -36,12 +36,12 @@ public class LogDO implements Serializable {
         this.id = id;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -92,26 +92,26 @@ public class LogDO implements Serializable {
         this.ip = ip;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("LogDO{");
         sb.append("id=").append(id);
-        sb.append(", user_id='").append(user_id).append('\'');
+        sb.append(", userId='").append(userId).append('\'');
         sb.append(", username='").append(username).append('\'');
         sb.append(", operation='").append(operation).append('\'');
         sb.append(", time=").append(time);
         sb.append(", method='").append(method).append('\'');
         sb.append(", params='").append(params).append('\'');
         sb.append(", ip='").append(ip).append('\'');
-        sb.append(", create_date=").append(create_date);
+        sb.append(", gmtCreate=").append(gmtCreate);
         sb.append('}');
         return sb.toString();
     }

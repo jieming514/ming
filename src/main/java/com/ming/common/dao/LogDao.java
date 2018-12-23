@@ -18,6 +18,5 @@ public interface LogDao {
 
     List<LogDO> list(Map<String, Object> map);
 
-
-
+    int count(Map<String,Object> params);
 }
