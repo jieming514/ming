@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +76,8 @@ public class UserController extends BaseController {
     @ResponseBody
     public R save(UserDO userDO) {
         userDO.setPassword(MD5Utils.encrypt(userDO.getUserName(), userDO.getPassword()));
+        userDO.setCreateDate(new Date());
+        userDO.setUserIdCreate(getUserId());
         if(userService.save(userDO) > 0) {
             return R.ok();
         } else {

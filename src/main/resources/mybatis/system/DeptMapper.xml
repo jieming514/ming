@@ -59,6 +59,7 @@
              <if test="orderNum != null and orderNum != ''"> sd.order_num = #{orderNum}, </if>
              <if test="delFlag != null and delFlag != ''"> sd.del_flag = #{delFlag} </if>
          </where>
+        order by sd.order_num
     </select>
 
     <select id="count" resultType="int">

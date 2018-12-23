@@ -452,3 +452,20 @@ INSERT INTO `sys_dept` VALUES ('13', '0', '测试部', '5', '1');
 INSERT INTO `sys_dept` VALUES ('14', '13', '测试一部', '1', '1');
 INSERT INTO `sys_dept` VALUES ('15', '13', '测试二部', '2', '1');
 
+
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE `sys_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户id',
+  `username` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `operation` varchar(50) DEFAULT NULL COMMENT '用户操作',
+  `time` int(11) DEFAULT NULL COMMENT '响应时间',
+  `method` varchar(200) DEFAULT NULL COMMENT '请求方法',
+  `params` varchar(5000) DEFAULT NULL COMMENT '请求参数',
+  `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
+  `gmt_create` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=372 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+
+insert into sys_log values (1,1,'明杰','登录','100','/login','null','127.0.0.1',sysdate());
+

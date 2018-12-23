@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.common.dao.LogDao">
+
+
+    <insert id="save" parameterType="com.ming.common.domain.LogDO"
+            useGeneratedKeys="true" keyProperty="id">
+      insert into sys_log (
+      user_id, username, operation, "time", method, params, ip, gmt_create
+      ) values (
+        #{userId},
+        #{username},
+        #{operation},
+        #{time},
+        #{method},
+        #{params},
+        #{ip},
+        #{gmt_create}
+      )
+    </insert>
+    <select id="get" resultType="com.ming.common.domain.LogDO">
+      select sl.id, sl.user_id,
+             sl.username,sl.operation,
+             sl.time, sl.method,
+             sl.params, sl.ip,
+             sl.gmt_create
+        from sys_log sl
+       where sl.id = #{id};
+    </select>
+
+    <select id="getList" resultType="com.ming.common.domain.LogDO">
+      select sl.id, sl.user_id,
+             sl.username,sl.operation,
+             sl.time, sl.method,
+             sl.params, sl.ip,
+             sl.gmt_create
+        from sys_log sl
+        <where>
+            <if test=" id != null and id != ''"> sl.id = #{id}, </if>
+            <if test=" user_id != null and user_id != ''"> sl.user_id = #{user_id}, </if>
+            <if test=" username != null and username != ''"> sl.username = #{username}, </if>
+            <if test=" operation != null and operation != ''"> sl.operation = #{operation}, </if>
+            <if test=" time != null and time != ''"> sl.time = #{time}, </if>
+            <if test=" method != null and method != ''"> sl.method = #{method} </if>
+            <if test=" params != null and params != ''"> sl.params = #{params} </if>
+            <if test=" ip != null and ip != ''"> sl.ip = #{ip} </if>
+            <if test=" gmt_create != null and gmt_create != ''"> sl.gmt_create = #{gmt_create} </if>
+        </where>
+    </select>
+</mapper>
