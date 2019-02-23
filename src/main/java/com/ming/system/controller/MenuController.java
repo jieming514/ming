@@ -1,5 +1,6 @@
 package com.ming.system.controller;
 
+import com.ming.common.annotation.Log;
 import com.ming.common.controller.BaseController;
 import com.ming.common.domain.Tree;
 import com.ming.common.util.R;
@@ -9,7 +10,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +25,7 @@ public class MenuController extends BaseController {
 
     private final String PREFIX = "system/menu";
 
+    @Log("菜单管理界面")
     @RequiresPermissions("sys:menu:menu")
     @GetMapping(value = "")
     public String menu() {
@@ -32,6 +33,7 @@ public class MenuController extends BaseController {
     }
 
 
+    @Log("菜单列表")
     @RequiresPermissions("sys:menu:menu")
     @GetMapping(value = "/list")
     @ResponseBody
@@ -49,6 +51,7 @@ public class MenuController extends BaseController {
      * @auther: jie_ming514@163.com
      * @date: 2018/10/12 23:21
      */
+    @Log("新增菜单页面")
     @RequiresPermissions("sys:menu:add")
     @GetMapping("/add/{pId}")
     public String add(Model model, @PathVariable("pId") Long pId) {
@@ -61,18 +64,21 @@ public class MenuController extends BaseController {
          return PREFIX + "/add";
     }
 
+    @Log("获取菜单结构树")
     @GetMapping("/tree")
     @ResponseBody
     public Tree<MenuDO> tree() {
         return menuService.getTree();
     }
 
+    @Log("通过ID获取菜单节点")
     @GetMapping("/tree/{pId}")
     @ResponseBody
     public Tree<MenuDO> tree(@PathVariable("pId") Long id) {
         return menuService.getTree(id);
     }
 
+    @Log("保存菜单")
     @RequiresPermissions("sys:menu:add")
     @PostMapping("/save")
     @ResponseBody
@@ -93,6 +99,7 @@ public class MenuController extends BaseController {
      * @auther: jie_ming514@163.com
      * @date: 2018/10/13 0:15
      */
+    @Log("删除菜单")
     @RequiresPermissions("sys:menu:remove")
     @PostMapping("/remove")
     @ResponseBody
@@ -108,13 +115,14 @@ public class MenuController extends BaseController {
 
     /**
      *
-     * 功能描述:
+     * 功能描述: 编辑菜单界面
      *
      * @param: 用户ID
      * @return: 编辑页面URL
      * @auther: jie_ming514@163.com
      * @date: 2018/10/13 0:39
      */
+    @Log("编辑菜单界面")
     @RequiresPermissions("sys:menu:edit")
     @GetMapping("/edit/{pId}")
     public String edit(Model model, @PathVariable("pId") Long pId) {
@@ -132,6 +140,7 @@ public class MenuController extends BaseController {
         return PREFIX + "/edit";
     }
 
+    @Log("更新菜单")
     @RequiresPermissions("sys:menu:edit")
     @PostMapping("/update")
     @ResponseBody
@@ -142,8 +151,6 @@ public class MenuController extends BaseController {
             return R.error(1,"更新菜单信息失败！");
         }
     }
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package com.ming.system.controller;
 
+import com.ming.common.annotation.Log;
 import com.ming.common.domain.Tree;
 import com.ming.common.util.R;
 import com.ming.system.domain.DeptDO;
@@ -28,13 +29,14 @@ public class DeptController {
     @Autowired
     private DeptService deptService;
 
+    @Log("部门管理界面")
     @RequiresPermissions("system:sysDept:sysDept")
     @GetMapping(value = "")
     public String dept() {
         return PREFIX + "/dept";
     }
 
-
+    @Log("部门列表")
     @RequiresPermissions("system:sysDept:sysDept")
     @GetMapping(value = "/list")
     @ResponseBody
@@ -42,7 +44,7 @@ public class DeptController {
         return deptService.list(params);
     }
 
-
+    @Log("新增部门页面")
     @RequiresPermissions("system:sysDept:add")
     @GetMapping(value = "/add/{pId}")
     public String add(@PathVariable("pId") Long deptId, Model model) {
@@ -55,6 +57,7 @@ public class DeptController {
         return PREFIX + "/add";
     }
 
+    @Log("新增部门")
     @RequiresPermissions("system:sysDept:add")
     @PostMapping(value = "/save")
     @ResponseBody
@@ -66,6 +69,7 @@ public class DeptController {
         }
     }
 
+    @Log("删除部门")
     @RequiresPermissions("system:sysDept:remove")
     @PostMapping(value = "/remove")
     @ResponseBody
@@ -77,6 +81,7 @@ public class DeptController {
         }
     }
 
+    @Log("编辑部门页面")
     @RequiresPermissions("system:sysDept:edit")
     @GetMapping(value = "/edit/{pId}")
     public String edit(@PathVariable("pId") Long deptId, Model model) {
@@ -91,7 +96,7 @@ public class DeptController {
         return PREFIX + "/edit";
     }
 
-
+    @Log("修改部门信息")
     @RequiresPermissions("system:sysDept:edit")
     @PostMapping(value = "/update")
     @ResponseBody
@@ -103,7 +108,7 @@ public class DeptController {
         }
     }
 
-
+    @Log("展示部门结构树")
     @RequiresPermissions("system:sysDept:sysDept")
     @GetMapping(value = "/tree")
     @ResponseBody

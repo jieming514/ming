@@ -1,64 +1,97 @@
 package com.ming.common.aspect;
 
-import com.ming.common.util.ShiroUtils;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
+import com.ming.common.annotation.Log;
+import com.ming.common.domain.LogDO;
+import com.ming.common.service.LogService;
+import com.ming.common.util.*;
+import com.ming.system.domain.UserDO;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
+import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
- * 请求日志统一处理
- * @author jie_ming514@163.com
- * @version 1.0
+ * @Description: ${desc}
+ * @Auther: jie_ming514@163.com
+ * @Date: 2019/2/23 21:30
  */
 @Aspect
 @Component
 public class LogAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
+    @Autowired
+    private LogService logService;
 
-
-    @Pointcut("execution(* com.ming.*.controller.*.*(..))")
+    @Pointcut("@annotation(com.ming.common.annotation.Log)")
     public void logPointCut() {
     }
 
-
-    /**
-     *
-     * 功能描述:
-     *
-     * @param:
-     * @return:
-     * @auther: jie_ming514@163.com
-     * @date: 2018/10/5 1:23
-     */
-    @Before("logPointCut()")
-    public void doBefore(JoinPoint point) {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-
-        //1. 请求内容
-        logger.info(request.getMethod() + ":" + request.getRequestURL().toString());
-        // 获取真实的ip地址
-        logger.info("CLASS_METHOD: " + point.getSignature().getDeclaringTypeName() + "."
-                + point.getSignature().getName());
-        logger.info("args:" + Arrays.toString(point.getArgs()));
-        logger.info("USER:" + ShiroUtils.getUserName());
-
+    @Around("logPointCut()")
+    public Object around(ProceedingJoinPoint point) throws Throwable {
+        long beginTime = System.currentTimeMillis();
+        Object result = point.proceed();
+        long time = System.currentTimeMillis() - beginTime;
+        saveLog(point, time);
+        return result;
     }
 
-    @AfterReturning(pointcut = "logPointCut()", returning = "result")
-    public void doAfterReturning(Object result) {
-        logger.debug("RESULT:" + result);
+    /**
+     * 功能描述: 保存日志
+     *
+     * @param: point  切入点
+     *         time   方法耗时
+     * @return:
+     * @auther: jie_ming514@163.com
+     * @date: 2019/2/23 21:37
+     */
+    private void saveLog(ProceedingJoinPoint point, long time) {
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        Log sysLog = method.getAnnotation(Log.class);
+        LogDO logDO = new LogDO();
+        if (sysLog != null) {
+            //获取注解信息
+            logDO.setOperation(sysLog.value());
+        }
+        String className = point.getTarget().getClass().getName();
+        String methodName = signature.getName();
+        logDO.setMethod(className + "." + methodName + "()");
+
+        Object[] args = point.getArgs();
+        if(args != null && args.length > 0) {
+            String params = StringUtils.limit(JSONUtils.beanToJson(args[0]), 1000);
+            logDO.setParams(params);
+        }
+        //获取request
+        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+        //获取IP地址
+        logDO.setIp(IPUtils.getIpAddr(request));
+        //获取用户名
+        UserDO userDO = ShiroUtils.getUser();
+        if(userDO == null) {
+            if (logDO.getParams() == null) {
+                logDO.setUserId(-1L);
+                logDO.setUsername("用户信息为空");
+            } else {
+                logDO.setUserId(-1L);
+                logDO.setUsername(logDO.getParams());
+            }
+        } else {
+            logDO.setUserId(userDO.getUserId());
+            logDO.setUsername(userDO.getUserName());
+        }
+        logDO.setTime((int) time);
+        Date date = new Date();
+        logDO.setGmtCreate(date);
+
+        logService.save(logDO);
     }
 
 }

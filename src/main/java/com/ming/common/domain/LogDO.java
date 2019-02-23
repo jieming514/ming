@@ -12,7 +12,7 @@ public class LogDO implements Serializable {
 
     //用户id
     private Long id;
-    private String userId;
+    private Long userId;
     //用户名
     private String username;
     //用户操作
@@ -36,11 +36,11 @@ public class LogDO implements Serializable {
         this.id = id;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

@@ -469,3 +469,30 @@ CREATE TABLE `sys_log` (
 
 insert into sys_log values (1,1,'明杰','登录','100','/login','null','127.0.0.1',sysdate());
 
+
+-- ----------------------------
+-- Table structure for `sys_task`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_task`;
+CREATE TABLE `sys_task` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cron_expression` varchar(255) DEFAULT NULL COMMENT 'cron表达式',
+  `method_name` varchar(255) DEFAULT NULL COMMENT '任务调用的方法名',
+  `is_concurrent` varchar(255) DEFAULT NULL COMMENT '任务是否有状态',
+  `description` varchar(255) DEFAULT NULL COMMENT '任务描述',
+  `update_by` varchar(64) DEFAULT NULL COMMENT '更新者',
+  `bean_class` varchar(255) DEFAULT NULL COMMENT '任务执行时调用哪个类的方法 包名+类名',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+  `job_status` varchar(255) DEFAULT NULL COMMENT '任务状态',
+  `job_group` varchar(255) DEFAULT NULL COMMENT '任务分组',
+  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_by` varchar(64) DEFAULT NULL COMMENT '创建者',
+  `spring_bean` varchar(255) DEFAULT NULL COMMENT 'Spring bean',
+  `job_name` varchar(255) DEFAULT NULL COMMENT '任务名',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_task
+-- ----------------------------
+INSERT INTO `sys_task` VALUES ('2', '0/10 * * * * ?', 'run1', '1', '', '4028ea815a3d2a8c015a3d2f8d2a0002', 'com.bootdo.common.task.WelcomeJob', '2017-05-19 18:30:56', '0', 'group1', '2017-05-19 18:31:07', null, '', 'welcomJob');

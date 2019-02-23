@@ -6,6 +6,7 @@ import com.ming.common.domain.PageDO;
 import com.ming.common.service.LogService;
 import com.ming.common.util.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class LogServiceImpl implements LogService {
         return logDao.list(params);
     }
 
+    @Async
     @Override
     public int save(LogDO logDO) {
         return logDao.save(logDO);

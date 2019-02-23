@@ -7,7 +7,7 @@
     <insert id="save" parameterType="com.ming.common.domain.LogDO"
             useGeneratedKeys="true" keyProperty="id">
       insert into sys_log (
-      user_id, username, operation, "time", method, params, ip, gmt_create
+      user_id, username, operation, time, method, params, ip, gmt_create
       ) values (
         #{userId},
         #{username},
@@ -16,7 +16,7 @@
         #{method},
         #{params},
         #{ip},
-        #{gmt_create}
+        #{gmtCreate}
       )
     </insert>
     <select id="get" resultType="com.ming.common.domain.LogDO">
