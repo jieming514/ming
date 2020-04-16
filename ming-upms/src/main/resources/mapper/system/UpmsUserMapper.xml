@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ming.upms.system.dao.UpmsUserDao">
+
+    <select id="get" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime` from upms_user where user_id = #{value}
+    </select>
+
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime` from upms_user
+        <where>
+            <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and username = #{username} </if>
+            <if test="password != null and password != ''"> and password = #{password} </if>
+            <if test="salt != null and salt != ''"> and salt = #{salt} </if>
+            <if test="realname != null and realname != ''"> and realname = #{realname} </if>
+            <if test="avatar != null and avatar != ''"> and avatar = #{avatar} </if>
+            <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+            <if test="email != null and email != ''"> and email = #{email} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="locked != null and locked != ''"> and locked = #{locked} </if>
+            <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by user_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from upms_user
+        <where>
+            <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and username = #{username} </if>
+            <if test="password != null and password != ''"> and password = #{password} </if>
+            <if test="salt != null and salt != ''"> and salt = #{salt} </if>
+            <if test="realname != null and realname != ''"> and realname = #{realname} </if>
+            <if test="avatar != null and avatar != ''"> and avatar = #{avatar} </if>
+            <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+            <if test="email != null and email != ''"> and email = #{email} </if>
+            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+            <if test="locked != null and locked != ''"> and locked = #{locked} </if>
+            <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsUserDO" useGeneratedKeys="true" keyProperty="userId">
+        insert into upms_user
+        (
+        `username`,
+        `password`,
+        `salt`,
+        `realname`,
+        `avatar`,
+        `phone`,
+        `email`,
+        `sex`,
+        `locked`,
+        `ctime`
+        )
+        values
+        (
+        #{username},
+        #{password},
+        #{salt},
+        #{realname},
+        #{avatar},
+        #{phone},
+        #{email},
+        #{sex},
+        #{locked},
+        #{ctime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.ming.upms.system.domain.UpmsUserDO">
+        update upms_user
+        <set>
+            <if test="username != null">`username` = #{username}, </if>
+            <if test="password != null">`password` = #{password}, </if>
+            <if test="salt != null">`salt` = #{salt}, </if>
+            <if test="realname != null">`realname` = #{realname}, </if>
+            <if test="avatar != null">`avatar` = #{avatar}, </if>
+            <if test="phone != null">`phone` = #{phone}, </if>
+            <if test="email != null">`email` = #{email}, </if>
+            <if test="sex != null">`sex` = #{sex}, </if>
+            <if test="locked != null">`locked` = #{locked}, </if>
+            <if test="ctime != null">`ctime` = #{ctime}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="remove">
+        delete from upms_user where user_id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from upms_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+
+    <select id="getUserByName" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select * from ming.upms_user where user_id = #{getUserByName}
+    </select>
+
+</mapper>

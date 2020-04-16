@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.upms.system.dao.UpmsPermissionDao">
+
+	<select id="get" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+		select `permission_id`,`system_id`,`pid`,`name`,`type`,`permission_value`,`uri`,`icon`,`status`,`ctime`,`orders` from upms_permission where permission_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+		select `permission_id`,`system_id`,`pid`,`name`,`type`,`permission_value`,`uri`,`icon`,`status`,`ctime`,`orders` from upms_permission
+        <where>  
+		  		  <if test="permissionId != null and permissionId != ''"> and permission_id = #{permissionId} </if>
+		  		  <if test="systemId != null and systemId != ''"> and system_id = #{systemId} </if>
+		  		  <if test="pid != null and pid != ''"> and pid = #{pid} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="permissionValue != null and permissionValue != ''"> and permission_value = #{permissionValue} </if>
+		  		  <if test="uri != null and uri != ''"> and uri = #{uri} </if>
+		  		  <if test="icon != null and icon != ''"> and icon = #{icon} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
+		  		  <if test="orders != null and orders != ''"> and orders = #{orders} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by permission_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from upms_permission
+		 <where>  
+		  		  <if test="permissionId != null and permissionId != ''"> and permission_id = #{permissionId} </if>
+		  		  <if test="systemId != null and systemId != ''"> and system_id = #{systemId} </if>
+		  		  <if test="pid != null and pid != ''"> and pid = #{pid} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="permissionValue != null and permissionValue != ''"> and permission_value = #{permissionValue} </if>
+		  		  <if test="uri != null and uri != ''"> and uri = #{uri} </if>
+		  		  <if test="icon != null and icon != ''"> and icon = #{icon} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
+		  		  <if test="orders != null and orders != ''"> and orders = #{orders} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsPermissionDO" useGeneratedKeys="true" keyProperty="permissionId">
+		insert into upms_permission
+		(
+			`system_id`, 
+			`pid`, 
+			`name`, 
+			`type`, 
+			`permission_value`, 
+			`uri`, 
+			`icon`, 
+			`status`, 
+			`ctime`, 
+			`orders`
+		)
+		values
+		(
+			#{systemId}, 
+			#{pid}, 
+			#{name}, 
+			#{type}, 
+			#{permissionValue}, 
+			#{uri}, 
+			#{icon}, 
+			#{status}, 
+			#{ctime}, 
+			#{orders}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ming.upms.system.domain.UpmsPermissionDO">
+		update upms_permission 
+		<set>
+			<if test="systemId != null">`system_id` = #{systemId}, </if>
+			<if test="pid != null">`pid` = #{pid}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="permissionValue != null">`permission_value` = #{permissionValue}, </if>
+			<if test="uri != null">`uri` = #{uri}, </if>
+			<if test="icon != null">`icon` = #{icon}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="ctime != null">`ctime` = #{ctime}, </if>
+			<if test="orders != null">`orders` = #{orders}</if>
+		</set>
+		where permission_id = #{permissionId}
+	</update>
+	
+	<delete id="remove">
+		delete from upms_permission where permission_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from upms_permission where permission_id in 
+		<foreach item="permissionId" collection="array" open="(" separator="," close=")">
+			#{permissionId}
+		</foreach>
+	</delete>
+
+	<select id="getByUserId" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+		SELECT
+			up.`permission_id`,
+			up.`system_id`,
+			up.`pid`,
+			up.`name`,
+			up.`type`,
+			up.`permission_value`,
+			up.`uri`,
+			up.`icon`,
+			up.`status`,
+			up.`ctime`,
+			up.`orders`
+		FROM upms_permission up,
+			upms_role_permission urp,
+			upms_role ur,
+			upms_user_role uur,
+			upms_user uu
+		WHERE up.permission_id = urp.permission_id
+		  AND urp.role_id = ur.role_id
+		  and ur.role_id = uur.role_id
+		  and uur.user_id = uu.user_id
+		  and uu.user_id = #{userId}
+	</select>
+
+	<select id="getPermsByUserId" resultType="string">
+		select distinct m.permission_value
+		  from upms_permission m
+		left join upms_role_permission rm
+		    on m.permission_id = rm.permission_id
+		left join upms_user_role ur
+		    on rm.role_id = ur.role_id
+		where ur.user_id = #{userId}
+	</select>
+
+</mapper>
