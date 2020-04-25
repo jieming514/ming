@@ -26,10 +26,17 @@ import java.util.LinkedHashMap;
 @Configuration
 public class ShiroConfig {
 
-
     @Value("${server.session-timeout}")
     private int tomcatTimeout;
 
+
+    /**
+     *    创建Shiro工厂实例
+     *    anno：所有URL都可以匿名访问
+     *    authc:所有URL都必须认证通过后才能访问
+     *    /**:代表拦截所有。
+     *    过滤连定义，从上往下顺序执行，一般将/**放在最下面
+     */
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -38,6 +45,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+
         filterChainDefinitionMap.put("/login","anon");
         filterChainDefinitionMap.put("/getVerify","anon");
         filterChainDefinitionMap.put("/css/**", "anon");
@@ -48,11 +56,11 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/files/**", "anon");
-        //filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/blog", "anon");
-        filterChainDefinitionMap.put("/blog/open/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
+        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

@@ -1,12 +1,13 @@
 package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsUserDO;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
-@Repository
+@Mapper
 public interface UpmsUserDao {
 
     public UpmsUserDO get(Long userId);

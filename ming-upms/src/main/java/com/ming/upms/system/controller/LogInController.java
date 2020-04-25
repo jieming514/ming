@@ -30,7 +30,7 @@ public class LogInController {
     @Autowired
     private UpmsUserService upmsUserService;
 
-    @GetMapping({"/index"})
+    @GetMapping(value = {"", "/index"})
     String index(Model model) {
         return "index_v1";
     }

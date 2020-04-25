@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@MapperScan("com.ming.upms.*.dao")
+
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MingUpmsApplication {
 

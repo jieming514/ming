@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @email jie_ming514@163.com
  * @date 2020-04-06 13:31:45
  */
-@Repository
+@Mapper
 public interface UpmsLogDao {
 
 	UpmsLogDO get(Integer logId);
