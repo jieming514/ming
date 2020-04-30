@@ -1,4 +1,4 @@
-/*this file is used for the bootdo project, it is a unique js file*/
+
 $(function(){
 	//初始化icheck插件
 	$(".i-checks").iCheck({
