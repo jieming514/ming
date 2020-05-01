@@ -32,7 +32,7 @@ public interface UpmsPermissionDao {
 
 	Set<String> getPermsByUserId(Long userId);
 
-	Set<UpmsPermissionDO> getPermissionByUserId(Long userId);
+	List<UpmsPermissionDO> getPermissionByUserId(Long userId);
 
 
 }

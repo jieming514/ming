@@ -56,14 +56,6 @@ function load() {
 									title : '帐号' 
 								},
 																{
-									field : 'password', 
-									title : '密码MD5(密码+盐)' 
-								},
-																{
-									field : 'salt', 
-									title : '盐' 
-								},
-																{
 									field : 'realname', 
 									title : '姓名' 
 								},
@@ -81,11 +73,27 @@ function load() {
 								},
 																{
 									field : 'sex', 
-									title : '性别' 
+									title : '性别',
+									formatter : function(value, row, index) {
+									    if(value == 1) {
+                                            return "男";
+									    }else if(value == 0) {
+									        return "女";
+									    }
+									    return "<b style='color=red'>未知</b>";
+									}
 								},
 																{
 									field : 'locked', 
-									title : '状态(0:正常,1:锁定)' 
+									title : '状态',
+									formatter : function(value, row, index) {
+									    if(value == 1) {
+                                            return "<span class='label label-warning'>锁定</span>";
+                                        }else if(value == 0) {
+                                            return "<span class='label label-success'>正常</span>";
+                                        }
+                                        return "<span class='label label-danger'>锁定</span>";
+									}
 								},
 																{
 									field : 'ctime', 

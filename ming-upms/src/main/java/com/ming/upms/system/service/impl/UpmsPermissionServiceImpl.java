@@ -65,7 +65,7 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 	 * 通过用户ID查找权限信息
 	 */
 	@Override
-	public Set<UpmsPermissionDO> getPermissionByUserId(Long userId){
+	public List<UpmsPermissionDO> getPermissionByUserId(Long userId){
 		return upmsPermissionDao.getPermissionByUserId(userId);
 	}
 
@@ -75,7 +75,7 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 	@Override
 	public List<Tree<UpmsPermissionDO>> getTreeByUserId(Long userId) {
 		List<Tree<UpmsPermissionDO>> trees = new ArrayList<Tree<UpmsPermissionDO>>();
-		Set<UpmsPermissionDO> upmsPermissionDOSet = getPermissionByUserId(userId);
+		List<UpmsPermissionDO> upmsPermissionDOSet = getPermissionByUserId(userId);
 		for (UpmsPermissionDO permission : upmsPermissionDOSet) {
 			Tree<UpmsPermissionDO> tree = new Tree<>();
 			tree.setId(permission.getPermissionId().toString());

@@ -56,7 +56,7 @@
 			#{name}, 
 			#{title}, 
 			#{description}, 
-			#{ctime}, 
+			now(),
 			#{orders}
 		)
 	</insert>

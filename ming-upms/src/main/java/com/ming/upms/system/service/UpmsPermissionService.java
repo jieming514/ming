@@ -35,7 +35,7 @@ public interface UpmsPermissionService {
 	/**
 	 * 通过用户ID查找权限信息
 	 */
-	Set<UpmsPermissionDO> getPermissionByUserId(Long userId);
+	List<UpmsPermissionDO> getPermissionByUserId(Long userId);
 
 	List<Tree<UpmsPermissionDO>> getTreeByUserId(Long userId);
 }

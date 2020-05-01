@@ -1,7 +1,9 @@
 package com.ming.upms.system.domain;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -23,7 +25,8 @@ public class UpmsRoleDO implements Serializable {
 	//角色描述
 	private String description;
 	//创建时间
-	private Long ctime;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+	private Date ctime;
 	//排序
 	private Long orders;
 
@@ -78,13 +81,13 @@ public class UpmsRoleDO implements Serializable {
 	/**
 	 * 设置：创建时间
 	 */
-	public void setCtime(Long ctime) {
+	public void setCtime(Date ctime) {
 		this.ctime = ctime;
 	}
 	/**
 	 * 获取：创建时间
 	 */
-	public Long getCtime() {
+	public Date getCtime() {
 		return ctime;
 	}
 	/**

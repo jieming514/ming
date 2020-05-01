@@ -6,6 +6,7 @@ import com.ming.upms.system.service.UpmsPermissionService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Set;
 
 public class UpmsPermissionServiceImplTest extends BasicTest {
@@ -53,7 +54,7 @@ public class UpmsPermissionServiceImplTest extends BasicTest {
 
     @Test
     public void getPermissionByUserId() {
-        Set<UpmsPermissionDO> permissionSet = upmsPermissionService.getPermissionByUserId(1L);
+        List<UpmsPermissionDO> permissionSet = upmsPermissionService.getPermissionByUserId(1L);
         System.out.printf(permissionSet.toString());
     }
 
