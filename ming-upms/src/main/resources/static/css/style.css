@@ -196,7 +196,7 @@ body.body-small .navbar-top-links li:last-child {
 }
 
 .nav-header {
-    padding: 33px 25px;
+    padding: 20px 25px;
     background: url("patterns/header-profile.png") no-repeat;
 }
 
@@ -220,6 +220,10 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav-header a {
     color: #DFE4ED;
+}
+
+.nav-header p {
+    color: #fff;
 }
 
 .nav-header .text-muted {

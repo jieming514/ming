@@ -45,6 +45,7 @@ public class LogInController extends BaseController {
         model.addAttribute("menus", permissionDOList);
         model.addAttribute("name", getUserName());
         model.addAttribute("username", getUser().getRealname());
+        model.addAttribute("picUrl","/img/profile_small.jpg");
 
         return "index_v1";
     }

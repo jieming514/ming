@@ -28,36 +28,15 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
-                    <div>
-                        <span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>
-                        <h3 class="" style="color: #ffffff">
-                            </i>ming后台管理系统
-                        </h3>
-                    </div>
-                    <div class="dropdown profile-element hidden">
-
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                            <span class="block m-t-xs"><strong class="font-bold"
-                                                               th:text="${username}">admin</strong></span>
-                            <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
-                             </span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a @click="personal" href="#">修改头像</a>
-                            </li>
-                            <li><a @click="personal" href="#">个人资料</a>
-                            </li>
-                            <li><a @click="personal" href="#">密码修改</a>
-                            </li>
-                            <li><a @click="personal" href="#">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="/logout">安全退出</a>
-                            </li>
-                        </ul>
-                        <div class="logo-element">ming</div>
-                    </div>
+                    <span class="clearfix">
+                        <div class="pull-left">
+                            <img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/>
+                        </div>
+                        <div class="pull-left" style="padding:8px 10px">
+                            <p class="font-bold" th:text="${username}">admin</p>
+                            <a href="/logout"><i class="fa fa fa-sign-out"></i> 注销</a>
+                        </div>
+                    </span>
                 </li>
                 <li><a href="#"> <i class="fa fa-home"></i> <span
                         class="nav-label">主页</span> <span class="fa arrow"></span>
@@ -91,13 +70,9 @@
 
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-default "
                        href="#" title="收起菜单"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom"
-                          method="post" action="">
-                        <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …"
-                                   class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
+                    <a class="minimalize-styl-2" style="color: #000">
+                        <b style="font-family: Arial;font-size:20px">ming后台管理系统</b>
+                    </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown"><a class="dropdown-toggle count-info"
