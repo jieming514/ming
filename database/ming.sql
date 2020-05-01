@@ -1,14 +1,13 @@
-# ming database
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: ming
+-- Host: localhost    Database: ming
 -- ------------------------------------------------------
--- Server version	5.5.53
+-- Server version	8.0.11
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -22,7 +21,7 @@
 
 DROP TABLE IF EXISTS `upms_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_log` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `description` varchar(100) DEFAULT NULL COMMENT '操作描述',
@@ -58,7 +57,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_organization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_organization` (
   `organization_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `pid` int(10) DEFAULT NULL COMMENT '所属上级',
@@ -85,7 +84,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_permission` (
   `permission_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `system_id` int(10) unsigned NOT NULL COMMENT '所属系统',
@@ -99,7 +98,7 @@ CREATE TABLE `upms_permission` (
   `ctime` bigint(20) DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='权限';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +107,7 @@ CREATE TABLE `upms_permission` (
 
 LOCK TABLES `upms_permission` WRITE;
 /*!40000 ALTER TABLE `upms_permission` DISABLE KEYS */;
-INSERT INTO `upms_permission` VALUES (1,1,0,'系统组织管理',1,'','','zmdi zmdi-accounts-list',1,1,1),(2,1,1,'系统管理',2,'upms:system:read','/manage/system/index','',1,2,2),(3,1,1,'组织管理',2,'upms:organization:read','/manage/organization/index','',1,3,3),(4,1,0,'角色用户管理',1,'','','zmdi zmdi-accounts',1,4,4);
+INSERT INTO `upms_permission` VALUES (1,1,0,'系统组织管理',1,'','','zmdi zmdi-accounts-list',1,1,1),(2,1,1,'系统管理',2,'upms:system:read','/system/upmsPermission','',1,2,2),(3,1,1,'组织管理',2,'upms:organization:read','/system/upmsOrganization','',1,3,3),(4,1,0,'角色用户管理',1,'','','zmdi zmdi-accounts',1,4,4),(5,1,4,'角色管理',2,'upms:role:read','/system/upmsRole',NULL,1,5,5),(6,1,4,'用户管理',2,'upms:user:read','/system/upmsRole',NULL,1,6,6);
 /*!40000 ALTER TABLE `upms_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +117,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_role` (
   `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` varchar(20) DEFAULT NULL COMMENT '角色名称',
@@ -146,7 +145,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_role_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_role_permission` (
   `role_permission_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `role_id` int(10) unsigned NOT NULL COMMENT '角色编号',
@@ -154,7 +153,7 @@ CREATE TABLE `upms_role_permission` (
   PRIMARY KEY (`role_permission_id`),
   KEY `FK_Reference_23` (`role_id`),
   CONSTRAINT `FK_Reference_23` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +162,7 @@ CREATE TABLE `upms_role_permission` (
 
 LOCK TABLES `upms_role_permission` WRITE;
 /*!40000 ALTER TABLE `upms_role_permission` DISABLE KEYS */;
-INSERT INTO `upms_role_permission` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4);
+INSERT INTO `upms_role_permission` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,1,6);
 /*!40000 ALTER TABLE `upms_role_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +172,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_system`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_system` (
   `system_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `icon` varchar(50) DEFAULT NULL COMMENT '图标',
@@ -206,7 +205,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `username` varchar(20) NOT NULL COMMENT '帐号',
@@ -239,7 +238,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_user_organization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_user_organization` (
   `user_organization_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
@@ -263,7 +262,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `upms_user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_user_role` (
   `user_role_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
@@ -291,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-24 23:42:18
+-- Dump completed on 2020-05-01 13:48:05

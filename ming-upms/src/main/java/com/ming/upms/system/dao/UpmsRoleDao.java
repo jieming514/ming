@@ -1,11 +1,10 @@
 package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsRoleDO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 角色
@@ -16,7 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UpmsRoleDao {
 
-	UpmsRoleDO get(Integer roleId);
+	UpmsRoleDO get(Long roleId);
 	
 	List<UpmsRoleDO> list(Map<String,Object> map);
 	
@@ -26,7 +25,7 @@ public interface UpmsRoleDao {
 	
 	int update(UpmsRoleDO upmsRole);
 	
-	int remove(Integer role_id);
+	int remove(Long roleId);
 	
-	int batchRemove(Integer[] roleIds);
+	int batchRemove(Long[] roleIds);
 }

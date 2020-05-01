@@ -1,25 +1,18 @@
 package com.ming.upms.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.ming.upms.system.domain.UpmsPermissionDO;
-import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
+import com.ming.upms.system.domain.UpmsPermissionDO;
+import com.ming.upms.system.service.UpmsPermissionService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 权限
@@ -61,7 +54,7 @@ public class UpmsPermissionController {
 
 	@GetMapping("/edit/{permissionId}")
 	@RequiresPermissions("system:upmsPermission:edit")
-	String edit(@PathVariable("permissionId") Integer permissionId,Model model){
+	String edit(@PathVariable("permissionId") Long permissionId,Model model){
 		UpmsPermissionDO upmsPermission = upmsPermissionService.get(permissionId);
 		model.addAttribute("upmsPermission", upmsPermission);
 	    return "system/upmsPermission/edit";
@@ -96,7 +89,7 @@ public class UpmsPermissionController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsPermission:remove")
-	public R remove( Integer permissionId){
+	public R remove( Long permissionId){
 		if(upmsPermissionService.remove(permissionId)>0){
 		return R.ok();
 		}
@@ -109,7 +102,7 @@ public class UpmsPermissionController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsPermission:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] permissionIds){
+	public R remove(@RequestParam("ids[]") Long[] permissionIds){
 		upmsPermissionService.batchRemove(permissionIds);
 		return R.ok();
 	}

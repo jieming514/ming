@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface UpmsLogService {
 	
-	UpmsLogDO get(Integer logId);
+	UpmsLogDO get(Long logId);
 	
 	List<UpmsLogDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface UpmsLogService {
 	
 	int update(UpmsLogDO upmsLog);
 	
-	int remove(Integer logId);
+	int remove(Long logId);
 	
-	int batchRemove(Integer[] logIds);
+	int batchRemove(Long[] logIds);
 }

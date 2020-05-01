@@ -1,25 +1,18 @@
 package com.ming.upms.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.ming.upms.system.domain.UpmsRoleDO;
-import com.ming.upms.system.service.UpmsRoleService;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
+import com.ming.upms.system.domain.UpmsRoleDO;
+import com.ming.upms.system.service.UpmsRoleService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 角色
@@ -61,7 +54,7 @@ public class UpmsRoleController {
 
 	@GetMapping("/edit/{roleId}")
 	@RequiresPermissions("system:upmsRole:edit")
-	String edit(@PathVariable("roleId") Integer roleId,Model model){
+	String edit(@PathVariable("roleId") Long roleId,Model model){
 		UpmsRoleDO upmsRole = upmsRoleService.get(roleId);
 		model.addAttribute("upmsRole", upmsRole);
 	    return "system/upmsRole/edit";
@@ -96,7 +89,7 @@ public class UpmsRoleController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsRole:remove")
-	public R remove( Integer roleId){
+	public R remove( Long roleId){
 		if(upmsRoleService.remove(roleId)>0){
 		return R.ok();
 		}
@@ -109,7 +102,7 @@ public class UpmsRoleController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsRole:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] roleIds){
+	public R remove(@RequestParam("ids[]") Long[] roleIds){
 		upmsRoleService.batchRemove(roleIds);
 		return R.ok();
 	}

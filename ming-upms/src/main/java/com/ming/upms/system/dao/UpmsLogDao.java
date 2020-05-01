@@ -1,12 +1,10 @@
 package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsLogDO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * 操作日志
@@ -17,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface UpmsLogDao {
 
-	UpmsLogDO get(Integer logId);
+	UpmsLogDO get(Long logId);
 	
 	List<UpmsLogDO> list(Map<String,Object> map);
 	
@@ -27,7 +25,7 @@ public interface UpmsLogDao {
 	
 	int update(UpmsLogDO upmsLog);
 	
-	int remove(Integer log_id);
+	int remove(Long logId);
 	
-	int batchRemove(Integer[] logIds);
+	int batchRemove(Long[] logIds);
 }

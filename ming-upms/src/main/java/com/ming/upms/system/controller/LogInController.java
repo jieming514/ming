@@ -2,8 +2,12 @@ package com.ming.upms.system.controller;
 
 import com.ming.common.utils.MD5Utils;
 import com.ming.common.utils.R;
+import com.ming.upms.common.controller.BaseController;
+import com.ming.upms.common.domain.Tree;
 import com.ming.upms.common.util.RandomValidateCodeUtil;
 import com.ming.upms.common.util.ShiroUtils;
+import com.ming.upms.system.domain.UpmsPermissionDO;
+import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -21,17 +25,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
-public class LogInController {
+public class LogInController extends BaseController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UpmsUserService upmsUserService;
 
+    @Autowired
+    private UpmsPermissionService upmsPermissionService;
+
     @GetMapping(value = {"", "/index"})
     String index(Model model) {
+        //获取用户资源
+        List<Tree<UpmsPermissionDO>> permissionDOList = upmsPermissionService.getTreeByUserId(getUserId());
+        model.addAttribute("menus", permissionDOList);
+        model.addAttribute("name", getUserName());
+        model.addAttribute("username", getUser().getRealname());
+
         return "index_v1";
     }
 

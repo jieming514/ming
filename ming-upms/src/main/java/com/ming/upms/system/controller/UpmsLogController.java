@@ -1,24 +1,18 @@
 package com.ming.upms.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.ming.upms.system.domain.UpmsLogDO;
-import com.ming.upms.system.service.UpmsLogService;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
+import com.ming.upms.system.domain.UpmsLogDO;
+import com.ming.upms.system.service.UpmsLogService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 操作日志
@@ -60,7 +54,7 @@ public class UpmsLogController {
 
 	@GetMapping("/edit/{logId}")
 	@RequiresPermissions("system:upmsLog:edit")
-	String edit(@PathVariable("logId") Integer logId,Model model){
+	String edit(@PathVariable("logId") Long logId,Model model){
 		UpmsLogDO upmsLog = upmsLogService.get(logId);
 		model.addAttribute("upmsLog", upmsLog);
 	    return "system/upmsLog/edit";
@@ -95,7 +89,7 @@ public class UpmsLogController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsLog:remove")
-	public R remove( Integer logId){
+	public R remove( Long logId){
 		if(upmsLogService.remove(logId)>0){
 		return R.ok();
 		}
@@ -108,7 +102,7 @@ public class UpmsLogController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsLog:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] logIds){
+	public R remove(@RequestParam("ids[]") Long[] logIds){
 		upmsLogService.batchRemove(logIds);
 		return R.ok();
 	}

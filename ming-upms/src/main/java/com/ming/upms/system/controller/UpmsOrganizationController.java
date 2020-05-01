@@ -1,24 +1,18 @@
 package com.ming.upms.system.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.ming.upms.system.domain.UpmsOrganizationDO;
-import com.ming.upms.system.service.UpmsOrganizationService;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
+import com.ming.upms.system.domain.UpmsOrganizationDO;
+import com.ming.upms.system.service.UpmsOrganizationService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 组织
@@ -60,7 +54,7 @@ public class UpmsOrganizationController {
 
 	@GetMapping("/edit/{organizationId}")
 	@RequiresPermissions("system:upmsOrganization:edit")
-	String edit(@PathVariable("organizationId") Integer organizationId,Model model){
+	String edit(@PathVariable("organizationId") Long organizationId,Model model){
 		UpmsOrganizationDO upmsOrganization = upmsOrganizationService.get(organizationId);
 		model.addAttribute("upmsOrganization", upmsOrganization);
 	    return "system/upmsOrganization/edit";
@@ -95,7 +89,7 @@ public class UpmsOrganizationController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsOrganization:remove")
-	public R remove( Integer organizationId){
+	public R remove( Long organizationId){
 		if(upmsOrganizationService.remove(organizationId)>0){
 		return R.ok();
 		}
@@ -108,7 +102,7 @@ public class UpmsOrganizationController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("system:upmsOrganization:batchRemove")
-	public R remove(@RequestParam("ids[]") Integer[] organizationIds){
+	public R remove(@RequestParam("ids[]") Long[] organizationIds){
 		upmsOrganizationService.batchRemove(organizationIds);
 		return R.ok();
 	}

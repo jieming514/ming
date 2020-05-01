@@ -1,7 +1,6 @@
 package com.ming.upms.system.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 
@@ -16,7 +15,7 @@ public class UpmsPermissionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//编号
-	private Integer permissionId;
+	private Long permissionId;
 	//所属系统
 	private Integer systemId;
 	//所属上级
@@ -41,13 +40,13 @@ public class UpmsPermissionDO implements Serializable {
 	/**
 	 * 设置：编号
 	 */
-	public void setPermissionId(Integer permissionId) {
+	public void setPermissionId(Long permissionId) {
 		this.permissionId = permissionId;
 	}
 	/**
 	 * 获取：编号
 	 */
-	public Integer getPermissionId() {
+	public Long getPermissionId() {
 		return permissionId;
 	}
 	/**

@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface UpmsOrganizationService {
 	
-	UpmsOrganizationDO get(Integer organizationId);
+	UpmsOrganizationDO get(Long organizationId);
 	
 	List<UpmsOrganizationDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface UpmsOrganizationService {
 	
 	int update(UpmsOrganizationDO upmsOrganization);
 	
-	int remove(Integer organizationId);
+	int remove(Long organizationId);
 	
-	int batchRemove(Integer[] organizationIds);
+	int batchRemove(Long[] organizationIds);
 }

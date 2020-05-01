@@ -1,12 +1,11 @@
 package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsPermissionDO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 权限
@@ -17,7 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UpmsPermissionDao {
 
-	UpmsPermissionDO get(Integer permissionId);
+	UpmsPermissionDO get(Long permissionId);
 	
 	List<UpmsPermissionDO> list(Map<String,Object> map);
 	
@@ -27,11 +26,13 @@ public interface UpmsPermissionDao {
 	
 	int update(UpmsPermissionDO upmsPermission);
 	
-	int remove(Integer permission_id);
+	int remove(Long permissionId);
 	
-	int batchRemove(Integer[] permissionIds);
+	int batchRemove(Long[] permissionIds);
 
-	Set<UpmsPermissionDO> getByUserId(Integer userId);
+	Set<String> getPermsByUserId(Long userId);
 
-	Set<String> getPermsByUserId(Integer userId);
+	Set<UpmsPermissionDO> getPermissionByUserId(Long userId);
+
+
 }

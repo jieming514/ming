@@ -3,14 +3,10 @@ package com.ming.upms.system.service.impl;
 import com.ming.upms.common.BasicTest;
 import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.service.UpmsPermissionService;
-import javafx.scene.effect.SepiaTone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class UpmsPermissionServiceImplTest extends BasicTest {
 
@@ -45,18 +41,20 @@ public class UpmsPermissionServiceImplTest extends BasicTest {
     public void batchRemove() {
     }
 
-    @Test
-    public void getByUserId() {
-        Set<UpmsPermissionDO> permissionDOSet = upmsPermissionService.getByUserId(1);
-        System.out.println(permissionDOSet);
-        //Assert.assertEquals();
-    }
+
 
     @Test
     public void getPermsByUserId() {
-        Set<String> permissionDOSet = upmsPermissionService.getPermsByUserId(1);
+        Set<String> permissionDOSet = upmsPermissionService.getPermsByUserId(1L);
         for (String permission: permissionDOSet) {
             System.out.println(permission);
         }
     }
+
+    @Test
+    public void getPermissionByUserId() {
+        Set<UpmsPermissionDO> permissionSet = upmsPermissionService.getPermissionByUserId(1L);
+        System.out.printf(permissionSet.toString());
+    }
+
 }

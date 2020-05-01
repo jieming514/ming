@@ -18,7 +18,7 @@ public class UpmsLogServiceImpl implements UpmsLogService {
 	private UpmsLogDao upmsLogDao;
 	
 	@Override
-	public UpmsLogDO get(Integer logId){
+	public UpmsLogDO get(Long logId){
 		return upmsLogDao.get(logId);
 	}
 	
@@ -43,12 +43,12 @@ public class UpmsLogServiceImpl implements UpmsLogService {
 	}
 	
 	@Override
-	public int remove(Integer logId){
+	public int remove(Long logId){
 		return upmsLogDao.remove(logId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] logIds){
+	public int batchRemove(Long[] logIds){
 		return upmsLogDao.batchRemove(logIds);
 	}
 	

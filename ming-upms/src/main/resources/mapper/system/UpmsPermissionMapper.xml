@@ -109,31 +109,6 @@
 		</foreach>
 	</delete>
 
-	<select id="getByUserId" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
-		SELECT
-			up.`permission_id`,
-			up.`system_id`,
-			up.`pid`,
-			up.`name`,
-			up.`type`,
-			up.`permission_value`,
-			up.`uri`,
-			up.`icon`,
-			up.`status`,
-			up.`ctime`,
-			up.`orders`
-		FROM upms_permission up,
-			upms_role_permission urp,
-			upms_role ur,
-			upms_user_role uur,
-			upms_user uu
-		WHERE up.permission_id = urp.permission_id
-		  AND urp.role_id = ur.role_id
-		  and ur.role_id = uur.role_id
-		  and uur.user_id = uu.user_id
-		  and uu.user_id = #{userId}
-	</select>
-
 	<select id="getPermsByUserId" resultType="string">
 		select distinct m.permission_value
 		  from upms_permission m
@@ -142,6 +117,17 @@
 		left join upms_user_role ur
 		    on rm.role_id = ur.role_id
 		where ur.user_id = #{userId}
+	</select>
+
+	<select id="getPermissionByUserId" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+		select distinct m.`permission_id`,m.`system_id`,m.`pid`,m.`name`,m.`type`,m.`permission_value`,m.`uri`,m.`icon`,m.`status`,m.`ctime`,m.`orders`
+		  from upms_permission m
+		  left join upms_role_permission rm
+		    on m.permission_id = rm.permission_id
+		  left join upms_user_role ur
+		    on rm.role_id = ur.role_id
+		 where ur.user_id = #{userId}
+		 order by m.permission_id asc
 	</select>
 
 </mapper>

@@ -18,7 +18,7 @@ public class UpmsOrganizationServiceImpl implements UpmsOrganizationService {
 	private UpmsOrganizationDao upmsOrganizationDao;
 	
 	@Override
-	public UpmsOrganizationDO get(Integer organizationId){
+	public UpmsOrganizationDO get(Long organizationId){
 		return upmsOrganizationDao.get(organizationId);
 	}
 	
@@ -43,12 +43,12 @@ public class UpmsOrganizationServiceImpl implements UpmsOrganizationService {
 	}
 	
 	@Override
-	public int remove(Integer organizationId){
+	public int remove(Long organizationId){
 		return upmsOrganizationDao.remove(organizationId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] organizationIds){
+	public int batchRemove(Long[] organizationIds){
 		return upmsOrganizationDao.batchRemove(organizationIds);
 	}
 	

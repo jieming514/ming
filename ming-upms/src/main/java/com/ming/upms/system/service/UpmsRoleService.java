@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface UpmsRoleService {
 	
-	UpmsRoleDO get(Integer roleId);
+	UpmsRoleDO get(Long roleId);
 	
 	List<UpmsRoleDO> list(Map<String, Object> map);
 	
@@ -24,7 +24,7 @@ public interface UpmsRoleService {
 	
 	int update(UpmsRoleDO upmsRole);
 	
-	int remove(Integer roleId);
+	int remove(Long roleId);
 	
-	int batchRemove(Integer[] roleIds);
+	int batchRemove(Long[] roleIds);
 }

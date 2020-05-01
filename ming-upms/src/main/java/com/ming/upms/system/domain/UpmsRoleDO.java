@@ -1,7 +1,6 @@
 package com.ming.upms.system.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 
@@ -16,7 +15,7 @@ public class UpmsRoleDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//编号
-	private Integer roleId;
+	private Long roleId;
 	//角色名称
 	private String name;
 	//角色标题
@@ -31,13 +30,13 @@ public class UpmsRoleDO implements Serializable {
 	/**
 	 * 设置：编号
 	 */
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 	/**
 	 * 获取：编号
 	 */
-	public Integer getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
 	/**

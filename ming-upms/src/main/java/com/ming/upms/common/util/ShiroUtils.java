@@ -23,7 +23,7 @@ public class ShiroUtils {
         Object object = getSubjct().getPrincipal();
         return (UpmsUserDO)object;
     }
-    public static Integer getUserId() {
+    public static Long getUserId() {
         return getUser().getUserId();
     }
     public static void logout() {

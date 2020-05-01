@@ -1,11 +1,10 @@
 package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsOrganizationDO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 组织
@@ -16,7 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UpmsOrganizationDao {
 
-	UpmsOrganizationDO get(Integer organizationId);
+	UpmsOrganizationDO get(Long organizationId);
 	
 	List<UpmsOrganizationDO> list(Map<String,Object> map);
 	
@@ -26,7 +25,7 @@ public interface UpmsOrganizationDao {
 	
 	int update(UpmsOrganizationDO upmsOrganization);
 	
-	int remove(Integer organization_id);
+	int remove(Long organizationId);
 	
-	int batchRemove(Integer[] organizationIds);
+	int batchRemove(Long[] organizationIds);
 }

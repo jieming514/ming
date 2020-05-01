@@ -1,9 +1,6 @@
 package com.ming.upms.common.shiro;
 
 import com.ming.upms.common.util.ShiroUtils;
-import com.ming.upms.system.dao.UpmsPermissionDao;
-import com.ming.upms.system.dao.UpmsUserDao;
-import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.upms.system.service.UpmsUserService;
@@ -39,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        Integer userId = ShiroUtils.getUserId();
+        Long userId = ShiroUtils.getUserId();
         Set<String> upmsPermissionDOSet = upmsPermissionService.getPermsByUserId(userId);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setStringPermissions(upmsPermissionDOSet);

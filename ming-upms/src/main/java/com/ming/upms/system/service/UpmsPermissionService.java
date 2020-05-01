@@ -1,7 +1,7 @@
 package com.ming.upms.system.service;
 
+import com.ming.upms.common.domain.Tree;
 import com.ming.upms.system.domain.UpmsPermissionDO;
-import javafx.scene.effect.SepiaTone;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public interface UpmsPermissionService {
 	
-	UpmsPermissionDO get(Integer permissionId);
+	UpmsPermissionDO get(Long permissionId);
 	
 	List<UpmsPermissionDO> list(Map<String, Object> map);
 	
@@ -26,11 +26,16 @@ public interface UpmsPermissionService {
 	
 	int update(UpmsPermissionDO upmsPermission);
 	
-	int remove(Integer permissionId);
+	int remove(Long permissionId);
 	
-	int batchRemove(Integer[] permissionIds);
+	int batchRemove(Long[] permissionIds);
 
-	Set<UpmsPermissionDO> getByUserId(Integer userId);
+	Set<String> getPermsByUserId(Long userId);
 
-	Set<String> getPermsByUserId(Integer userId);
+	/**
+	 * 通过用户ID查找权限信息
+	 */
+	Set<UpmsPermissionDO> getPermissionByUserId(Long userId);
+
+	List<Tree<UpmsPermissionDO>> getTreeByUserId(Long userId);
 }
