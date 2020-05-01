@@ -21,7 +21,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by organization_id desc
+                order by organization_id asc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">

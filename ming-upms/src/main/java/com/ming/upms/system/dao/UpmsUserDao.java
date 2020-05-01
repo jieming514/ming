@@ -6,19 +6,26 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户
+ * @author ming
+ * @email jie_ming514@163.com
+ * @date 2020-05-01 15:23:25
+ */
 @Mapper
 public interface UpmsUserDao {
 
-    public UpmsUserDO get(Long userId);
-
-    public List<UpmsUserDO> list(Map<String, Object> params);
-
-    public int insert(UpmsUserDO upmsUserDO);
-
-    public int update(UpmsUserDO upmsUserDO);
-
-    public int remove(Long userId);
-
-    public UpmsUserDO getUserByName(String userName);
-
+	UpmsUserDO get(Long userId);
+	
+	List<UpmsUserDO> list(Map<String,Object> map);
+	
+	int count(Map<String,Object> map);
+	
+	int save(UpmsUserDO upmsUser);
+	
+	int update(UpmsUserDO upmsUser);
+	
+	int remove(Long user_id);
+	
+	int batchRemove(Long[] userIds);
 }

@@ -9,45 +9,46 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-@Service("upmsUserServiceImpl")
+
+
+@Service
 public class UpmsUserServiceImpl implements UpmsUserService {
-
-    @Autowired
-    private UpmsUserDao upmsUserDao;
-
-    @Override
-    public UpmsUserDO get(Long userId) {
-        return upmsUserDao.get(userId);
-    }
-
-    @Override
-    public List<UpmsUserDO> list(Map<String, Object> params) {
-        return upmsUserDao.list(params);
-    }
-
-    @Override
-    public int insert(UpmsUserDO upmsUserDO) {
-        return 0;
-    }
-
-    @Override
-    public int update(UpmsUserDO upmsUserDO) {
-        return 0;
-    }
-
-    @Override
-    public int remove(Long userId) {
-        return 0;
-    }
-
-    /**
-     * 通过用户名获取用户信息
-     * @param userName
-     * @return
-     */
-    @Override
-    public UpmsUserDO getUserByName(String userName) {
-        return upmsUserDao.getUserByName(userName);
-    }
-
+	@Autowired
+	private UpmsUserDao upmsUserDao;
+	
+	@Override
+	public UpmsUserDO get(Long userId){
+		return upmsUserDao.get(userId);
+	}
+	
+	@Override
+	public List<UpmsUserDO> list(Map<String, Object> map){
+		return upmsUserDao.list(map);
+	}
+	
+	@Override
+	public int count(Map<String, Object> map){
+		return upmsUserDao.count(map);
+	}
+	
+	@Override
+	public int save(UpmsUserDO upmsUser){
+		return upmsUserDao.save(upmsUser);
+	}
+	
+	@Override
+	public int update(UpmsUserDO upmsUser){
+		return upmsUserDao.update(upmsUser);
+	}
+	
+	@Override
+	public int remove(Long userId){
+		return upmsUserDao.remove(userId);
+	}
+	
+	@Override
+	public int batchRemove(Long[] userIds){
+		return upmsUserDao.batchRemove(userIds);
+	}
+	
 }

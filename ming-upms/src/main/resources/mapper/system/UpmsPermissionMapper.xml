@@ -27,7 +27,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by permission_id desc
+                order by permission_id asc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
