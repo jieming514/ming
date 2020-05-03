@@ -30,7 +30,7 @@ import java.util.List;
 @Controller
 public class LogInController extends BaseController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(LogInController.class);
 
     @Autowired
     private UpmsUserService upmsUserService;

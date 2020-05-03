@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class MainsiteErrorController implements ErrorController {
-    Logger logger = LoggerFactory.getLogger(MainsiteErrorController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MainsiteErrorController.class);
 
     private final String ERROR_PATH ="/error";
 
