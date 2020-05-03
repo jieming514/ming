@@ -5,6 +5,7 @@
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -12,9 +13,17 @@
     <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
         <Prudent>true</Prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件命名-->
             <FileNamePattern>
-                applog/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
+                applog/%d{yyyy-MM-dd}/common-all-%d{yyyy-MM-dd}-%i.log
             </FileNamePattern>
+            <!--保存最近10天的日志，防止磁盘被占满-->
+            <maxHistory>10</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--设置最大日志文件大小-->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
@@ -23,11 +32,13 @@
         </layout>
     </appender>
 
+    <!--输出指定包文件的日志-->
     <logger name="com.ming" additivity="false">
         <appender-ref ref="console"/>
         <appender-ref ref="logFile" />
     </logger>
 
+    <!--日志处理级别-->
     <root level="error">
         <appender-ref ref="console"/>
         <appender-ref ref="logFile" />
