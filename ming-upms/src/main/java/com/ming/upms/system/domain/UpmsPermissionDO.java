@@ -172,7 +172,7 @@ public class UpmsPermissionDO implements Serializable {
 
 	@Override
 	public String toString() {
-		final StringBuffer sb = new StringBuffer("UpmsPermissionDO{");
+		final StringBuilder sb = new StringBuilder("UpmsPermissionDO{");
 		sb.append("permissionId=").append(permissionId);
 		sb.append(", systemId=").append(systemId);
 		sb.append(", pid=").append(pid);

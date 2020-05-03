@@ -103,10 +103,9 @@ public class UpmsRoleDO implements Serializable {
 		return orders;
 	}
 
-
 	@Override
 	public String toString() {
-		final StringBuffer sb = new StringBuffer("UpmsRoleDO{");
+		final StringBuilder sb = new StringBuilder("UpmsRoleDO{");
 		sb.append("roleId=").append(roleId);
 		sb.append(", name='").append(name).append('\'');
 		sb.append(", title='").append(title).append('\'');
