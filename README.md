@@ -1,6 +1,7 @@
 
 # ming
-[![star](https://gitee.com/jie_ming514/ming/badge/star.svg?theme=dark)](https://gitee.com/jie_ming514/ming/stargazers)
+[![image](https://img.shields.io/badge/CSDN-jie_ming514-orange.svg)](https://blog.csdn.net/m1090760001)
+![image](https://img.shields.io/badge/license-Apache2.0-blue.svg)
 
 
 ## 一、项目介绍
@@ -76,8 +77,11 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
 
 
 ## 五、系统演示
-
+  - 页面加载中
 
 
 ## 六、其他相关
-### 7.1. ming 相关博客
+### 6.1. ming 相关博客
+  - CSDN博客：[jie_ming514的博客](https://blog.csdn.net/m1090760001)
+
+
