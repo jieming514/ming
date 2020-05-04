@@ -21,15 +21,8 @@
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
 		  		  <if test="orders != null and orders != ''"> and orders = #{orders} </if>
-		  		</where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-			<otherwise>
-                order by permission_id asc
-			</otherwise>
-        </choose>
+		</where>
+		order by permission_id asc
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

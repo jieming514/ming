@@ -6,85 +6,57 @@ $(function() {
 
 function load() {
 	$('#exampleTable')
-			.bootstrapTable(
+			.bootstrapTreeTable(
 					{
-						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
-					//	showRefresh : true,
-					//	showToggle : true,
-					//	showColumns : true,
-						iconSize : 'outline',
-						toolbar : '#exampleToolbar',
-						striped : true, // 设置为true会有隔行变色效果
-						dataType : "json", // 服务器返回的数据类型
-						pagination : true, // 设置为true会在底部显示分页条
-						// queryParamsType : "limit",
-						// //设置为limit则会发送符合RESTFull格式的参数
-						singleSelect : false, // 设置为true将禁止多选
-						// contentType : "application/x-www-form-urlencoded",
-						// //发送到服务器的数据编码类型
-						pageSize : 10, // 如果设置了分页，每页数据条数
-						pageNumber : 1, // 如果设置了分布，首页页码
-						//search : true, // 是否显示搜索框
-						showColumns : false, // 是否显示内容下拉框（选择显示的列）
-						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
-						queryParams : function(params) {
-							return {
-								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
-							};
-						},
-						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
-						// queryParamsType = 'limit' ,返回参数必须包含
-						// limit, offset, search, sort, order 否则, 需要包含:
-						// pageSize, pageNumber, searchText, sortName,
-						// sortOrder.
-						// 返回false将会终止请求
+						id: 'permissionId',
+                        code: 'permissionId',
+                        parentCode: 'pid',
+                        type: "GET", // 请求数据的ajax类型
+                        url: prefix + '/list', // 请求数据的ajax的url
+                        ajaxParams: {sort:'order_num'}, // 请求数据的ajax的data属性
+                        expandColumn: '2',// 在哪一列上面显示展开按钮
+                        striped: true, // 是否各行渐变色
+                        bordered: true, // 是否显示边框
+                        expandAll: false, // 是否全部展开
 						columns : [
 								{
-									checkbox : true
-								},
-																{
 									field : 'permissionId', 
-									title : '编号' 
+									title : '编号',
+									visible: false,
+                                    align: 'center',
+                                    valign: 'center',
+                                    width: '5%'
 								},
-																{
-									field : 'systemId', 
+								{
+									field : 'systemId',
+									valign: 'center',
 									title : '所属系统' 
 								},
 																{
-									field : 'pid', 
-									title : '所属上级',
-									formatter : function(value, row, index) {
-									    if (value == 0) {
-									        return "#"
-									    }
-									    return value;
-									}
-								},
-																{
-									field : 'name', 
+									field : 'name',
+									valign: 'center',
 									title : '名称' 
 								},
 																{
 									field : 'type', 
 									title : '类型',
-                                    formatter : function(value, row, index) {
-                                        if(value == 1) {
+									align: 'center',
+									valign: 'center',
+                                    formatter : function(item, index) {
+                                        if(item.type == 1) {
                                             return "<span class='label label-success'>目录</span>";
-                                        }else if(value == 2) {
+                                        }else if(item.type == 2) {
                                             return "<span class='label label-primary'>菜单</span>";
-                                        }else if(value == 3) {
+                                        }else if(item.type == 3) {
                                              return "<span class='label label-info'>按钮</span>";
                                          }
                                         return "<span class='label label-danger'>未知</span>";
                                     }
 								},
 																{
-									field : 'permissionValue', 
+									field : 'permissionValue',
+									align: 'center',
+									valign: 'center',
 									title : '权限值' 
 								},
 																{
@@ -92,26 +64,32 @@ function load() {
 									title : '路径' 
 								},
 																{
-									field : 'icon', 
+									field : 'icon',
+									align: 'center',
+									valign: 'center',
 									title : '图标',
-									formatter : function(value, row, index) {
-									    return "<i class='" + value + "' aria-hidden='true'></i>";
+									formatter : function(item, index) {
+									    return "<i class='" + item.icon + "' aria-hidden='true'></i>";
 									}
 								},
 																{
-									field : 'status', 
+									field : 'status',
+									align: 'center',
+									valign: 'center',
 									title : '状态',
-                                    formatter : function(value, row, index) {
-                                        if(value == 0) {
+                                    formatter : function(item, index) {
+                                        if(item.status == 0) {
                                             return "<span class='label label-warning'>禁用</span>";
-                                        }else if(value == 1) {
+                                        }else if(item.status == 1) {
                                             return "<span class='label label-success'>正常</span>";
                                         }
-                                        return "<span class='label label-danger'>位置</span>";
+                                        return "<span class='label label-danger'>未知</span>";
                                     }
 								},
 																{
-									field : 'ctime', 
+									field : 'ctime',
+									align: 'center',
+									valign: 'center',
 									title : '创建时间' 
 								},
 																{
@@ -182,8 +160,6 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
-}
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {

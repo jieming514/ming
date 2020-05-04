@@ -1,7 +1,5 @@
 package com.ming.upms.system.controller;
 
-import com.ming.common.utils.PageUtils;
-import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.service.UpmsPermissionService;
@@ -37,13 +35,9 @@ public class UpmsPermissionController {
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:upmsPermission:upmsPermission")
-	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-        Query query = new Query(params);
-		List<UpmsPermissionDO> upmsPermissionList = upmsPermissionService.list(query);
-		int total = upmsPermissionService.count(query);
-		PageUtils pageUtils = new PageUtils(upmsPermissionList, total);
-		return pageUtils;
+	public List<UpmsPermissionDO> list(@RequestParam Map<String, Object> params){
+		List<UpmsPermissionDO> upmsPermissionList = upmsPermissionService.list(params);
+		return upmsPermissionList;
 	}
 	
 	@GetMapping("/add")
