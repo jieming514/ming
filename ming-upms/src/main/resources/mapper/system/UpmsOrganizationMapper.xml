@@ -53,7 +53,7 @@
 			#{pid}, 
 			#{name}, 
 			#{description}, 
-			#{ctime}
+			now()
 		)
 	</insert>
 	 

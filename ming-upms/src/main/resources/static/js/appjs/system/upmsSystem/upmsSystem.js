@@ -69,7 +69,15 @@ function load() {
 								},
 																{
 									field : 'status', 
-									title : '状态(-1:黑名单,1:正常)' 
+									title : '状态',
+									formatter : function (value, row, index) {
+									    if(value == -1) {
+                                            return "<span class='label label-warning'>黑名单</span>";
+                                        }else if(value == 1) {
+                                            return "<span class='label label-success'>正常</span>";
+                                        }
+                                        return "<span class='label label-danger'>未知</span>";
+									}
 								},
 																{
 									field : 'name', 

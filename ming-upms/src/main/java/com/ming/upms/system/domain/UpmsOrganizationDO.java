@@ -1,5 +1,7 @@
 package com.ming.upms.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,7 +26,8 @@ public class UpmsOrganizationDO implements Serializable {
 	//组织描述
 	private String description;
 	//创建时间
-	private Long ctime;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+	private Date ctime;
 
 	/**
 	 * 设置：编号
@@ -77,13 +80,25 @@ public class UpmsOrganizationDO implements Serializable {
 	/**
 	 * 设置：创建时间
 	 */
-	public void setCtime(Long ctime) {
+	public void setCtime(Date ctime) {
 		this.ctime = ctime;
 	}
 	/**
 	 * 获取：创建时间
 	 */
-	public Long getCtime() {
+	public Date getCtime() {
 		return ctime;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("UpmsOrganizationDO{");
+		sb.append("organizationId=").append(organizationId);
+		sb.append(", pid=").append(pid);
+		sb.append(", name='").append(name).append('\'');
+		sb.append(", description='").append(description).append('\'');
+		sb.append(", ctime=").append(ctime);
+		sb.append('}');
+		return sb.toString();
 	}
 }

@@ -59,10 +59,18 @@ function load() {
 									field : 'realname', 
 									title : '姓名' 
 								},
-																{
-									field : 'avatar', 
-									title : '头像' 
-								},
+								{
+                                    field : 'sex',
+                                    title : '性别',
+                                    formatter : function(value, row, index) {
+                                        if(value == 1) {
+                                              return "男";
+                                        }else if(value == 0) {
+                                            return "女";
+                                        }
+                                        return "<b style='color=red'>未知</b>";
+                                    }
+                                },
 																{
 									field : 'phone', 
 									title : '电话' 
@@ -70,18 +78,6 @@ function load() {
 																{
 									field : 'email', 
 									title : '邮箱' 
-								},
-																{
-									field : 'sex', 
-									title : '性别',
-									formatter : function(value, row, index) {
-									    if(value == 1) {
-                                            return "男";
-									    }else if(value == 0) {
-									        return "女";
-									    }
-									    return "<b style='color=red'>未知</b>";
-									}
 								},
 																{
 									field : 'locked', 
@@ -92,7 +88,7 @@ function load() {
                                         }else if(value == 0) {
                                             return "<span class='label label-success'>正常</span>";
                                         }
-                                        return "<span class='label label-danger'>锁定</span>";
+                                        return "<span class='label label-danger'>未知</span>";
 									}
 								},
 																{

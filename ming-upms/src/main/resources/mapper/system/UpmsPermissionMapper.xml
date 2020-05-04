@@ -76,7 +76,7 @@
 			#{uri}, 
 			#{icon}, 
 			#{status}, 
-			#{ctime}, 
+			now(),
 			#{orders}
 		)
 	</insert>

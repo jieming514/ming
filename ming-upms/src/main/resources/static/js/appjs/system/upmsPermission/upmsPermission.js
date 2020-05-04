@@ -57,7 +57,13 @@ function load() {
 								},
 																{
 									field : 'pid', 
-									title : '所属上级' 
+									title : '所属上级',
+									formatter : function(value, row, index) {
+									    if (value == 0) {
+									        return "#"
+									    }
+									    return value;
+									}
 								},
 																{
 									field : 'name', 

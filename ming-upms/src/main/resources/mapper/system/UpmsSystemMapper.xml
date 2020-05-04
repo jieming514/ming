@@ -64,7 +64,7 @@
 			`name`, 
 			`title`, 
 			`description`, 
-			`ctime`, 
+			now(),
 			`orders`
 		)
 		values
