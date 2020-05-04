@@ -7,6 +7,7 @@ import com.ming.upms.common.domain.Tree;
 import com.ming.upms.common.util.RandomValidateCodeUtil;
 import com.ming.upms.common.util.ShiroUtils;
 import com.ming.upms.system.domain.UpmsPermissionDO;
+import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -42,11 +43,9 @@ public class LogInController extends BaseController {
     String index(Model model) {
         //获取用户资源
         List<Tree<UpmsPermissionDO>> permissionDOList = upmsPermissionService.getTreeByUserId(getUserId());
+        UpmsUserDO user = getUser();
         model.addAttribute("menus", permissionDOList);
-        model.addAttribute("name", getUserName());
-        model.addAttribute("username", getUser().getRealname());
-        model.addAttribute("picUrl","/img/profile_small.jpg");
-
+        model.addAttribute("user", getUser());
         return "index_v1";
     }
 

@@ -30,10 +30,10 @@
                 <li class="nav-header">
                     <span class="clearfix">
                         <div class="pull-left">
-                            <img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/>
+                            <img alt="image" class="img-circle" height="60" width="60" th:src="${user.avatar}"/>
                         </div>
                         <div class="pull-left" style="padding:8px 10px">
-                            <p class="font-bold" th:text="${username}">admin</p>
+                            <p class="font-bold" th:text="${user.realname}">admin</p>
                             <a href="/logout"><i class="fa fa fa-sign-out"></i> 注销</a>
                         </div>
                     </span>
