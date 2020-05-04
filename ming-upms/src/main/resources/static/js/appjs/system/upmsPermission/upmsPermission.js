@@ -65,7 +65,17 @@ function load() {
 								},
 																{
 									field : 'type', 
-									title : '类型(1:目录,2:菜单,3:按钮)' 
+									title : '类型',
+                                    formatter : function(value, row, index) {
+                                        if(value == 1) {
+                                            return "<span class='label label-success'>目录</span>";
+                                        }else if(value == 2) {
+                                            return "<span class='label label-primary'>菜单</span>";
+                                        }else if(value == 3) {
+                                             return "<span class='label label-info'>按钮</span>";
+                                         }
+                                        return "<span class='label label-danger'>未知</span>";
+                                    }
 								},
 																{
 									field : 'permissionValue', 
@@ -77,11 +87,22 @@ function load() {
 								},
 																{
 									field : 'icon', 
-									title : '图标' 
+									title : '图标',
+									formatter : function(value, row, index) {
+									    return "<i class='" + value + "' aria-hidden='true'></i>";
+									}
 								},
 																{
 									field : 'status', 
-									title : '状态(0:禁止,1:正常)' 
+									title : '状态',
+                                    formatter : function(value, row, index) {
+                                        if(value == 0) {
+                                            return "<span class='label label-warning'>禁用</span>";
+                                        }else if(value == 1) {
+                                            return "<span class='label label-success'>正常</span>";
+                                        }
+                                        return "<span class='label label-danger'>位置</span>";
+                                    }
 								},
 																{
 									field : 'ctime', 

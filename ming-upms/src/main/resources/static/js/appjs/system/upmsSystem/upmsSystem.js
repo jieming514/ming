@@ -1,5 +1,5 @@
 
-var prefix = "/blog/bComments"
+var prefix = "/system/upmsSystem"
 $(function() {
 	load();
 });
@@ -33,8 +33,8 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset
-					            //name:$('#searchName').val(),
-					          //  username:$('#searchName').val()
+					           // name:$('#searchName').val(),
+					           // username:$('#searchName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -48,74 +48,62 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'id', 
-									title : '主键' 
+									field : 'systemId', 
+									title : '编号' 
 								},
 																{
-									field : 'coid', 
-									title : '' 
+									field : 'icon', 
+									title : '图标' 
 								},
 																{
-									field : 'created', 
-									title : '创建者' 
+									field : 'banner', 
+									title : '背景' 
 								},
 																{
-									field : 'author', 
-									title : '作者' 
+									field : 'theme', 
+									title : '主题' 
 								},
 																{
-									field : 'authorId', 
-									title : '作者编号' 
-								},
-																{
-									field : 'ownerId', 
-									title : '归属人编号' 
-								},
-																{
-									field : 'email', 
-									title : '邮箱' 
-								},
-																{
-									field : 'url', 
-									title : '链接地址' 
-								},
-																{
-									field : 'ip', 
-									title : 'ip地址' 
-								},
-																{
-									field : 'agent', 
-									title : '代理人' 
-								},
-																{
-									field : 'content', 
-									title : '内容' 
-								},
-																{
-									field : 'type', 
-									title : '类型' 
+									field : 'basepath', 
+									title : '根目录' 
 								},
 																{
 									field : 'status', 
-									title : '状态' 
+									title : '状态(-1:黑名单,1:正常)' 
 								},
 																{
-									field : 'parent', 
-									title : '原始文章' 
+									field : 'name', 
+									title : '系统名称' 
+								},
+																{
+									field : 'title', 
+									title : '系统标题' 
+								},
+																{
+									field : 'description', 
+									title : '系统描述' 
+								},
+																{
+									field : 'ctime', 
+									title : '创建时间' 
+								},
+																{
+									field : 'orders', 
+									title : '排序' 
 								},
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+												+ row.systemId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+												+ row.systemId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
+												+ row.systemId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -126,16 +114,14 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	$("#content").val($('#content').code());
-	var perContent= layer.open({
+	layer.open({
 		type : 2,
-		title : '发布文章',
+		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
-	 layer.full(perContent);
 }
 function edit(id) {
 	layer.open({
@@ -155,7 +141,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'id' : id
+				'systemId' : id
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -173,7 +159,6 @@ function resetPwd(id) {
 }
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;
@@ -182,11 +167,10 @@ function batchRemove() {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
-		
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
+			ids[i] = row['systemId'];
 		});
 		$.ajax({
 			type : 'POST',
