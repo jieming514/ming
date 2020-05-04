@@ -2,7 +2,7 @@
 # ming
 [![image](https://img.shields.io/badge/CSDN-jie_ming514-orange.svg)](https://blog.csdn.net/m1090760001)
 ![image](https://img.shields.io/badge/license-Apache2.0-blue.svg)
-
+![image](https://img.shields.io/badge/Spring%20Boot-2.1.1.RELEASE-blue.svg)
 
 ## 一、项目介绍
 ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、人事办公。旨在通过实战分享个人经验简洁高效，减少过渡封装，展现技术本质,以技术服务于业务。
@@ -77,7 +77,13 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
 
 
 ## 五、系统演示
-  - 页面加载中
+  - 登录页面
+     ![登录页面](_doc/show/login.png)
+  - 主页面
+     ![主页面](_doc/show/main.png)
+  - 用户维护页面
+     ![用户维护页面](_doc/show/user.png)
+
 
 
 ## 六、其他相关
