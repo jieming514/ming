@@ -13,6 +13,7 @@ import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -85,8 +86,14 @@ public class LogInController extends BaseController {
             }
         } catch (Exception e) {
             logger.error("get verify is error:", e);
-            return R.error("验证码校验失败");
+            return R.error("验证码校验失败！");
         }
+        UpmsUserDO user = upmsUserService.getUserByusername(username);
+        if (user == null || user.getUserId() == null) {
+            return R.error("用户不存在！");
+        }
+        //密码加盐
+        password += user.getSalt();
         //验证用户信息
         password = MD5Utils.encrypt(username, password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
@@ -94,8 +101,10 @@ public class LogInController extends BaseController {
         try {
             subject.login(token);
             return R.ok();
+        } catch (LockedAccountException e) {
+            return R.error("用户被锁定，请找管理员处理！");
         } catch (AuthenticationException e) {
-            return R.error("用户名密码错误");
+            return R.error("用户名密码错误！");
         }
     }
 

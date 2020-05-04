@@ -51,6 +51,18 @@ function load() {
 									field : 'systemId', 
 									title : '编号' 
 								},
+								{
+                                    field : 'name',
+                                    title : '系统名称'
+                                },
+                                                                {
+                                    field : 'title',
+                                    title : '系统标题'
+                                },
+                                                                {
+                                    field : 'description',
+                                    title : '系统描述'
+                                },
 																{
 									field : 'icon', 
 									title : '图标' 
@@ -78,18 +90,6 @@ function load() {
                                         }
                                         return "<span class='label label-danger'>未知</span>";
 									}
-								},
-																{
-									field : 'name', 
-									title : '系统名称' 
-								},
-																{
-									field : 'title', 
-									title : '系统标题' 
-								},
-																{
-									field : 'description', 
-									title : '系统描述' 
 								},
 																{
 									field : 'ctime', 

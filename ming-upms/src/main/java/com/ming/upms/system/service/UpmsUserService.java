@@ -27,4 +27,11 @@ public interface UpmsUserService {
 	int remove(Long userId);
 	
 	int batchRemove(Long[] userIds);
+
+	/**
+	 * 通过用户名获取用户信息
+	 * @param username
+	 * @return
+	 */
+	UpmsUserDO getUserByusername(String username);
 }

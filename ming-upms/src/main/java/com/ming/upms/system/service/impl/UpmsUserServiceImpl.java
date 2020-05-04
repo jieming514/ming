@@ -50,5 +50,11 @@ public class UpmsUserServiceImpl implements UpmsUserService {
 	public int batchRemove(Long[] userIds){
 		return upmsUserDao.batchRemove(userIds);
 	}
-	
+
+	@Override
+	public UpmsUserDO getUserByusername(String username) {
+		return upmsUserDao.getUserByusername(username);
+	}
+
+
 }

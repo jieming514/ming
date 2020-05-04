@@ -1,10 +1,12 @@
 package com.ming.upms.system.controller;
 
+import com.ming.common.utils.MD5Utils;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserService;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,6 +69,10 @@ public class UpmsUserController {
 	@PostMapping("/save")
 	@RequiresPermissions("system:upmsUser:add")
 	public R save( UpmsUserDO upmsUser){
+		String salt = RandomStringUtils.randomAlphanumeric(30);
+		upmsUser.setSalt(salt);
+		String password = upmsUser.getPassword() + salt;
+		upmsUser.setPassword(MD5Utils.encrypt(upmsUser.getUsername(), password));
 		if(upmsUserService.save(upmsUser)>0){
 			return R.ok();
 		}

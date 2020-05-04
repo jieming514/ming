@@ -28,4 +28,6 @@ public interface UpmsUserDao {
 	int remove(Long user_id);
 	
 	int batchRemove(Long[] userIds);
+
+	UpmsUserDO getUserByusername(String username);
 }

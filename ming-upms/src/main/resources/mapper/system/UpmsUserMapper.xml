@@ -109,8 +109,9 @@
     </delete>
 
 
-    <select id="getUserByName" resultType="com.ming.upms.system.domain.UpmsUserDO">
-        select * from ming.upms_user where user_id = #{getUserByName}
+    <select id="getUserByusername" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select `user_id`,`username`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`
+          from ming.upms_user where username = #{value}
     </select>
 
 </mapper>
