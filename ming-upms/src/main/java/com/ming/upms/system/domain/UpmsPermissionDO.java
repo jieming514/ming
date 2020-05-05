@@ -20,6 +20,8 @@ public class UpmsPermissionDO implements Serializable {
 	private Long permissionId;
 	//所属系统
 	private Integer systemId;
+	//所属系统名称
+	private String systemName;
 	//所属上级
 	private Integer pid;
 	//名称
@@ -64,6 +66,15 @@ public class UpmsPermissionDO implements Serializable {
 	public Integer getSystemId() {
 		return systemId;
 	}
+
+	public String getSystemName() {
+		return systemName;
+	}
+
+	public void setSystemName(String systemName) {
+		this.systemName = systemName;
+	}
+
 	/**
 	 * 设置：所属上级
 	 */

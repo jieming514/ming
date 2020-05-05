@@ -25,23 +25,27 @@ function load() {
 									visible: false,
                                     align: 'center',
                                     valign: 'center',
-                                    width: '5%'
+                                    width: '3%'
 								},
+                                {
+                                    field : 'systemName',
+                                    align: 'center',
+                                    valign: 'center',
+                                    title : '所属系统',
+                                    width: '10%'
+                                },
 								{
-									field : 'systemId',
-									valign: 'center',
-									title : '所属系统' 
-								},
-																{
 									field : 'name',
 									valign: 'center',
-									title : '名称' 
+									title : '名称',
+									width: '12%'
 								},
 																{
 									field : 'type', 
 									title : '类型',
 									align: 'center',
 									valign: 'center',
+									width: '4%',
                                     formatter : function(item, index) {
                                         if(item.type == 1) {
                                             return "<span class='label label-success'>目录</span>";
@@ -55,19 +59,21 @@ function load() {
 								},
 																{
 									field : 'permissionValue',
-									align: 'center',
 									valign: 'center',
-									title : '权限值' 
+									title : '权限值',
+									width: '12%'
 								},
 																{
 									field : 'uri', 
-									title : '路径' 
+									title : '路径',
+									width: '20%'
 								},
 																{
 									field : 'icon',
 									align: 'center',
 									valign: 'center',
 									title : '图标',
+									width: '4%',
 									formatter : function(item, index) {
 									    return "<i class='" + item.icon + "' aria-hidden='true'></i>";
 									}
@@ -77,6 +83,7 @@ function load() {
 									align: 'center',
 									valign: 'center',
 									title : '状态',
+									width: '4%',
                                     formatter : function(item, index) {
                                         if(item.status == 0) {
                                             return "<span class='label label-warning'>禁用</span>";
@@ -86,17 +93,14 @@ function load() {
                                         return "<span class='label label-danger'>未知</span>";
                                     }
 								},
-																{
+								{
 									field : 'ctime',
 									align: 'center',
 									valign: 'center',
-									title : '创建时间' 
+									title : '创建时间',
+									width: '8%'
 								},
-																{
-									field : 'orders', 
-									title : '排序' 
-								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',

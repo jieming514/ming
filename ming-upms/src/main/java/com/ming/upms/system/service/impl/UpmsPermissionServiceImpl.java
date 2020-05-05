@@ -91,4 +91,9 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		return list;
 	}
 
+	@Override
+	public List<UpmsPermissionDO> getSystemPermissionList(Map<String, Object> map) {
+		return upmsPermissionDao.getSystemPermissionList(map);
+	}
+
 }

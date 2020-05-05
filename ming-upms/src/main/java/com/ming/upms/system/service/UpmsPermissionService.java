@@ -38,4 +38,11 @@ public interface UpmsPermissionService {
 	List<UpmsPermissionDO> getPermissionByUserId(Long userId);
 
 	List<Tree<UpmsPermissionDO>> getTreeByUserId(Long userId);
+
+	/**
+	 * 获取系统资源
+	 * @param map
+	 * @return
+	 */
+	List<UpmsPermissionDO> getSystemPermissionList(Map<String,Object> map);
 }

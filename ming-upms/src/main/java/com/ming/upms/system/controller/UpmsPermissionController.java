@@ -36,7 +36,8 @@ public class UpmsPermissionController {
 	@GetMapping("/list")
 	@RequiresPermissions("system:upmsPermission:upmsPermission")
 	public List<UpmsPermissionDO> list(@RequestParam Map<String, Object> params){
-		List<UpmsPermissionDO> upmsPermissionList = upmsPermissionService.list(params);
+		//List<UpmsPermissionDO> upmsPermissionList = upmsPermissionService.list(params);
+		List<UpmsPermissionDO> upmsPermissionList = upmsPermissionService.getSystemPermissionList(params);
 		return upmsPermissionList;
 	}
 	

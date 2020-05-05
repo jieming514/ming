@@ -42,7 +42,7 @@
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
 		  		  <if test="orders != null and orders != ''"> and orders = #{orders} </if>
-		  		</where>
+		 </where>
 	</select>
 	 
 	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsPermissionDO" useGeneratedKeys="true" keyProperty="permissionId">
@@ -121,6 +121,33 @@
 		    on rm.role_id = ur.role_id
 		 where ur.user_id = #{userId}
 		 order by m.permission_id asc
+	</select>
+
+	<select id="getSystemPermissionList" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+		SELECT
+			up.`permission_id`,
+			up.`system_id`,
+			us.`title` systemName,
+			up.`pid`,
+			up.`name`,
+			up.`type`,
+			up.`permission_value`,
+			up.`uri`,
+			up.`icon`,
+			up.`status`,
+			up.`ctime`,
+			up.`orders`
+			FROM upms_permission up
+				LEFT JOIN
+			upms_system us ON up.system_id = us.system_id
+		<where>
+			<if test="systemIds != null and systemIds != ''">
+				us.system_id in
+				<foreach item="systemId" collection="array" open="(" separator="," close=")">
+					#{systemId}
+				</foreach>
+			</if>
+		</where>
 	</select>
 
 </mapper>

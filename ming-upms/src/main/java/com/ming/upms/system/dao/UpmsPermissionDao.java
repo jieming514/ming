@@ -34,5 +34,6 @@ public interface UpmsPermissionDao {
 
 	List<UpmsPermissionDO> getPermissionByUserId(Long userId);
 
+	List<UpmsPermissionDO> getSystemPermissionList(Map<String,Object> map);
 
 }
