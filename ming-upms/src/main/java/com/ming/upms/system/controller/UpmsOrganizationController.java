@@ -1,7 +1,5 @@
 package com.ming.upms.system.controller;
 
-import com.ming.common.utils.PageUtils;
-import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 import com.ming.upms.system.service.UpmsOrganizationService;
@@ -37,13 +35,9 @@ public class UpmsOrganizationController {
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:upmsOrganization:upmsOrganization")
-	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-        Query query = new Query(params);
-		List<UpmsOrganizationDO> upmsOrganizationList = upmsOrganizationService.list(query);
-		int total = upmsOrganizationService.count(query);
-		PageUtils pageUtils = new PageUtils(upmsOrganizationList, total);
-		return pageUtils;
+	public List<UpmsOrganizationDO> list(@RequestParam Map<String, Object> params){
+		List<UpmsOrganizationDO> upmsOrganizationList = upmsOrganizationService.list(params);
+		return upmsOrganizationList;
 	}
 	
 	@GetMapping("/add")
@@ -55,7 +49,7 @@ public class UpmsOrganizationController {
 	@GetMapping("/edit/{organizationId}")
 	@RequiresPermissions("system:upmsOrganization:edit")
 	String edit(@PathVariable("organizationId") Long organizationId,Model model){
-		UpmsOrganizationDO upmsOrganization = upmsOrganizationService.get(organizationId);
+		UpmsOrganizationDO upmsOrganization = upmsOrganizationService.getOrganizationById(organizationId);
 		model.addAttribute("upmsOrganization", upmsOrganization);
 	    return "system/upmsOrganization/edit";
 	}

@@ -27,4 +27,6 @@ public interface UpmsSystemService {
 	int remove(Long systemId);
 	
 	int batchRemove(Long[] systemIds);
+
+	List<UpmsSystemDO> getAvalidList(Map<String, Object> map);
 }

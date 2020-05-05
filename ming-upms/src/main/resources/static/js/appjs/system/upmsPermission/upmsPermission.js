@@ -13,10 +13,9 @@ function load() {
                         parentCode: 'pid',
                         type: "GET", // 请求数据的ajax类型
                         url: prefix + '/list', // 请求数据的ajax的url
-                        ajaxParams: {sort:'order_num'}, // 请求数据的ajax的data属性
+                        ajaxParams: {sort:'orders'}, // 请求数据的ajax的data属性
                         expandColumn: '2',// 在哪一列上面显示展开按钮
                         striped: true, // 是否各行渐变色
-                        bordered: true, // 是否显示边框
                         expandAll: false, // 是否全部展开
 						columns : [
 								{
@@ -104,15 +103,15 @@ function load() {
 									title : '操作',
 									field : 'id',
 									align : 'center',
-									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.permissionId
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.permissionId
-												+ '\')"><i class="fa fa-remove"></i></a> ';
+									formatter : function(item, index) {
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit('
+												+ item.permissionId
+												+ ')"><i class="fa fa-edit"></i></a> ';
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove('
+												+ item.permissionId
+												+ ')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.permissionId
+												+ item.permissionId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -120,7 +119,7 @@ function load() {
 					});
 }
 function reLoad() {
-	$('#exampleTable').bootstrapTable('refresh');
+	load();
 }
 function add() {
 	layer.open({

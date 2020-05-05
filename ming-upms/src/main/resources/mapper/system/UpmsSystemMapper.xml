@@ -64,7 +64,7 @@
 			`name`, 
 			`title`, 
 			`description`, 
-			now(),
+			`ctime`,
 			`orders`
 		)
 		values
@@ -77,8 +77,8 @@
 			#{status}, 
 			#{name}, 
 			#{title}, 
-			#{description}, 
-			#{ctime}, 
+			#{description},
+		    now(),
 			#{orders}
 		)
 	</insert>

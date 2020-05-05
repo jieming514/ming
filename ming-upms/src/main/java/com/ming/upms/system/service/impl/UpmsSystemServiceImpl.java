@@ -50,5 +50,16 @@ public class UpmsSystemServiceImpl implements UpmsSystemService {
 	public int batchRemove(Long[] systemIds){
 		return upmsSystemDao.batchRemove(systemIds);
 	}
-	
+
+	/**
+	 * 获取有效的列表
+	 * @param map
+	 * @return
+	 */
+	@Override
+	public List<UpmsSystemDO> getAvalidList(Map<String, Object> map) {
+		map.put("status", 1);
+		return list(map);
+	}
+
 }

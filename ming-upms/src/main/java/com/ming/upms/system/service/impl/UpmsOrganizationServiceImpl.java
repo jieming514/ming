@@ -1,14 +1,13 @@
 package com.ming.upms.system.service.impl;
 
+import com.ming.upms.system.dao.UpmsOrganizationDao;
+import com.ming.upms.system.domain.UpmsOrganizationDO;
+import com.ming.upms.system.service.UpmsOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
-import com.ming.upms.system.dao.UpmsOrganizationDao;
-import com.ming.upms.system.domain.UpmsOrganizationDO;
-import com.ming.upms.system.service.UpmsOrganizationService;
 
 
 
@@ -51,5 +50,10 @@ public class UpmsOrganizationServiceImpl implements UpmsOrganizationService {
 	public int batchRemove(Long[] organizationIds){
 		return upmsOrganizationDao.batchRemove(organizationIds);
 	}
-	
+
+	@Override
+	public UpmsOrganizationDO getOrganizationById(Long organizationId) {
+		return upmsOrganizationDao.getOrganizationById(organizationId);
+	}
+
 }

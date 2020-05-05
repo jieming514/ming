@@ -28,4 +28,6 @@ public interface UpmsOrganizationDao {
 	int remove(Long organizationId);
 	
 	int batchRemove(Long[] organizationIds);
+
+	UpmsOrganizationDO getOrganizationById(Long organizationId);
 }

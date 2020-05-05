@@ -63,7 +63,6 @@
 			<if test="pid != null">`pid` = #{pid}, </if>
 			<if test="name != null">`name` = #{name}, </if>
 			<if test="description != null">`description` = #{description}, </if>
-			<if test="ctime != null">`ctime` = #{ctime}</if>
 		</set>
 		where organization_id = #{organizationId}
 	</update>
@@ -79,5 +78,20 @@
 		</foreach>
 	</delete>
 
+	<select id="getOrganizationById" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
+		SELECT
+			uo1.`organization_id`,
+			uo1.`name`,
+			uo1.`pid`,
+			uo2.name pName,
+			uo1.`description`,
+			uo1.`ctime`
+		FROM
+			upms_organization uo1
+		LEFT JOIN
+			upms_organization uo2 ON uo1.pid = uo2.organization_id
+		WHERE
+			uo1.organization_id = #{value}
+	</select>
 
 </mapper>

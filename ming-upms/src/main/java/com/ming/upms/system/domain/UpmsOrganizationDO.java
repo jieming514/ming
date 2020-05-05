@@ -18,11 +18,14 @@ public class UpmsOrganizationDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//编号
-	private Integer organizationId;
-	//所属上级
-	private Integer pid;
+	private Long organizationId;
 	//组织名称
 	private String name;
+	//所属上级
+	private Long pid;
+	//上级名称
+	private String pName;
+
 	//组织描述
 	private String description;
 	//创建时间
@@ -32,25 +35,25 @@ public class UpmsOrganizationDO implements Serializable {
 	/**
 	 * 设置：编号
 	 */
-	public void setOrganizationId(Integer organizationId) {
+	public void setOrganizationId(Long organizationId) {
 		this.organizationId = organizationId;
 	}
 	/**
 	 * 获取：编号
 	 */
-	public Integer getOrganizationId() {
+	public Long getOrganizationId() {
 		return organizationId;
 	}
 	/**
 	 * 设置：所属上级
 	 */
-	public void setPid(Integer pid) {
+	public void setPid(Long pid) {
 		this.pid = pid;
 	}
 	/**
 	 * 获取：所属上级
 	 */
-	public Integer getPid() {
+	public Long getPid() {
 		return pid;
 	}
 	/**
@@ -65,6 +68,15 @@ public class UpmsOrganizationDO implements Serializable {
 	public String getName() {
 		return name;
 	}
+
+	public String getpName() {
+		return pName;
+	}
+
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+
 	/**
 	 * 设置：组织描述
 	 */

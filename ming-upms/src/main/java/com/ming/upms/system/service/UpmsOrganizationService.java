@@ -27,4 +27,6 @@ public interface UpmsOrganizationService {
 	int remove(Long organizationId);
 	
 	int batchRemove(Long[] organizationIds);
+
+	UpmsOrganizationDO getOrganizationById(Long organizationId);
 }

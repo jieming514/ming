@@ -2,13 +2,16 @@ package com.ming.upms.system.controller;
 
 import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsPermissionDO;
+import com.ming.upms.system.domain.UpmsSystemDO;
 import com.ming.upms.system.service.UpmsPermissionService;
+import com.ming.upms.system.service.UpmsSystemService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +28,10 @@ import java.util.Map;
 public class UpmsPermissionController {
 	@Autowired
 	private UpmsPermissionService upmsPermissionService;
+
+	@Autowired
+	private UpmsSystemService upmsSystemService;
+
 	
 	@GetMapping()
 	@RequiresPermissions("system:upmsPermission:upmsPermission")
@@ -43,7 +50,9 @@ public class UpmsPermissionController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("system:upmsPermission:add")
-	String add(){
+	String add(Model model){
+		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
+		model.addAttribute("systemList", systemList);
 	    return "system/upmsPermission/add";
 	}
 
@@ -51,7 +60,9 @@ public class UpmsPermissionController {
 	@RequiresPermissions("system:upmsPermission:edit")
 	String edit(@PathVariable("permissionId") Long permissionId,Model model){
 		UpmsPermissionDO upmsPermission = upmsPermissionService.get(permissionId);
+		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
 		model.addAttribute("upmsPermission", upmsPermission);
+		model.addAttribute("systemList", systemList);
 	    return "system/upmsPermission/edit";
 	}
 	
