@@ -9,11 +9,11 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="system:upmsPermission:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="system:upmsPermission:add" type="button" class="btn  btn-primary" onclick="add()" title="添加根目录">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
 							<button shiro:hasPermission="system:upmsPermission:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
+								onclick="batchRemove()" title="删除资源">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
