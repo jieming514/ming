@@ -197,16 +197,3 @@ function batchRemove() {
 
 	});
 }
-
-// tree表格树 展开/折叠
-var expandFlag;
-$("#expandAllBtn").click(function() {
-    var dataExpand = $.common.isEmpty(table.options.expandAll) ? true : table.options.expandAll;
-    expandFlag = $.common.isEmpty(expandFlag) ? dataExpand : expandFlag;
-    if (!expandFlag) {
-        $.bttTable.bootstrapTreeTable('expandAll');
-    } else {
-        $.bttTable.bootstrapTreeTable('collapseAll');
-    }
-    expandFlag = expandFlag ? false: true;
-})

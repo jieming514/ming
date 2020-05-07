@@ -47,3 +47,19 @@ function validateRule() {
 		}
 	})
 }
+
+$(function() {
+    $("input[name='icon']").focus(function() {
+        $(".icon-drop").show();
+    });
+    $("#signupForm").click(function(event) {
+        var obj = event.srcElement || event.target;
+        if (!$(obj).is("input[name='icon']")) {
+            $(".icon-drop").hide();
+        }
+    });
+    $(".icon-drop").find(".ico-list i").on("click", function() {
+        $('#icon').val($(this).attr('class'));
+    });
+
+});

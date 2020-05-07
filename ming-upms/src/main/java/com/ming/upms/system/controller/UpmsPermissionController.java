@@ -65,7 +65,13 @@ public class UpmsPermissionController {
 		model.addAttribute("systemList", systemList);
 	    return "system/upmsPermission/edit";
 	}
-	
+
+	@GetMapping("/icon")
+	String icon() {
+		return "system/upmsPermission/icon";
+	}
+
+
 	/**
 	 * 保存
 	 */
