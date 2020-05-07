@@ -51,7 +51,7 @@ function load() {
                                         }else if(item.type == 2) {
                                             return "<span class='label label-primary'>菜单</span>";
                                         }else if(item.type == 3) {
-                                             return "<span class='label label-info'>按钮</span>";
+                                             return "<span class='label label-warning'>按钮</span>";
                                          }
                                         return "<span class='label label-danger'>未知</span>";
                                     }
@@ -104,16 +104,22 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(item, index) {
+									    var a = '<a class="btn btn-info btn-sm '+s_add_h+'" href="#" mce_href="#" title="添加子节点" onclick="add('
+                                                + item.permissionId
+                                                + ')"><i class="fa fa-plus"></i></a> ';
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit('
 												+ item.permissionId
 												+ ')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove('
+										var d = '<a class="btn btn-danger btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove('
 												+ item.permissionId
 												+ ')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ item.permissionId
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										if(item.type == 3) {
+										    return e + d ;
+										}
+										return a + e + d ;
 									}
 								} ]
 					});
@@ -121,14 +127,15 @@ function load() {
 function reLoad() {
 	load();
 }
-function add() {
+//上一级目录
+function add(pid) {
 	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' +pid // iframe的url
 	});
 }
 function edit(id) {

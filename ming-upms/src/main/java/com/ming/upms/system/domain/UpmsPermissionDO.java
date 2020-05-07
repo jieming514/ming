@@ -23,7 +23,7 @@ public class UpmsPermissionDO implements Serializable {
 	//所属系统名称
 	private String systemName;
 	//所属上级
-	private Integer pid;
+	private Long pid;
 	//名称
 	private String name;
 	//类型(1:目录,2:菜单,3:按钮)
@@ -78,13 +78,13 @@ public class UpmsPermissionDO implements Serializable {
 	/**
 	 * 设置：所属上级
 	 */
-	public void setPid(Integer pid) {
+	public void setPid(Long pid) {
 		this.pid = pid;
 	}
 	/**
 	 * 获取：所属上级
 	 */
-	public Integer getPid() {
+	public Long getPid() {
 		return pid;
 	}
 	/**

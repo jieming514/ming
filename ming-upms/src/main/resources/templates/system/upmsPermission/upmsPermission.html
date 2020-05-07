@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -9,7 +10,7 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="system:upmsPermission:add" type="button" class="btn  btn-primary" onclick="add()" title="添加根目录">
+							<button shiro:hasPermission="system:upmsPermission:add" type="button" class="btn  btn-primary" onclick="add(0)" title="添加根目录">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
 							<button type="button" class="btn  btn-info" id="expandAllBtn" title="展开/折叠">
@@ -33,9 +34,15 @@
 
 		<div>
 			<script type="text/javascript">
+				var s_add_h = 'hidden';
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
 				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="system:upmsPermission:add">
+			<script type="text/javascript">
+					s_add_h = '';
 			</script>
 		</div>
 		<div shiro:hasPermission="system:upmsPermission:edit">
@@ -46,11 +53,6 @@
 		<div shiro:hasPermission="system:upmsPermission:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="system:upmsPermission:resetPwd">
-			<script type="text/javascript">
-				var s_resetPwd_h = '';
 			</script>
 		</div>
 	</div>

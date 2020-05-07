@@ -48,12 +48,19 @@ public class UpmsPermissionController {
 		return upmsPermissionList;
 	}
 	
-	@GetMapping("/add")
+	@GetMapping("/add/{pid}")
 	@RequiresPermissions("system:upmsPermission:add")
-	String add(Model model){
+	String add(@PathVariable("pid") Long pid, Model model){
 		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
+		UpmsPermissionDO pPermissionDO = upmsPermissionService.get(pid);
+		if(pPermissionDO == null || pPermissionDO.getPermissionId() == null) {
+			pPermissionDO = new UpmsPermissionDO();
+			pPermissionDO.setPermissionId(0L);
+			pPermissionDO.setName("根目录");
+		}
 		model.addAttribute("systemList", systemList);
-	    return "system/upmsPermission/add";
+		model.addAttribute("pPermissionDO", pPermissionDO);
+		return "system/upmsPermission/add";
 	}
 
 	@GetMapping("/edit/{permissionId}")
@@ -61,7 +68,14 @@ public class UpmsPermissionController {
 	String edit(@PathVariable("permissionId") Long permissionId,Model model){
 		UpmsPermissionDO upmsPermission = upmsPermissionService.get(permissionId);
 		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
+		UpmsPermissionDO pPermissionDO = upmsPermissionService.get(upmsPermission.getPid());
+		if(pPermissionDO == null || pPermissionDO.getPermissionId() == null) {
+			pPermissionDO = new UpmsPermissionDO();
+			pPermissionDO.setPermissionId(0L);
+			pPermissionDO.setName("根目录");
+		}
 		model.addAttribute("upmsPermission", upmsPermission);
+		model.addAttribute("pPermissionDO", pPermissionDO);
 		model.addAttribute("systemList", systemList);
 	    return "system/upmsPermission/edit";
 	}
