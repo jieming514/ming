@@ -1,3 +1,5 @@
+var prefix = "/system/upmsOrganization"
+
 $().ready(function() {
 	validateRule();
 });
@@ -46,4 +48,20 @@ function validateRule() {
 			}
 		}
 	})
+}
+
+function getTree() {
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : "/system/upmsOrganization/getTree",
+        async : false,
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },
+        success : function(data) {
+            debugger;
+
+        }
+    });
 }

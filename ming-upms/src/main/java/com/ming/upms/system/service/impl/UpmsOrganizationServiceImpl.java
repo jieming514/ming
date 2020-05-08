@@ -1,11 +1,15 @@
 package com.ming.upms.system.service.impl;
 
+import com.ming.upms.common.domain.Tree;
+import com.ming.upms.common.util.BuildTree;
 import com.ming.upms.system.dao.UpmsOrganizationDao;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 import com.ming.upms.system.service.UpmsOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,5 +59,29 @@ public class UpmsOrganizationServiceImpl implements UpmsOrganizationService {
 	public UpmsOrganizationDO getOrganizationById(Long organizationId) {
 		return upmsOrganizationDao.getOrganizationById(organizationId);
 	}
+
+	/**
+	 * 获取完整的机构数
+	 * @return
+	 */
+	@Override
+	public Tree<UpmsOrganizationDO> getTree() {
+		List<Tree<UpmsOrganizationDO>> trees = new ArrayList<Tree<UpmsOrganizationDO>>();
+		List<UpmsOrganizationDO> UpmsOrganizationList = list(new HashMap<>());
+		for (UpmsOrganizationDO organizationDO : UpmsOrganizationList) {
+			Tree<UpmsOrganizationDO> tree = new Tree<UpmsOrganizationDO>();
+			tree.setId(organizationDO.getOrganizationId().toString());
+			tree.setText(organizationDO.getName());
+			tree.setParentId(organizationDO.getPid().toString());
+			Map<String, Object> state = new HashMap<>();
+			state.put("opened", true);
+			tree.setState(state);
+			trees.add(tree);
+		}
+		Tree<UpmsOrganizationDO> t = BuildTree.build(trees);
+		return t;
+	}
+
+
 
 }

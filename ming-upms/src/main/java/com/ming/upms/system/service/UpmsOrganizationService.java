@@ -1,5 +1,6 @@
 package com.ming.upms.system.service;
 
+import com.ming.upms.common.domain.Tree;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 
 import java.util.List;
@@ -29,4 +30,11 @@ public interface UpmsOrganizationService {
 	int batchRemove(Long[] organizationIds);
 
 	UpmsOrganizationDO getOrganizationById(Long organizationId);
+
+	/**
+	 * 获取完整的机构数
+	 * @return
+	 */
+	Tree<UpmsOrganizationDO> getTree();
+
 }

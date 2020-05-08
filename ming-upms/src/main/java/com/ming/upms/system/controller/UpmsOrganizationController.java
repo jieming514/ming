@@ -1,6 +1,7 @@
 package com.ming.upms.system.controller;
 
 import com.ming.common.utils.R;
+import com.ming.upms.common.domain.Tree;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 import com.ming.upms.system.service.UpmsOrganizationService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -99,6 +100,15 @@ public class UpmsOrganizationController {
 	public R remove(@RequestParam("ids[]") Long[] organizationIds){
 		upmsOrganizationService.batchRemove(organizationIds);
 		return R.ok();
+	}
+
+
+	@ResponseBody
+	@PostMapping("/getTree")
+	public Tree<UpmsOrganizationDO> getTree() {
+		Tree<UpmsOrganizationDO> tree = new Tree<UpmsOrganizationDO>();
+		tree = upmsOrganizationService.getTree();
+		return tree;
 	}
 	
 }
