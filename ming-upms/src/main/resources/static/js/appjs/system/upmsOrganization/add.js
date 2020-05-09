@@ -51,17 +51,12 @@ function validateRule() {
 }
 
 function getTree() {
-    $.ajax({
-        cache : true,
-        type : "POST",
-        url : "/system/upmsOrganization/getTree",
-        async : false,
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },
-        success : function(data) {
-            debugger;
-
-        }
+    layer.open({
+        type : 2,
+        title : '部门机构树',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '300px', '400px' ],
+        content : prefix + '/getOrganizationTree' // iframe的url
     });
 }

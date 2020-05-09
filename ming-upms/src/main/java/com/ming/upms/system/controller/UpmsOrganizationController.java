@@ -102,6 +102,11 @@ public class UpmsOrganizationController {
 		return R.ok();
 	}
 
+	@GetMapping("/getOrganizationTree")
+	@RequiresPermissions("system:upmsOrganization:read")
+	public String getOrganizationTree() {
+		return "system/upmsOrganization/tree";
+	}
 
 	@ResponseBody
 	@PostMapping("/getTree")

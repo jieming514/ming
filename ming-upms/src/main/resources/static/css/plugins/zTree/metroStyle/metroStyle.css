@@ -28,10 +28,10 @@ website:    http://code.google.com/p/jquerytree/
 .ztree li span.button {line-height:0; margin:0; padding: 0; width:21px; height:21px; display: inline-block; vertical-align:middle;
   border:0 none; cursor: pointer;outline:none;
   background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
-  background-image:url("./img/32px.png"); *background-image:url("./img/metro.gif")}
+  background-image:url("./img/metro.png"); *background-image:url("./img/metro.gif")}
 
 .ztree li span.button.chk {width:13px; height:13px; margin:0 2px; cursor: auto}
-.ztree li span.button.chk.checkbox_false_full {background-position: -228px -4px;}
+.ztree li span.button.chk.checkbox_false_full {background-position: -5px -5px;}
 .ztree li span.button.chk.checkbox_false_full_focus {background-position: -5px -26px;}
 .ztree li span.button.chk.checkbox_false_part {background-position: -5px -48px;}
 .ztree li span.button.chk.checkbox_false_part_focus {background-position: -5px -68px;}
@@ -53,10 +53,10 @@ website:    http://code.google.com/p/jquerytree/
 .ztree li span.button.chk.radio_true_disable {background-position: -68px -89px;}
 
 .ztree li span.button.switch {width:21px; height:21px}
-.ztree li span.button.root_open{background-position:-36px -4px}
-.ztree li span.button.root_close{background-position:-103px -39px}
-.ztree li span.button.roots_open{background-position: -36px -4px;}
-.ztree li span.button.roots_close{background-position: -103px -39px;}
+.ztree li span.button.root_open{background-position:-105px -63px}
+.ztree li span.button.root_close{background-position:-126px -63px}
+.ztree li span.button.roots_open{background-position: -105px 0;}
+.ztree li span.button.roots_close{background-position: -126px 0;}
 .ztree li span.button.center_open{background-position: -105px -21px;}
 .ztree li span.button.center_close{background-position: -126px -21px;}
 .ztree li span.button.bottom_open{background-position: -105px -42px;}
