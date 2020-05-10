@@ -57,6 +57,27 @@ function getTree() {
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '300px', '400px' ],
-        content : prefix + '/getOrganizationTree' // iframe的url
+        content : prefix + '/getOrganizationTree', // iframe的url
+        btn : ['确认', '取消'],
+        success : function(layero, index) {
+            var body = layer.getChildFrame('body', index);
+            var data = {};
+            data['treeId'] = $("#pid").val();
+            data['treeName'] = $("#pName").val();
+            body.find("#treeId").val(data['treeId']);
+            body.find("#treeName").val(data['treeName']);
+        },
+        yes: function(index, layero){
+            var body = layer.getChildFrame("body", index);
+            var data = {};
+            data['treeId'] = body.find("#treeId").val();
+            data['treeName'] = body.find("#treeName").val();
+            $("#pid").val(data['treeId']);
+            $("#pName").val(data['treeName']);
+            layer.close(index);
+        },
+        btn2 : function(index) {
+            layer.close(index); //如果设定了yes回调，需进行手工关闭
+        }
     });
 }

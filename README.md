@@ -43,7 +43,7 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
 ### 3.2.前端技术
   - JS框架：jQuery
   - 弹出层：layer
-  - 树结构控件：jsTree
+  - 树结构控件：zTree
   - 数据表格：bootstrap
 
 ### 3.3.开发工具
@@ -83,7 +83,8 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
      ![主页面](_doc/show/main.png)
   - 用户维护页面
      ![用户维护页面](_doc/show/user.png)
-
+  - 机构树页面
+     ![组织树管理](_doc/show/tree.png)
 
 
 ## 六、其他相关
