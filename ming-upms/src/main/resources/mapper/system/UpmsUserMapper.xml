@@ -2,24 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ming.upms.system.dao.UpmsUserDao">
 
+    <resultMap id="UpmsUserResult" type="com.ming.upms.system.domain.UpmsUserDO">
+        <id property="userId"        column="user_id"/>
+        <result property="username"  column="username"/>
+        <result property="password"  column="password"/>
+        <result property="salt"      column="salt"/>
+        <result property="realname"  column="realname"/>
+        <result property="avatar"    column="avatar"/>
+        <result property="phone"     column="phone"/>
+        <result property="email"     column="email"/>
+        <result property="sex"       column="sex"/>
+        <result property="locked"    column="locked"/>
+        <result property="ctime"     column="ctime"/>
+        <association property="upmsOrganizationDO"    column="organization_id" javaType="com.ming.upms.system.domain.UpmsOrganizationDO" resultMap="UpmsOrganizationResult" />
+    </resultMap>
+
+    <resultMap id="UpmsOrganizationResult" type="com.ming.upms.system.domain.UpmsOrganizationDO">
+        <id     property="organizationId"   column="organization_id"/>
+        <result property="name"             column="name"/>
+        <result property="pid"              column="pid"/>
+        <result property="description"      column="description"/>
+        <result property="ctime"            column="ctime"/>
+    </resultMap>
+
+
+    <sql id="selectUserVo">
+        select uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`,
+               uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
+          from upms_user uu
+          left join upms_organization uo on uu.organization_id = uo.organization_id
+    </sql>
+
+
     <select id="get" resultType="com.ming.upms.system.domain.UpmsUserDO">
         select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime` from upms_user where user_id = #{value}
     </select>
 
-    <select id="list" resultType="com.ming.upms.system.domain.UpmsUserDO">
-        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime` from upms_user
+    <select id="list" resultMap="UpmsUserResult">
+        <include refid="selectUserVo"/>
         <where>
-            <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-            <if test="username != null and username != ''"> and username = #{username} </if>
-            <if test="password != null and password != ''"> and password = #{password} </if>
-            <if test="salt != null and salt != ''"> and salt = #{salt} </if>
-            <if test="realname != null and realname != ''"> and realname = #{realname} </if>
-            <if test="avatar != null and avatar != ''"> and avatar = #{avatar} </if>
-            <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-            <if test="email != null and email != ''"> and email = #{email} </if>
-            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
-            <if test="locked != null and locked != ''"> and locked = #{locked} </if>
-            <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
+            <if test="userId != null and userId != ''"> and uu.user_id = #{userId} </if>
+            <if test="username != null and username != ''"> and uu.username = #{username} </if>
+            <if test="password != null and password != ''"> and uu.password = #{password} </if>
+            <if test="salt != null and salt != ''"> and uu.salt = #{salt} </if>
+            <if test="realname != null and realname != ''"> and uu.realname = #{realname} </if>
+            <if test="avatar != null and avatar != ''"> and uu.avatar = #{avatar} </if>
+            <if test="phone != null and phone != ''"> and uu.phone = #{phone} </if>
+            <if test="email != null and email != ''"> and uu.email = #{email} </if>
+            <if test="sex != null and sex != ''"> and uu.sex = #{sex} </if>
+            <if test="locked != null and locked != ''"> and uu.locked = #{locked} </if>
+            <if test="ctime != null and ctime != ''"> and uu.ctime = #{ctime} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

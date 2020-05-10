@@ -71,6 +71,10 @@ function load() {
                                         return "<b style='color=red'>未知</b>";
                                     }
                                 },
+                                {
+                                    field : 'upmsOrganizationDO.name',
+                                    title : '组织'
+                                },
 																{
 									field : 'phone', 
 									title : '电话' 

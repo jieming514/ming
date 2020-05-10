@@ -40,6 +40,9 @@ public class UpmsUserDO implements Serializable {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
 
+	//组织信息
+	private UpmsOrganizationDO upmsOrganizationDO;
+
 	/**
 	 * 设置：编号
 	 */
@@ -171,5 +174,32 @@ public class UpmsUserDO implements Serializable {
 	 */
 	public Date getCtime() {
 		return ctime;
+	}
+
+	public UpmsOrganizationDO getUpmsOrganizationDO() {
+		return upmsOrganizationDO;
+	}
+
+	public void setUpmsOrganizationDO(UpmsOrganizationDO upmsOrganizationDO) {
+		this.upmsOrganizationDO = upmsOrganizationDO;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("UpmsUserDO{");
+		sb.append("userId=").append(userId);
+		sb.append(", username='").append(username).append('\'');
+		sb.append(", password='").append(password).append('\'');
+		sb.append(", salt='").append(salt).append('\'');
+		sb.append(", realname='").append(realname).append('\'');
+		sb.append(", avatar='").append(avatar).append('\'');
+		sb.append(", phone='").append(phone).append('\'');
+		sb.append(", email='").append(email).append('\'');
+		sb.append(", sex=").append(sex);
+		sb.append(", locked=").append(locked);
+		sb.append(", ctime=").append(ctime);
+		sb.append(", upmsOrganizationDO=").append(upmsOrganizationDO);
+		sb.append('}');
+		return sb.toString();
 	}
 }
