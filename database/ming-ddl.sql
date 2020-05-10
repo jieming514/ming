@@ -56,7 +56,7 @@ CREATE TABLE `upms_organization` (
   `description` varchar(1000) DEFAULT NULL COMMENT '组织描述',
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='组织';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='组织';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `upms_permission` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='权限';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `upms_system` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`system_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='系统';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,8 +159,9 @@ CREATE TABLE `upms_user` (
   `sex` tinyint(4) DEFAULT NULL COMMENT '性别',
   `locked` tinyint(4) DEFAULT NULL COMMENT '状态(0:正常,1:锁定)',
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
+  `organization_id` int(10) DEFAULT NULL COMMENT '所属组织机构',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,4 +203,4 @@ CREATE TABLE `upms_user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-04 14:21:45
+-- Dump completed on 2020-05-10 23:25:11
