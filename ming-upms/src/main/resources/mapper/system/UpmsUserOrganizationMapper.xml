@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.upms.system.dao.UpmsUserOrganizationDao">
+
+	<select id="get" resultType="com.ming.upms.system.domain.UpmsUserOrganizationDO">
+		select `user_organization_id`,`user_id`,`organization_id` from upms_user_organization where user_organization_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.ming.upms.system.domain.UpmsUserOrganizationDO">
+		select `user_organization_id`,`user_id`,`organization_id` from upms_user_organization
+        <where>  
+		  		  <if test="userOrganizationId != null and userOrganizationId != ''"> and user_organization_id = #{userOrganizationId} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="organizationId != null and organizationId != ''"> and organization_id = #{organizationId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by user_organization_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from upms_user_organization
+		 <where>  
+		  		  <if test="userOrganizationId != null and userOrganizationId != ''"> and user_organization_id = #{userOrganizationId} </if>
+		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		  		  <if test="organizationId != null and organizationId != ''"> and organization_id = #{organizationId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsUserOrganizationDO">
+		insert into upms_user_organization
+		(
+			`user_organization_id`, 
+			`user_id`, 
+			`organization_id`
+		)
+		values
+		(
+			#{userOrganizationId}, 
+			#{userId}, 
+			#{organizationId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ming.upms.system.domain.UpmsUserOrganizationDO">
+		update upms_user_organization 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="organizationId != null">`organization_id` = #{organizationId}</if>
+		</set>
+		where user_organization_id = #{userOrganizationId}
+	</update>
+	
+	<delete id="remove">
+		delete from upms_user_organization where user_organization_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from upms_user_organization where user_organization_id in 
+		<foreach item="userOrganizationId" collection="array" open="(" separator="," close=")">
+			#{userOrganizationId}
+		</foreach>
+	</delete>
+
+</mapper>
