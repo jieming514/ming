@@ -18,27 +18,4 @@ public class UpmsRoleServiceTest extends BasicTest {
         Assert.assertEquals(new Integer("1"), upmsUserDO.getRoleId());
     }
 
-    @Test
-    public void list() {
-    }
-
-    @Test
-    public void count() {
-    }
-
-    @Test
-    public void save() {
-    }
-
-    @Test
-    public void update() {
-    }
-
-    @Test
-    public void remove() {
-    }
-
-    @Test
-    public void batchRemove() {
-    }
 }

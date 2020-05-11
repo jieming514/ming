@@ -1,48 +1,17 @@
-package com.ming.upms.system.service.impl;
+package com.ming.upms.system.service;
 
 import com.ming.upms.common.BasicTest;
 import com.ming.upms.system.domain.UpmsPermissionDO;
-import com.ming.upms.system.service.UpmsPermissionService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Set;
 
-public class UpmsPermissionServiceImplTest extends BasicTest {
+public class UpmsPermissionServiceTest extends BasicTest {
 
     @Autowired
     private UpmsPermissionService upmsPermissionService;
-
-    @Test
-    public void get() {
-    }
-
-    @Test
-    public void list() {
-    }
-
-    @Test
-    public void count() {
-    }
-
-    @Test
-    public void save() {
-    }
-
-    @Test
-    public void update() {
-    }
-
-    @Test
-    public void remove() {
-    }
-
-    @Test
-    public void batchRemove() {
-    }
-
-
 
     @Test
     public void getPermsByUserId() {
