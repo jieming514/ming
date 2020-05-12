@@ -14,6 +14,7 @@
         <result property="sex"       column="sex"/>
         <result property="locked"    column="locked"/>
         <result property="ctime"     column="ctime"/>
+        <result property="organizationId"     column="organization_id"/>
         <association property="upmsOrganizationDO"    column="organization_id" javaType="com.ming.upms.system.domain.UpmsOrganizationDO" resultMap="UpmsOrganizationResult" />
     </resultMap>
 
@@ -34,8 +35,8 @@
     </sql>
 
 
-    <select id="get" resultType="com.ming.upms.system.domain.UpmsUserDO">
-        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime` from upms_user where user_id = #{value}
+    <select id="get" resultMap="UpmsUserResult">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id` from upms_user where user_id = #{value}
     </select>
 
     <select id="list" resultMap="UpmsUserResult">
@@ -125,6 +126,7 @@
             <if test="sex != null">`sex` = #{sex}, </if>
             <if test="locked != null">`locked` = #{locked}, </if>
             <if test="ctime != null">`ctime` = #{ctime}</if>
+            <if test="organizationId != null">`organization_id` = #{organizationId}</if>
         </set>
         where user_id = #{userId}
     </update>
@@ -144,6 +146,11 @@
     <select id="getUserByusername" resultType="com.ming.upms.system.domain.UpmsUserDO">
         select `user_id`,`username`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`
           from ming.upms_user where username = #{value}
+    </select>
+
+    <select id="selectUserByUserId" resultMap="UpmsUserResult">
+        <include refid="selectUserVo"/>
+        where uu.`user_id` = #{value}
     </select>
 
 </mapper>

@@ -40,6 +40,9 @@ public class UpmsUserDO implements Serializable {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
 
+	//组织ID
+	private Long organizationId;
+
 	//组织信息
 	private UpmsOrganizationDO upmsOrganizationDO;
 
@@ -184,6 +187,14 @@ public class UpmsUserDO implements Serializable {
 		this.upmsOrganizationDO = upmsOrganizationDO;
 	}
 
+	public Long getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(Long organizationId) {
+		this.organizationId = organizationId;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder("UpmsUserDO{");
@@ -198,6 +209,7 @@ public class UpmsUserDO implements Serializable {
 		sb.append(", sex=").append(sex);
 		sb.append(", locked=").append(locked);
 		sb.append(", ctime=").append(ctime);
+		sb.append(", organizationId=").append(organizationId);
 		sb.append(", upmsOrganizationDO=").append(upmsOrganizationDO);
 		sb.append('}');
 		return sb.toString();

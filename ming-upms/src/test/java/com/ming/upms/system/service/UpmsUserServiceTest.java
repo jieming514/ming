@@ -15,8 +15,14 @@ public class UpmsUserServiceTest extends BasicTest {
     @Test
     public void get() {
         UpmsUserDO upmsUserDO = upmsUserService.get(1L);
-        System.out.println(upmsUserDO.toString());
-        Assert.assertEquals(new Integer("1"), upmsUserDO.getUserId());
+        Assert.assertEquals(new Long(1L), upmsUserDO.getUserId());
+    }
+
+    @Test
+    public void selectUserByUserId() {
+        UpmsUserDO upmsUserDO = upmsUserService.selectUserByUserId(1L);
+        Assert.assertEquals(new Long(1L), upmsUserDO.getUserId());
+        Assert.assertEquals("admin", upmsUserDO.getUsername());
     }
 
 }

@@ -57,7 +57,7 @@ public class UpmsUserController {
 	@GetMapping("/edit/{userId}")
 	@RequiresPermissions("system:upmsUser:edit")
 	String edit(@PathVariable("userId") Long userId,Model model){
-		UpmsUserDO upmsUser = upmsUserService.get(userId);
+		UpmsUserDO upmsUser = upmsUserService.selectUserByUserId(userId);
 		model.addAttribute("upmsUser", upmsUser);
 	    return "system/upmsUser/edit";
 	}

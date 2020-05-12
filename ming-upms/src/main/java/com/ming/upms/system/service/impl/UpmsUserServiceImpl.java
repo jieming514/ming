@@ -56,5 +56,9 @@ public class UpmsUserServiceImpl implements UpmsUserService {
 		return upmsUserDao.getUserByusername(username);
 	}
 
+	@Override
+	public UpmsUserDO selectUserByUserId(Long userId) {
+		return upmsUserDao.selectUserByUserId(userId);
+	}
 
 }

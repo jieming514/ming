@@ -34,4 +34,6 @@ public interface UpmsUserService {
 	 * @return
 	 */
 	UpmsUserDO getUserByusername(String username);
+
+	UpmsUserDO selectUserByUserId(Long userId);
 }
