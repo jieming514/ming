@@ -6,6 +6,12 @@ server:
     # 应用的访问路径
     context-path: /
 
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mapper/**/*Mapper.xml
+  type-aliases-package: com.ming.upms.**.domain
+
 
 # Spring 配置
 spring:
@@ -18,8 +24,3 @@ spring:
   profiles:
     active: dev
 
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-  mapper-locations: mapper/**/*Mapper.xml
-  typeAliasesPackage: com.ming.upms.**.domain
