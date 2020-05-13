@@ -10,7 +10,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: mapper/**/*Mapper.xml
-  type-aliases-package: com.ming.upms.**.domain
+  type-aliases-package: com.ming.upms
 
 
 # Spring 配置

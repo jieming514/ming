@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ming.upms.system.dao.UpmsUserDao">
 
-    <resultMap id="UpmsUserResult" type="com.ming.upms.system.domain.UpmsUserDO">
+    <resultMap id="UpmsUserResult" type="UpmsUserDO">
         <id property="userId"        column="user_id"/>
         <result property="username"  column="username"/>
         <result property="password"  column="password"/>
@@ -15,10 +15,10 @@
         <result property="locked"    column="locked"/>
         <result property="ctime"     column="ctime"/>
         <result property="organizationId"     column="organization_id"/>
-        <association property="upmsOrganizationDO"    column="organization_id" javaType="com.ming.upms.system.domain.UpmsOrganizationDO" resultMap="UpmsOrganizationResult" />
+        <association property="upmsOrganizationDO"    column="organization_id" javaType="UpmsOrganizationDO" resultMap="UpmsOrganizationResult" />
     </resultMap>
 
-    <resultMap id="UpmsOrganizationResult" type="com.ming.upms.system.domain.UpmsOrganizationDO">
+    <resultMap id="UpmsOrganizationResult" type="UpmsOrganizationDO">
         <id     property="organizationId"   column="organization_id"/>
         <result property="name"             column="name"/>
         <result property="pid"              column="pid"/>
@@ -84,7 +84,7 @@
         </where>
     </select>
 
-    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsUserDO" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="save" parameterType="UpmsUserDO" useGeneratedKeys="true" keyProperty="userId">
         insert into upms_user
         (
         `username`,
@@ -113,7 +113,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ming.upms.system.domain.UpmsUserDO">
+    <update id="update" parameterType="UpmsUserDO">
         update upms_user
         <set>
             <if test="username != null">`username` = #{username}, </if>
@@ -143,7 +143,7 @@
     </delete>
 
 
-    <select id="getUserByusername" resultType="com.ming.upms.system.domain.UpmsUserDO">
+    <select id="getUserByusername" resultType="UpmsUserDO">
         select `user_id`,`username`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`
           from ming.upms_user where username = #{value}
     </select>
