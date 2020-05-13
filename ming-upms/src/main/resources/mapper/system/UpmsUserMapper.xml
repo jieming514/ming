@@ -153,6 +153,7 @@
     <select id="selectUserByUserId" resultMap="UpmsUserResult">
         <include refid="selectUserVo"/>
         where uu.`user_id` = #{value}
+        order by uu.user_id desc
     </select>
 
 </mapper>

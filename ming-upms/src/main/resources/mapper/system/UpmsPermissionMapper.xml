@@ -22,7 +22,7 @@
 		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
 		  		  <if test="orders != null and orders != ''"> and orders = #{orders} </if>
 		</where>
-		order by permission_id asc
+		order by orders asc, permission_id asc
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -148,6 +148,7 @@
 				</foreach>
 			</if>
 		</where>
+		order by up.orders asc
 	</select>
 
 </mapper>
