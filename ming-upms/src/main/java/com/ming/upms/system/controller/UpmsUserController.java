@@ -4,6 +4,7 @@ import com.ming.common.utils.MD5Utils;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
+import com.ming.upms.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang.RandomStringUtils;
@@ -38,7 +39,7 @@ public class UpmsUserController {
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:upmsUser:upmsUser")
+	//@RequiresPermissions("system:upmsUser:upmsUser")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -49,12 +50,14 @@ public class UpmsUserController {
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("system:upmsUser:add")
+	@Log("添加用户")
+	//@RequiresPermissions("system:upmsUser:add")
 	String add(){
 	    return "system/upmsUser/add";
 	}
 
 	@GetMapping("/edit/{userId}")
+	@Log("编辑用户")
 	@RequiresPermissions("system:upmsUser:edit")
 	String edit(@PathVariable("userId") Long userId,Model model){
 		UpmsUserDO upmsUser = upmsUserService.selectUserByUserId(userId);
@@ -67,6 +70,7 @@ public class UpmsUserController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
+	@Log("保存用户")
 	@RequiresPermissions("system:upmsUser:add")
 	public R save( UpmsUserDO upmsUser){
 		String salt = RandomStringUtils.randomAlphanumeric(30);
@@ -83,6 +87,7 @@ public class UpmsUserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
+	@Log("更新用户")
 	@RequiresPermissions("system:upmsUser:edit")
 	public R update( UpmsUserDO upmsUser){
 		upmsUserService.update(upmsUser);
@@ -94,6 +99,7 @@ public class UpmsUserController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
+	@Log("删除用户")
 	@RequiresPermissions("system:upmsUser:remove")
 	public R remove( Long userId){
 		if(upmsUserService.remove(userId)>0){
@@ -107,6 +113,7 @@ public class UpmsUserController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
+	@Log("批量删除用户")
 	@RequiresPermissions("system:upmsUser:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] userIds){
 		upmsUserService.batchRemove(userIds);

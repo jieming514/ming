@@ -3,8 +3,6 @@ package com.ming.upms.system.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-
-
 /**
  * 操作日志
  * 
@@ -22,7 +20,7 @@ public class UpmsLogDO implements Serializable {
 	//操作用户
 	private String username;
 	//操作时间
-	private Long startTime;
+	private Date startTime;
 	//消耗时间
 	private Integer spendTime;
 	//根路径
@@ -83,13 +81,13 @@ public class UpmsLogDO implements Serializable {
 	/**
 	 * 设置：操作时间
 	 */
-	public void setStartTime(Long startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 	/**
 	 * 获取：操作时间
 	 */
-	public Long getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 	/**
