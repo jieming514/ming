@@ -24,7 +24,7 @@ function load() {
 									visible: false,
                                     align: 'center',
                                     valign: 'center',
-                                    width: '3%'
+                                    width: '5%'
 								},
                                 {
                                     field : 'systemName',
@@ -44,7 +44,7 @@ function load() {
 									title : '类型',
 									align: 'center',
 									valign: 'center',
-									width: '4%',
+									width: '5%',
                                     formatter : function(item, index) {
                                         if(item.type == 1) {
                                             return "<span class='label label-success'>目录</span>";
@@ -72,7 +72,7 @@ function load() {
 									align: 'center',
 									valign: 'center',
 									title : '图标',
-									width: '4%',
+									width: '5%',
 									formatter : function(item, index) {
 									    return "<i class='" + item.icon + "' aria-hidden='true'></i>";
 									}
