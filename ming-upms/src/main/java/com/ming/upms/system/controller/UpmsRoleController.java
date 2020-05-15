@@ -3,6 +3,7 @@ package com.ming.upms.system.controller;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
+import com.ming.upms.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsRoleDO;
 import com.ming.upms.system.service.UpmsRoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -48,12 +49,14 @@ public class UpmsRoleController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("system:upmsRole:add")
+	@Log("添加角色")
 	String add(){
 	    return "system/upmsRole/add";
 	}
 
 	@GetMapping("/edit/{roleId}")
 	@RequiresPermissions("system:upmsRole:edit")
+	@Log("编辑角色")
 	String edit(@PathVariable("roleId") Long roleId,Model model){
 		UpmsRoleDO upmsRole = upmsRoleService.get(roleId);
 		model.addAttribute("upmsRole", upmsRole);
@@ -65,6 +68,7 @@ public class UpmsRoleController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
+	@Log("保存角色")
 	@RequiresPermissions("system:upmsRole:add")
 	public R save( UpmsRoleDO upmsRole){
 		if(upmsRoleService.save(upmsRole)>0){
@@ -77,6 +81,7 @@ public class UpmsRoleController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
+	@Log("修改角色")
 	@RequiresPermissions("system:upmsRole:edit")
 	public R update( UpmsRoleDO upmsRole){
 		upmsRoleService.update(upmsRole);
@@ -88,6 +93,7 @@ public class UpmsRoleController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
+	@Log("删除角色")
 	@RequiresPermissions("system:upmsRole:remove")
 	public R remove( Long roleId){
 		if(upmsRoleService.remove(roleId)>0){
@@ -101,6 +107,7 @@ public class UpmsRoleController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
+	@Log("批量删除角色")
 	@RequiresPermissions("system:upmsRole:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] roleIds){
 		upmsRoleService.batchRemove(roleIds);

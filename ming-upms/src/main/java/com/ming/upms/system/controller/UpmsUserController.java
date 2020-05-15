@@ -51,7 +51,7 @@ public class UpmsUserController {
 	
 	@GetMapping("/add")
 	@Log("添加用户")
-	//@RequiresPermissions("system:upmsUser:add")
+	@RequiresPermissions("system:upmsUser:add")
 	String add(){
 	    return "system/upmsUser/add";
 	}

@@ -1,6 +1,7 @@
 package com.ming.upms.system.controller;
 
 import com.ming.common.utils.R;
+import com.ming.upms.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.domain.UpmsSystemDO;
 import com.ming.upms.system.service.UpmsPermissionService;
@@ -50,6 +51,7 @@ public class UpmsPermissionController {
 	
 	@GetMapping("/add/{pid}")
 	@RequiresPermissions("system:upmsPermission:add")
+	@Log("添加权限")
 	String add(@PathVariable("pid") Long pid, Model model){
 		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
 		UpmsPermissionDO pPermissionDO = upmsPermissionService.get(pid);
@@ -65,6 +67,7 @@ public class UpmsPermissionController {
 
 	@GetMapping("/edit/{permissionId}")
 	@RequiresPermissions("system:upmsPermission:edit")
+	@Log("编辑权限")
 	String edit(@PathVariable("permissionId") Long permissionId,Model model){
 		UpmsPermissionDO upmsPermission = upmsPermissionService.get(permissionId);
 		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
@@ -92,6 +95,7 @@ public class UpmsPermissionController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("system:upmsPermission:add")
+	@Log("保存权限")
 	public R save( UpmsPermissionDO upmsPermission){
 		if(upmsPermissionService.save(upmsPermission)>0){
 			return R.ok();
@@ -103,6 +107,7 @@ public class UpmsPermissionController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
+	@Log("修改权限")
 	@RequiresPermissions("system:upmsPermission:edit")
 	public R update( UpmsPermissionDO upmsPermission){
 		upmsPermissionService.update(upmsPermission);
@@ -114,6 +119,7 @@ public class UpmsPermissionController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
+	@Log("删除权限")
 	@RequiresPermissions("system:upmsPermission:remove")
 	public R remove( Long permissionId){
 		if(upmsPermissionService.remove(permissionId)>0){
@@ -127,6 +133,7 @@ public class UpmsPermissionController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
+	@Log("批量删除权限")
 	@RequiresPermissions("system:upmsPermission:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] permissionIds){
 		upmsPermissionService.batchRemove(permissionIds);

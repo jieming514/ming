@@ -8,7 +8,6 @@ import com.ming.upms.system.service.UpmsLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,43 +44,9 @@ public class UpmsLogController {
 		PageUtils pageUtils = new PageUtils(upmsLogList, total);
 		return pageUtils;
 	}
-	
-	@GetMapping("/add")
-	@RequiresPermissions("system:upmsLog:add")
-	String add(){
-	    return "system/upmsLog/add";
-	}
 
-	@GetMapping("/edit/{logId}")
-	@RequiresPermissions("system:upmsLog:edit")
-	String edit(@PathVariable("logId") Long logId,Model model){
-		UpmsLogDO upmsLog = upmsLogService.get(logId);
-		model.addAttribute("upmsLog", upmsLog);
-	    return "system/upmsLog/edit";
-	}
-	
-	/**
-	 * 保存
-	 */
-	@ResponseBody
-	@PostMapping("/save")
-	@RequiresPermissions("system:upmsLog:add")
-	public R save( UpmsLogDO upmsLog){
-		if(upmsLogService.save(upmsLog)>0){
-			return R.ok();
-		}
-		return R.error();
-	}
-	/**
-	 * 修改
-	 */
-	@ResponseBody
-	@RequestMapping("/update")
-	@RequiresPermissions("system:upmsLog:edit")
-	public R update( UpmsLogDO upmsLog){
-		upmsLogService.update(upmsLog);
-		return R.ok();
-	}
+
+
 	
 	/**
 	 * 删除
