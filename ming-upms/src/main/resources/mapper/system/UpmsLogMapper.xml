@@ -4,11 +4,11 @@
 <mapper namespace="com.ming.upms.system.dao.UpmsLogDao">
 
 	<select id="get" resultType="com.ming.upms.system.domain.UpmsLogDO">
-		select `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`url`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions` from upms_log where log_id = #{value}
+		select `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions` from upms_log where log_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.ming.upms.system.domain.UpmsLogDO">
-		select `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`url`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions` from upms_log
+		select `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions` from upms_log
         <where>  
 		  		  <if test="logId != null and logId != ''"> and log_id = #{logId} </if>
 		  		  <if test="description != null and description != ''"> and description = #{description} </if>
@@ -17,7 +17,6 @@
 		  		  <if test="spendTime != null and spendTime != ''"> and spend_time = #{spendTime} </if>
 		  		  <if test="basePath != null and basePath != ''"> and base_path = #{basePath} </if>
 		  		  <if test="uri != null and uri != ''"> and uri = #{uri} </if>
-		  		  <if test="url != null and url != ''"> and url = #{url} </if>
 		  		  <if test="method != null and method != ''"> and method = #{method} </if>
 		  		  <if test="parameter != null and parameter != ''"> and parameter = #{parameter} </if>
 		  		  <if test="userAgent != null and userAgent != ''"> and user_agent = #{userAgent} </if>
@@ -48,7 +47,6 @@
 		  		  <if test="spendTime != null and spendTime != ''"> and spend_time = #{spendTime} </if>
 		  		  <if test="basePath != null and basePath != ''"> and base_path = #{basePath} </if>
 		  		  <if test="uri != null and uri != ''"> and uri = #{uri} </if>
-		  		  <if test="url != null and url != ''"> and url = #{url} </if>
 		  		  <if test="method != null and method != ''"> and method = #{method} </if>
 		  		  <if test="parameter != null and parameter != ''"> and parameter = #{parameter} </if>
 		  		  <if test="userAgent != null and userAgent != ''"> and user_agent = #{userAgent} </if>
@@ -66,8 +64,7 @@
 			`start_time`, 
 			`spend_time`, 
 			`base_path`, 
-			`uri`, 
-			`url`, 
+			`uri`,
 			`method`, 
 			`parameter`, 
 			`user_agent`, 
@@ -82,8 +79,7 @@
 			#{startTime}, 
 			#{spendTime}, 
 			#{basePath}, 
-			#{uri}, 
-			#{url}, 
+			#{uri},
 			#{method}, 
 			#{parameter}, 
 			#{userAgent}, 
@@ -102,7 +98,6 @@
 			<if test="spendTime != null">`spend_time` = #{spendTime}, </if>
 			<if test="basePath != null">`base_path` = #{basePath}, </if>
 			<if test="uri != null">`uri` = #{uri}, </if>
-			<if test="url != null">`url` = #{url}, </if>
 			<if test="method != null">`method` = #{method}, </if>
 			<if test="parameter != null">`parameter` = #{parameter}, </if>
 			<if test="userAgent != null">`user_agent` = #{userAgent}, </if>

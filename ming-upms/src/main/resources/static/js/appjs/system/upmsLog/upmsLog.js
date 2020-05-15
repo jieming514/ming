@@ -75,16 +75,12 @@ function load() {
 									title : 'URI' 
 								},
 																{
-									field : 'url', 
-									title : 'URL' 
-								},
-																{
 									field : 'method', 
 									title : '请求类型' 
 								},
 																{
 									field : 'parameter', 
-									title : '' 
+									title : '参数'
 								},
 																{
 									field : 'userAgent', 
@@ -96,7 +92,15 @@ function load() {
 								},
 																{
 									field : 'result', 
-									title : '' 
+									title : '结果',
+									formatter : function(value, row, index) {
+                                        if(value == 1) {
+                                              return "<span class='label label-danger'>失败</span>";
+                                        }else if(value == 0) {
+                                            return "<span class='label label-success'>成功</span>";
+                                        }
+                                        return "<span class='label label-danger'>未知</span>";
+									}
 								},
 																{
 									field : 'permissions', 

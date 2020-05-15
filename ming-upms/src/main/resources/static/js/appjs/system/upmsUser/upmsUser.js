@@ -68,9 +68,9 @@ function load() {
                                     title : '性别',
                                     formatter : function(value, row, index) {
                                         if(value == 1) {
-                                              return "男";
+                                              return "<span class='label label-success'>男</span>";
                                         }else if(value == 0) {
-                                            return "女";
+                                            return "<span class='label label-danger'>女</span>";
                                         }
                                         return "<b style='color=red'>未知</b>";
                                     }

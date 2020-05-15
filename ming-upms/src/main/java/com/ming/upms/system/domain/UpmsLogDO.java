@@ -1,5 +1,7 @@
 package com.ming.upms.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class UpmsLogDO implements Serializable {
 	//操作用户
 	private String username;
 	//操作时间
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date startTime;
 	//消耗时间
 	private Integer spendTime;
@@ -27,8 +30,6 @@ public class UpmsLogDO implements Serializable {
 	private String basePath;
 	//URI
 	private String uri;
-	//URL
-	private String url;
 	//请求类型
 	private String method;
 	//
@@ -37,8 +38,8 @@ public class UpmsLogDO implements Serializable {
 	private String userAgent;
 	//IP地址
 	private String ip;
-	//
-	private String result;
+	// 相应
+	private Integer result;
 	//权限值
 	private String permissions;
 
@@ -127,18 +128,6 @@ public class UpmsLogDO implements Serializable {
 		return uri;
 	}
 	/**
-	 * 设置：URL
-	 */
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	/**
-	 * 获取：URL
-	 */
-	public String getUrl() {
-		return url;
-	}
-	/**
 	 * 设置：请求类型
 	 */
 	public void setMethod(String method) {
@@ -189,13 +178,13 @@ public class UpmsLogDO implements Serializable {
 	/**
 	 * 设置：
 	 */
-	public void setResult(String result) {
+	public void setResult(Integer result) {
 		this.result = result;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getResult() {
+	public Integer getResult() {
 		return result;
 	}
 	/**
