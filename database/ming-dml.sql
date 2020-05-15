@@ -24,6 +24,7 @@ LOCK TABLES `upms_log` WRITE;
 /*!40000 ALTER TABLE `upms_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Dumping data for table `upms_organization`
 --
@@ -40,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `upms_permission` WRITE;
 /*!40000 ALTER TABLE `upms_permission` DISABLE KEYS */;
-INSERT INTO `upms_permission` VALUES (1,1,0,'系统资源管理',1,'','','fa fa-gear',1,'2020-05-02 05:55:02',1),(2,1,1,'资源管理',2,'upms:system:read','/system/upmsPermission','',1,'2020-05-02 05:55:02',2),(3,1,4,'组织管理',2,'upms:organization:read','/system/upmsOrganization','',1,'2020-05-02 05:55:02',3),(4,1,0,'组织角色管理',1,'','','fa fa-users',1,'2020-05-02 05:55:02',4),(5,1,4,'角色管理',2,'upms:role:read','/system/upmsRole','',1,'2020-05-02 05:55:02',5),(6,1,4,'用户管理',2,'upms:user:read','/system/upmsUser','',1,'2020-05-02 05:55:02',6),(7,1,1,'系统管理',2,'upms:system:read','/system/upmsSystem','',1,'2020-05-02 05:55:02',1),(11,1,2,'添加',3,'upms:system:upmsPermission:add','','',1,'2020-05-07 22:26:23',1),(12,1,2,'下载',3,'upms:system:upmsPermission:edit','','',1,'2020-05-07 22:34:02',1),(13,1,7,'添加',3,'upms:system:upmsSystem:add','','',1,'2020-05-07 22:44:41',3);
+INSERT INTO `upms_permission` VALUES (1,1,0,'系统资源管理',1,'upms:system','','fa fa-gear',1,'2020-05-02 05:55:02',1),(2,1,1,'系统管理',2,'system:upmsSystem:upmsSystem','/system/upmsSystem','',1,'2020-05-02 05:55:02',1),(3,1,1,'资源管理',2,'system:upmsPermission:upmsPermission','/system/upmsPermission','',1,'2020-05-02 05:55:02',2),(4,1,0,'组织角色管理',1,'upms:role','','fa fa-users',1,'2020-05-02 05:55:02',4),(5,1,4,'角色管理',2,'system:upmsRole:upmsRole','/system/upmsRole','',1,'2020-05-02 05:55:02',5),(6,1,4,'用户管理',2,'system:upmsUser:upmsUser','/system/upmsUser','',1,'2020-05-02 05:55:02',6),(7,1,4,'组织管理',2,'system:upmsOrganization:upmsOrganization','/system/upmsOrganization','',1,'2020-05-02 05:55:02',3),(8,1,3,'修改',3,'system:upmsPermission:edit','','',1,'2020-05-07 22:26:23',1),(9,1,3,'下载',3,'system:upmsPermission:edit','','',1,'2020-05-07 22:34:02',1),(10,1,2,'添加',3,'system:upmsSystem:add','','',1,'2020-05-07 22:44:41',3),(15,1,0,'日志管理',1,'system:log','','fa fa-edit',1,'2020-05-14 21:44:33',1),(16,1,15,'用户操作日志',2,'system:upmsLog:upmsLog','/system/upmsLog','',1,'2020-05-14 21:46:41',2),(17,1,3,'添加',3,'system:upmsPermission:add','','',1,'2020-05-14 23:32:57',3),(18,1,2,'修改',3,'system:upmsSystem:edit','','',1,'2020-05-14 23:51:47',3),(19,1,5,'添加',3,'system:upmsRole:add','','',1,'2020-05-14 23:54:46',3),(20,1,5,'修改',3,'system:upmsRole:edit','','',1,'2020-05-14 23:55:16',3),(21,1,6,'添加',3,'system:upmsUser:add','','',1,'2020-05-15 21:24:40',3),(22,1,6,'修改',3,'system:upmsUser:edit','','',1,'2020-05-15 21:25:02',3),(23,1,7,'添加',3,'system:upmsOrganization:add','','',1,'2020-05-15 21:25:34',1),(24,1,7,'修改',3,'system:upmsOrganization:edit','','',1,'2020-05-15 21:27:10',3);
 /*!40000 ALTER TABLE `upms_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `upms_role_permission` WRITE;
 /*!40000 ALTER TABLE `upms_role_permission` DISABLE KEYS */;
-INSERT INTO `upms_role_permission` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,1,6),(7,1,7);
+INSERT INTO `upms_role_permission` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,1,6),(7,1,7),(8,1,8),(9,1,9),(10,1,10),(11,1,15),(12,1,16),(13,1,17),(14,1,18),(15,1,19),(16,1,20),(17,1,21),(18,1,22),(19,1,23),(20,1,24);
 /*!40000 ALTER TABLE `upms_role_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +81,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `upms_user` WRITE;
 /*!40000 ALTER TABLE `upms_user` DISABLE KEYS */;
-INSERT INTO `upms_user` VALUES (1,'admin','1d45e9bc108bcf0237885d37df5488c9','66f1b370c660445a8657bf8bf1794486','管理员','/img/profile_small01.jpg','18271681268','1090760001@qq.com',1,0,'2020-05-02 05:55:02',8),(6,'jie_ming514','6b9face23149cc42f884b02a9df57fdf','GVICiTo2JTuzSoYtuuFY','明杰','/img/profile_small03.jpg','18271681268','1090760001@qq.com',1,0,'2020-05-04 21:22:57',9);
+INSERT INTO `upms_user` VALUES (1,'admin','1d45e9bc108bcf0237885d37df5488c9','66f1b370c660445a8657bf8bf1794486','管理员','/img/profile_small01.jpg','18271681268','1090760001@qq.com',0,0,'2020-05-02 05:55:02',8),(8,'jie_ming514','b733189d4a00b0c882166a6e77a22b04','vKZ6EhUJVfBZxiO1EFdUHfwkJEO5A0','明杰','/img/profile_small03.jpg','111111','jie_ming514@163.com',1,0,'2020-05-13 20:29:59',11),(9,'test','b5f7a38359cbafdb41452e32b0a1cc5d','l5266XyOiKpXT2FDYMtoOezjgIslyS','测试用户','/img/profile_small03.jpg','133333333333','jie_ming514@163.com',0,0,'2020-05-13 20:30:40',10);
 /*!40000 ALTER TABLE `upms_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-10 23:22:27
+-- Dump completed on 2020-05-15 22:02:34

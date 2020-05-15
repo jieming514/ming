@@ -26,12 +26,12 @@ CREATE TABLE `upms_log` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `description` varchar(100) DEFAULT NULL COMMENT '操作描述',
   `username` varchar(20) DEFAULT NULL COMMENT '操作用户',
-  `start_time` bigint(20) DEFAULT NULL COMMENT '操作时间',
+  `start_time` datetime DEFAULT NULL COMMENT '操作时间',
   `spend_time` int(11) DEFAULT NULL COMMENT '消耗时间',
   `base_path` varchar(500) DEFAULT NULL COMMENT '根路径',
   `uri` varchar(500) DEFAULT NULL COMMENT 'URI',
   `url` varchar(500) DEFAULT NULL COMMENT 'URL',
-  `method` varchar(10) DEFAULT NULL COMMENT '请求类型',
+  `method` varchar(100) DEFAULT NULL COMMENT '请求类型',
   `parameter` mediumtext,
   `user_agent` varchar(500) DEFAULT NULL COMMENT '用户标识',
   `ip` varchar(30) DEFAULT NULL COMMENT 'IP地址',
@@ -39,7 +39,7 @@ CREATE TABLE `upms_log` (
   `permissions` varchar(100) DEFAULT NULL COMMENT '权限值',
   PRIMARY KEY (`log_id`),
   KEY `log_id` (`log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='操作日志';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `upms_permission` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='权限';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `upms_role_permission` (
   PRIMARY KEY (`role_permission_id`),
   KEY `FK_Reference_23` (`role_id`),
   CONSTRAINT `FK_Reference_23` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `upms_user` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   `organization_id` int(10) DEFAULT NULL COMMENT '所属组织机构',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,4 +203,4 @@ CREATE TABLE `upms_user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-10 23:25:11
+-- Dump completed on 2020-05-15 22:02:58
