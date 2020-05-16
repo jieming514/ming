@@ -2,6 +2,7 @@
 var prefix = "/system/upmsUser"
 $(function() {
 	load();
+	getOrganizationTree();
 });
 
 function load() {
@@ -25,19 +26,20 @@ function load() {
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
-						//search : true, // 是否显示搜索框
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
                         sortable : true,
                         sortOrder: "asc",
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-								limit : params.limit,
-								offset : params.offset,
+
                                 order : params.order,
-                                sort : params.sort
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
+                                sort : params.sort,
+                                organizationId: $('#organizationId').val(),
+					            userId:$('#userId').val(),
+					            username:$('#searchName').val(),
+                                limit : params.limit,
+                                offset : params.offset
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -167,8 +169,6 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
-}
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
@@ -203,3 +203,36 @@ function batchRemove() {
 
 	});
 }
+
+function getOrganizationTree() {
+    var settings = {
+        data: {
+            simpleData: {
+                idKey : "id",   //节点数据中保存唯一标识的属性名称
+                pIdKey : "parentId",    //节点数据中保存其父节点唯一标识的属性名称
+                rootPId : -1  //用于修正根节点父节点数据，即 pIdKey 指定的属性值
+            },
+            key: {
+                name : "text"  //zTree 节点数据保存节点名称的属性名称  默认值："name"
+            }
+        },
+        callback: {
+            onClick : function (event, treeId, treeNode) {
+                var treeId = treeNode.id;
+                $("#organizationId").val(treeId);
+                $("#exampleTable").bootstrapTable('refresh');
+            }
+        }
+    };
+
+    var url = "/system/upmsOrganization/getTree";
+    $.ajax({
+        type : "post",
+        url : url,
+        success : function(res){
+            zTreeObj = $.fn.zTree.init($("#organizationTree"), settings, res);
+            zTreeObj.expandAll(true);   //true 节点全部展开、false节点收缩
+        }
+    });
+}
+

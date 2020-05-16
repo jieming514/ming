@@ -29,14 +29,14 @@ public class UpmsOrganizationController {
 	private UpmsOrganizationService upmsOrganizationService;
 	
 	@GetMapping()
-	@RequiresPermissions("system:upmsOrganization:upmsOrganization")
+	@RequiresPermissions("system:upmsOrganization:read")
 	public String UpmsOrganization(){
 	    return "system/upmsOrganization/upmsOrganization";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:upmsOrganization:upmsOrganization")
+	@RequiresPermissions("system:upmsOrganization:read")
 	public List<UpmsOrganizationDO> list(@RequestParam Map<String, Object> params){
 		List<UpmsOrganizationDO> upmsOrganizationList = upmsOrganizationService.list(params);
 		return upmsOrganizationList;
@@ -109,9 +109,9 @@ public class UpmsOrganizationController {
 		return R.ok();
 	}
 
-	@GetMapping("/getOrganizationTree")
-	@RequiresPermissions("system:upmsOrganization:read")
+
 	@Log("获取组织树")
+	@GetMapping("/getOrganizationTree")
 	public String getOrganizationTree() {
 		return "system/upmsOrganization/tree";
 	}
@@ -123,5 +123,5 @@ public class UpmsOrganizationController {
 		tree = upmsOrganizationService.getTree();
 		return tree;
 	}
-	
+
 }

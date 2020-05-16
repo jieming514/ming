@@ -30,17 +30,11 @@
     <sql id="selectUserVo">
         select uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`,
                uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
-          from upms_user uu
-          left join upms_organization uo on uu.organization_id = uo.organization_id
     </sql>
 
-
-    <select id="get" resultMap="UpmsUserResult">
-        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id` from upms_user where user_id = #{value}
-    </select>
-
-    <select id="list" resultMap="UpmsUserResult">
-        <include refid="selectUserVo"/>
+    <sql id="selectUserVoWhere">
+        from upms_user uu
+        left join upms_organization uo on uu.organization_id = uo.organization_id
         <where>
             <if test="userId != null and userId != ''"> and uu.user_id = #{userId} </if>
             <if test="username != null and username != ''"> and uu.username = #{username} </if>
@@ -51,9 +45,20 @@
             <if test="phone != null and phone != ''"> and uu.phone = #{phone} </if>
             <if test="email != null and email != ''"> and uu.email = #{email} </if>
             <if test="sex != null and sex != ''"> and uu.sex = #{sex} </if>
+            <if test="organizationId != null and organizationId != ''"> and uu.organization_id = #{organizationId} </if>
             <if test="locked != null and locked != ''"> and uu.locked = #{locked} </if>
             <if test="ctime != null and ctime != ''"> and uu.ctime = #{ctime} </if>
         </where>
+    </sql>
+
+
+    <select id="get" resultMap="UpmsUserResult">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id` from upms_user where user_id = #{value}
+    </select>
+
+    <select id="list" resultMap="UpmsUserResult">
+        <include refid="selectUserVo"/>
+        <include refid="selectUserVoWhere"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -68,20 +73,8 @@
     </select>
 
     <select id="count" resultType="int">
-        select count(*) from upms_user
-        <where>
-            <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-            <if test="username != null and username != ''"> and username = #{username} </if>
-            <if test="password != null and password != ''"> and password = #{password} </if>
-            <if test="salt != null and salt != ''"> and salt = #{salt} </if>
-            <if test="realname != null and realname != ''"> and realname = #{realname} </if>
-            <if test="avatar != null and avatar != ''"> and avatar = #{avatar} </if>
-            <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-            <if test="email != null and email != ''"> and email = #{email} </if>
-            <if test="sex != null and sex != ''"> and sex = #{sex} </if>
-            <if test="locked != null and locked != ''"> and locked = #{locked} </if>
-            <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
-        </where>
+        select count(1)
+        <include refid="selectUserVoWhere"/>
     </select>
 
     <insert id="save" parameterType="UpmsUserDO" useGeneratedKeys="true" keyProperty="userId">
@@ -151,9 +144,12 @@
     </select>
 
     <select id="selectUserByUserId" resultMap="UpmsUserResult">
-        <include refid="selectUserVo"/>
-        where uu.`user_id` = #{value}
-        order by uu.user_id desc
+        select uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`,
+               uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
+          from upms_user uu
+          left join upms_organization uo on uu.organization_id = uo.organization_id
+         where uu.`user_id` = #{value}
+         order by uu.user_id desc
     </select>
 
 </mapper>

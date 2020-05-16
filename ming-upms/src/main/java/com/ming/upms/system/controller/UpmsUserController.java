@@ -39,7 +39,7 @@ public class UpmsUserController {
 	
 	@ResponseBody
 	@GetMapping("/list")
-	//@RequiresPermissions("system:upmsUser:upmsUser")
+	@RequiresPermissions("system:upmsUser:upmsUser")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
