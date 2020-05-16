@@ -190,10 +190,13 @@ function getTree(roleId) {
         title : '角色资源列表',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
-        area : [ '300px', '400px' ],
+        area : [ '400px', '500px' ],
         content : '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
-        btn : ['确认'],
+        btn : ['保存','取消'],
         yes : function(index, layero) {
+            layer.close(index); //如果设定了yes回调，需进行手工关闭
+        },
+        btn2 : function(index) {
             layer.close(index); //如果设定了yes回调，需进行手工关闭
         }
     });
