@@ -2,6 +2,7 @@ package com.ming.upms.system.controller;
 
 import com.ming.common.utils.R;
 import com.ming.upms.common.annotation.Log;
+import com.ming.upms.common.domain.Tree;
 import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.domain.UpmsSystemDO;
 import com.ming.upms.system.service.UpmsPermissionService;
@@ -139,5 +140,25 @@ public class UpmsPermissionController {
 		upmsPermissionService.batchRemove(permissionIds);
 		return R.ok();
 	}
-	
+
+	@Log("获取资源树")
+	@GetMapping("/getPermissionTree/{roleId}")
+	public String getPermissionTree(@PathVariable("roleId") Long roleId, Model model) {
+		model.addAttribute("roleId", roleId);
+		return "system/upmsPermission/tree";
+	}
+
+	/**
+	 * 获取一个角色的资源树
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("/getTree")
+	public Tree<UpmsPermissionDO> getTree(Long roleId) {
+		Tree<UpmsPermissionDO> tree = new Tree<UpmsPermissionDO>();
+		tree = upmsPermissionService.getTree(roleId);
+		return tree;
+	}
+
+
 }

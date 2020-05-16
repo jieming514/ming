@@ -47,30 +47,43 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'roleId', 
+									field : 'roleId',
+									align : 'center',
 									title : '编号' 
 								},
 																{
-									field : 'name', 
+									field : 'name',
+									align : 'center',
 									title : '角色名称' 
 								},
 																{
-									field : 'title', 
+									field : 'title',
+									align : 'center',
 									title : '角色标题' 
 								},
 																{
 									field : 'description', 
 									title : '角色描述' 
 								},
-																{
-									field : 'ctime', 
+								{
+								    title : '资源',
+									align : 'center',
+								    field : 'id',
+								    formatter : function(value, row, index) {
+								        return "<a href='#' onclick='getTree("+row.roleId+")'>查看资源</a>";
+								    }
+								},
+								{
+									field : 'ctime',
+									align : 'center',
 									title : '创建时间' 
 								},
-																{
-									field : 'orders', 
+								{
+									field : 'orders',
+									align : 'center',
 									title : '排序' 
 								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
@@ -169,4 +182,19 @@ function batchRemove() {
 	}, function() {
 
 	});
+}
+//获取机构树
+function getTree(roleId) {
+    layer.open({
+        type : 2,
+        title : '角色资源树',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '300px', '400px' ],
+        content : '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
+        btn : ['确认'],
+        yes : function(index, layero) {
+            layer.close(index); //如果设定了yes回调，需进行手工关闭
+        }
+    });
 }

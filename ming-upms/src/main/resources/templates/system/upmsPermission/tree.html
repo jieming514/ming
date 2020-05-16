@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head th:include="include :: header"></head>
+<style>
+	body{height:auto;font-family: "Microsoft YaHei";}
+	button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
+</style>
+<body class="hold-transition box box-main">
+
+	<div id="tree" class="ztree treeselect"
+		 style="margin: 5% 10%; padding : 5px; background:#f5f5f5"></div>
+
+	<div style="display:block">
+		<form id="treeForm" class="layui-form">
+			<div class="layui-form-item">
+				<input id="treeId" type="hidden" class="layui-input">
+			</div>
+			<div class="layui-form-item">
+				<input id="treeName" type="hidden" class="layui-input">
+			</div>
+		</form>
+	</div>
+
+	<div th:include="include::footer"></div>
+	<script th:inline="javascript">
+		var settings = {
+			data: {
+				simpleData: {
+					idKey : "id",   //节点数据中保存唯一标识的属性名称
+					pIdKey : "parentId",    //节点数据中保存其父节点唯一标识的属性名称
+					rootPId : -1  //用于修正根节点父节点数据，即 pIdKey 指定的属性值
+				},
+				key: {
+					name : "text"  //zTree 节点数据保存节点名称的属性名称  默认值："name"
+				}
+			},
+			callback: {
+				onClick : zOnClick,
+				onAsyncSuccess : zTreeOnAsyncSuccess
+			}
+		};
+
+		$(function() {
+			var url = "/system/upmsPermission/getTree";
+			$.ajax({
+				type : "post",
+				url : url,
+				data : [[${roleId}]],
+				async : true,
+				success : function(res){
+					zTreeObj = $.fn.zTree.init($("#tree"), settings, res);
+					zTreeObj.expandAll(true);   //true 节点全部展开、false节点收缩
+				}
+			});
+		});
+		
+		function zOnClick(event, treeId, treeNode) {
+		    var treeId = treeNode.id;
+		    var treeName = treeNode.text;
+		    $("#treeId").val(treeId);
+		    $("#treeName").val(treeName);
+		}
+
+		function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+		    var data = {};
+			data['treeId'] = $("#treeId").val();
+			for(var i = 0; i < treeNode.children.length; i++) {
+				if(treeNode.children[i].id == data['treeId']) {
+					treeNode.children[i].checked = true;
+					zTree.updateNode(treeNode.children[i]);
+				}
+			}
+		}
+	</script>
+</body>
+</html>

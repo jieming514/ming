@@ -96,4 +96,37 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		return upmsPermissionDao.getSystemPermissionList(map);
 	}
 
+	public List<UpmsPermissionDO> selectPermissionByRoleId(Long roleId) {
+		return null;
+	}
+
+	/**
+	 * 获取资源树
+	 * @return
+	 */
+	@Override
+	public Tree<UpmsPermissionDO> getTree() {
+		return getTree(null);
+	}
+
+	@Override
+	public Tree<UpmsPermissionDO> getTree(Long roleId) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("roleId", roleId);
+		List<Tree<UpmsPermissionDO>> trees = new ArrayList<Tree<UpmsPermissionDO>>();
+		List<UpmsPermissionDO> upmsPermissionList = list(paramMap);
+		for (UpmsPermissionDO permissionDO : upmsPermissionList) {
+			Tree tree = new Tree();
+			tree.setId(permissionDO.getPermissionId().toString());
+			tree.setText(permissionDO.getName());
+			tree.setParentId(permissionDO.getPid().toString());
+			Map<String, Object> state = new HashMap<>();
+			state.put("opened", true);
+			tree.setState(state);
+			trees.add(tree);
+		}
+		Tree<UpmsPermissionDO> t = BuildTree.build(trees);
+		return t;
+	}
+
 }

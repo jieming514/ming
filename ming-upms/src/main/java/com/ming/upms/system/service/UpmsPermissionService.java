@@ -45,4 +45,18 @@ public interface UpmsPermissionService {
 	 * @return
 	 */
 	List<UpmsPermissionDO> getSystemPermissionList(Map<String,Object> map);
+
+	/**
+	 * 获取完整资源树
+	 * @return
+	 */
+    Tree<UpmsPermissionDO> getTree();
+
+	/**
+	 * 获取角色的资源
+	 * @param roleId
+	 * @return
+	 */
+	Tree<UpmsPermissionDO> getTree(Long roleId);
+
 }
