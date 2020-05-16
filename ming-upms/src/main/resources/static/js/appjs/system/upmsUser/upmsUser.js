@@ -32,12 +32,11 @@ function load() {
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-
                                 order : params.order,
                                 sort : params.sort,
                                 organizationId: $('#organizationId').val(),
-					            userId:$('#userId').val(),
-					            username:$('#searchName').val(),
+					            username:$('#username').val(),
+					            phone : $('#phone').val(),
                                 limit : params.limit,
                                 offset : params.offset
 							};

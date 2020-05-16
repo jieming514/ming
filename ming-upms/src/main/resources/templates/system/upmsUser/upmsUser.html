@@ -25,11 +25,11 @@
 							<div class="form-group">
 								<label class="col-sm-1 control-label">帐号：</label>
 								<div class="col-sm-2">
-									<input id="userId" name="userId" class="form-control" type="text">
-								</div>
-								<label class="col-sm-1 control-label">姓名：</label>
-								<div class="col-sm-2">
 									<input id="username" name="username" class="form-control" type="text">
+								</div>
+								<label class="col-sm-1 control-label">电话：</label>
+								<div class="col-sm-2">
+									<input id="phone" name="phone" class="form-control" type="text">
 								</div>
 							</div>
 						</form>
@@ -39,6 +39,9 @@
 					<div class="ibox-content">
 						<div class="fixed-table-toolbar">
 							<div class="columns pull-left">
+								<button id="serachBtn" class="btn btn-success" onclick="javascript:reLoad()">
+									<i class="fa fa-search" aria-hidden="true"></i>查询
+								</button>
 								<button shiro:hasPermission="system:upmsUser:add" type="button" class="btn  btn-primary" onclick="add()">
 									<i class="fa fa-plus" aria-hidden="true"></i>添加
 								</button>
