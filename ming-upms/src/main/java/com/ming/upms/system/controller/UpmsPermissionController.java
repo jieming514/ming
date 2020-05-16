@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,10 +155,10 @@ public class UpmsPermissionController {
 	 */
 	@ResponseBody
 	@PostMapping("/getTree")
-	public Tree<UpmsPermissionDO> getTree(Long roleId) {
-		Tree<UpmsPermissionDO> tree = new Tree<UpmsPermissionDO>();
-		tree = upmsPermissionService.getTree(roleId);
-		return tree;
+	public List<Tree<UpmsPermissionDO>> getTree(Long roleId) {
+		List<Tree<UpmsPermissionDO>> treeList = new ArrayList<Tree<UpmsPermissionDO>>();
+		treeList = upmsPermissionService.getTree(roleId);
+		return treeList;
 	}
 
 

@@ -112,7 +112,7 @@
 		where ur.user_id = #{userId}
 	</select>
 
-	<select id="getPermissionByUserId" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+	<select id="selectPermissionByUserId" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
 		select distinct m.`permission_id`,m.`system_id`,m.`pid`,m.`name`,m.`type`,m.`permission_value`,m.`uri`,m.`icon`,m.`status`,m.`ctime`,m.`orders`
 		  from upms_permission m
 		  left join upms_role_permission rm
@@ -123,20 +123,18 @@
 		 order by m.permission_id asc
 	</select>
 
+	<select id="selectPermissionByRoleId" resultType="UpmsPermissionDO">
+		select distinct m.`permission_id`,m.`system_id`,m.`pid`,m.`name`,m.`type`,m.`permission_value`,m.`uri`,m.`icon`,m.`status`,m.`ctime`,m.`orders`
+		  from upms_permission m
+		  left join upms_role_permission rm
+		    on m.permission_id = rm.permission_id
+		 where rm.role_id = #{roleId}
+		 order by m.permission_id asc
+	</select>
+
 	<select id="getSystemPermissionList" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
-		SELECT
-			up.`permission_id`,
-			up.`system_id`,
-			us.`title` systemName,
-			up.`pid`,
-			up.`name`,
-			up.`type`,
-			up.`permission_value`,
-			up.`uri`,
-			up.`icon`,
-			up.`status`,
-			up.`ctime`,
-			up.`orders`
+		SELECT up.`permission_id`, up.`system_id`, us.`title` systemName, up.`pid`, up.`name`,
+			   up.`type`, up.`permission_value`, up.`uri`, up.`icon`, up.`status`, up.`ctime`, up.`orders`
 			FROM upms_permission up
 				LEFT JOIN
 			upms_system us ON up.system_id = us.system_id

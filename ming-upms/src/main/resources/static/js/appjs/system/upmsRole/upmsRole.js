@@ -187,7 +187,7 @@ function batchRemove() {
 function getTree(roleId) {
     layer.open({
         type : 2,
-        title : '角色资源树',
+        title : '角色资源列表',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '300px', '400px' ],

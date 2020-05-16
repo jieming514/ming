@@ -35,7 +35,7 @@ public interface UpmsPermissionService {
 	/**
 	 * 通过用户ID查找权限信息
 	 */
-	List<UpmsPermissionDO> getPermissionByUserId(Long userId);
+	List<UpmsPermissionDO> selectPermissionByUserId(Long userId);
 
 	List<Tree<UpmsPermissionDO>> getTreeByUserId(Long userId);
 
@@ -46,17 +46,13 @@ public interface UpmsPermissionService {
 	 */
 	List<UpmsPermissionDO> getSystemPermissionList(Map<String,Object> map);
 
-	/**
-	 * 获取完整资源树
-	 * @return
-	 */
-    Tree<UpmsPermissionDO> getTree();
+	List<UpmsPermissionDO> selectPermissionByRoleId(Long roleId);
 
 	/**
 	 * 获取角色的资源
 	 * @param roleId
 	 * @return
 	 */
-	Tree<UpmsPermissionDO> getTree(Long roleId);
+	List<Tree<UpmsPermissionDO>> getTree(Long roleId);
 
 }

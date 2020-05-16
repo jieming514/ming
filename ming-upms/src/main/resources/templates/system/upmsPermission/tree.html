@@ -45,7 +45,9 @@
 			$.ajax({
 				type : "post",
 				url : url,
-				data : [[${roleId}]],
+				data : {
+					roleId : [[${roleId}]]
+				},
 				async : true,
 				success : function(res){
 					zTreeObj = $.fn.zTree.init($("#tree"), settings, res);

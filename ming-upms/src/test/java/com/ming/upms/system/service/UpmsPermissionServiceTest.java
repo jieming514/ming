@@ -2,6 +2,7 @@ package com.ming.upms.system.service;
 
 import com.ming.upms.common.BasicTest;
 import com.ming.upms.system.domain.UpmsPermissionDO;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,8 +24,11 @@ public class UpmsPermissionServiceTest extends BasicTest {
 
     @Test
     public void getPermissionByUserId() {
-        List<UpmsPermissionDO> permissionSet = upmsPermissionService.getPermissionByUserId(1L);
-        System.out.printf(permissionSet.toString());
+        List<UpmsPermissionDO> permissionList = upmsPermissionService.selectPermissionByUserId(1L);
+        if (permissionList != null && permissionList.size() > 0) {
+            Assert.assertEquals(new Long(1L), permissionList.get(0).getPermissionId());
+        }
+
     }
 
 }
