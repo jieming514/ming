@@ -192,11 +192,8 @@ function getTree(roleId) {
         shadeClose : false, // 点击遮罩关闭层
         area : [ '400px', '500px' ],
         content : '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
-        btn : ['保存','取消'],
+        btn : ['确认'],
         yes : function(index, layero) {
-            layer.close(index); //如果设定了yes回调，需进行手工关闭
-        },
-        btn2 : function(index) {
             layer.close(index); //如果设定了yes回调，需进行手工关闭
         }
     });

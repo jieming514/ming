@@ -50,5 +50,6 @@ public class UpmsRoleServiceImpl implements UpmsRoleService {
 	public int batchRemove(Long[] roleIds){
 		return upmsRoleDao.batchRemove(roleIds);
 	}
+
 	
 }

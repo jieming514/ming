@@ -41,6 +41,9 @@ public class UpmsPermissionDO implements Serializable {
 	private Date ctime;
 	//排序
 	private Long orders;
+	//角色是否拥有角色
+	private Boolean checked;
+
 
 	/**
 	 * 设置：编号
@@ -183,12 +186,27 @@ public class UpmsPermissionDO implements Serializable {
 	public Long getOrders() {
 		return orders;
 	}
+	/**
+	 * 角色是否拥有资源标识
+	 * @return
+	 */
+
+	public Boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
+
+
 
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder("UpmsPermissionDO{");
 		sb.append("permissionId=").append(permissionId);
 		sb.append(", systemId=").append(systemId);
+		sb.append(", systemName='").append(systemName).append('\'');
 		sb.append(", pid=").append(pid);
 		sb.append(", name='").append(name).append('\'');
 		sb.append(", type=").append(type);
@@ -198,6 +216,7 @@ public class UpmsPermissionDO implements Serializable {
 		sb.append(", status=").append(status);
 		sb.append(", ctime=").append(ctime);
 		sb.append(", orders=").append(orders);
+		sb.append(", locked='").append(checked).append('\'');
 		sb.append('}');
 		return sb.toString();
 	}

@@ -3,7 +3,9 @@ package com.ming.upms.system.service.impl;
 import com.ming.upms.common.domain.Tree;
 import com.ming.upms.common.util.BuildTree;
 import com.ming.upms.system.dao.UpmsPermissionDao;
+import com.ming.upms.system.dao.UpmsRolePermissionDao;
 import com.ming.upms.system.domain.UpmsPermissionDO;
+import com.ming.upms.system.domain.UpmsRolePermissionDO;
 import com.ming.upms.system.service.UpmsPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,12 @@ import java.util.*;
 
 @Service
 public class UpmsPermissionServiceImpl implements UpmsPermissionService {
+
 	@Autowired
 	private UpmsPermissionDao upmsPermissionDao;
+
+	@Autowired
+	private UpmsRolePermissionDao upmsRolePermissionDao;
 	
 	@Override
 	public UpmsPermissionDO get(Long permissionId){
@@ -75,7 +81,7 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 	@Override
 	public List<Tree<UpmsPermissionDO>> getTreeByUserId(Long userId) {
 		List<Tree<UpmsPermissionDO>> trees = new ArrayList<Tree<UpmsPermissionDO>>();
-		List<UpmsPermissionDO> upmsPermissionDOSet = selectPermissionByUserId(userId);
+		List<UpmsPermissionDO> upmsPermissionDOSet = upmsPermissionDao.selectPermissionByUserId(userId);
 		for (UpmsPermissionDO permission : upmsPermissionDOSet) {
 			Tree<UpmsPermissionDO> tree = new Tree<>();
 			tree.setId(permission.getPermissionId().toString());
@@ -132,5 +138,27 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		List<Tree<UpmsPermissionDO>> list = BuildTree.buildList(trees, "0");
 		return list;
 	}
+
+	/**
+	 * 获取角色拥有的资源
+	 */
+	@Override
+	public List<UpmsPermissionDO> selectRoleHasPermissionByRoleId(Long roleId) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("roleId", roleId);
+		List<UpmsRolePermissionDO> rolePermissionDOList = upmsRolePermissionDao.list(paramMap);
+		//获取所有的资源树
+		List<UpmsPermissionDO> resultList = upmsPermissionDao.list(new HashMap<>());
+		for (UpmsRolePermissionDO rolePermissionDO : rolePermissionDOList) {
+			for (UpmsPermissionDO result : resultList) {
+				result.setChecked(false);
+				if (result.getPermissionId().equals(rolePermissionDO.getPermissionId())) {
+					result.setChecked(true);
+				}
+			}
+		}
+		return resultList;
+	}
+
 
 }

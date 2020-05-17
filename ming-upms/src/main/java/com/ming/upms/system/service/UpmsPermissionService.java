@@ -42,4 +42,5 @@ public interface UpmsPermissionService {
 
 	List<Tree<UpmsPermissionDO>> getTree(Long roleId);
 
+	List<UpmsPermissionDO> selectRoleHasPermissionByRoleId(Long roleId);
 }
