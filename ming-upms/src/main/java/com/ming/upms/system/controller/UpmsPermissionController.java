@@ -165,8 +165,8 @@ public class UpmsPermissionController {
 	 * 获取角色拥有的资源
 	 */
 	@ResponseBody
-	@PostMapping("/selectRoleHasPermission")
-	public List<UpmsPermissionDO> selectRoleHasPermission(Long roleId) {
+	@PostMapping("/selectRoleHasPermission/{roleId}")
+	public List<UpmsPermissionDO> selectRoleHasPermission(@PathVariable("roleId") Long roleId) {
 		List<UpmsPermissionDO> upmsPermissionDOList = new ArrayList<>();
 		upmsPermissionDOList = upmsPermissionService.selectRoleHasPermissionByRoleId(roleId);
 		return upmsPermissionDOList;

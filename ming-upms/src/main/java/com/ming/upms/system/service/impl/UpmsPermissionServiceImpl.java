@@ -149,11 +149,12 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		List<UpmsRolePermissionDO> rolePermissionDOList = upmsRolePermissionDao.list(paramMap);
 		//获取所有的资源树
 		List<UpmsPermissionDO> resultList = upmsPermissionDao.list(new HashMap<>());
-		for (UpmsRolePermissionDO rolePermissionDO : rolePermissionDOList) {
-			for (UpmsPermissionDO result : resultList) {
+		for (UpmsPermissionDO result : resultList) {
+			for (UpmsRolePermissionDO rolePermissionDO : rolePermissionDOList) {
 				result.setChecked(false);
 				if (result.getPermissionId().equals(rolePermissionDO.getPermissionId())) {
 					result.setChecked(true);
+					break;
 				}
 			}
 		}
