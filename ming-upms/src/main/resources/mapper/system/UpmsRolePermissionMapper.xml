@@ -71,4 +71,9 @@
 		</foreach>
 	</delete>
 
+	<select id="selectRolePermissionByRoleId" resultType="UpmsRolePermissionDO">
+		select urp.`role_permission_id`,urp.`role_id`,urp.`permission_id` from upms_role_permission urp
+		 where urp.role_id = #{value}
+	</select>
+
 </mapper>

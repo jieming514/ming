@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface UpmsRolePermissionService {
 	
-	UpmsRolePermissionDO get(Integer rolePermissionId);
+	UpmsRolePermissionDO get(Long rolePermissionId);
 	
 	List<UpmsRolePermissionDO> list(Map<String, Object> map);
 	
@@ -24,8 +24,15 @@ public interface UpmsRolePermissionService {
 	
 	int update(UpmsRolePermissionDO upmsRolePermission);
 	
-	int remove(Integer rolePermissionId);
+	int remove(Long rolePermissionId);
 	
-	int batchRemove(Integer[] rolePermissionIds);
+	int batchRemove(Long[] rolePermissionIds);
+
+	/**
+	 * 通过角色ID查找角色权限关系
+	 * @param roleId
+	 * @return
+	 */
+	List<UpmsRolePermissionDO> selectRolePermissionByRoleId(Long roleId);
 
 }

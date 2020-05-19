@@ -17,7 +17,7 @@ public class UpmsRolePermissionServiceImpl implements UpmsRolePermissionService 
 	private UpmsRolePermissionDao upmsRolePermissionDao;
 	
 	@Override
-	public UpmsRolePermissionDO get(Integer rolePermissionId){
+	public UpmsRolePermissionDO get(Long rolePermissionId){
 		return upmsRolePermissionDao.get(rolePermissionId);
 	}
 	
@@ -42,13 +42,18 @@ public class UpmsRolePermissionServiceImpl implements UpmsRolePermissionService 
 	}
 	
 	@Override
-	public int remove(Integer rolePermissionId){
+	public int remove(Long rolePermissionId){
 		return upmsRolePermissionDao.remove(rolePermissionId);
 	}
 	
 	@Override
-	public int batchRemove(Integer[] rolePermissionIds){
+	public int batchRemove(Long[] rolePermissionIds){
 		return upmsRolePermissionDao.batchRemove(rolePermissionIds);
+	}
+
+	@Override
+	public List<UpmsRolePermissionDO> selectRolePermissionByRoleId(Long roleId) {
+		return upmsRolePermissionDao.selectRolePermissionByRoleId(roleId);
 	}
 
 }

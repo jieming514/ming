@@ -15,7 +15,7 @@ import java.util.Map;
 @Mapper
 public interface UpmsRolePermissionDao {
 
-	UpmsRolePermissionDO get(Integer rolePermissionId);
+	UpmsRolePermissionDO get(Long rolePermissionId);
 	
 	List<UpmsRolePermissionDO> list(Map<String, Object> map);
 	
@@ -25,7 +25,10 @@ public interface UpmsRolePermissionDao {
 	
 	int update(UpmsRolePermissionDO upmsRolePermission);
 	
-	int remove(Integer role_permission_id);
+	int remove(Long role_permission_id);
 	
-	int batchRemove(Integer[] rolePermissionIds);
+	int batchRemove(Long[] rolePermissionIds);
+
+	List<UpmsRolePermissionDO> selectRolePermissionByRoleId(Long roleId);
+
 }

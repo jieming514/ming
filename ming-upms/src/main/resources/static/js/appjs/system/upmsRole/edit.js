@@ -9,11 +9,14 @@ $.validator.setDefaults({
 	}
 });
 function update() {
+    permissionArr = getCheckedNodes();
+    var data = $('#signupForm').serialize();
+    data = data + "&permissionArr="+permissionArr;
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/system/upmsRole/update",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : data,// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -79,7 +82,16 @@ function getRoleHasPermission(roleId) {
     };
     var zTreeNodes=[];
     zTreeObj = $.fn.zTree.init($("#permissionTree"), settings, zTreeNodes);
-    zTreeObj.expandAll(true);   //true 节点全部展开、false节点收缩
 
+}
 
+function getCheckedNodes() {
+    var zTreeObj = $.fn.zTree.getZTreeObj("permissionTree");
+    var checkedNodes = zTreeObj.getCheckedNodes();
+    var permissionArr = new Array();
+    debugger;
+    for(i=0; i < checkedNodes.length; i++) {
+        permissionArr[i] = checkedNodes[i].permissionId;
+    }
+    return permissionArr;
 }

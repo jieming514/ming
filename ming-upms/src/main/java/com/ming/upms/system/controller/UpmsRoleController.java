@@ -5,8 +5,12 @@ import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsRoleDO;
+import com.ming.upms.system.domain.UpmsRolePermissionDO;
+import com.ming.upms.system.service.UpmsRolePermissionService;
 import com.ming.upms.system.service.UpmsRoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +30,15 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/upmsRole")
 public class UpmsRoleController {
+
+	private static final Logger logger = LoggerFactory.getLogger(UpmsRoleController.class);
+
 	@Autowired
 	private UpmsRoleService upmsRoleService;
-	
+
+	@Autowired
+	private UpmsRolePermissionService upmsRolePermissionService;
+
 	@GetMapping()
 	@RequiresPermissions("system:upmsRole:upmsRole")
 	String UpmsRole(){
@@ -83,8 +93,18 @@ public class UpmsRoleController {
 	@RequestMapping("/update")
 	@Log("修改角色")
 	@RequiresPermissions("system:upmsRole:edit")
-	public R update( UpmsRoleDO upmsRole){
+	public R update( UpmsRoleDO upmsRole, Long[] permissionArr){
 		upmsRoleService.update(upmsRole);
+		List<UpmsRolePermissionDO> rolePermissionDOList = upmsRolePermissionService.selectRolePermissionByRoleId(upmsRole.getRoleId());
+		for (UpmsRolePermissionDO upmsRolePermissionDO : rolePermissionDOList) {
+			upmsRolePermissionService.remove(upmsRolePermissionDO.getRolePermissionId());
+		}
+		for (Long permission : permissionArr) {
+			UpmsRolePermissionDO upmsRolePermissionDO = new UpmsRolePermissionDO();
+			upmsRolePermissionDO.setRoleId(upmsRole.getRoleId());
+			upmsRolePermissionDO.setPermissionId(permission);
+			upmsRolePermissionService.save(upmsRolePermissionDO);
+		}
 		return R.ok();
 	}
 	
