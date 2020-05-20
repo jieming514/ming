@@ -28,11 +28,20 @@ public interface UpmsRolePermissionService {
 	
 	int batchRemove(Long[] rolePermissionIds);
 
+	int batchInsert(List<UpmsRolePermissionDO> upmsRolePermissionDOList);
+
 	/**
 	 * 通过角色ID查找角色权限关系
 	 * @param roleId
 	 * @return
 	 */
 	List<UpmsRolePermissionDO> selectRolePermissionByRoleId(Long roleId);
+
+	/**
+	 * 通过角色ID删除角色权限关系
+	 * @param roleId
+	 * @return
+	 */
+	int deleteRolePermissionByRoleId(Long roleId);
 
 }

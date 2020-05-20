@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -94,17 +95,16 @@ public class UpmsRoleController {
 	@Log("修改角色")
 	@RequiresPermissions("system:upmsRole:edit")
 	public R update( UpmsRoleDO upmsRole, Long[] permissionArr){
+		List<UpmsRolePermissionDO> upmsRolePermissionDOList = new ArrayList<UpmsRolePermissionDO>();
 		upmsRoleService.update(upmsRole);
-		List<UpmsRolePermissionDO> rolePermissionDOList = upmsRolePermissionService.selectRolePermissionByRoleId(upmsRole.getRoleId());
-		for (UpmsRolePermissionDO upmsRolePermissionDO : rolePermissionDOList) {
-			upmsRolePermissionService.remove(upmsRolePermissionDO.getRolePermissionId());
-		}
+		upmsRolePermissionService.deleteRolePermissionByRoleId(upmsRole.getRoleId());
 		for (Long permission : permissionArr) {
 			UpmsRolePermissionDO upmsRolePermissionDO = new UpmsRolePermissionDO();
 			upmsRolePermissionDO.setRoleId(upmsRole.getRoleId());
 			upmsRolePermissionDO.setPermissionId(permission);
-			upmsRolePermissionService.save(upmsRolePermissionDO);
+			upmsRolePermissionDOList.add(upmsRolePermissionDO);
 		}
+		upmsRolePermissionService.batchInsert(upmsRolePermissionDOList);
 		return R.ok();
 	}
 	

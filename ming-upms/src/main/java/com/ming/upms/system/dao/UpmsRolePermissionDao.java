@@ -2,6 +2,7 @@ package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsRolePermissionDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,10 @@ public interface UpmsRolePermissionDao {
 	
 	int batchRemove(Long[] rolePermissionIds);
 
+	int batchInsert(@Param("upmsRolePermissionDOList") List<UpmsRolePermissionDO> upmsRolePermissionDOList);
+
 	List<UpmsRolePermissionDO> selectRolePermissionByRoleId(Long roleId);
+
+	int deleteRolePermissionByRoleId(Long roleId);
 
 }

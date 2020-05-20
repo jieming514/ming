@@ -50,6 +50,19 @@
 			#{permissionId}
 		)
 	</insert>
+
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into upms_role_permission
+		(
+		`role_permission_id`,
+		`role_id`,
+		`permission_id`
+		)
+		values
+		<foreach item="rolePermission" collection="upmsRolePermissionDOList" separator =",">
+			(#{rolePermission.rolePermissionId},#{rolePermission.roleId},#{rolePermission.permissionId})
+		</foreach>
+	</insert>
 	 
 	<update id="update" parameterType="com.ming.upms.system.domain.UpmsRolePermissionDO">
 		update upms_role_permission 
@@ -75,5 +88,9 @@
 		select urp.`role_permission_id`,urp.`role_id`,urp.`permission_id` from upms_role_permission urp
 		 where urp.role_id = #{value}
 	</select>
+
+	<delete id="deleteRolePermissionByRoleId">
+		delete from upms_role_permission where role_id = #{value}
+	</delete>
 
 </mapper>

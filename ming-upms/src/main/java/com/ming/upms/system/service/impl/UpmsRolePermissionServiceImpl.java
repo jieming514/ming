@@ -52,8 +52,18 @@ public class UpmsRolePermissionServiceImpl implements UpmsRolePermissionService 
 	}
 
 	@Override
+	public int batchInsert(List<UpmsRolePermissionDO> upmsRolePermissionDOList) {
+		return upmsRolePermissionDao.batchInsert(upmsRolePermissionDOList);
+	}
+
+	@Override
 	public List<UpmsRolePermissionDO> selectRolePermissionByRoleId(Long roleId) {
 		return upmsRolePermissionDao.selectRolePermissionByRoleId(roleId);
+	}
+
+	@Override
+	public int deleteRolePermissionByRoleId(Long roleId) {
+		return upmsRolePermissionDao.deleteRolePermissionByRoleId(roleId);
 	}
 
 }
