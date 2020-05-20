@@ -5,6 +5,7 @@ import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.common.annotation.Log;
+import com.ming.upms.common.controller.BaseController;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang.RandomStringUtils;
@@ -27,7 +28,7 @@ import java.util.Map;
  
 @Controller
 @RequestMapping("/system/upmsUser")
-public class UpmsUserController {
+public class UpmsUserController extends BaseController {
 	@Autowired
 	private UpmsUserService upmsUserService;
 	
@@ -118,6 +119,15 @@ public class UpmsUserController {
 	public R remove(@RequestParam("ids[]") Long[] userIds){
 		upmsUserService.batchRemove(userIds);
 		return R.ok();
+	}
+
+	@GetMapping("/personal")
+	@Log("编辑用户")
+	@RequiresPermissions("system:upmsUser:edit")
+	String personal(Model model){
+		UpmsUserDO upmsUser = upmsUserService.selectUserByUserId(getUserId());
+		model.addAttribute("user", upmsUser);
+		return "system/upmsUser/personal";
 	}
 	
 }

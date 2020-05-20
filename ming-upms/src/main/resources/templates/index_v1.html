@@ -46,11 +46,12 @@
                                data-index="0" th:href="@{/main}">了解ming</a></li>
                     </ul>
                 </li>
-                <li th:each="menu : ${menus}"><a href="#">
-                    <i class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>
-                    <span class="nav-label" th:text="${menu.text}">基础信息</span> <span
-                            class="fa arrow"></span>
-                </a>
+                <li th:each="menu : ${menus}">
+                    <a href="#">
+                        <i class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>
+                        <span class="nav-label" th:text="${menu.text}">基础信息</span> <span
+                                class="fa arrow"></span>
+                    </a>
                     <ul class="nav nav-second-level">
                         <li th:each="cmenu : ${menu.children}">
                             <a class="J_menuItem" href="graph_echarts.html"
@@ -301,7 +302,7 @@
                     maxmin: true,
                     shadeClose: false,
                     area: ['800px', '600px'],
-                    content: '/sys/user/personal'
+                    content: '/system/upmsUser/personal'
                 });
             }
         },
