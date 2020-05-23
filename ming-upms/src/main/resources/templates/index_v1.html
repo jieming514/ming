@@ -30,7 +30,10 @@
                 <li class="nav-header">
                     <span class="clearfix">
                         <div class="pull-left">
-                            <img alt="image" class="img-circle" height="60" width="60" th:src="${user.avatar}"/>
+                            <a class="J_menuItem" href="/system/upmsUser/personal" title="个人中心">
+                                <div class="hide">个人中心</div>
+                                <img alt="image" class="img-circle" height="60" width="60" th:src="${user.avatar}"/>
+                            </a>
                         </div>
                         <div class="pull-left" style="padding:8px 10px">
                             <p class="font-bold" th:text="${user.realname}">admin</p>

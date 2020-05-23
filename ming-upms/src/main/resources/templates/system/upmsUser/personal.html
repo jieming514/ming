@@ -15,13 +15,25 @@
                 </div>
                 <div class="ibox-content">
                     <div class="text-center">
-                        <p><img class="img-circle img-lg" height="100" width="100" th:src="${user.avatar}"></p>
+                        <p><img class="img-circle img-lg" height="128" width="128" th:src="${user.avatar}"></p>
                         <p><a href="javascript:avatar()">修改头像</a></p>
                     </div>
                     <ul class="list-group list-group-striped">
+                        <li class="list-group-item"><i class="fa fa-id-badge"></i>
+                            <b class="font-noraml">登录账号：</b>
+                            <p class="pull-right">[[${user.username}]]</p>
+                        </li>
                         <li class="list-group-item"><i class="fa fa-user"></i>
-                            <b class="font-noraml">登录名称：</b>
+                            <b class="font-noraml">用户名称：</b>
                             <p class="pull-right">[[${user.realname}]]</p>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-user"></i>
+                            <b class="font-noraml">性别：</b>
+                            <p class="pull-right" th:switch="${user.sex}">
+                                <span th:case="'1'">男</span>
+                                <span th:case="'0'">女</span>
+                                <span th:case="*">未填写</span>
+                            </p>
                         </li>
                         <li class="list-group-item"><i class="fa fa-phone"></i>
                             <b  class="font-noraml">手机号码：</b>
@@ -78,20 +90,17 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">性别：</label>
                                         <div class="col-sm-10">
-                                            <div class="radio-box">
-                                                <input type="radio" id="radio1" th:field="*{sex}" name="sex" value="0">
-                                                <label for="radio1">男</label>
-                                            </div>
-                                            <div class="radio-box">
-                                                <input type="radio" id="radio2" th:field="*{sex}" name="sex" value="1">
-                                                <label for="radio2">女</label>
-                                            </div>
+                                            <label class="radio-inline">
+                                                <input th:field="*{sex}" type="radio" name="sex" value="1" /> 男
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input th:field="*{sex}" type="radio" name="sex" value="0" /> 女
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitUserInfo()"><i class="fa fa-check"></i>保 存</button>&nbsp;
-                                            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitUserInfo()"><i class="fa fa-check"></i>保 存</button>
                                         </div>
                                     </div>
                                 </form>
@@ -120,8 +129,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitChangPassword()"><i class="fa fa-check"></i>保 存</button>&nbsp;
-                                            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitChangPassword()"><i class="fa fa-check"></i>保 存</button>
                                         </div>
                                     </div>
                                 </form>

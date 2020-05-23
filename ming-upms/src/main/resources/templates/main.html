@@ -6,31 +6,75 @@
     <title>欢迎页</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <head th:include="include :: header"></head>
 </head>
-<body>
-<div class="panel panel-default">
-    <div class="panel-heading">了解ming</div>
-    <div style="padding: 10px 0 20px 10px;">
-        <h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
-        <ul>
-            <li>面向学习型的开源框架，简洁高效，减少过渡封装，展现技术本质</li>
-            <li>Springboot作为基础框架，使用mybatis作为持久层框架</li>
-            <li>使用官方推荐的thymeleaf做为模板引擎，shiro作为安全框架,主流技术，“一网打尽”</li>
-            <li>极简配置，一键前后台代码生成</li>
-        </ul>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>了解ming</strong></div>
+        <div class="panel-context">
+            <h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
+            <ul>
+                <li>面向学习型的开源框架，简洁高效，减少过渡封装，展现技术本质</li>
+                <li>Springboot作为基础框架，使用mybatis作为持久层框架</li>
+                <li>使用官方推荐的thymeleaf做为模板引擎，shiro作为安全框架,主流技术，“一网打尽”</li>
+                <li>极简配置，一键前后台代码生成</li>
+            </ul>
 
-        <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
-        <ul>
-            <li>Github地址：<a href="https://github.com/jieming514/ming.git" target="_blank">https://github.com/jieming514/ming.git</a>
-            </li>
-            <li>Gitee地址：<a href="https://gitee.com/jie_ming514/ming.git" target="_blank">https://gitee.com/jie_ming514/ming.git</a>
-            </li>
-        </ul>
+            <h3>&nbsp;&nbsp;&nbsp;获取源码</h3>
+            <ul>
+                <li>Github地址：<a href="https://github.com/jieming514/ming.git" target="_blank">https://github.com/jieming514/ming.git</a>
+                </li>
+                <li>Gitee地址：<a href="https://gitee.com/jie_ming514/ming.git" target="_blank">https://gitee.com/jie_ming514/ming.git</a>
+                </li>
+            </ul>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-title"><strong>更新日志</strong></div>
+                <div class="ibox-content panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><a href="#v1_0_0" data-toggle="collapse">v1.0.0</a></div>
+                        <div id="v1_0_0" class="panel-body">
+                            <ol>
+                                <li>系统登录：系统用户登录，账号为admin/admin/admin123</li>
+                                <li>用户管理：新建用户，修改用户，删除用户，查询用户</li>
+                                <li>机构管理：新建机构，修改机构，删除机构，查询机构</li>
+                                <li>角色管理：新建角色，修改角色，删除角色，查询角色</li>
+                                <li>资源管理：新建资源，修改资源，删除资源，查询资源</li>
+                                <li>字典管理：新建字典，修改字典，删除字典，查询字典</li>
+                                <li>系统日志：记录用户登录和操作日志，查看系统执行日志记录</li>
+                                <li>代码生成：提供代码生成器，最大化的降低代码开发量</li>
+                                <li>主题切换：支持主题切换，自定主题颜色，一键换肤</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><a href="#v1_0_1" class="panel-toggle" data-toggle="collapse">v1.0.1</a></div>
+                        <div id="v1_0_1" class="panel-body collapse">
+                            <p>更新日志</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-title"><strong>联系方式</strong></div>
+                <div class="ibox-content">
+                    <p><strong>博 &nbsp; 客：</strong>
+                        <a href="https://blog.csdn.net/m1090760001" target="_blank">jie_ming514的博客</a></p>
+                    <p><strong>邮 &nbsp; 箱：</strong> jie_ming514@163.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-     </div>
 </div>
 </body>
+<div th:include="include :: footer"></div>
 <script src="js/jquery.min.js"></script>
 <script src="js/openTab.js"></script>
 </html>
