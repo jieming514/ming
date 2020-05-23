@@ -5,163 +5,135 @@
 <head th:include="include :: header"></head>
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
+<input id="userId" name="userId" type="hidden" th:value="${user.userId}" />
+<div class="wrapper wrapper-content">
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="ibox">
-                <div class="ibox-title" style="padding-bottom: 0;">
-                    <h3 class="text-center">个人资料中心</h3>
-                    <div class="gg-nav">
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title ibox-title-gray dashboard-header">
+                    <h5>个人资料</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="text-center">
+                        <p><img class="img-circle img-lg" height="100" width="100" th:src="${user.avatar}"></p>
+                        <p><a href="javascript:avatar()">修改头像</a></p>
+                    </div>
+                    <ul class="list-group list-group-striped">
+                        <li class="list-group-item"><i class="fa fa-user"></i>
+                            <b class="font-noraml">登录名称：</b>
+                            <p class="pull-right">[[${user.realname}]]</p>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-phone"></i>
+                            <b  class="font-noraml">手机号码：</b>
+                            <p class="pull-right">[[${user.phone}]]</p>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-envelope-o"></i>
+                            <b  class="font-noraml">邮箱地址：</b>
+                            <p class="pull-right" >[[${user.email}]]</p>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-calendar"></i>
+                            <b  class="font-noraml">创建时间：</b>
+                            <p class="pull-right" >[[${#dates.format(user.ctime, 'yyyy-MM-dd')}]]</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9" style="padding-left: 0px">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title ibox-title-gray dashboard-header">
+                    <h5>基本资料</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#basic_info" data-toggle="tab">基本资料</a></li>
-                            <li><a href="#photo_info" data-toggle="tab">头像修改</a></li>
-                            <li><a href="#pwd_info" data-toggle="tab">修改密码</a></li>
+                            <li class="active"><a href="#user_info" data-toggle="tab" aria-expanded="true">基本资料</a></li>
+                            <li><a href="#modify_password" data-toggle="tab" aria-expanded="false">修改密码</a></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="tab-content">
-                    <!--basic info-->
-                    <div class="ibox-content tab-pane fade in active"  id="basic_info">
-                        <form class="gg-form" role="form" id="basicInfoForm">
-                            <input name="userId" type="hidden" th:value="${user.userId}"/>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>姓名:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="realname" name="name" th:value="${user.realname}"  placeholder="请输入姓名" />
-                                </div>
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>性别:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <div class="radio i-checks">
-                                        <input type="text" class="form-control" id="sex" name="sex"  th:value="${user.sex}" placeholder="请输入手机号" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>手机:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="phone" name="mobile"  th:value="${user.phone}" placeholder="请输入手机号" />
-                                </div>
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>邮箱:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="email" name="email" th:value="${user.email}" placeholder="请输入邮箱" />
-                                </div>
-                            </div>
-                        </form>
-                        <div class="gg-btnGroup">
-                            <button type="button" class="btn btn-sm btn-primary" id="base_save">保存</button>
-                        </div>
-                    </div>
-                    <!--photo_info-->
-                    <div class="ibox-content tab-pane fade gg" id="photo_info">
-                        <div class="ggcontainer" id="crop-avatar">
-                            <form class="avatar-form" action="/sys/user/uploadImg" enctype="multipart/form-data" method="post">
-                                <div class="avatar-body">
-                                    <div class="avatar-upload">
-                                        <input class="avatar-src" name="avatar_src" type="hidden">
-                                        <input class="avatar-data" name="avatar_data" type="hidden">
-                                        <label for="avatarInput">选取文件</label>
-                                        <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
-                                    </div>
-                                    <!-- Crop and preview -->
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="avatar-wrapper"></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="avatar-preview preview-lg"></div>
-                                            <div class="avatar-preview preview-md"></div>
-                                            <div class="avatar-preview preview-sm"></div>
+                        <div class="tab-content" style="margin-top: 15px">
+                            <!--用户信息-->
+                            <div class="tab-pane active" id="user_info" th:object="${user}">
+                                <form class="form-horizontal" id="form-user-edit">
+                                    <!--隐藏ID-->
+                                    <input name="id" id="id" type="hidden">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户名称：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" name="realname" th:field="*{realname}" placeholder="请输入用户名称">
                                         </div>
                                     </div>
-
-                                    <div class="row avatar-btns">
-                                        <div class="col-md-9">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees">左旋转</button>
-                                                <button class="btn btn-primary" data-method="rotate" data-option="-15" type="button">-15°</button>
-                                                <button class="btn btn-primary" data-method="rotate" data-option="-30" type="button">-30°</button>
-                                                <button class="btn btn-primary" data-method="rotate" data-option="-45" type="button">-45°</button>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">手机号码：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" name="phone" maxlength="11" th:field="*{phone}" placeholder="请输入手机号码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">邮箱：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" autocomplete="off" class="form-control" name="email" th:field="*{email}" placeholder="请输入邮箱">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">性别：</label>
+                                        <div class="col-sm-10">
+                                            <div class="radio-box">
+                                                <input type="radio" id="radio1" th:field="*{sex}" name="sex" value="0">
+                                                <label for="radio1">男</label>
                                             </div>
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees">右旋转</button>
-                                                <button class="btn btn-primary" data-method="rotate" data-option="15" type="button">15°</button>
-                                                <button class="btn btn-primary" data-method="rotate" data-option="30" type="button">30°</button>
-                                                <button class="btn btn-primary" data-method="rotate" data-option="45" type="button">45°</button>
+                                            <div class="radio-box">
+                                                <input type="radio" id="radio2" th:field="*{sex}" name="sex" value="1">
+                                                <label for="radio2">女</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-primary btn-block avatar-save" type="submit">完成裁剪</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitUserInfo()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                            <!-- Loading state -->
-                            <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-                        </div>
-                    </div>
-                    <!--pwd_info-->
-                    <div class="ibox-content tab-pane fade" id="pwd_info">
-                        <form class="gg-form" role="form" id="modifyPwd">
-                            <a id="logout" class="hidden" href="/logout"></a>
-                            <input type="hidden" name ="userDO.userId" th:value="${user.userId}"/>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>旧密码:</span>
-                                </div>
-                                <div class="gg-formDetail gg-dashed">
-                                    <input type="password" class="form-control gg-border0" id="pwdOld" name="pwdOld" placeholder="请输入旧密码" />
-                                    <span class="fa fa-eye gg-faeye" title="鼠标移入显示内容"><span>
-                                </div>
+                                </form>
                             </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>新密码:</span>
-                                </div>
-                                <div class="gg-formDetail gg-dashed">
-                                    <input type="password" class="form-control gg-border0" id="pwdNew" name="pwdNew" placeholder="请输入新密码" />
-                                    <span class="fa fa-eye gg-faeye" title="鼠标移入显示内容"></span>
-                                </div>
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>确认密码:</span>
-                                </div>
-                                <div class="gg-formDetail gg-dashed">
-                                    <input type="password" class="form-control gg-border0" id="confirm_password" name="confirm_password" placeholder="请确认密码" />
-                                    <span class="fa fa-eye gg-faeye" title="鼠标移入显示内容"></span>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="gg-btnGroup">
-                            <button type="button" class="btn btn-sm btn-primary" id="pwd_save">保存</button>
-                        </div>
-                    </div>
 
+                            <!--修改密码-->
+                            <div class="tab-pane" id="modify_password">
+                                <form class="form-horizontal" id="form-user-resetPwd">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">旧密码：</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" name="oldPassword" placeholder="请输入旧密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">新密码：</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="请输入新密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">确认密码：</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" name="confirmPassword" placeholder="请确认密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitChangPassword()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+</body>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/js/appjs/system/upmsUser/personal.js"></script>
 </body>
