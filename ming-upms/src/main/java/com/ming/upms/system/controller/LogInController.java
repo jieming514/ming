@@ -47,7 +47,7 @@ public class LogInController extends BaseController {
         UpmsUserDO user = getUser();
         model.addAttribute("menus", permissionDOList);
         model.addAttribute("user", getUser());
-        return "index_v1";
+        return "index";
     }
 
     @GetMapping("/main")
