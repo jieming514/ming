@@ -94,10 +94,10 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.roleId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										var f = '<a class="btn btn-success btn-sm J_menuItem" href="#" title="角色授权用户" mce_href="#" onclick="authRole(\''
 												+ row.roleId
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										return e + d + f;
 									}
 								} ]
 					});
@@ -147,7 +147,10 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
+//角色授权用户
+function authRole(roleId) {
+    location.href = prefix + "/authRole/"+ roleId;
+
 }
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

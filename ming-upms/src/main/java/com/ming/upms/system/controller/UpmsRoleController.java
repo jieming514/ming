@@ -8,6 +8,7 @@ import com.ming.upms.system.domain.UpmsRoleDO;
 import com.ming.upms.system.domain.UpmsRolePermissionDO;
 import com.ming.upms.system.service.UpmsRolePermissionService;
 import com.ming.upms.system.service.UpmsRoleService;
+import com.ming.upms.system.service.UpmsUserRoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,9 @@ public class UpmsRoleController {
 
 	@Autowired
 	private UpmsRolePermissionService upmsRolePermissionService;
+
+	@Autowired
+	private UpmsUserRoleService upmsUserRoleService;
 
 	@GetMapping()
 	@RequiresPermissions("system:upmsRole:upmsRole")
@@ -132,6 +136,17 @@ public class UpmsRoleController {
 	public R remove(@RequestParam("ids[]") Long[] roleIds){
 		upmsRoleService.batchRemove(roleIds);
 		return R.ok();
+	}
+
+	/**
+	 * 角色授权用户页面
+	 * @return
+	 */
+	@GetMapping("/authRole/{roleId}")
+	public String authRole(@PathVariable("roleId") Long roleId, Model model) {
+		UpmsRoleDO upmsRoleDO = upmsRoleService.get(roleId);
+		model.addAttribute("upmsRoleDO", upmsRoleDO);
+		return "system/upmsRole/authUser";
 	}
 	
 }
