@@ -26,19 +26,30 @@
 				<div class="ibox">
 					<div class="ibox-content">
 						<div class="fixed-table-toolbar">
-							<div class="columns pull-left">
-								<div class="col-sm-6">
+							<div class="columns">
+								<div class="col-sm-2">
 									<input id="username" name="username" class="form-control" type="text" placeholder="用户账号">
 								</div>
 								<button id="serachBtn" class="btn btn-success" onclick="javascript:reLoad()">
 									<i class="fa fa-search" aria-hidden="true"></i>查询
 								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ibox">
+					<div class="ibox-content">
+						<div class="fixed-table-toolbar">
+							<div class="columns pull-left">
 								<button shiro:hasPermission="system:upmsUser:add" type="button" class="btn  btn-primary" onclick="add()">
 									<i class="fa fa-plus" aria-hidden="true"></i>添加
 								</button>
 								<button shiro:hasPermission="system:upmsUser:batchRemove" type="button" class="btn  btn-danger"
 										onclick="batchRemove()">
 									<i class="fa fa-trash" aria-hidden="true"></i>删除
+								</button>
+								<button type="button" class="btn  btn-danger" onclick="goBack()">
+									<i class="fa fa-reply-all" aria-hidden="true"></i>返回
 								</button>
 							</div>
 						</div>

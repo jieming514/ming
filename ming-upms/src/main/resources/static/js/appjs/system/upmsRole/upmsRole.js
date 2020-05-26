@@ -96,7 +96,7 @@ function load() {
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm J_menuItem" href="#" title="角色授权用户" mce_href="#" onclick="authRole(\''
 												+ row.roleId
-												+ '\')"><i class="fa fa-key"></i></a> ';
+												+ '\')"><i class="fa fa-user-circle"></i></a> ';
 										return e + d + f;
 									}
 								} ]

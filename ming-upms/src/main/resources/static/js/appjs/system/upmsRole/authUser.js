@@ -50,6 +50,14 @@ function load() {
 									field : 'realname',
 									title : '姓名'
 								},
+								{
+                                    field : 'phone',
+                                    title : '电话'
+                                },
+                                                                {
+                                    field : 'email',
+                                    title : '邮箱'
+                                },
                                 {
 									field : 'locked',
 									title : '状态',
@@ -80,4 +88,8 @@ function load() {
 									}
 								} ]
 					});
+}
+
+function goBack() {
+    window.history.back(-1);
 }
