@@ -28,4 +28,19 @@ public interface UpmsUserRoleDao {
 	int remove(Integer user_role_id);
 	
 	int batchRemove(Integer[] userRoleIds);
+
+	/**
+	 * 通过用户名查询用户角色
+	 * @param userId
+	 * @return
+	 */
+	List<UpmsUserRoleDO> selectUserRoleByUserId(Long userId);
+
+	/**
+	 * 通过用户名查询用户角色
+	 * @param roleId
+	 * @return
+	 */
+	List<UpmsUserRoleDO> selectUserRoleByroleId(Long roleId);
+
 }

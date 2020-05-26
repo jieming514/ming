@@ -1,14 +1,13 @@
 package com.ming.upms.system.service.impl;
 
+import com.ming.upms.system.dao.UpmsUserRoleDao;
+import com.ming.upms.system.domain.UpmsUserRoleDO;
+import com.ming.upms.system.service.UpmsUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
-import com.ming.upms.system.dao.UpmsUserRoleDao;
-import com.ming.upms.system.domain.UpmsUserRoleDO;
-import com.ming.upms.system.service.UpmsUserRoleService;
 
 
 
@@ -51,5 +50,15 @@ public class UpmsUserRoleServiceImpl implements UpmsUserRoleService {
 	public int batchRemove(Integer[] userRoleIds){
 		return upmsUserRoleDao.batchRemove(userRoleIds);
 	}
-	
+
+	@Override
+	public List<UpmsUserRoleDO> selectUserRoleByUserId(Long userId) {
+		return upmsUserRoleDao.selectUserRoleByUserId(userId);
+	}
+
+	@Override
+	public List<UpmsUserRoleDO> selectUserRoleByroleId(Long roleId) {
+		return upmsUserRoleDao.selectUserRoleByroleId(roleId);
+	}
+
 }

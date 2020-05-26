@@ -6,9 +6,11 @@ import com.ming.common.utils.R;
 import com.ming.upms.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsRoleDO;
 import com.ming.upms.system.domain.UpmsRolePermissionDO;
+import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsRolePermissionService;
 import com.ming.upms.system.service.UpmsRoleService;
 import com.ming.upms.system.service.UpmsUserRoleService;
+import com.ming.upms.system.service.UpmsUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,9 @@ public class UpmsRoleController {
 
 	@Autowired
 	private UpmsUserRoleService upmsUserRoleService;
+
+	@Autowired
+	private UpmsUserService upmsUserService;
 
 	@GetMapping()
 	@RequiresPermissions("system:upmsRole:upmsRole")
@@ -143,10 +148,20 @@ public class UpmsRoleController {
 	 * @return
 	 */
 	@GetMapping("/authRole/{roleId}")
+	@RequiresPermissions("system:upmsRole:upmsRole")
 	public String authRole(@PathVariable("roleId") Long roleId, Model model) {
 		UpmsRoleDO upmsRoleDO = upmsRoleService.get(roleId);
 		model.addAttribute("upmsRoleDO", upmsRoleDO);
 		return "system/upmsRole/authUser";
+	}
+
+	@PostMapping("/selectAuthRoleUser/{roleId}")
+	@RequiresPermissions("system:upmsRole:upmsRole")
+	@ResponseBody
+	public List<UpmsUserDO> selectAuthRoleUserByRoleId(@PathVariable("roleId") Long roleId,
+													   @RequestParam Map<String, Object> params) {
+		params.put("roleId", roleId);
+		return upmsUserService.selectUserByRole(params);
 	}
 	
 }

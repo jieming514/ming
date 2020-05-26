@@ -152,4 +152,11 @@
          order by uu.user_id desc
     </select>
 
+    <select id="selectUserByRole" resultType="UpmsUserDO">
+        select uu.`user_id`,uu.`username`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`
+          from upms_user uu
+          left join upms_user_role uur on uu.user_id = uur.user_id
+         where uur.role_id = #{roleId}
+    </select>
+
 </mapper>

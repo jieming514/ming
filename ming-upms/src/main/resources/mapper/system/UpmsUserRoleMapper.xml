@@ -71,4 +71,14 @@
 		</foreach>
 	</delete>
 
+	<select id="selectUserRoleByUserId" resultType="UpmsUserRoleDO">
+		select `user_role_id`,`user_id`,`role_id` from upms_user_role
+		  where user_id = #{value}
+	</select>
+
+	<select id="selectUserRoleByroleId" resultType="UpmsUserRoleDO">
+		select `user_role_id`,`user_id`,`role_id` from upms_user_role
+		where role_id = #{value}
+	</select>
+
 </mapper>

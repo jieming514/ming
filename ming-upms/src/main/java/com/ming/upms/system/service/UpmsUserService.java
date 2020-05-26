@@ -36,4 +36,6 @@ public interface UpmsUserService {
 	UpmsUserDO getUserByusername(String username);
 
 	UpmsUserDO selectUserByUserId(Long userId);
+
+	List<UpmsUserDO> selectUserByRole(Map<String,Object> map);
 }
