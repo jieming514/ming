@@ -30,10 +30,10 @@
  	<select id="count" resultType="int">
 		select count(*) from upms_user_role
 		 <where>  
-		  		  <if test="userRoleId != null and userRoleId != ''"> and user_role_id = #{userRoleId} </if>
-		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
-		  		</where>
+			  <if test="userRoleId != null and userRoleId != ''"> and user_role_id = #{userRoleId} </if>
+			  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+		  </where>
 	</select>
 	 
 	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsUserRoleDO">
@@ -80,5 +80,9 @@
 		select `user_role_id`,`user_id`,`role_id` from upms_user_role
 		where role_id = #{value}
 	</select>
+
+	<delete id="deleteUserRoleInfo">
+		delete from upms_user_role where role_id=#{roleId} and user_id=#{userId}
+	</delete>
 
 </mapper>

@@ -61,4 +61,9 @@ public class UpmsUserRoleServiceImpl implements UpmsUserRoleService {
 		return upmsUserRoleDao.selectUserRoleByroleId(roleId);
 	}
 
+	@Override
+	public int deleteUserRoleInfo(Long roleId, Long userId) {
+		return upmsUserRoleDao.deleteUserRoleInfo(roleId, userId);
+	}
+
 }

@@ -2,6 +2,7 @@ package com.ming.upms.system.dao;
 
 import com.ming.upms.system.domain.UpmsUserRoleDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -42,5 +43,13 @@ public interface UpmsUserRoleDao {
 	 * @return
 	 */
 	List<UpmsUserRoleDO> selectUserRoleByroleId(Long roleId);
+
+	/**
+	 * 删除用户角色关系
+	 * @param roleId
+	 * @param userId
+	 * @return
+	 */
+	int deleteUserRoleInfo(@Param("roleId")Long roleId, @Param("userId")Long userId);
 
 }

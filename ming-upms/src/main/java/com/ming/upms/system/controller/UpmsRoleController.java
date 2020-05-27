@@ -163,5 +163,16 @@ public class UpmsRoleController {
 		params.put("roleId", roleId);
 		return upmsUserService.selectUserByRole(params);
 	}
+
+
+	@PostMapping("/deleteUserRoleInfo")
+	@Log("删除角色的用户")
+	@ResponseBody
+	public R deleteUserRoleInfo(Long roleId, Long userId) {
+		if(upmsUserRoleService.deleteUserRoleInfo(roleId, userId) > 0) {
+			return R.ok();
+		}
+		return R.error("删除角色的用户失败");
+	}
 	
 }

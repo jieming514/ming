@@ -75,21 +75,46 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm " href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.userId
-												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm " href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.userId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.userId
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										return d ;
 									}
 								} ]
 					});
 }
 
+function reLoad() {
+	$('#exampleTable').bootstrapTable('refresh');
+}
+
 function goBack() {
     window.history.back(-1);
+}
+
+function remove(userId) {
+
+    layer.confirm('确定要删除选中的记录？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            url : prefix+"/deleteUserRoleInfo",
+            type : "post",
+            data : {
+                'roleId' : roleId,
+                'userId' : userId
+            },
+            success : function(r) {
+                if (r.code==0) {
+                    layer.msg(r.msg);
+                    reLoad();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
 }

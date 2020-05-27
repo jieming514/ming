@@ -42,4 +42,12 @@ public interface UpmsUserRoleService {
 	 * @return
 	 */
 	List<UpmsUserRoleDO> selectUserRoleByroleId(Long roleId);
+
+	/**
+	 * 删除用户角色关系
+	 * @param roleId
+	 * @param userId
+	 * @return
+	 */
+	int deleteUserRoleInfo(Long roleId, Long userId);
 }

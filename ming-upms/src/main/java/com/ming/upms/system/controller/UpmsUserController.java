@@ -7,6 +7,7 @@ import com.ming.common.utils.R;
 import com.ming.upms.common.annotation.Log;
 import com.ming.upms.common.controller.BaseController;
 import com.ming.upms.system.domain.UpmsUserDO;
+import com.ming.upms.system.service.UpmsUserRoleService;
 import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -29,8 +30,12 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/upmsUser")
 public class UpmsUserController extends BaseController {
+
 	@Autowired
 	private UpmsUserService upmsUserService;
+
+	@Autowired
+	private UpmsUserRoleService upmsUserRoleService;
 	
 	@GetMapping()
 	@RequiresPermissions("system:upmsUser:upmsUser")
@@ -124,7 +129,7 @@ public class UpmsUserController extends BaseController {
 	@GetMapping("/personal")
 	@Log("编辑用户")
 	@RequiresPermissions("system:upmsUser:edit")
-	String personal(Model model){
+	public String personal(Model model){
 		UpmsUserDO upmsUser = upmsUserService.selectUserByUserId(getUserId());
 		model.addAttribute("user", upmsUser);
 		return "system/upmsUser/personal";
