@@ -33,5 +33,7 @@ public interface UpmsUserDao {
 
 	UpmsUserDO selectUserByUserId(Long userId);
 
+	int selectUserCountByRole(Map<String,Object> map);
+
 	List<UpmsUserDO> selectUserByRole(Map<String,Object> map);
 }

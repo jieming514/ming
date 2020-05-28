@@ -15,46 +15,46 @@ public class UpmsUserRoleDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//编号
-	private Integer userRoleId;
+	private Long userRoleId;
 	//用户编号
-	private Integer userId;
+	private Long userId;
 	//角色编号
-	private Integer roleId;
+	private Long roleId;
 
 	/**
 	 * 设置：编号
 	 */
-	public void setUserRoleId(Integer userRoleId) {
+	public void setUserRoleId(Long userRoleId) {
 		this.userRoleId = userRoleId;
 	}
 	/**
 	 * 获取：编号
 	 */
-	public Integer getUserRoleId() {
+	public Long getUserRoleId() {
 		return userRoleId;
 	}
 	/**
 	 * 设置：用户编号
 	 */
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	/**
 	 * 获取：用户编号
 	 */
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 	/**
 	 * 设置：角色编号
 	 */
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 	/**
 	 * 获取：角色编号
 	 */
-	public Integer getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
 }

@@ -155,13 +155,18 @@ public class UpmsRoleController {
 		return "system/upmsRole/authUser";
 	}
 
-	@PostMapping("/selectAuthRoleUser/{roleId}")
+	@GetMapping("/selectAuthRoleUser")
 	@RequiresPermissions("system:upmsRole:upmsRole")
 	@ResponseBody
-	public List<UpmsUserDO> selectAuthRoleUserByRoleId(@PathVariable("roleId") Long roleId,
-													   @RequestParam Map<String, Object> params) {
-		params.put("roleId", roleId);
-		return upmsUserService.selectUserByRole(params);
+	public PageUtils selectAuthRoleUserByRoleId(@RequestParam Map<String, Object> params) {
+		Query query = new Query(params);
+		List<UpmsUserDO> upmsUserDOList = new ArrayList<>();
+		int count = upmsUserService.selectUserCountByRole(query);
+		if(count > 0) {
+			upmsUserDOList = upmsUserService.selectUserByRole(query);
+		}
+		PageUtils pageUtils = new PageUtils(upmsUserDOList, count);
+		return pageUtils;
 	}
 
 
@@ -173,6 +178,29 @@ public class UpmsRoleController {
 			return R.ok();
 		}
 		return R.error("删除角色的用户失败");
+	}
+
+	@GetMapping("/selectUser/{roleId}")
+	public String selectUser(@PathVariable("roleId") Long roleId, Model model) {
+		model.addAttribute("roleId", roleId);
+		return "system/upmsRole/selectUser";
+	}
+
+	@PostMapping("/addRoleForUser")
+	@Log("添加角色拥有用户")
+	@ResponseBody
+	public R addRoleForUser(@RequestParam("roleId") Long roleId,
+							@RequestParam("ids[]") Long[] userIds) {
+		try {
+			int count = upmsUserRoleService.batchAddRole(roleId, userIds);
+			if(count>0) {
+				return R.ok("新增" + count + "条记录！");
+			}
+			return R.error("用户均已存在，无需新增！");
+		} catch (RuntimeException e) {
+			return R.error();
+		}
+
 	}
 	
 }

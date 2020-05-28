@@ -37,12 +37,12 @@
         left join upms_organization uo on uu.organization_id = uo.organization_id
         <where>
             <if test="userId != null and userId != ''"> and uu.user_id = #{userId} </if>
-            <if test="username != null and username != ''"> and uu.username = #{username} </if>
+            <if test="username != null and username != ''"> and uu.username like concat('%', #{username}, '%') </if>
             <if test="password != null and password != ''"> and uu.password = #{password} </if>
             <if test="salt != null and salt != ''"> and uu.salt = #{salt} </if>
-            <if test="realname != null and realname != ''"> and uu.realname = #{realname} </if>
+            <if test="realname != null and realname != ''"> and uu.realname like concat('%', #{realname}, '%') </if>
             <if test="avatar != null and avatar != ''"> and uu.avatar = #{avatar} </if>
-            <if test="phone != null and phone != ''"> and uu.phone = #{phone} </if>
+            <if test="phone != null and phone != ''"> and uu.phone like concat('%', #{phone}, '%') </if>
             <if test="email != null and email != ''"> and uu.email = #{email} </if>
             <if test="sex != null and sex != ''"> and uu.sex = #{sex} </if>
             <if test="organizationId != null and organizationId != ''"> and uu.organization_id = #{organizationId} </if>
@@ -152,11 +152,23 @@
          order by uu.user_id desc
     </select>
 
+    <sql id="selectUserByRoleWhere">
+        where uur.role_id = #{roleId}
+        <if test="username != null">and uu.`username` like concat('%', #{username}, '%') </if>
+    </sql>
+
+    <select id="selectUserCountByRole" resultType="int">
+        select count(1)
+          from upms_user uu
+          left join upms_user_role uur on uu.user_id = uur.user_id
+        <include refid="selectUserByRoleWhere"></include>
+    </select>
+
     <select id="selectUserByRole" resultType="UpmsUserDO">
         select uu.`user_id`,uu.`username`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`
           from upms_user uu
           left join upms_user_role uur on uu.user_id = uur.user_id
-         where uur.role_id = #{roleId}
+        <include refid="selectUserByRoleWhere"></include>
     </select>
 
 </mapper>

@@ -50,4 +50,6 @@ public interface UpmsUserRoleService {
 	 * @return
 	 */
 	int deleteUserRoleInfo(Long roleId, Long userId);
+
+	int batchAddRole(Long roleId, Long[] userIds);
 }

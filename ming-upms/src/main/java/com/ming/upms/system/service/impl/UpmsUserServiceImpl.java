@@ -62,6 +62,11 @@ public class UpmsUserServiceImpl implements UpmsUserService {
 	}
 
 	@Override
+	public int selectUserCountByRole(Map<String, Object> map) {
+		return upmsUserDao.selectUserCountByRole(map);
+	}
+
+	@Override
 	public List<UpmsUserDO> selectUserByRole(Map<String, Object> map) {
 		return upmsUserDao.selectUserByRole(map);
 	}

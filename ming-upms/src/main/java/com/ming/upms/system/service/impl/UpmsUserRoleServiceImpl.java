@@ -6,6 +6,7 @@ import com.ming.upms.system.service.UpmsUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +65,30 @@ public class UpmsUserRoleServiceImpl implements UpmsUserRoleService {
 	@Override
 	public int deleteUserRoleInfo(Long roleId, Long userId) {
 		return upmsUserRoleDao.deleteUserRoleInfo(roleId, userId);
+	}
+
+	/**
+	 * 为角色批量添加用户
+	 * @param roleId
+	 * @param userIds
+	 * @return
+	 */
+	@Override
+	public int batchAddRole(Long roleId, Long[] userIds) {
+		int count = 0;
+		for (int i=0; i < userIds.length; i++) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("roleId", roleId);
+			map.put("userId", userIds[i]);
+			//没有数据才更新
+			if(count(map) == 0) {
+				UpmsUserRoleDO upmsUserRoleDO = new UpmsUserRoleDO();
+				upmsUserRoleDO.setRoleId(roleId);
+				upmsUserRoleDO.setUserId(userIds[i]);
+				count += upmsUserRoleDao.save(upmsUserRoleDO);
+			}
+		}
+		return count;
 	}
 
 }
