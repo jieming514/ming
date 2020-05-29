@@ -102,7 +102,6 @@ function goBack() {
 }
 
 function remove(userId) {
-
     layer.confirm('确定要删除选中的记录？', {
         btn : [ '确定', '取消' ]
     }, function() {
@@ -123,6 +122,42 @@ function remove(userId) {
             }
         });
     })
+}
+
+function batchRemove() {
+	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		layer.msg("请选择要删除的数据");
+		return;
+	}
+	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function() {
+		var ids = new Array();
+		// 遍历所有选择的行数据，取每条数据对应的ID
+		$.each(rows, function(i, row) {
+			ids[i] = row['userId'];
+		});
+		$.ajax({
+			type : 'POST',
+			data : {
+			    roleId : roleId,
+				ids : ids
+			},
+			url : prefix + '/batchRemoveRole',
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoad();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	}, function() {
+
+	});
 }
 
 function add() {

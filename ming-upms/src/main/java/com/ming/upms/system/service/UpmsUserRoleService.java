@@ -51,5 +51,19 @@ public interface UpmsUserRoleService {
 	 */
 	int deleteUserRoleInfo(Long roleId, Long userId);
 
+	/**
+	 * 批量添加
+	 * @param roleId
+	 * @param userIds
+	 * @return
+	 */
 	int batchAddRole(Long roleId, Long[] userIds);
+
+	/**
+	 * 批量删除
+	 * @param roleId
+	 * @param userIds
+	 * @return
+	 */
+	int batchRemoveRole(Long roleId, Long[] userIds);
 }

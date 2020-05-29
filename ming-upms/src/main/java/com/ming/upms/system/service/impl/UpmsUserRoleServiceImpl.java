@@ -91,4 +91,13 @@ public class UpmsUserRoleServiceImpl implements UpmsUserRoleService {
 		return count;
 	}
 
+	@Override
+	public int batchRemoveRole(Long roleId, Long[] userIds) {
+		int count =0;
+		for (int i=0; i < userIds.length; i++) {
+			count += upmsUserRoleDao.deleteUserRoleInfo(roleId, userIds[i]);
+		}
+		return count;
+	}
+
 }

@@ -180,6 +180,23 @@ public class UpmsRoleController {
 		return R.error("删除角色的用户失败");
 	}
 
+	@PostMapping("/batchRemoveRole")
+	@Log("批量删除角色的用户")
+	@ResponseBody
+	public R batchRemoveRole(@RequestParam("roleId") Long roleId,
+									 @RequestParam("ids[]") Long[] userIds) {
+		try {
+			int count = upmsUserRoleService.batchRemoveRole(roleId, userIds);
+			if(count>0) {
+				return R.ok("新增" + count + "条记录！");
+			}
+			return R.error("用户均已存在，无需新增！");
+		}catch (RuntimeException e) {
+			return R.error();
+		}
+	}
+
+
 	@GetMapping("/selectUser/{roleId}")
 	public String selectUser(@PathVariable("roleId") Long roleId, Model model) {
 		model.addAttribute("roleId", roleId);
