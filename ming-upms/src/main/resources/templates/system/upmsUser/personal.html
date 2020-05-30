@@ -68,23 +68,23 @@
                             <div class="tab-pane active" id="user_info" th:object="${user}">
                                 <form class="form-horizontal" id="form-user-edit">
                                     <!--隐藏ID-->
-                                    <input name="id" id="id" type="hidden">
+                                    <input name="userId" id="userId" type="hidden">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">用户名称：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" name="realname" th:field="*{realname}" placeholder="请输入用户名称">
+                                            <input type="text" autocomplete="off" class="form-control" id="realname" name="realname" th:field="*{realname}" placeholder="请输入用户名称">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">手机号码：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" name="phone" maxlength="11" th:field="*{phone}" placeholder="请输入手机号码">
+                                            <input type="text" autocomplete="off" class="form-control" id="phone" name="phone" maxlength="11" th:field="*{phone}" placeholder="请输入手机号码">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">邮箱：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" autocomplete="off" class="form-control" name="email" th:field="*{email}" placeholder="请输入邮箱">
+                                            <input type="text" autocomplete="off" class="form-control" id="email" name="email" th:field="*{email}" placeholder="请输入邮箱">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -100,7 +100,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="button" class="btn btn-sm btn-primary" onclick="submitUserInfo()"><i class="fa fa-check"></i>保 存</button>
+                                            <button type="submit" class="btn btn-sm btn-primary" onclick="submitUserInfo()">
+                                                <i class="fa fa-check"></i>保 存
+                                            </button>
                                         </div>
                                     </div>
                                 </form>

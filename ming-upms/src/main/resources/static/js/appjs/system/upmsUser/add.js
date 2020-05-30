@@ -36,12 +36,12 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			username : {
 				required : true
 			}
 		},
 		messages : {
-			name : {
+			username : {
 				required : icon + "请输入姓名"
 			}
 		}
