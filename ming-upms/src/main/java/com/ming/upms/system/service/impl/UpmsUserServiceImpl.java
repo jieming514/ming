@@ -1,5 +1,6 @@
 package com.ming.upms.system.service.impl;
 
+import com.ming.upms.common.constant.UserConstants;
 import com.ming.upms.system.dao.UpmsUserDao;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserService;
@@ -69,6 +70,36 @@ public class UpmsUserServiceImpl implements UpmsUserService {
 	@Override
 	public List<UpmsUserDO> selectUserByRole(Map<String, Object> map) {
 		return upmsUserDao.selectUserByRole(map);
+	}
+
+	/**
+	 * 判断邮箱是否唯一
+	 * @param upmsUserDO
+	 * @return
+	 */
+	@Override
+	public String checkEmailUnique(UpmsUserDO upmsUserDO) {
+		Long userId = upmsUserDO.getUserId() == null ? -1L : upmsUserDO.getUserId();
+		UpmsUserDO info = upmsUserDao.checkEmailUnique(upmsUserDO.getEmail());
+		if(info != null && info.getUserId() != userId) {
+			return UserConstants.USER_EMAIL_NOT_UNIQUE;
+		}
+		return UserConstants.USER_EMAIL_UNIQUE;
+	}
+
+	/**
+	 * 判断电话是否唯一
+	 * @param upmsUserDO
+	 * @return
+	 */
+	@Override
+	public String checkPhoneUnique(UpmsUserDO upmsUserDO) {
+		Long userId = upmsUserDO.getUserId() == null ? -1L : upmsUserDO.getUserId();
+		UpmsUserDO info = upmsUserDao.checkPhoneUnique(upmsUserDO.getPhone());
+		if(info != null && info.getUserId() != userId) {
+			return UserConstants.USER_PHONE_NOT_UNIQUE;
+		}
+		return UserConstants.USER_PHONE_UNIQUE;
 	}
 
 

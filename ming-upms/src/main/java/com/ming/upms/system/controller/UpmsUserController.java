@@ -134,5 +134,17 @@ public class UpmsUserController extends BaseController {
 		model.addAttribute("user", upmsUser);
 		return "system/upmsUser/personal";
 	}
-	
+
+	@PostMapping("/checkEmailUnique")
+	@ResponseBody
+	public String checkEmailUnique(UpmsUserDO upmsUserDO) {
+		return upmsUserService.checkEmailUnique(upmsUserDO);
+	}
+
+	@PostMapping("/checkPhoneUnique")
+	@ResponseBody
+	public String checkPhoneUnique(UpmsUserDO upmsUserDO) {
+		return upmsUserService.checkPhoneUnique(upmsUserDO);
+	}
+
 }

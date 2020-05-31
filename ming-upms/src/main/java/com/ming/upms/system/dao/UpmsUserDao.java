@@ -36,4 +36,17 @@ public interface UpmsUserDao {
 	int selectUserCountByRole(Map<String,Object> map);
 
 	List<UpmsUserDO> selectUserByRole(Map<String,Object> map);
+
+
+	/**
+	 * 校验email是否唯一
+	 * @return
+	 */
+	UpmsUserDO checkEmailUnique(String email);
+
+	/**
+	 * 校验手机号是否唯一
+	 */
+	UpmsUserDO checkPhoneUnique(String email);
+
 }

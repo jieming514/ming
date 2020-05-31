@@ -19,7 +19,7 @@ function submitUserInfo() {
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/system/upmsUser/update?userId="+userId,
+        url : "/system/upmsUser/update",
         data : $('#form-user-edit').serialize(),// 你的formid
         async : false,
         error : function(request) {
@@ -54,8 +54,9 @@ function validateRule() {
             email:{
                 required:true,
                 email:true,
+                isEmail:true,
                 remote: {
-                    url: "system/user/checkEmailUnique",
+                    url: "/system/upmsUser/checkEmailUnique",
                     type: "post",
                     dataType: "json",
                     data: {
@@ -63,11 +64,14 @@ function validateRule() {
                             return $("#userId").val();
                         },
                         "email": function() {
-                            return $.common.trim($("#email").val());
+                            return $("#email").val();
                         }
                     },
                     dataFilter: function (data, type) {
-                        return $.validate.unique(data);
+                        if(data != null && data == 1) {
+                            return false
+                        }
+                        return true;
                     }
                 }
             },
@@ -75,19 +79,22 @@ function validateRule() {
                 required:true,
                 isPhone:true,
                 remote: {
-                    url: "system/user/checkPhoneUnique",
+                    url: "/system/upmsUser/checkPhoneUnique",
                     type: "post",
                     dataType: "json",
                     data: {
                         "userId": function() {
                             return $("#userId").val();
                         },
-                        "phonenumber": function() {
-                            return $.common.trim($("#phonenumber").val());
+                        "phone": function() {
+                            return $("#phone").val();
                         }
                     },
                     dataFilter: function (data, type) {
-                        return $.validate.unique(data);
+                        if(data != null && data == 1) {
+                            return false
+                        }
+                        return true;
                     }
                 }
             },

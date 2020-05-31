@@ -171,4 +171,16 @@
         <include refid="selectUserByRoleWhere"></include>
     </select>
 
+    <select id="checkEmailUnique" resultType="UpmsUserDO">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id`
+          from upms_user
+         where email = #{value}
+    </select>
+
+    <select id="checkPhoneUnique" resultType="UpmsUserDO">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id`
+        from upms_user
+        where phone = #{value}
+    </select>
+
 </mapper>

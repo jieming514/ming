@@ -40,4 +40,14 @@ public interface UpmsUserService {
 	int selectUserCountByRole(Map<String,Object> map);
 
 	List<UpmsUserDO> selectUserByRole(Map<String,Object> map);
+	/**
+	 * 校验email是否唯一
+	 * @return
+	 */
+	String checkEmailUnique(UpmsUserDO upmsUserDO);
+
+	/**
+	 * 校验手机号是否唯一
+	 */
+	String checkPhoneUnique(UpmsUserDO upmsUserDO);
 }

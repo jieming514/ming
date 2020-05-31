@@ -16,6 +16,11 @@ $(document).ready(function(){
 		var tel = /^(0\d{2,3}-)?\d{7,8}$/g;//区号3,4位,号码7,8位
 		return this.optional(element) || (tel.test(value));
 	},"请填写正确的座机号码");
+	//邮箱验证
+    jQuery.validator.addMethod("isEmail",function(value,element){
+        var tel = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/g;//登录名@主机名.域名
+        return this.optional(element) || (tel.test(value));
+    },"请填写正确的电子邮箱");
 	//姓名校验
 	jQuery.validator.addMethod("isName",function(value,element){
 		var name=/^[\u4e00-\u9fa5]{2,6}$/;
