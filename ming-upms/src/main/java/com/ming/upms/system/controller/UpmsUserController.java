@@ -10,6 +10,7 @@ import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserRoleService;
 import com.ming.upms.system.service.UpmsUserService;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -146,5 +147,37 @@ public class UpmsUserController extends BaseController {
 	public String checkPhoneUnique(UpmsUserDO upmsUserDO) {
 		return upmsUserService.checkPhoneUnique(upmsUserDO);
 	}
+
+	@PostMapping("/checkPassword")
+	@ResponseBody
+	public boolean checkPassword(Long userId, String password) {
+		UpmsUserDO userDO = getUser();
+		password += userDO.getSalt();
+		password = MD5Utils.encrypt(userDO.getUsername(), password);
+		if(userDO.getPassword().equals(password)) {
+			return true;
+		}
+		return false;
+	}
+
+	@PostMapping("/resetPwd")
+	@ResponseBody
+	public R resetPwd(UpmsUserDO user) {
+		if (!getUserId().equals(user.getUserId())) {
+			return R.error("非用户本人操作！");
+		}
+		if(StringUtils.isBlank(user.getPassword())) {
+			return R.error("新密码不能为空");
+		}
+		UpmsUserDO userDO = getUser();
+		String password = user.getPassword() + userDO.getSalt();
+		user.setPassword(MD5Utils.encrypt(userDO.getUsername(), password));
+		if (upmsUserService.update(user) > 0) {
+			return R.ok();
+		}
+		return R.error("为更新数据，更新失败！");
+
+	}
+
 
 }

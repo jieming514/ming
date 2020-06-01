@@ -12,4 +12,6 @@ public class UserConstants {
     public final static String USER_EMAIL_NOT_UNIQUE = "1";
 
 
+
+
 }

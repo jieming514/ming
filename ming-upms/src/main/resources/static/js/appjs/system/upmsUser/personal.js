@@ -5,6 +5,7 @@ $().ready(function() {
 $.validator.setDefaults({
 	submitHandler : function() {
 		submitUserInfo();
+		submitChangPassword();
 	}
 });
 
@@ -16,29 +17,57 @@ function avatar() {
 
 
 function submitUserInfo() {
-    $.ajax({
-        cache : true,
-        type : "POST",
-        url : "/system/upmsUser/update",
-        data : $('#form-user-edit').serialize(),// 你的formid
-        async : false,
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },
-        success : function(data) {
-            if (data.code == 0) {
-                layer.msg("操作成功");
-            } else {
-                layer.alert(data.msg)
-            }
+    if($("#form-user-edit").valid()) {
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : "/system/upmsUser/update",
+            data : $('#form-user-edit').serialize(),// 你的formid
+            async : false,
+            error : function(request) {
+                parent.layer.alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    layer.msg("操作成功");
+                } else {
+                    layer.alert(data.msg)
+                }
 
-        }
-    });
+            }
+        });
+    }
 }
 
 
-function submitChangPassword () {
-
+function submitChangPassword() {
+    if($("#form-user-resetPwd").valid()) {
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url :"/system/upmsUser/resetPwd",
+            data : {
+                userId : function() {
+                    return $("#userId").val();
+                },
+                password : function() {
+                    return $("#newPassword").val();
+                }
+            },
+            async : false,
+            error : function(request) {
+                laryer.alert("Connection error");
+            },
+            success : function(data) {
+                if (data.code == 0) {
+                    layer.alert("更新密码成功");
+                    $('#form-user-resetPwd')[0].reset();
+                } else {
+                    layer.alert(data.msg)
+                }
+            }
+        });
+    }
 }
 
 function validateRule() {
@@ -122,10 +151,13 @@ function validateRule() {
             oldPassword:{
                 required:true,
                 remote: {
-                    url: "system/user/profile/checkPassword",
-                    type: "get",
+                    url: "/system/upmsUser/checkPassword",
+                    type: "post",
                     dataType: "json",
                     data: {
+                        userId: function() {
+                            return $("#userId").val();
+                        },
                         password: function() {
                             return $("input[name='oldPassword']").val();
                         }
