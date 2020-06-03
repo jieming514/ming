@@ -45,9 +45,6 @@ public class UpmsLogController {
 		return pageUtils;
 	}
 
-
-
-	
 	/**
 	 * 删除
 	 */

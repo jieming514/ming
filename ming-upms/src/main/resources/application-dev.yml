@@ -32,4 +32,8 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
-
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java
+      exclude: WEB-INF/**
