@@ -109,7 +109,9 @@
 		    on m.permission_id = rm.permission_id
 		left join upms_user_role ur
 		    on rm.role_id = ur.role_id
-		where ur.user_id = #{userId}
+		where isnull(m.permission_value) = 0
+		  and length((m.permission_value)) > 0
+		  and ur.user_id = #{userId}
 	</select>
 
 	<select id="selectPermissionByUserId" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
