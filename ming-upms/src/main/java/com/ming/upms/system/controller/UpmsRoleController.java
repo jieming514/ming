@@ -11,6 +11,8 @@ import com.ming.upms.system.service.UpmsRolePermissionService;
 import com.ming.upms.system.service.UpmsRoleService;
 import com.ming.upms.system.service.UpmsUserRoleService;
 import com.ming.upms.system.service.UpmsUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,8 @@ import java.util.Map;
  * @email jie_ming514@163.com
  * @date 2020-04-11 20:08:05
  */
- 
+
+@Api(tags = "角色管理页面")
 @Controller
 @RequestMapping("/system/upmsRole")
 public class UpmsRoleController {
@@ -49,12 +52,14 @@ public class UpmsRoleController {
 	@Autowired
 	private UpmsUserService upmsUserService;
 
+	@ApiOperation(value="角色信息页面", notes="角色信息页面")
 	@GetMapping()
 	@RequiresPermissions("system:upmsRole:upmsRole")
 	String UpmsRole(){
 	    return "system/upmsRole/upmsRole";
 	}
-	
+
+	@ApiOperation(value="角色信息列表", notes="角色信息列表")
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:upmsRole:upmsRole")
@@ -66,7 +71,8 @@ public class UpmsRoleController {
 		PageUtils pageUtils = new PageUtils(upmsRoleList, total);
 		return pageUtils;
 	}
-	
+
+	@ApiOperation(value="新增角色页面", notes="新增角色页面")
 	@GetMapping("/add")
 	@RequiresPermissions("system:upmsRole:add")
 	@Log("添加角色")
@@ -74,6 +80,7 @@ public class UpmsRoleController {
 	    return "system/upmsRole/add";
 	}
 
+	@ApiOperation(value="编辑角色页面", notes="编辑角色页面")
 	@GetMapping("/edit/{roleId}")
 	@RequiresPermissions("system:upmsRole:edit")
 	@Log("编辑角色")
@@ -82,10 +89,8 @@ public class UpmsRoleController {
 		model.addAttribute("upmsRole", upmsRole);
 	    return "system/upmsRole/edit";
 	}
-	
-	/**
-	 * 保存
-	 */
+
+	@ApiOperation(value="新增角色接口", notes="新增角色接口")
 	@ResponseBody
 	@PostMapping("/save")
 	@Log("保存角色")
@@ -96,9 +101,8 @@ public class UpmsRoleController {
 		}
 		return R.error();
 	}
-	/**
-	 * 修改
-	 */
+
+	@ApiOperation(value="更新角色接口", notes="更新角色接口")
 	@ResponseBody
 	@RequestMapping("/update")
 	@Log("修改角色")
@@ -116,10 +120,8 @@ public class UpmsRoleController {
 		upmsRolePermissionService.batchInsert(upmsRolePermissionDOList);
 		return R.ok();
 	}
-	
-	/**
-	 * 删除
-	 */
+
+	@ApiOperation(value="删除角色接口", notes="删除角色接口")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@Log("删除角色")
@@ -130,14 +132,12 @@ public class UpmsRoleController {
 		}
 		return R.error();
 	}
-	
-	/**
-	 * 删除
-	 */
+
+	@ApiOperation(value="批量删除角色信息接口", notes="批量删除角色信息接口")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@Log("批量删除角色")
-	@RequiresPermissions("system:upmsRole:batchRemove")
+	@RequiresPermissions("system:upmsRole:remove")
 	public R remove(@RequestParam("ids[]") Long[] roleIds){
 		upmsRoleService.batchRemove(roleIds);
 		return R.ok();
@@ -147,6 +147,7 @@ public class UpmsRoleController {
 	 * 角色授权用户页面
 	 * @return
 	 */
+	@ApiOperation(value="角色授权用户页面", notes="角色授权用户页面")
 	@GetMapping("/authRole/{roleId}")
 	@RequiresPermissions("system:upmsRole:upmsRole")
 	public String authRole(@PathVariable("roleId") Long roleId, Model model) {
@@ -155,6 +156,7 @@ public class UpmsRoleController {
 		return "system/upmsRole/authUser";
 	}
 
+	@ApiOperation(value="查询授权的用户列表", notes="查询授权的用户列表")
 	@GetMapping("/selectAuthRoleUser")
 	@RequiresPermissions("system:upmsRole:upmsRole")
 	@ResponseBody
@@ -169,7 +171,7 @@ public class UpmsRoleController {
 		return pageUtils;
 	}
 
-
+	@ApiOperation(value="删除角色的用户", notes="删除角色的用户")
 	@PostMapping("/deleteUserRoleInfo")
 	@Log("删除角色的用户")
 	@ResponseBody
@@ -180,6 +182,7 @@ public class UpmsRoleController {
 		return R.error("删除角色的用户失败");
 	}
 
+	@ApiOperation(value="批量删除角色的用户", notes="批量删除角色的用户")
 	@PostMapping("/batchRemoveRole")
 	@Log("批量删除角色的用户")
 	@ResponseBody
@@ -196,13 +199,14 @@ public class UpmsRoleController {
 		}
 	}
 
-
+	@ApiOperation(value="选择角色的用户页面", notes="选择角色的用户页面")
 	@GetMapping("/selectUser/{roleId}")
 	public String selectUser(@PathVariable("roleId") Long roleId, Model model) {
 		model.addAttribute("roleId", roleId);
 		return "system/upmsRole/selectUser";
 	}
 
+	@ApiOperation(value="添加角色拥有用户", notes="添加角色拥有用户")
 	@PostMapping("/addRoleForUser")
 	@Log("添加角色拥有用户")
 	@ResponseBody

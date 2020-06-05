@@ -5,6 +5,8 @@ import com.ming.upms.common.annotation.Log;
 import com.ming.upms.common.domain.Tree;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 import com.ming.upms.system.service.UpmsOrganizationService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,19 +23,22 @@ import java.util.Map;
  * @email jie_ming514@163.com
  * @date 2020-04-06 14:29:52
  */
- 
+
+@Api(tags = "组织管理页面")
 @Controller
 @RequestMapping("/system/upmsOrganization")
 public class UpmsOrganizationController {
 	@Autowired
 	private UpmsOrganizationService upmsOrganizationService;
-	
+
+	@ApiOperation(value="组织管理页面", notes="组织管理页面")
 	@GetMapping()
 	@RequiresPermissions("system:upmsOrganization:read")
 	public String UpmsOrganization(){
 	    return "system/upmsOrganization/upmsOrganization";
 	}
-	
+
+	@ApiOperation(value="组织列表接口", notes="组织列表接口")
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:upmsOrganization:read")
@@ -41,7 +46,8 @@ public class UpmsOrganizationController {
 		List<UpmsOrganizationDO> upmsOrganizationList = upmsOrganizationService.list(params);
 		return upmsOrganizationList;
 	}
-	
+
+	@ApiOperation(value="新增组织页面", notes="新增组织页面")
 	@GetMapping("/add")
 	@RequiresPermissions("system:upmsOrganization:add")
 	@Log("添加组织")
@@ -49,6 +55,7 @@ public class UpmsOrganizationController {
 	    return "system/upmsOrganization/add";
 	}
 
+	@ApiOperation(value="编辑组织页面", notes="编辑组织页面")
 	@GetMapping("/edit/{organizationId}")
 	@RequiresPermissions("system:upmsOrganization:edit")
 	@Log("编辑组织")
@@ -57,10 +64,8 @@ public class UpmsOrganizationController {
 		model.addAttribute("upmsOrganization", upmsOrganization);
 	    return "system/upmsOrganization/edit";
 	}
-	
-	/**
-	 * 保存
-	 */
+
+	@ApiOperation(value="新增组织信息接口", notes="新增组织信息接口")
 	@ResponseBody
 	@PostMapping("/save")
 	@Log("保存组织")
@@ -71,21 +76,8 @@ public class UpmsOrganizationController {
 		}
 		return R.error();
 	}
-	/**
-	 * 修改
-	 */
-	@ResponseBody
-	@RequestMapping("/update")
-	@Log("更新组织")
-	@RequiresPermissions("system:upmsOrganization:edit")
-	public R update( UpmsOrganizationDO upmsOrganization){
-		upmsOrganizationService.update(upmsOrganization);
-		return R.ok();
-	}
-	
-	/**
-	 * 删除
-	 */
+
+	@ApiOperation(value="删除组织信息接口", notes="删除组织信息接口")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@Log("删除组织")
@@ -96,32 +88,42 @@ public class UpmsOrganizationController {
 		}
 		return R.error();
 	}
-	
-	/**
-	 * 删除
-	 */
+
+	@ApiOperation(value="批量删除组织信息接口", notes="批量删除组织信息接口")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@Log("批量删除组织")
-	@RequiresPermissions("system:upmsOrganization:batchRemove")
+	@RequiresPermissions("system:upmsOrganization:remove")
 	public R remove(@RequestParam("ids[]") Long[] organizationIds){
 		upmsOrganizationService.batchRemove(organizationIds);
 		return R.ok();
 	}
 
 
+	@ApiOperation(value="获取组织树页面", notes="获取组织树页面")
 	@Log("获取组织树")
 	@GetMapping("/getOrganizationTree")
 	public String getOrganizationTree() {
 		return "system/upmsOrganization/tree";
 	}
 
-	@ResponseBody
+	@ApiOperation(value="获取组织树接口", notes="获取组织树接口")
 	@PostMapping("/getTree")
+	@ResponseBody
 	public Tree<UpmsOrganizationDO> getTree() {
 		Tree<UpmsOrganizationDO> tree = new Tree<UpmsOrganizationDO>();
 		tree = upmsOrganizationService.getTree();
 		return tree;
 	}
 
+
+	@ApiOperation(value="修改组织信息接口", notes="修改组织信息接口")
+	@RequestMapping("/update")
+	@Log("更新组织")
+	@RequiresPermissions("system:upmsOrganization:edit")
+	@ResponseBody
+	public R update( UpmsOrganizationDO upmsOrganization){
+		upmsOrganizationService.update(upmsOrganization);
+		return R.ok();
+	}
 }

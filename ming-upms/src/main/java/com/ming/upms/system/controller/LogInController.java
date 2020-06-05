@@ -10,6 +10,8 @@ import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.upms.system.service.UpmsUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -29,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+@Api(tags = "用户登录接口")
 @Controller
 public class LogInController extends BaseController {
 
@@ -40,6 +43,7 @@ public class LogInController extends BaseController {
     @Autowired
     private UpmsPermissionService upmsPermissionService;
 
+    @ApiOperation(value="主页面", notes="ming后台管理主页面")
     @GetMapping(value = {"", "/index"})
     String index(Model model) {
         //获取用户资源
@@ -50,6 +54,7 @@ public class LogInController extends BaseController {
         return "index";
     }
 
+    @ApiOperation(value="首页", notes="ming后台管理首页，介绍项目信息")
     @GetMapping("/main")
     String main() {
         return "main";
@@ -59,6 +64,7 @@ public class LogInController extends BaseController {
      * 登录页面
      * @return
      */
+    @ApiOperation(value="登录页面", notes="登录页面")
     @GetMapping("/login")
     public String login(Model model) {
         return "login";
@@ -72,6 +78,7 @@ public class LogInController extends BaseController {
      * @param request
      * @return
      */
+    @ApiOperation(value="登录接口", notes="登录接口")
     @PostMapping("/login")
     @ResponseBody
     public R ajaxLogin(String username, String password,String verify,HttpServletRequest request) {
@@ -108,16 +115,14 @@ public class LogInController extends BaseController {
         }
     }
 
+    @ApiOperation(value="注销接口", notes="注销退出接口")
     @GetMapping("/logout")
     public String logout() {
         ShiroUtils.logout();
         return "redirect:/login";
     }
 
-    /**
-     * 获取验证码
-     * @return
-     */
+    @ApiOperation(value="获取验证码", notes="登录时获取验证码图片")
     @GetMapping("/getVerify")
     public void getVerify(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("image/jpeg");

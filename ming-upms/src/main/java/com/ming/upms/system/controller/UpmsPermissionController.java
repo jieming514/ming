@@ -7,6 +7,8 @@ import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.domain.UpmsSystemDO;
 import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.upms.system.service.UpmsSystemService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +21,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 权限
+ * 资源
  * 
  * @author ming
  * @email jie_ming514@163.com
  * @date 2020-04-06 15:17:30
  */
- 
+
+@Api(tags = "资源管理页面")
 @Controller
 @RequestMapping("/system/upmsPermission")
 public class UpmsPermissionController {
@@ -35,13 +38,14 @@ public class UpmsPermissionController {
 	@Autowired
 	private UpmsSystemService upmsSystemService;
 
-	
+	@ApiOperation(value="资源信息页面", notes="资源信息页面")
 	@GetMapping()
 	@RequiresPermissions("system:upmsPermission:upmsPermission")
 	String UpmsPermission(){
 	    return "system/upmsPermission/upmsPermission";
 	}
-	
+
+	@ApiOperation(value="资源信息列表", notes="资源信息列表")
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:upmsPermission:upmsPermission")
@@ -50,10 +54,11 @@ public class UpmsPermissionController {
 		List<UpmsPermissionDO> upmsPermissionList = upmsPermissionService.getSystemPermissionList(params);
 		return upmsPermissionList;
 	}
-	
+
+	@ApiOperation(value="新增资源页面", notes="新增资源页面")
 	@GetMapping("/add/{pid}")
 	@RequiresPermissions("system:upmsPermission:add")
-	@Log("添加权限")
+	@Log("添加资源")
 	String add(@PathVariable("pid") Long pid, Model model){
 		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
 		UpmsPermissionDO pPermissionDO = upmsPermissionService.get(pid);
@@ -67,9 +72,10 @@ public class UpmsPermissionController {
 		return "system/upmsPermission/add";
 	}
 
+	@ApiOperation(value="编辑资源页面", notes="编辑资源页面")
 	@GetMapping("/edit/{permissionId}")
 	@RequiresPermissions("system:upmsPermission:edit")
-	@Log("编辑权限")
+	@Log("编辑资源")
 	String edit(@PathVariable("permissionId") Long permissionId,Model model){
 		UpmsPermissionDO upmsPermission = upmsPermissionService.get(permissionId);
 		List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
@@ -85,43 +91,40 @@ public class UpmsPermissionController {
 	    return "system/upmsPermission/edit";
 	}
 
+	@ApiOperation(value="获取图标信息", notes="获取图标信息")
 	@GetMapping("/icon")
 	String icon() {
 		return "system/upmsPermission/icon";
 	}
 
 
-	/**
-	 * 保存
-	 */
+	@ApiOperation(value="新增资源接口", notes="新增资源接口")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("system:upmsPermission:add")
-	@Log("保存权限")
+	@Log("保存资源")
 	public R save( UpmsPermissionDO upmsPermission){
 		if(upmsPermissionService.save(upmsPermission)>0){
 			return R.ok();
 		}
 		return R.error();
 	}
-	/**
-	 * 修改
-	 */
+
+	@ApiOperation(value="更新资源接口", notes="更新资源接口")
 	@ResponseBody
 	@RequestMapping("/update")
-	@Log("修改权限")
+	@Log("修改资源")
 	@RequiresPermissions("system:upmsPermission:edit")
 	public R update( UpmsPermissionDO upmsPermission){
 		upmsPermissionService.update(upmsPermission);
 		return R.ok();
 	}
-	
-	/**
-	 * 删除
-	 */
+
+
+	@ApiOperation(value="删除资源接口", notes="删除资源接口")
 	@PostMapping( "/remove")
 	@ResponseBody
-	@Log("删除权限")
+	@Log("删除资源")
 	@RequiresPermissions("system:upmsPermission:remove")
 	public R remove( Long permissionId){
 		if(upmsPermissionService.remove(permissionId)>0){
@@ -129,19 +132,18 @@ public class UpmsPermissionController {
 		}
 		return R.error();
 	}
-	
-	/**
-	 * 删除
-	 */
+
+	@ApiOperation(value="批量删除资源信息接口", notes="批量删除资源信息接口")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@Log("批量删除权限")
+	@Log("批量删除资源")
 	@RequiresPermissions("system:upmsPermission:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] permissionIds){
 		upmsPermissionService.batchRemove(permissionIds);
 		return R.ok();
 	}
 
+	@ApiOperation(value="获取资源树", notes="获取资源树")
 	@Log("获取资源树")
 	@GetMapping("/getPermissionTree/{roleId}")
 	public String getPermissionTree(@PathVariable("roleId") Long roleId, Model model) {
@@ -153,6 +155,7 @@ public class UpmsPermissionController {
 	 * 获取一个角色的资源树
 	 * @return
 	 */
+	@ApiOperation(value="批量删除组织信息接口", notes="批量删除组织信息接口")
 	@ResponseBody
 	@PostMapping("/getTree")
 	public List<Tree<UpmsPermissionDO>> getTree(Long roleId) {
@@ -164,6 +167,7 @@ public class UpmsPermissionController {
 	/**
 	 * 获取角色拥有的资源
 	 */
+	@ApiOperation(value="批量删除组织信息接口", notes="批量删除组织信息接口")
 	@ResponseBody
 	@PostMapping("/selectRoleHasPermission/{roleId}")
 	public List<UpmsPermissionDO> selectRoleHasPermission(@PathVariable("roleId") Long roleId) {
