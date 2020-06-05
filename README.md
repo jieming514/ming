@@ -5,7 +5,8 @@
 ![image](https://img.shields.io/badge/Spring%20Boot-2.1.1.RELEASE-blue.svg)
 
 ## 项目介绍
-ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、人事办公。旨在通过实战分享个人经验简洁高效，减少过渡封装，展现技术本质,以技术服务于业务。
+<p>因本人姓“明”，所以以ming作为项目名；网上看到的项目大都是公共模块的项目。所以希望整合出一整套后台管理系统。</p>
+<p>ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、人事办公。旨在通过实战分享个人经验简洁高效，减少过渡封装，展现技术本质,以技术服务于业务。</p>
 
 
 ## 项目模块
@@ -42,6 +43,7 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
 | Alibaba Druid | 1.1.14 | 数据库连接池 |
 | Thymeleaf | 2.0.0 | 模板引擎 |
 | Logback | 1.2.3 | 日志管理|
+| Swagger |2.9.2 | API接口文档页面 |
 
 
 ### 2.前端技术
@@ -70,7 +72,7 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
 ### 2.部署说明
 
 #### 运行前准备工作
-  1. 新建ming数据库，导入database文件夹下的ming.sql；
+  1. 新建ming数据库，导入database文件夹下的ming-ddl.sql和ming-dml.sql；
   2. 修改application.yml文件中的mysql数据库的用户名和密码；
   
 #### 启动
@@ -82,14 +84,15 @@ ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公�
 
 ## 系统演示截图
 
-| | |
-|  ----  | ----  |
 | ![登录页面](_doc/show/login.png)  | ![主页面](_doc/show/main.png)  |
+|  ----  | ----  |
 | ![用户维护页面](_doc/show/user.png) | ![个人维护页面](_doc/show/personal.png) |
 | ![角色编辑页面](_doc/show/role.png) | ![角色用户管理页面](_doc/show/roleUser.png) |
 | ![资源管理页面](_doc/show/permission.png) |![系统列表页面](_doc/show/system.png)|
 | ![组织树管理](_doc/show/tree.png) | ![日志管理页面](_doc/show/userlog.png) |
 
+## 参与开发
+> 首先谢谢大家支持，如果你希望参与开发，欢迎通过Github上fork本项目，并Pull Request您的commit。
 
 ## 其他相关
 ### 1. ming 相关博客
