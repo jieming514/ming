@@ -51,5 +51,15 @@ public class UpmsRoleServiceImpl implements UpmsRoleService {
 		return upmsRoleDao.batchRemove(roleIds);
 	}
 
-	
+	@Override
+	public List<UpmsRoleDO> selectRoleByUserId(Long userId) {
+		return upmsRoleDao.selectRoleByUserId(userId);
+	}
+
+	@Override
+	public int selectRoleCountByUserId(Long userId) {
+		return upmsRoleDao.selectRoleCountByUserId(userId);
+	}
+
+
 }

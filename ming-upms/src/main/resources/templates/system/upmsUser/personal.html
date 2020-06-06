@@ -55,13 +55,14 @@
         <div class="col-sm-9" style="padding-left: 0px">
             <div class="ibox float-e-margins">
                 <div class="ibox-title ibox-title-gray dashboard-header">
-                    <h5>基本资料</h5>
+                    <h5>系统资料</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#user_info" data-toggle="tab" aria-expanded="true">基本资料</a></li>
                             <li><a href="#modify_password" data-toggle="tab" aria-expanded="false">修改密码</a></li>
+                            <li><a href="#userRole" data-toggle="tab" aria-expanded="false" onclick="getUserRole()">角色资源</a></li>
                         </ul>
                         <div class="tab-content" style="margin-top: 15px">
                             <!--用户信息-->
@@ -135,6 +136,9 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="tab-pane" id="userRole">
+                                <table id="exampleTable" data-mobile-responsive="true"></table>
                             </div>
                         </div>
                     </div>

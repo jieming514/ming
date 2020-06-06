@@ -221,7 +221,17 @@ public class UpmsRoleController {
 		} catch (RuntimeException e) {
 			return R.error();
 		}
+	}
 
+	@ApiOperation(value="通过用户名查找角色", notes="通过用户名查找角色")
+	@ResponseBody
+	@GetMapping("/selectRoleByUserId/{userId}")
+	public PageUtils list(@PathVariable("userId") Long userId){
+
+		int total = upmsRoleService.selectRoleCountByUserId(userId);
+		List<UpmsRoleDO> upmsRoleList = upmsRoleService.selectRoleByUserId(userId);
+		PageUtils pageUtils = new PageUtils(upmsRoleList, total);
+		return pageUtils;
 	}
 	
 }

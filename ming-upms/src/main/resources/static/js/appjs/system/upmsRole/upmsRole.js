@@ -186,7 +186,7 @@ function batchRemove() {
 
 	});
 }
-//获取机构树
+//获取资源树
 function getTree(roleId) {
     layer.open({
         type : 2,

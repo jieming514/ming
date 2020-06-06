@@ -1,3 +1,4 @@
+
 $().ready(function() {
 	validateRule();
 });
@@ -193,4 +194,78 @@ function validateRule() {
         focusCleanup: true
     });
 
+}
+
+function getUserRole() {
+    userId = $("#userId").val(),
+	$('#exampleTable').bootstrapTable({
+        method : 'get', // 服务器数据的请求方式 get or post
+        url : "/system/upmsRole/selectRoleByUserId/"+userId, // 服务器数据的加载地址
+        showRefresh : true,
+        showToggle : true,
+        showColumns : true,
+        iconSize : 'outline',
+        toolbar : '#exampleToolbar',
+        striped : true, // 设置为true会有隔行变色效果
+        dataType : "json", // 服务器返回的数据类型
+        pagination : true, // 设置为true会在底部显示分页条
+        // queryParamsType : "limit",
+        // //设置为limit则会发送符合RESTFull格式的参数
+        singleSelect : false, // 设置为true将禁止多选
+        // contentType : "application/x-www-form-urlencoded",
+        // //发送到服务器的数据编码类型
+        pageSize : 10, // 如果设置了分页，每页数据条数
+        pageNumber : 1, // 如果设置了分布，首页页码
+        sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+        queryParams : function(params) {
+            return {
+                limit : params.limit,
+                offset : params.offset
+            };
+        },
+        columns : [
+                {
+                    field : 'roleId',
+                    align : 'center',
+                    title : '编号'
+                },
+                {
+                    field : 'name',
+                    align : 'center',
+                    title : '角色名称'
+                },
+                {
+                    field : 'title',
+                    align : 'center',
+                    title : '角色标题'
+                },
+                {
+                    field : 'description',
+                    title : '角色描述'
+                },
+                {
+                    title : '资源',
+                    align : 'center',
+                    field : 'id',
+                    formatter : function(value, row, index) {
+                        return "<a href='#' onclick='getTree("+row.roleId+")'>查看资源</a>";
+                    }
+                }]
+    });
+}
+
+//获取资源树
+function getTree(roleId) {
+    layer.open({
+        type : 2,
+        title : '角色资源列表',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '400px', '500px' ],
+        content : '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
+        btn : ['确认'],
+        yes : function(index, layero) {
+            layer.close(index); //如果设定了yes回调，需进行手工关闭
+        }
+    });
 }

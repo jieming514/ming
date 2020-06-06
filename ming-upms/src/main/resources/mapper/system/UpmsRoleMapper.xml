@@ -84,4 +84,21 @@
 		</foreach>
 	</delete>
 
+	<sql id="selectRoleByUserIdWhere">
+		 from upms_role ur
+		 left join upms_user_role uur on ur.role_id = uur.role_id
+		where uur.user_id = #{userId}
+	</sql>
+
+	<select id="selectRoleByUserId" resultType="UpmsRoleDO">
+		select ur.`role_id`,ur.`name`,ur.`title`,ur.`description`,ur.`ctime`,ur.`orders`
+		<include refid="selectRoleByUserIdWhere"></include>
+	</select>
+
+	<select id="selectRoleCountByUserId" resultType="int">
+		select count(1)
+		<include refid="selectRoleByUserIdWhere"></include>
+	</select>
+
+
 </mapper>
