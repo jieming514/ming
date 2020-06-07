@@ -9,42 +9,42 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">帐号：</label>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">帐号：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="username" name="username" class="form-control" type="text" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">密码：</label>
+								<label class="col-sm-3 control-label">密码：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="password" name="password" class="form-control" type="password" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">姓名：</label>
+								<label class="col-sm-3 control-label">姓名：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="realname" name="realname" class="form-control" type="text" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">性别：</label>
+								<label class="col-sm-3 control-label">性别：<strong style="color:red">*</strong></label>
 								<div class="col-sm-3">
 									<select class="form-control" id="sex" name="sex">
-										<option value="1">男</option>
+										<option value="1" selected>男</option>
 										<option value="0">女</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group" hidden>
-								<label class="col-sm-3 control-label">组织机构ID：</label>
+								<label class="col-sm-3 control-label">组织机构ID：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="organizationId" name="organizationId" class="form-control"
 										   value="0" type="hidden" readonly="true">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">组织机构名称：</label>
+								<label class="col-sm-3 control-label">组织机构名称：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="organizationName" name="organizationName" class="form-control" type="text" onclick="getTree()"
 										   readonly="true" placeholder="点击选择组织机构">
@@ -58,13 +58,13 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">电话：</label>
+								<label class="col-sm-3 control-label">电话：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="phone" name="phone" class="form-control" type="text" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">邮箱：</label>
+								<label class="col-sm-3 control-label">邮箱：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="email" name="email" class="form-control" type="text" autocomplete="off">
 								</div>
@@ -83,7 +83,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
+									<button type="button" class="btn btn-primary" onclick="save()">提交</button>
 								</div>
 							</div>
 						</form>
@@ -93,6 +93,7 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
+	<script src="/js/plugins/validate/jquery.validate.extend.js"></script>
 	<script type="text/javascript" src="/js/appjs/system/upmsUser/add.js">
 	</script>
 </body>
