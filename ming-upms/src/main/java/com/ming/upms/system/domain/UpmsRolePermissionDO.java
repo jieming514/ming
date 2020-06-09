@@ -1,5 +1,8 @@
 package com.ming.upms.system.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 
@@ -11,14 +14,15 @@ import java.io.Serializable;
  * @email jie_ming514@163.com
  * @date 2020-05-17 22:00:49
  */
+@ApiModel(value = "角色权限关系", description = "角色权限关系实体类")
 public class UpmsRolePermissionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//编号
+	@ApiModelProperty(value = "编号")
 	private Long rolePermissionId;
-	//角色编号
+	@ApiModelProperty(value = "角色编号")
 	private Long roleId;
-	//权限编号
+	@ApiModelProperty(value = "权限编号")
 	private Long permissionId;
 
 	/**

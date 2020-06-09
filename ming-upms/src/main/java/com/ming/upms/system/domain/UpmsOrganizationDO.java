@@ -1,6 +1,8 @@
 package com.ming.upms.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,21 +16,26 @@ import java.util.Date;
  * @email jie_ming514@163.com
  * @date 2020-04-06 14:29:52
  */
+@ApiModel(value = "组织", description = "组织实体类")
 public class UpmsOrganizationDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//编号
+
+	@ApiModelProperty(value = "编号")
 	private Long organizationId;
-	//组织名称
+
+	@ApiModelProperty(value = "组织名称")
 	private String name;
-	//所属上级
+
+	@ApiModelProperty(value = "所属上级")
 	private Long pid;
-	//上级名称
+
+	@ApiModelProperty(value = "上级名称")
 	private String pName;
 
-	//组织描述
+	@ApiModelProperty(value = "组织描述")
 	private String description;
-	//创建时间
+
+	@ApiModelProperty(value = "创建时间")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
 

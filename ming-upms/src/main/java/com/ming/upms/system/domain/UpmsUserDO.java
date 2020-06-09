@@ -1,6 +1,8 @@
 package com.ming.upms.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,37 +15,38 @@ import java.util.Date;
  * @email jie_ming514@163.com
  * @date 2020-05-01 15:23:25
  */
+@ApiModel(value = "用户权限关系", description = "用户权限关系实体类")
 public class UpmsUserDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//编号
+	@ApiModelProperty(value = "编号")
 	private Long userId;
-	//帐号
+	@ApiModelProperty(value = "帐号")
 	private String username;
-	//密码MD5(密码+盐)
+	@ApiModelProperty(value = "密码MD5(密码+盐)")
 	private String password;
-	//盐
+	@ApiModelProperty(value = "盐")
 	private String salt;
-	//姓名
+	@ApiModelProperty(value = "姓名")
 	private String realname;
-	//头像
+	@ApiModelProperty(value = "头像")
 	private String avatar;
-	//电话
+	@ApiModelProperty(value = "电话")
 	private String phone;
-	//邮箱
+	@ApiModelProperty(value = "邮箱")
 	private String email;
-	//性别
+	@ApiModelProperty(value = "性别")
 	private Integer sex;
-	//状态(0:正常,1:锁定)
+	@ApiModelProperty(value = "状态(0:正常,1:锁定)")
 	private Integer locked;
-	//创建时间
+	@ApiModelProperty(value = "创建时间")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
 
-	//组织ID
+	@ApiModelProperty(value = "组织ID")
 	private Long organizationId;
 
-	//组织信息
+	@ApiModelProperty(value = "组织信息")
 	private UpmsOrganizationDO upmsOrganizationDO;
 
 	/**

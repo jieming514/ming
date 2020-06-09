@@ -1,6 +1,8 @@
 package com.ming.upms.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,35 +14,48 @@ import java.util.Date;
  * @email jie_ming514@163.com
  * @date 2020-04-06 13:31:45
  */
+@ApiModel(value = "日志", description = "用户操作日志")
 public class UpmsLogDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//编号
+	@ApiModelProperty(value = "编号ID")
 	private Integer logId;
-	//操作描述
+
+	@ApiModelProperty(value = "操作描述")
 	private String description;
-	//操作用户
+
+	@ApiModelProperty(value = "操作用户")
 	private String username;
-	//操作时间
+
+	@ApiModelProperty(value = "操作开始时间")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date startTime;
-	//消耗时间
+
+	@ApiModelProperty(value = "消耗时间")
 	private Integer spendTime;
-	//根路径
+
+	@ApiModelProperty(value = "根路径")
 	private String basePath;
-	//URI
+
+	@ApiModelProperty(value = "URI")
 	private String uri;
-	//请求类型
+
+	@ApiModelProperty(value = "请求类型")
 	private String method;
-	//
+
+	@ApiModelProperty(value = "请求参数")
 	private String parameter;
-	//用户标识
+
+	@ApiModelProperty(value = "用户标识")
 	private String userAgent;
-	//IP地址
+
+	@ApiModelProperty(value = "IP地址")
 	private String ip;
-	// 相应
+
+	@ApiModelProperty(value = "请求结果")
 	private Integer result;
-	//权限值
+
+	@ApiModelProperty(value = "权限值")
 	private String permissions;
 
 	/**

@@ -1,6 +1,8 @@
 package com.ming.upms.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,31 +15,42 @@ import java.util.Date;
  * @email jie_ming514@163.com
  * @date 2020-05-04 13:04:29
  */
+@ApiModel(value = "系统", description = "系统实体类")
 public class UpmsSystemDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//编号
+	@ApiModelProperty(value = "编号")
 	private Long systemId;
-	//图标
+
+	@ApiModelProperty(value = "图标")
 	private String icon;
-	//背景
+
+	@ApiModelProperty(value = "背景")
 	private String banner;
-	//主题
+
+	@ApiModelProperty(value = "主题")
 	private String theme;
-	//根目录
+
+	@ApiModelProperty(value = "根目录")
 	private String basepath;
-	//状态(-1:黑名单,1:正常)
+
+	@ApiModelProperty(value = "状态(-1:黑名单,1:正常)")
 	private Integer status;
-	//系统名称
+
+	@ApiModelProperty(value = "系统名称")
 	private String name;
-	//系统标题
+
+	@ApiModelProperty(value = "系统标题")
 	private String title;
-	//系统描述
+
+	@ApiModelProperty(value = "系统描述")
 	private String description;
-	//创建时间
+
+	@ApiModelProperty(value = "创建时间")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
-	//排序
+
+	@ApiModelProperty(value = "排序")
 	private Long orders;
 
 	/**

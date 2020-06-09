@@ -1,6 +1,8 @@
 package com.ming.upms.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,21 +15,27 @@ import java.util.Date;
  * @email jie_ming514@163.com
  * @date 2020-04-11 20:08:05
  */
+@ApiModel(value = "角色", description = "角色实体类")
 public class UpmsRoleDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//编号
+	@ApiModelProperty(value = "编号")
 	private Long roleId;
-	//角色名称
+
+	@ApiModelProperty(value = "角色名称")
 	private String name;
-	//角色标题
+
+	@ApiModelProperty(value = "角色标题")
 	private String title;
-	//角色描述
+
+	@ApiModelProperty(value = "角色描述")
 	private String description;
-	//创建时间
+
+	@ApiModelProperty(value = "创建时间")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
-	//排序
+
+	@ApiModelProperty(value = "排序")
 	private Long orders;
 
 	/**

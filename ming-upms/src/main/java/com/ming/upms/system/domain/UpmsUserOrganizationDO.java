@@ -1,5 +1,8 @@
 package com.ming.upms.system.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 
@@ -11,14 +14,15 @@ import java.io.Serializable;
  * @email jie_ming514@163.com
  * @date 2020-05-10 14:20:51
  */
+@ApiModel(value = "用户组织关系", description = "用户组织关系实体类")
 public class UpmsUserOrganizationDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//编号
+	@ApiModelProperty(value = "编号")
 	private Integer userOrganizationId;
-	//用户编号
+	@ApiModelProperty(value = "用户编号")
 	private Integer userId;
-	//组织编号
+	@ApiModelProperty(value = "组织编号")
 	private Integer organizationId;
 
 	/**

@@ -1,6 +1,8 @@
 package com.ming.upms.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,35 +15,48 @@ import java.util.Date;
  * @email jie_ming514@163.com
  * @date 2020-04-06 15:17:30
  */
+@ApiModel(value = "权限", description = "权限实体类")
 public class UpmsPermissionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//编号
+
+	@ApiModelProperty(value = "编号")
 	private Long permissionId;
-	//所属系统
+
+	@ApiModelProperty(value = "所属系统")
 	private Integer systemId;
-	//所属系统名称
+
+	@ApiModelProperty(value = "所属系统名称")
 	private String systemName;
-	//所属上级
+
+	@ApiModelProperty(value = "所属上级")
 	private Long pid;
-	//名称
+
+	@ApiModelProperty(value = "名称")
 	private String name;
-	//类型(1:目录,2:菜单,3:按钮)
+
+	@ApiModelProperty(value = "类型(1:目录,2:菜单,3:按钮)")
 	private Integer type;
-	//权限值
+
+	@ApiModelProperty(value = "权限值")
 	private String permissionValue;
-	//路径
+
+	@ApiModelProperty(value = "路径")
 	private String uri;
-	//图标
+
+	@ApiModelProperty(value = "图标")
 	private String icon;
-	//状态(0:禁止,1:正常)
+
+	@ApiModelProperty(value = "状态(0:禁止,1:正常)")
 	private Integer status;
-	//创建时间
+
+	@ApiModelProperty(value = "创建时间")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date ctime;
-	//排序
+
+	@ApiModelProperty(value = "排序")
 	private Long orders;
-	//角色是否拥有角色
+
+	@ApiModelProperty(value = "角色是否拥有角色")
 	private Boolean checked;
 
 
