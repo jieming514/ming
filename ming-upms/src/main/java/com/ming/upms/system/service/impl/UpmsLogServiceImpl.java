@@ -1,14 +1,14 @@
 package com.ming.upms.system.service.impl;
 
+import com.ming.upms.system.dao.UpmsLogDao;
+import com.ming.upms.system.domain.UpmsLogDO;
+import com.ming.upms.system.service.UpmsLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
-import com.ming.upms.system.dao.UpmsLogDao;
-import com.ming.upms.system.domain.UpmsLogDO;
-import com.ming.upms.system.service.UpmsLogService;
 
 
 
@@ -31,7 +31,8 @@ public class UpmsLogServiceImpl implements UpmsLogService {
 	public int count(Map<String, Object> map){
 		return upmsLogDao.count(map);
 	}
-	
+
+	@Async
 	@Override
 	public int save(UpmsLogDO upmsLog){
 		return upmsLogDao.save(upmsLog);
