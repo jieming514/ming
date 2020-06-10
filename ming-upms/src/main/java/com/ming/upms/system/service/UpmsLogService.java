@@ -20,9 +20,7 @@ public interface UpmsLogService {
 	
 	int count(Map<String, Object> map);
 	
-	int save(UpmsLogDO upmsLog);
-	
-	int update(UpmsLogDO upmsLog);
+	void save(UpmsLogDO upmsLog);
 	
 	int remove(Long logId);
 	

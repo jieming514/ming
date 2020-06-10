@@ -34,13 +34,8 @@ public class UpmsLogServiceImpl implements UpmsLogService {
 
 	@Async
 	@Override
-	public int save(UpmsLogDO upmsLog){
-		return upmsLogDao.save(upmsLog);
-	}
-	
-	@Override
-	public int update(UpmsLogDO upmsLog){
-		return upmsLogDao.update(upmsLog);
+	public void save(UpmsLogDO upmsLog){
+		upmsLogDao.save(upmsLog);
 	}
 	
 	@Override

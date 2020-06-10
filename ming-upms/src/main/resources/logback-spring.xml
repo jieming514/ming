@@ -4,7 +4,7 @@
     <!--输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}-[%line] - %msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -27,19 +27,21 @@
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} -%msg%n
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{20}-[%line] - %msg%n
             </Pattern>
         </layout>
     </appender>
 
     <!--输出指定包文件的日志-->
-    <logger name="com.ming" additivity="false">
+    <logger name="com.ming.upms" additivity="false">
         <appender-ref ref="console"/>
         <appender-ref ref="logFile" />
     </logger>
+    <!-- Spring日志级别控制  -->
+    <logger name="org.springframework" level="warn" />
 
     <!--日志处理级别-->
-    <root level="error">
+    <root level="info">
         <appender-ref ref="console"/>
         <appender-ref ref="logFile" />
     </root>

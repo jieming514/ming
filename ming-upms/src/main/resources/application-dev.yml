@@ -37,3 +37,8 @@ spring:
       enabled: true  #设置开启热部署
       additional-paths: src/main/java
       exclude: classpath:/static/**
+  threadpool:
+    corePoolSize: 50
+    maxPoolSize: 200
+    queueCapacity: 1000
+    keepAliveSeconds: 300
