@@ -35,16 +35,17 @@
 
 ### 1.后端技术
 
-| 技术 | 版本 | 说明 |
-|:--- | --- | :---|
-| spring-boot | 2.1.1 | 核心框架 |
-| Apache Shiro | 1.4.2 | 安全框架 |
-| MyBatis | 1.3.2 | 持久层框架 |
-| Alibaba Druid | 1.1.14 | 数据库连接池 |
-| Thymeleaf | 2.0.0 | 模板引擎 |
-| Logback | 1.2.3 | 日志管理|
-| Swagger |2.9.2 | API接口文档页面 |
-
+| 技术 | 版本 | 说明 | 官网 |
+|:--- | --- | :---| :---|
+| spring-boot | 2.1.1 | 核心框架 | https://start.spring.io/ |
+| Apache Shiro | 1.4.2 | 安全框架 | http://shiro.apache.org/ |
+| MyBatis | 1.3.2 | 持久层框架 | http://mybatis.org/ |
+| PageHelper | 1.2.5 | MyBatis物理分页插件 | http://git.oschina.net/free/Mybatis_PageHelper |
+| Alibaba Druid | 1.1.14 | 数据库连接池 | https://druid.apache.org/
+| Thymeleaf | 2.0.0 | 模板引擎 | https://www.thymeleaf.org/ |
+| Logback | 1.2.3 | 日志管理| http://logback.qos.ch |
+| Swagger |2.9.2 | API接口文档页面 | https://swagger.io/ |
+| Velocity | 1.7 | 模板引擎 | http://velocity.apache.org/ |
 
 ### 2.前端技术
   - JS框架：jQuery
