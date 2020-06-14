@@ -11,12 +11,5 @@ public class MingUpmsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MingUpmsApplication.class, args);
-        System.out.println("        .__                \n" +
-                "  _____ |__| ____    ____  \n" +
-                " /     \\|  |/    \\  / ___\\ \n" +
-                "|  Y Y  \\  |   |  \\/ /_/  >\n" +
-                "|__|_|  /__|___|  /\\___  / \n" +
-                "      \\/        \\//_____/  \n" +
-                "=============================");
     }
 }

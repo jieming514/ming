@@ -1,3 +1,7 @@
+ming:
+  name: ming-upms
+  version: 1.0.0
+
 server:
   session-timeout: 1800
   # 服务器的HTTP端口，默认为80

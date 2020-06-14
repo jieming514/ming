@@ -15,7 +15,7 @@ public class UpmsRoleServiceTest extends BasicTest {
     public void get() {
         UpmsRoleDO upmsUserDO = upmsRoleService.get(1L);
         System.out.println(upmsUserDO);
-        Assert.assertEquals(new Integer("1"), upmsUserDO.getRoleId());
+        Assert.assertEquals(new Long(1L), upmsUserDO.getRoleId());
     }
 
 }
