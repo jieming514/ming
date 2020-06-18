@@ -28,3 +28,9 @@ spring:
   profiles:
     active: dev
 
+# actuator监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, logfile
