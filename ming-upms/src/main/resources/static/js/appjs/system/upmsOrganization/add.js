@@ -38,13 +38,19 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
+			pName : {
+				required : true
+			},
 			name : {
 				required : true
 			}
 		},
 		messages : {
+			pName : {
+				required : icon + "请填写所属上级"
+			},
 			name : {
-				required : icon + "请输入姓名"
+				required : icon + "请输入组织名称"
 			}
 		}
 	})

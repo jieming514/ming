@@ -11,7 +11,7 @@
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="permissionId" name="permissionId" th:value="${upmsPermission.permissionId}"  type="hidden">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">所属系统：</label>
+								<label class="col-sm-3 control-label">所属系统：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<select id="systemId" name="systemId" class="form-control" disabled>
 										<option th:each="system:${systemList}" th:text="${system.title}" th:value="${system.systemId}"
@@ -20,20 +20,20 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">所属上级：</label>
+								<label class="col-sm-3 control-label">所属上级：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="pid" name="pid" class="form-control" type="hidden" th:value="${upmsPermission.pid}" >
 									<input id="pName" name="pName" class="form-control" type="text" th:value="${pPermissionDO.name}" disabled>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">名称：</label>
+								<label class="col-sm-3 control-label">名称：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<input id="name" name="name" th:value="${upmsPermission.name}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">类型：</label>
+								<label class="col-sm-3 control-label">类型：<strong style="color:red">*</strong></label>
 								<div class="col-sm-8">
 									<select class="form-control" id="type" name="type">
 										<option th:selected="${upmsPermission.type} eq '1'" value="1">目录</option>
