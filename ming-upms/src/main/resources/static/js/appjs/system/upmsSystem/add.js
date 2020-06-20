@@ -30,19 +30,47 @@ function save() {
 
 		}
 	});
-
 }
+
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
 			name : {
 				required : true
+			},
+			title : {
+				required : true
+			},
+			description : {
+				required : true,
+				maxlength : 100
+			},
+			basepath : {
+				required : true,
+				url: true
+			},
+			order: {
+				digits:true
 			}
 		},
 		messages : {
 			name : {
-				required : icon + "请输入姓名"
+				required : icon + "请输入系统ID"
+			},
+			title: {
+				required : icon + "请输入系统标题"
+			},
+			description: {
+				required : icon + "请输入系统描述",
+				maxlength: icon + "系统描述内容过长，请保持在100字以内！"
+			},
+			basepath: {
+				required : icon + "请输入系统url",
+				url: icon + "网站格式不正确，正确格式：http://ip:port/index"
+			},
+			order: {
+				digits: icon + "排序只能为整数值！"
 			}
 		}
 	})
