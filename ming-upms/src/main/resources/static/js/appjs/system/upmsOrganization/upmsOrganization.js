@@ -14,7 +14,7 @@ function load() {
                         code: 'organizationId',
                         parentCode: 'pid',
                         expandColumn: '1',// 在哪一列上面显示展开按钮
-                        striped: true, // 是否各行渐变色
+                        striped: false, // 是否各行渐变色
                         bordered: true, // 是否显示边框
                         expandAll: false, // 是否全部展开
                         expandFirst: true, // 是否默认第一级展开--expandAll为false时生效
