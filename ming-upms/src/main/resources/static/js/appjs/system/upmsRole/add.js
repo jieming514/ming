@@ -38,11 +38,23 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
+			},
+			title : {
+				required : true
+			},
+			orders: {
+				digits: true
 			}
 		},
 		messages : {
 			name : {
-				required : icon + "请输入姓名"
+				required : icon + "请输入角色ID"
+			},
+			title: {
+				required : icon + "请输入角色名称"
+			},
+			orders: {
+				digits: icon + "排序只能为整数值"
 			}
 		}
 	})

@@ -50,8 +50,8 @@ function validateRule() {
 				required : true,
 				url: true
 			},
-			order: {
-				digits:true
+			orders: {
+				digits: true
 			}
 		},
 		messages : {
@@ -69,7 +69,7 @@ function validateRule() {
 				required : icon + "请输入系统url",
 				url: icon + "网站格式不正确，正确格式：http://ip:port/index"
 			},
-			order: {
+			orders: {
 				digits: icon + "排序只能为整数值！"
 			}
 		}

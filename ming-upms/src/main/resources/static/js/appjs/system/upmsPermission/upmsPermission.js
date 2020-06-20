@@ -15,7 +15,7 @@ function load() {
                         url: prefix + '/list', // 请求数据的ajax的url
                         ajaxParams: {sort:'orders'}, // 请求数据的ajax的data属性
                         expandColumn: '2',// 在哪一列上面显示展开按钮
-                        striped: true, // 是否各行渐变色
+                        striped: false, // 是否各行渐变色
                         expandAll: false, // 是否全部展开
 						columns : [
 								{

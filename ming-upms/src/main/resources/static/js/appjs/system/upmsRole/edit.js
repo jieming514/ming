@@ -39,16 +39,28 @@ function update() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
-		}
+        rules : {
+            name : {
+                required : true
+            },
+            title : {
+                required : true
+            },
+            orders: {
+                digits: true
+            }
+        },
+        messages : {
+            name : {
+                required : icon + "请输入角色ID"
+            },
+            title: {
+                required : icon + "请输入角色名称"
+            },
+            orders: {
+                digits: icon + "排序只能为整数值"
+            }
+        }
 	})
 }
 
