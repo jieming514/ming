@@ -15,7 +15,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="text-center">
-                        <p><img class="img-circle img-lg" height="128" width="128" th:src="${user.avatar}"></p>
+                        <p><img class="img-circle img-lg" height="128" width="128" th:src="@{${user.avatar}}"></p>
                         <p><a href="javascript:avatar()">修改头像</a></p>
                     </div>
                     <ul class="list-group list-group-striped">
@@ -149,9 +149,9 @@
 </div>
 </body>
 <div th:include="include :: footer"></div>
-<script src="/js/plugins/validate/jquery.validate.extend.js"
+<script src="../../../static/js/plugins/validate/jquery.validate.extend.js"
         th:src="@{/js/plugins/validate/jquery.validate.extend.js}"></script>
-<script type="text/javascript" src="/js/appjs/system/upmsUser/personal.js"
+<script type="text/javascript" src="../../../static/js/appjs/system/upmsUser/personal.js"
         th:src="@{/js/appjs/system/upmsUser/personal.js}"></script>
 </body>
 </html>
