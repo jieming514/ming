@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `upms_config`
+--
+
+DROP TABLE IF EXISTS `upms_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `upms_config` (
+  `config_id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
+  `system_id` bigint(10) NOT NULL COMMENT '系统ID',
+  `config_name` varchar(100) DEFAULT '' COMMENT '参数名称',
+  `config_key` varchar(100) DEFAULT '' COMMENT '参数键名',
+  `config_value` varchar(500) DEFAULT '' COMMENT '参数键值',
+  `config_type` char(1) DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`config_id`),
+  KEY `FK_CONFIG_SYSTEM_ID_idx` (`system_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='参数配置表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `upms_log`
 --
 
@@ -38,7 +62,7 @@ CREATE TABLE `upms_log` (
   `result` tinyint(2) DEFAULT NULL COMMENT '响应状态',
   PRIMARY KEY (`log_id`),
   KEY `log_id` (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='操作日志';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,7 +79,7 @@ CREATE TABLE `upms_organization` (
   `description` varchar(500) DEFAULT NULL COMMENT '组织描述',
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='组织';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='组织';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +102,7 @@ CREATE TABLE `upms_permission` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   `orders` bigint(20) NOT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='权限';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='权限';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +120,7 @@ CREATE TABLE `upms_role` (
   `ctime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `orders` bigint(20) NOT NULL COMMENT '排序',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='角色';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +139,7 @@ CREATE TABLE `upms_role_permission` (
   KEY `FK_Reference_24_idx` (`permission_id`),
   CONSTRAINT `FK_Reference_23` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`),
   CONSTRAINT `FK_Reference_24` FOREIGN KEY (`permission_id`) REFERENCES `upms_permission` (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +186,7 @@ CREATE TABLE `upms_user` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   `organization_id` int(10) DEFAULT NULL COMMENT '所属组织机构',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='用户';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +216,7 @@ CREATE TABLE `upms_user_role` (
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
   `role_id` int(10) DEFAULT NULL COMMENT '角色编号',
   PRIMARY KEY (`user_role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -204,4 +228,4 @@ CREATE TABLE `upms_user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-20 22:40:32
+-- Dump completed on 2020-06-26 23:18:21
