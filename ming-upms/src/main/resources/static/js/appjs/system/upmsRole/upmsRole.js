@@ -194,7 +194,7 @@ function getTree(roleId) {
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '400px', '500px' ],
-        content : prefix + '/getPermissionTree/'+roleId, // iframe的url
+        content : ctx + '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
         btn : ['确认'],
         yes : function(index, layero) {
             layer.close(index); //如果设定了yes回调，需进行手工关闭
