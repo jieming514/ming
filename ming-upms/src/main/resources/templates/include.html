@@ -69,4 +69,7 @@
 			th:src="@{/js/plugins/summernote/summernote-zh-CN.min.js}"></script>
 	<script src="../static/js/ajax-util.js"
 			th:src="@{/js/ajax-util.js}"></script>
+	<script th:inline="javascript">
+		var ctx = [[${#request.getContextPath()}]];
+	</script>
 </div>

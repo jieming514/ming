@@ -1,3 +1,4 @@
+var prefix = ctx + "/system/upmsUser";
 
 $().ready(function() {
 	validateRule();
@@ -12,7 +13,7 @@ $.validator.setDefaults({
 
 /*用户管理-头像*/
 function avatar() {
-    var url = 'system/user/profile/avatar';
+    var url = ctx + 'system/user/profile/avatar';
     $.modal.open("修改头像", url);
 }
 
@@ -22,7 +23,7 @@ function submitUserInfo() {
         $.ajax({
             cache : true,
             type : "POST",
-            url : "/system/upmsUser/update",
+            url : prefix + "/update",
             data : $('#form-user-edit').serialize(),// 你的formid
             async : false,
             error : function(request) {
@@ -46,7 +47,7 @@ function submitChangPassword() {
         $.ajax({
             cache : true,
             type : "POST",
-            url :"/system/upmsUser/resetPwd",
+            url : prefix + "/resetPwd",
             data : {
                 userId : function() {
                     return $("#userId").val();
@@ -86,7 +87,7 @@ function validateRule() {
                 email:true,
                 isEmail:true,
                 remote: {
-                    url: "/system/upmsUser/checkEmailUnique",
+                    url: prefix + "/checkEmailUnique",
                     type: "post",
                     dataType: "json",
                     data: {
@@ -109,7 +110,7 @@ function validateRule() {
                 required:true,
                 isPhone:true,
                 remote: {
-                    url: "/system/upmsUser/checkPhoneUnique",
+                    url: prefix + "/checkPhoneUnique",
                     type: "post",
                     dataType: "json",
                     data: {
@@ -152,7 +153,7 @@ function validateRule() {
             oldPassword:{
                 required:true,
                 remote: {
-                    url: "/system/upmsUser/checkPassword",
+                    url: prefix + "/checkPassword",
                     type: "post",
                     dataType: "json",
                     data: {
@@ -200,7 +201,7 @@ function getUserRole() {
     userId = $("#userId").val(),
 	$('#exampleTable').bootstrapTable({
         method : 'get', // 服务器数据的请求方式 get or post
-        url : "/system/upmsRole/selectRoleByUserId/"+userId, // 服务器数据的加载地址
+        url : ctx + "/system/upmsRole/selectRoleByUserId/"+userId, // 服务器数据的加载地址
         showRefresh : true,
         showToggle : true,
         showColumns : true,
@@ -262,7 +263,7 @@ function getTree(roleId) {
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '400px', '500px' ],
-        content : '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
+        content : ctx + '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
         btn : ['确认'],
         yes : function(index, layero) {
             layer.close(index); //如果设定了yes回调，需进行手工关闭

@@ -1,5 +1,5 @@
+var prefix = ctx + "/system/upmsUser";
 
-var prefix = "/system/upmsUser"
 $(function() {
 	load();
 	getOrganizationTree();
@@ -224,7 +224,7 @@ function getOrganizationTree() {
         }
     };
 
-    var url = "/system/upmsOrganization/getTree";
+    var url = ctx + "/system/upmsOrganization/getTree";
     $.ajax({
         type : "post",
         url : url,

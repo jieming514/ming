@@ -1,5 +1,5 @@
+var prefix = ctx + "/system/upmsPermission";
 
-var prefix = "/system/upmsPermission"
 $(function() {
 	load();
 });

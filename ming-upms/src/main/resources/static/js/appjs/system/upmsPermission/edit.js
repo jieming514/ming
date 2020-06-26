@@ -1,3 +1,5 @@
+var prefix = ctx + "/system/upmsPermission";
+
 $().ready(function() {
 	validateRule();
 });
@@ -11,7 +13,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/upmsPermission/update",
+		url : prefix + "/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {

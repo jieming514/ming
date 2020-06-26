@@ -1,4 +1,5 @@
-var prefix = "/system/upmsRole"
+var prefix = ctx + "/system/upmsRole";
+
 $(function() {
 	load();
 });
@@ -106,7 +107,7 @@ function remove(userId) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : prefix+"/deleteUserRoleInfo",
+            url : prefix + "/deleteUserRoleInfo",
             type : "post",
             data : {
                 'roleId' : roleId,

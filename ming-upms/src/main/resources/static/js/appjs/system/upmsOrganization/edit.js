@@ -1,3 +1,5 @@
+var prefix = ctx + "/system/upmsOrganization";
+
 $().ready(function() {
 	validateRule();
 });
@@ -11,7 +13,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/upmsOrganization/update",
+		url : prefix + "/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {

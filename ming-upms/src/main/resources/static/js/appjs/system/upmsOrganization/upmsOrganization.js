@@ -1,5 +1,5 @@
+var prefix = ctx + "/system/upmsOrganization";
 
-var prefix = "/system/upmsOrganization"
 $(function() {
 	load();
 });

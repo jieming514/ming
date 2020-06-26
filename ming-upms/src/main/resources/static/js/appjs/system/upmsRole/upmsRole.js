@@ -1,5 +1,5 @@
+var prefix = ctx + "/system/upmsRole";
 
-var prefix = "/system/upmsRole"
 $(function() {
 	load();
 });
@@ -46,22 +46,22 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
+								{
 									field : 'roleId',
 									align : 'center',
 									title : '编号' 
 								},
-																{
+								{
 									field : 'name',
 									align : 'center',
 									title : '角色名称' 
 								},
-																{
+								{
 									field : 'title',
 									align : 'center',
 									title : '角色标题' 
 								},
-																{
+								{
 									field : 'description', 
 									title : '角色描述' 
 								},
@@ -194,7 +194,7 @@ function getTree(roleId) {
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '400px', '500px' ],
-        content : '/system/upmsPermission/getPermissionTree/'+roleId, // iframe的url
+        content : prefix + '/getPermissionTree/'+roleId, // iframe的url
         btn : ['确认'],
         yes : function(index, layero) {
             layer.close(index); //如果设定了yes回调，需进行手工关闭

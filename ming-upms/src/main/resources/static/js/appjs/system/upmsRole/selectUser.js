@@ -1,4 +1,5 @@
-var prefix = "/system/upmsRole"
+var prefix = ctx + "/system/upmsRole";
+
 $(function() {
 	load();
 });
@@ -8,7 +9,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : "/system/upmsUser/list", // 服务器数据的加载地址
+						url : ctx + "/system/upmsUser/list", // 服务器数据的加载地址
 						showRefresh : true,
 						showToggle : true,
 						showColumns : true,

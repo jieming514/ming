@@ -1,3 +1,4 @@
+var prefix = ctx + "/system/upmsUser";
 
 $().ready(function() {
 	validateRule();
@@ -12,7 +13,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/upmsUser/update",
+		url : prefix + "/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -56,7 +57,7 @@ function getTree() {
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '300px', '400px' ],
-        content : '/system/upmsOrganization/getOrganizationTree', // iframe的url
+        content : ctx + '/system/upmsOrganization/getOrganizationTree', // iframe的url
         btn : ['确认', '取消'],
         success : function(layero, index) {
             var body = layer.getChildFrame('body', index);

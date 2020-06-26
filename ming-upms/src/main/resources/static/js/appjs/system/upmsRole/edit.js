@@ -1,3 +1,5 @@
+var prefix = ctx + "/system/upmsRole";
+
 $().ready(function() {
 	validateRule();
 	getRoleHasPermission(roleId);
@@ -15,7 +17,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/upmsRole/update",
+		url : prefix + "/update",
 		data : data,// 你的formid
 		async : false,
 		error : function(request) {
@@ -65,7 +67,7 @@ function validateRule() {
 }
 
 function getRoleHasPermission(roleId) {
-    var url = "/system/upmsPermission/selectRoleHasPermission/" + roleId;
+    var url = ctx + "/system/upmsPermission/selectRoleHasPermission/" + roleId;
     var settings = {
         check: {
             enable: true ,//显示复选框
