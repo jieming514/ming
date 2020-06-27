@@ -38,7 +38,7 @@ spring:
       additional-paths: src/main/java
       exclude: classpath:/static/**
   threadpool:
-    corePoolSize: 50
-    maxPoolSize: 200
-    queueCapacity: 1000
-    keepAliveSeconds: 300
+    corePoolSize: 10
+    maxPoolSize: 50
+    queueCapacity: 100
+    keepAliveSeconds: 30
