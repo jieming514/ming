@@ -83,7 +83,7 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		List<Tree<UpmsPermissionDO>> trees = new ArrayList<Tree<UpmsPermissionDO>>();
 		List<UpmsPermissionDO> upmsPermissionDOSet = upmsPermissionDao.selectPermissionByUserId(userId);
 		for (UpmsPermissionDO permission : upmsPermissionDOSet) {
-			Tree<UpmsPermissionDO> tree = new Tree<>();
+			Tree<UpmsPermissionDO> tree = new Tree<UpmsPermissionDO>();
 			tree.setId(permission.getPermissionId().toString());
 			tree.setText(permission.getName());
 			tree.setParentId(permission.getPid().toString());
@@ -126,11 +126,11 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		List<Tree<UpmsPermissionDO>> trees = new ArrayList<Tree<UpmsPermissionDO>>();
 		List<UpmsPermissionDO> upmsPermissionList = selectPermissionByRoleId(roleId);
 		for (UpmsPermissionDO permissionDO : upmsPermissionList) {
-			Tree tree = new Tree();
+			Tree<UpmsPermissionDO> tree = new Tree<UpmsPermissionDO>();
 			tree.setId(permissionDO.getPermissionId().toString());
 			tree.setText(permissionDO.getName());
 			tree.setParentId(permissionDO.getPid().toString());
-			Map<String, Object> state = new HashMap<>();
+			Map<String, Object> state = new HashMap<String, Object>();
 			state.put("opened", true);
 			tree.setState(state);
 			trees.add(tree);
@@ -148,7 +148,7 @@ public class UpmsPermissionServiceImpl implements UpmsPermissionService {
 		paramMap.put("roleId", roleId);
 		List<UpmsRolePermissionDO> rolePermissionDOList = upmsRolePermissionDao.list(paramMap);
 		//获取所有的资源树
-		List<UpmsPermissionDO> resultList = upmsPermissionDao.list(new HashMap<>());
+		List<UpmsPermissionDO> resultList = upmsPermissionDao.list(new HashMap<String, Object>());
 		for (UpmsPermissionDO result : resultList) {
 			for (UpmsRolePermissionDO rolePermissionDO : rolePermissionDOList) {
 				result.setChecked(false);
