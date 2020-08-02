@@ -3,7 +3,7 @@
 -- Host: localhost    Database: ming
 -- ------------------------------------------------------
 -- Server version	8.0.11
-
+use ming;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -135,10 +135,10 @@ CREATE TABLE `upms_role_permission` (
   `role_id` int(10) unsigned NOT NULL COMMENT '角色编号',
   `permission_id` int(10) unsigned NOT NULL COMMENT '权限编号',
   PRIMARY KEY (`role_permission_id`),
-  KEY `FK_Reference_23` (`role_id`),
-  KEY `FK_Reference_24_idx` (`permission_id`),
-  CONSTRAINT `FK_Reference_23` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`),
-  CONSTRAINT `FK_Reference_24` FOREIGN KEY (`permission_id`) REFERENCES `upms_permission` (`permission_id`)
+  KEY `FK_urp_role_id` (`role_id`),
+  KEY `FK_urp_permission_id` (`permission_id`),
+  CONSTRAINT `FK_urp_role_id` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`),
+  CONSTRAINT `FK_urp_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `upms_permission` (`permission_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -200,7 +200,11 @@ CREATE TABLE `upms_user_organization` (
   `user_organization_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
   `organization_id` int(10) unsigned NOT NULL COMMENT '组织编号',
-  PRIMARY KEY (`user_organization_id`)
+  PRIMARY KEY (`user_organization_id`),
+  KEY `FK_uuo_user_id` (`user_id`),
+  KEY `FK_uuo_organization_id` (`organization_id`),
+  CONSTRAINT `FK_uuo_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`),
+  CONSTRAINT `FK_uuo_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `upms_organization` (`organization_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户组织关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,8 +218,12 @@ DROP TABLE IF EXISTS `upms_user_role`;
 CREATE TABLE `upms_user_role` (
   `user_role_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
-  `role_id` int(10) DEFAULT NULL COMMENT '角色编号',
-  PRIMARY KEY (`user_role_id`)
+  `role_id` int(10) unsigned NOT NULL COMMENT '角色编号',
+  PRIMARY KEY (`user_role_id`),
+  KEY `FK_uur_user_id` (`user_id`),
+  KEY `FK_uur_role_id` (`role_id`),
+  CONSTRAINT `FK_uur_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`),
+  CONSTRAINT `FK_uur_role_id_1` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
