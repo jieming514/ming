@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.bootdo.common.utils;
+package com.ming.common.utils;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 

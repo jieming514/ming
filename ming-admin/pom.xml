@@ -14,16 +14,19 @@
 
 
     <dependencies>
+        <!--SpringWeb框架-->
         <dependency>
-            <groupId>com.ming</groupId>
-            <artifactId>ming-common</artifactId>
-            <version>0.0.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
+
     </dependencies>
-
-
-
-
-
-
+    
 </project>

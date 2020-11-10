@@ -1,4 +1,4 @@
-package com.bootdo.common.utils;
+package com.ming.common.utils;
 
 /* author：zss
  * 日期：2017年3月31日

@@ -1,4 +1,4 @@
-package com.ming.upms.common.util;
+package com.ming.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

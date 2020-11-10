@@ -16,17 +16,38 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ${className}Dao {
 
+    /**
+     * 通过 ${pk.attrname} 查询 ${comments} 信息
+     */
 	${className}DO get(${pk.attrType} ${pk.attrname});
-	
+
+    /**
+     * 查询 ${comments} 列表（分页）
+     */
 	List<${className}DO> list(Map<String,Object> map);
-	
+
+    /**
+     * 查询 ${comments} 总记录数
+     */
 	int count(Map<String,Object> map);
-	
+
+    /**
+     * 保存 ${comments} 记录
+     */
 	int save(${className}DO ${classname});
-	
+
+    /**
+     * 更新 ${comments} 记录
+     */
 	int update(${className}DO ${classname});
-	
+
+    /**
+     * 删除 ${comments} 记录
+     */
 	int remove(${pk.attrType} ${pk.columnName});
-	
+
+    /**
+     * 批量删除 ${comments} 记录
+     */
 	int batchRemove(${pk.attrType}[] ${pk.attrname}s);
 }

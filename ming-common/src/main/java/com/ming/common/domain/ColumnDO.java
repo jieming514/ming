@@ -1,4 +1,4 @@
-package com.ming.upms.common.domain;
+package com.ming.common.domain;
 
 /**
  * 列信息类

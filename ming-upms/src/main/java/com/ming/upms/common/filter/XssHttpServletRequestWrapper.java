@@ -1,6 +1,6 @@
 package com.ming.upms.common.filter;
 
-import com.ming.upms.common.util.JsoupUtil;
+import com.ming.common.utils.JsoupUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

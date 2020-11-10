@@ -1,6 +1,6 @@
-package com.ming.upms.common.util;
+package com.ming.common.utils;
 
-import com.ming.upms.common.domain.Tree;
+import com.ming.common.domain.Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;

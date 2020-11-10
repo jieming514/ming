@@ -1,4 +1,4 @@
-package com.ming.upms.common.domain;
+package com.ming.common.domain;
 
 import java.util.List;
 

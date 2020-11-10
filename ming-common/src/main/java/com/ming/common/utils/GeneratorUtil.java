@@ -1,8 +1,7 @@
-package com.ming.upms.common.util;
+package com.ming.common.utils;
 
-import com.ming.common.utils.DateUtils;
-import com.ming.upms.common.domain.ColumnDO;
-import com.ming.upms.common.domain.TableDO;
+import com.ming.common.domain.ColumnDO;
+import com.ming.common.domain.TableDO;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;

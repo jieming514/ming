@@ -1,6 +1,6 @@
 package com.ming.upms.system.service;
 
-import com.ming.upms.common.domain.Tree;
+import com.ming.common.domain.Tree;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 
 import java.util.List;

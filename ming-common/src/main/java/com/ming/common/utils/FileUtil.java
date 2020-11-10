@@ -1,4 +1,4 @@
-package com.bootdo.common.utils;
+package com.ming.common.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

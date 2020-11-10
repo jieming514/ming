@@ -1,9 +1,9 @@
 package com.ming.upms.common.aspect;
 
 import com.ming.upms.common.annotation.Log;
-import com.ming.upms.common.util.HttpContextUtils;
-import com.ming.upms.common.util.IPUtils;
-import com.ming.upms.common.util.JSONUtils;
+import com.ming.common.utils.HttpContextUtils;
+import com.ming.common.utils.IPUtils;
+import com.ming.common.utils.JSONUtils;
 import com.ming.upms.common.util.ShiroUtils;
 import com.ming.upms.system.domain.UpmsLogDO;
 import com.ming.upms.system.domain.UpmsUserDO;

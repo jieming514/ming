@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 操作日志
- * 
+ * 用户操作日志
+ *
  * @author ming
  * @email jie_ming514@163.com
  * @date 2020-04-06 13:31:45
@@ -26,47 +26,53 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/upmsLog")
 public class UpmsLogController {
-	@Autowired
-	private UpmsLogService upmsLogService;
 
-	@ApiOperation(value="用户操作查看页面", notes="用户操作查看页面")
-	@GetMapping()
-	@RequiresPermissions("system:upmsLog:upmsLog")
-	String UpmsLog(){
-	    return "system/upmsLog/upmsLog";
-	}
 
-	@ApiOperation(value="用户操作列表", notes="用户操作列表")
-	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:upmsLog:upmsLog")
-	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
+    @Autowired
+    private UpmsLogService upmsLogService;
+
+
+    @ApiOperation(value = "用户操作查看页面", notes = "用户操作查看页面")
+    @GetMapping()
+    @RequiresPermissions("system:upmsLog:read")
+    public String UpmsLog() {
+        return "system/upmsLog/upmsLog";
+    }
+
+
+    @ApiOperation(value = "用户操作列表", notes = "用户操作列表")
+    @ResponseBody
+    @GetMapping("/list")
+    @RequiresPermissions("system:upmsLog:read")
+    public PageUtils list(@RequestParam Map<String, Object> params) {
+        //查询列表数据
         Query query = new Query(params);
-		List<UpmsLogDO> upmsLogList = upmsLogService.list(query);
-		int total = upmsLogService.count(query);
-		PageUtils pageUtils = new PageUtils(upmsLogList, total);
-		return pageUtils;
-	}
+        List<UpmsLogDO> upmsLogList = upmsLogService.list(query);
+        int total = upmsLogService.count(query);
+        PageUtils pageUtils = new PageUtils(upmsLogList, total);
+        return pageUtils;
+    }
 
-	@ApiOperation(value="清理日志接口", notes="清理日志接口")
-	@PostMapping( "/remove")
-	@ResponseBody
-	@RequiresPermissions("system:upmsLog:remove")
-	public R remove( Long logId){
-		if(upmsLogService.remove(logId)>0){
-		return R.ok();
-		}
-		return R.error();
-	}
 
-	@ApiOperation(value="批量清理用户日志接口", notes="批量清理用户日志接口")
-	@PostMapping( "/batchRemove")
-	@ResponseBody
-	@RequiresPermissions("system:upmsLog:batchRemove")
-	public R remove(@RequestParam("ids[]") Long[] logIds){
-		upmsLogService.batchRemove(logIds);
-		return R.ok();
-	}
-	
+    @ApiOperation(value = "清理日志接口", notes = "清理日志接口")
+    @PostMapping("/remove")
+    @ResponseBody
+    @RequiresPermissions("system:upmsLog:remove")
+    public R remove(Long logId) {
+        if (upmsLogService.remove(logId) > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+
+    @ApiOperation(value = "批量清理用户日志接口", notes = "批量清理用户日志接口")
+    @PostMapping("/batchRemove")
+    @ResponseBody
+    @RequiresPermissions("system:upmsLog:batchRemove")
+    public R remove(@RequestParam("ids[]") Long[] logIds) {
+        upmsLogService.batchRemove(logIds);
+        return R.ok();
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.ming.upms.system.service.impl;
 
-import com.ming.upms.common.domain.Tree;
-import com.ming.upms.common.util.BuildTree;
+import com.ming.common.domain.Tree;
+import com.ming.common.utils.BuildTree;
 import com.ming.upms.system.dao.UpmsOrganizationDao;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
 import com.ming.upms.system.service.UpmsOrganizationService;

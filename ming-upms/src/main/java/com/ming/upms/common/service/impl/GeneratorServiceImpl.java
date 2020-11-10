@@ -2,7 +2,7 @@ package com.ming.upms.common.service.impl;
 
 import com.ming.upms.common.dao.GeneratorDao;
 import com.ming.upms.common.service.GeneratorService;
-import com.ming.upms.common.util.GeneratorUtil;
+import com.ming.common.utils.GeneratorUtil;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

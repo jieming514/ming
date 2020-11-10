@@ -1,11 +1,11 @@
-package com.ming.upms.common.util;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package com.ming.common.utils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * xss非法标签过滤

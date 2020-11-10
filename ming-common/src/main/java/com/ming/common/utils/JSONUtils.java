@@ -1,4 +1,4 @@
-package com.ming.upms.common.util;
+package com.ming.common.utils;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;

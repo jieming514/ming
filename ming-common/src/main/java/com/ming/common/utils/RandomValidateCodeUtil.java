@@ -1,4 +1,4 @@
-package com.ming.upms.common.util;
+package com.ming.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,8 +101,8 @@ public class RandomValidateCodeUtil {
         //平移
         g.translate(random.nextInt(3), random.nextInt(3));
         //旋转
-        int angle =  random.nextInt(30) - 15;
-        g.rotate(Math.toRadians(angle),27 * i, 16);
+        // int angle =  random.nextInt(30) - 15;
+        // g.rotate(Math.toRadians(angle),27 * i, 16);
         g.drawString(rand, 15 * i, 16);
         g.setTransform(orig);
         return randomString;
