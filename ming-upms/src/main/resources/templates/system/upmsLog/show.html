@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">编号：</label>
+                            <div class="col-sm-9">
+                                <input id="logId" name="logId" th:value="${upmsLog.logId}" class="form-control" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">操作描述：</label>
+                            <div class="col-sm-9">
+                                <input id="description" name="description" th:value="${upmsLog.description}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">操作用户：</label>
+                            <div class="col-sm-9">
+                                <input id="use" name="username" th:value="${upmsLog.username}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label class="col-sm-2 control-label">操作时间：</label>
+                            <div class="col-sm-9">
+                                <input id="startTime" name="startTime" class="form-control" th:value="${upmsLog.startTime}"
+                                       value="0" type="hidden" readonly="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">消耗时间(ms)：</label>
+                            <div class="col-sm-9">
+                                <input id="spendTime" name="spendTime" class="form-control" type="text" th:value="${upmsLog.spendTime}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">根路径：</label>
+                            <div class="col-sm-9">
+                                <input id="basePath" name="basePath" th:value="${upmsLog.basePath}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">URI：</label>
+                            <div class="col-sm-9">
+                                <input id="uri" name="uri" th:value="${upmsLog.uri}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">请求类型：</label>
+                            <div class="col-sm-9">
+                                <input id="method" name="method" th:value="${upmsLog.method}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">请求参数：</label>
+                            <div class="col-sm-9">
+                                <pre id="parameter" name="parameter" th:text="${upmsLog.parameter}"></pre>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">IP地址：</label>
+                            <div class="col-sm-9">
+                                <input id="ip" name="ip" th:value="${upmsLog.ip}" class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户设备：</label>
+                            <div class="col-sm-9">
+                                <pre id="userAgent" name="userAgent" th:text="${upmsLog.userAgent}"></pre>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+
+</body>
+</html>

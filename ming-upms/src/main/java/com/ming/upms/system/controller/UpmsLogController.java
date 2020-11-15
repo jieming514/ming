@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -74,5 +75,15 @@ public class UpmsLogController {
         upmsLogService.batchRemove(logIds);
         return R.ok();
     }
+
+    @ApiOperation(value = "通过ID获取日志详细信息", notes = "通过ID获取日志详细信息")
+    @GetMapping("/show/{logId}")
+    @RequiresPermissions("system:upmsLog:read")
+    public String show(@PathVariable("logId") Long logId, Model model) {
+        UpmsLogDO upmsLogDO = upmsLogService.get(logId);
+        model.addAttribute("upmsLog", upmsLogDO);
+        return "system/upmsLog/show";
+    }
+
 
 }

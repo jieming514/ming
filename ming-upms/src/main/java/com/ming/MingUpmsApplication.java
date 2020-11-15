@@ -4,6 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
+/**
+ * @author jie_ming514
+ */
 @ServletComponentScan
 @SpringBootApplication
 public class MingUpmsApplication {

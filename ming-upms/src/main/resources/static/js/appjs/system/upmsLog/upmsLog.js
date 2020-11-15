@@ -48,7 +48,8 @@ function load() {
 								},
 																{
 									field : 'logId', 
-									title : '编号' 
+									title : '编号',
+									align : 'center'
 								},
 																{
 									field : 'description', 
@@ -60,15 +61,17 @@ function load() {
 								},
 																{
 									field : 'startTime', 
-									title : '操作时间' 
+									title : '操作时间',
+									align : 'center'
 								},
 																{
 									field : 'spendTime', 
-									title : '消耗时间' 
+									title : '消耗时间(ms)',
+									align : 'center'
 								},
 																{
 									field : 'basePath', 
-									title : '根路径' 
+									title : '根路径'
 								},
 																{
 									field : 'uri', 
@@ -76,19 +79,13 @@ function load() {
 								},
 																{
 									field : 'method', 
-									title : '请求类型' 
-								},
-																{
-									field : 'parameter', 
-									title : '参数'
-								},
-																{
-									field : 'userAgent', 
-									title : '用户标识' 
+									title : '请求类型',
+									align : 'center'
 								},
 																{
 									field : 'ip', 
-									title : 'IP地址' 
+									title : 'IP地址',
+									align : 'center'
 								},
 																{
 									field : 'result', 
@@ -102,10 +99,17 @@ function load() {
                                         return "<span class='label label-danger'>未知</span>";
 									}
 								},
-																{
-									field : 'permissions', 
-									title : '权限值' 
-								} ]
+								{
+								    field : 'id',
+								    title : '操作',
+								    align : 'center',
+                                    formatter : function(value, row, index) {
+                                        var s = '<a class="btn btn-primary btn-sm " href="#" mce_href="#" title="详情" onclick="show('
+                                                + row.logId
+                                                + ')"><i class="fa fa-search"></i></a> ';
+                                        return s;
+                                    }
+								}]
 					});
 }
 function reLoad() {
@@ -167,4 +171,20 @@ function batchRemove() {
 	}, function() {
 
 	});
+}
+/* 展示详情信息*/
+function show(logId) {
+    layer.open({
+        type : 2,
+        title : '日志详情',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '600px' ],
+        content : prefix + '/show/' + logId, // iframe的url
+        btn : ['关闭'],
+        yes : function(index, layero) {
+            layer.close(index); //如果设定了yes回调，需进行手工关闭
+        }
+    });
+
 }

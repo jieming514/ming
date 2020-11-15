@@ -151,7 +151,7 @@ public class UpmsRoleController {
 
     @ApiOperation(value = "角色授权用户页面", notes = "角色授权用户页面")
     @GetMapping("/authRole/{roleId}")
-    @RequiresPermissions("system:upmsRole:upmsRole")
+    @RequiresPermissions("system:upmsRole:read")
     public String authRole(@PathVariable("roleId") Long roleId, Model model) {
         UpmsRoleDO upmsRoleDO = upmsRoleService.get(roleId);
         model.addAttribute("upmsRoleDO", upmsRoleDO);
@@ -161,7 +161,7 @@ public class UpmsRoleController {
 
     @ApiOperation(value = "查询授权的用户列表", notes = "查询授权的用户列表")
     @GetMapping("/selectAuthRoleUser")
-    @RequiresPermissions("system:upmsRole:upmsRole")
+    @RequiresPermissions("system:upmsRole:read")
     @ResponseBody
     public PageUtils selectAuthRoleUserByRoleId(@RequestParam Map<String, Object> params) {
         Query query = new Query(params);
