@@ -1,2 +1,31 @@
+# 项目配置
+ming:
+  name: ming
+  version: 1.0.0
+
 server:
   port: 80
+  session-timeout: 1800
+
+# Spring配置
+spring:
+  # 模板引擎
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    active: test
+
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.ming.upms.**.domain
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
+

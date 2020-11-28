@@ -3,7 +3,7 @@
 -- Host: localhost    Database: ming
 -- ------------------------------------------------------
 -- Server version	8.0.11
-use ming;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -14,6 +14,12 @@ use ming;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Position to start replication or point-in-time recovery from
+--
+
+-- CHANGE MASTER TO MASTER_LOG_FILE='binlog.000030', MASTER_LOG_POS=155;
 
 --
 -- Table structure for table `upms_config`
@@ -62,7 +68,7 @@ CREATE TABLE `upms_log` (
   `result` tinyint(2) DEFAULT NULL COMMENT '响应状态',
   PRIMARY KEY (`log_id`),
   KEY `log_id` (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8 COMMENT='操作日志';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,9 +143,9 @@ CREATE TABLE `upms_role_permission` (
   PRIMARY KEY (`role_permission_id`),
   KEY `FK_urp_role_id` (`role_id`),
   KEY `FK_urp_permission_id` (`permission_id`),
-  CONSTRAINT `FK_urp_role_id` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`),
-  CONSTRAINT `FK_urp_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `upms_permission` (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+  CONSTRAINT `FK_urp_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `upms_permission` (`permission_id`),
+  CONSTRAINT `FK_urp_role_id` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,8 +209,8 @@ CREATE TABLE `upms_user_organization` (
   PRIMARY KEY (`user_organization_id`),
   KEY `FK_uuo_user_id` (`user_id`),
   KEY `FK_uuo_organization_id` (`organization_id`),
-  CONSTRAINT `FK_uuo_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`),
-  CONSTRAINT `FK_uuo_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `upms_organization` (`organization_id`)
+  CONSTRAINT `FK_uuo_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `upms_organization` (`organization_id`),
+  CONSTRAINT `FK_uuo_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户组织关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -222,8 +228,8 @@ CREATE TABLE `upms_user_role` (
   PRIMARY KEY (`user_role_id`),
   KEY `FK_uur_user_id` (`user_id`),
   KEY `FK_uur_role_id` (`role_id`),
-  CONSTRAINT `FK_uur_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`),
-  CONSTRAINT `FK_uur_role_id_1` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`)
+  CONSTRAINT `FK_uur_role_id_1` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`),
+  CONSTRAINT `FK_uur_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -236,4 +242,4 @@ CREATE TABLE `upms_user_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-26 23:18:21
+-- Dump completed on 2020-11-28 16:01:30
