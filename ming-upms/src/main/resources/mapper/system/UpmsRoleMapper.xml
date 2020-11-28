@@ -3,102 +3,103 @@
 
 <mapper namespace="com.ming.upms.system.dao.UpmsRoleDao">
 
-	<select id="get" resultType="com.ming.upms.system.domain.UpmsRoleDO">
-		select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role where role_id = #{value}
-	</select>
+    <select id="get" resultType="com.ming.upms.system.domain.UpmsRoleDO">
+        select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role where role_id = #{value}
+    </select>
 
-	<select id="list" resultType="com.ming.upms.system.domain.UpmsRoleDO">
-		select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role
-        <where>  
-			<if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="title != null and title != ''"> and title = #{title} </if>
-			<if test="description != null and description != ''"> and description = #{description} </if>
-			<if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
-			<if test="orders != null and orders != ''"> and orders = #{orders} </if>
-		</where>
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsRoleDO">
+        select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role
+        <where>
+            <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="title != null and title != ''">and title = #{title}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
+            <if test="orders != null and orders != ''">and orders = #{orders}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by orders asc, role_id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from upms_role
-		<where>
-			<if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="title != null and title != ''"> and title = #{title} </if>
-			<if test="description != null and description != ''"> and description = #{description} </if>
-			<if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
-			<if test="orders != null and orders != ''"> and orders = #{orders} </if>
-		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsRoleDO" useGeneratedKeys="true" keyProperty="roleId">
-		insert into upms_role
-		(
-			`name`, 
-			`title`, 
-			`description`, 
-			`ctime`, 
-			`orders`
-		)
-		values
-		(
-			#{name}, 
-			#{title}, 
-			#{description}, 
-			now(),
-			#{orders}
-		)
-	</insert>
-	 
-	<update id="update" parameterType="com.ming.upms.system.domain.UpmsRoleDO">
-		update upms_role 
-		<set>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="title != null">`title` = #{title}, </if>
-			<if test="description != null">`description` = #{description}, </if>
-			<if test="ctime != null">`ctime` = #{ctime}, </if>
-			<if test="orders != null">`orders` = #{orders}</if>
-		</set>
-		where role_id = #{roleId}
-	</update>
-	
-	<delete id="remove">
-		delete from upms_role where role_id = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from upms_role where role_id in 
-		<foreach item="roleId" collection="array" open="(" separator="," close=")">
-			#{roleId}
-		</foreach>
-	</delete>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<sql id="selectRoleByUserIdWhere">
-		 from upms_role ur
-		 left join upms_user_role uur on ur.role_id = uur.role_id
-		where uur.user_id = #{userId}
-	</sql>
+    <select id="count" resultType="int">
+        select count(*) from upms_role
+        <where>
+            <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="title != null and title != ''">and title = #{title}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
+            <if test="orders != null and orders != ''">and orders = #{orders}</if>
+        </where>
+    </select>
 
-	<select id="selectRoleByUserId" resultType="UpmsRoleDO">
-		select ur.`role_id`,ur.`name`,ur.`title`,ur.`description`,ur.`ctime`,ur.`orders`
-		<include refid="selectRoleByUserIdWhere"></include>
-	</select>
+    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsRoleDO" useGeneratedKeys="true"
+            keyProperty="roleId">
+        insert into upms_role
+        (
+        `name`,
+        `title`,
+        `description`,
+        `ctime`,
+        `orders`
+        )
+        values
+        (
+        #{name},
+        #{title},
+        #{description},
+        now(),
+        #{orders}
+        )
+    </insert>
 
-	<select id="selectRoleCountByUserId" resultType="int">
-		select count(1)
-		<include refid="selectRoleByUserIdWhere"></include>
-	</select>
+    <update id="update" parameterType="com.ming.upms.system.domain.UpmsRoleDO">
+        update upms_role
+        <set>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="title != null">`title` = #{title},</if>
+            <if test="description != null">`description` = #{description},</if>
+            <if test="ctime != null">`ctime` = #{ctime},</if>
+            <if test="orders != null">`orders` = #{orders}</if>
+        </set>
+        where role_id = #{roleId}
+    </update>
+
+    <delete id="remove">
+        delete from upms_role where role_id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from upms_role where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
+
+    <sql id="selectRoleByUserIdWhere">
+        from upms_role ur
+        left join upms_user_role uur on ur.role_id = uur.role_id
+        where uur.user_id = #{userId}
+    </sql>
+
+    <select id="selectRoleByUserId" resultType="com.ming.upms.system.domain.UpmsRoleDO">
+        select ur.`role_id`,ur.`name`,ur.`title`,ur.`description`,ur.`ctime`,ur.`orders`
+        <include refid="selectRoleByUserIdWhere"></include>
+    </select>
+
+    <select id="selectRoleCountByUserId" resultType="int">
+        select count(1)
+        <include refid="selectRoleByUserIdWhere"></include>
+    </select>
 
 
 </mapper>

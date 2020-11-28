@@ -50,6 +50,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/getVerify","anon");
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/plugins/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/docs/**", "anon");
@@ -57,7 +58,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/files/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
-        //filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");

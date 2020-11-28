@@ -23,12 +23,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- thymeleaf 依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
         <!-- 数据监控 actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

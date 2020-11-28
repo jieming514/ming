@@ -10,7 +10,6 @@
 <p>因本人姓“明”，所以以ming作为项目名；网上看到的项目大都是公共模块的项目。所以希望整合出一整套后台管理系统。</p>
 <p>ming 项目是基于SpringBoot2的一整套后端管理平台，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、人事办公。旨在通过实战分享个人经验简洁高效，减少过渡封装，展现技术本质,以技术服务于业务。</p>
 
-
 ## 项目模块
 
 ### 1. 项目功能
@@ -52,7 +51,7 @@
 
 ### 2.前端技术
 
-  - JS框架：jQuery
+  - JS框架：jQuery、BootStrap
   - 弹出层：layer
   - 树结构控件：zTree
   - 数据表格：bootstrap-table
@@ -85,7 +84,7 @@
   
 #### 启动
 
-  - com.ming.MingUpmsApplication 类的 main() 方法
+  - 打开`ming-admin`模块下的 `com.ming.MingAdminApplication` 类的 main() 方法进行启动。
 
 #### 登录
 

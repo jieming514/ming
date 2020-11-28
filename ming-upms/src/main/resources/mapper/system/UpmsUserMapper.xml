@@ -2,58 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ming.upms.system.dao.UpmsUserDao">
 
-    <resultMap id="UpmsUserResult" type="UpmsUserDO">
-        <id property="userId"        column="user_id"/>
-        <result property="username"  column="username"/>
-        <result property="password"  column="password"/>
-        <result property="salt"      column="salt"/>
-        <result property="realname"  column="realname"/>
-        <result property="avatar"    column="avatar"/>
-        <result property="phone"     column="phone"/>
-        <result property="email"     column="email"/>
-        <result property="sex"       column="sex"/>
-        <result property="locked"    column="locked"/>
-        <result property="ctime"     column="ctime"/>
-        <result property="organizationId"     column="organization_id"/>
-        <association property="upmsOrganizationDO"    column="organization_id" javaType="UpmsOrganizationDO" resultMap="UpmsOrganizationResult" />
+    <resultMap id="UpmsUserResult" type="com.ming.upms.system.domain.UpmsUserDO">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="salt" column="salt"/>
+        <result property="realname" column="realname"/>
+        <result property="avatar" column="avatar"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="locked" column="locked"/>
+        <result property="ctime" column="ctime"/>
+        <result property="organizationId" column="organization_id"/>
+        <association property="upmsOrganizationDO" column="organization_id"
+                     javaType="com.ming.upms.system.domain.UpmsOrganizationDO"
+                     resultMap="UpmsOrganizationResult"/>
     </resultMap>
 
-    <resultMap id="UpmsOrganizationResult" type="UpmsOrganizationDO">
-        <id     property="organizationId"   column="organization_id"/>
-        <result property="name"             column="name"/>
-        <result property="pid"              column="pid"/>
-        <result property="description"      column="description"/>
-        <result property="ctime"            column="ctime"/>
+    <resultMap id="UpmsOrganizationResult" type="com.ming.upms.system.domain.UpmsOrganizationDO">
+        <id property="organizationId" column="organization_id"/>
+        <result property="name" column="name"/>
+        <result property="pid" column="pid"/>
+        <result property="description" column="description"/>
+        <result property="ctime" column="ctime"/>
     </resultMap>
 
 
     <sql id="selectUserVo">
-        select uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`,
-               uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
+        select
+        uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`,
+        uu.`organization_id`,
+        uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
     </sql>
 
     <sql id="selectUserVoWhere">
         from upms_user uu
         left join upms_organization uo on uu.organization_id = uo.organization_id
         <where>
-            <if test="userId != null and userId != ''"> and uu.user_id = #{userId} </if>
-            <if test="username != null and username != ''"> and uu.username like concat('%', #{username}, '%') </if>
-            <if test="password != null and password != ''"> and uu.password = #{password} </if>
-            <if test="salt != null and salt != ''"> and uu.salt = #{salt} </if>
-            <if test="realname != null and realname != ''"> and uu.realname like concat('%', #{realname}, '%') </if>
-            <if test="avatar != null and avatar != ''"> and uu.avatar = #{avatar} </if>
-            <if test="phone != null and phone != ''"> and uu.phone like concat('%', #{phone}, '%') </if>
-            <if test="email != null and email != ''"> and uu.email = #{email} </if>
-            <if test="sex != null and sex != ''"> and uu.sex = #{sex} </if>
-            <if test="organizationId != null and organizationId != ''"> and uu.organization_id = #{organizationId} </if>
-            <if test="locked != null and locked != ''"> and uu.locked = #{locked} </if>
-            <if test="ctime != null and ctime != ''"> and uu.ctime = #{ctime} </if>
+            <if test="userId != null and userId != ''">and uu.user_id = #{userId}</if>
+            <if test="username != null and username != ''">and uu.username like concat('%', #{username}, '%')</if>
+            <if test="password != null and password != ''">and uu.password = #{password}</if>
+            <if test="salt != null and salt != ''">and uu.salt = #{salt}</if>
+            <if test="realname != null and realname != ''">and uu.realname like concat('%', #{realname}, '%')</if>
+            <if test="avatar != null and avatar != ''">and uu.avatar = #{avatar}</if>
+            <if test="phone != null and phone != ''">and uu.phone like concat('%', #{phone}, '%')</if>
+            <if test="email != null and email != ''">and uu.email = #{email}</if>
+            <if test="sex != null and sex != ''">and uu.sex = #{sex}</if>
+            <if test="organizationId != null and organizationId != ''">and uu.organization_id = #{organizationId}</if>
+            <if test="locked != null and locked != ''">and uu.locked = #{locked}</if>
+            <if test="ctime != null and ctime != ''">and uu.ctime = #{ctime}</if>
         </where>
     </sql>
 
 
     <select id="get" resultMap="UpmsUserResult">
-        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id` from upms_user where user_id = #{value}
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`,
+        `organization_id` from upms_user where user_id = #{value}
     </select>
 
     <select id="list" resultMap="UpmsUserResult">
@@ -77,7 +82,8 @@
         <include refid="selectUserVoWhere"/>
     </select>
 
-    <insert id="save" parameterType="UpmsUserDO" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsUserDO"
+            useGeneratedKeys="true" keyProperty="userId">
         insert into upms_user
         (
         `username`,
@@ -108,18 +114,18 @@
         )
     </insert>
 
-    <update id="update" parameterType="UpmsUserDO">
+    <update id="update" parameterType="com.ming.upms.system.domain.UpmsUserDO">
         update upms_user
         <set>
-            <if test="username != null">`username` = #{username}, </if>
-            <if test="password != null">`password` = #{password}, </if>
-            <if test="salt != null">`salt` = #{salt}, </if>
-            <if test="realname != null">`realname` = #{realname}, </if>
-            <if test="avatar != null">`avatar` = #{avatar}, </if>
-            <if test="phone != null">`phone` = #{phone}, </if>
-            <if test="email != null">`email` = #{email}, </if>
-            <if test="sex != null">`sex` = #{sex}, </if>
-            <if test="locked != null">`locked` = #{locked}, </if>
+            <if test="username != null">`username` = #{username},</if>
+            <if test="password != null">`password` = #{password},</if>
+            <if test="salt != null">`salt` = #{salt},</if>
+            <if test="realname != null">`realname` = #{realname},</if>
+            <if test="avatar != null">`avatar` = #{avatar},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="email != null">`email` = #{email},</if>
+            <if test="sex != null">`sex` = #{sex},</if>
+            <if test="locked != null">`locked` = #{locked},</if>
             <if test="ctime != null">`ctime` = #{ctime}</if>
             <if test="organizationId != null">`organization_id` = #{organizationId}</if>
         </set>
@@ -138,47 +144,53 @@
     </delete>
 
 
-    <select id="getUserByusername" resultType="UpmsUserDO">
+    <select id="getUserByusername" resultType="com.ming.upms.system.domain.UpmsUserDO">
         select `user_id`,`username`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`
-          from ming.upms_user where username = #{value}
+        from ming.upms_user where username = #{value}
     </select>
 
     <select id="selectUserByUserId" resultMap="UpmsUserResult">
-        select uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`,
-               uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
-          from upms_user uu
-          left join upms_organization uo on uu.organization_id = uo.organization_id
-         where uu.`user_id` = #{value}
-         order by uu.user_id desc
+        select
+        uu.`user_id`,uu.`username`,uu.`password`,uu.`salt`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`,
+        uu.`organization_id`,
+        uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
+        from upms_user uu
+        left join upms_organization uo on uu.organization_id = uo.organization_id
+        where uu.`user_id` = #{value}
+        order by uu.user_id desc
     </select>
 
     <sql id="selectUserByRoleWhere">
         where uur.role_id = #{roleId}
-        <if test="username != null">and uu.`username` like concat('%', #{username}, '%') </if>
+        <if test="username != null">and uu.`username` like concat('%', #{username}, '%')</if>
     </sql>
 
     <select id="selectUserCountByRole" resultType="int">
         select count(1)
-          from upms_user uu
-          left join upms_user_role uur on uu.user_id = uur.user_id
+        from upms_user uu
+        left join upms_user_role uur on uu.user_id = uur.user_id
         <include refid="selectUserByRoleWhere"></include>
     </select>
 
-    <select id="selectUserByRole" resultType="UpmsUserDO">
-        select uu.`user_id`,uu.`username`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`, uu.`organization_id`
-          from upms_user uu
-          left join upms_user_role uur on uu.user_id = uur.user_id
+    <select id="selectUserByRole" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select
+        uu.`user_id`,uu.`username`,uu.`realname`,uu.`avatar`,uu.`phone`,uu.`email`,uu.`sex`,uu.`locked`,uu.`ctime`,
+        uu.`organization_id`
+        from upms_user uu
+        left join upms_user_role uur on uu.user_id = uur.user_id
         <include refid="selectUserByRoleWhere"></include>
     </select>
 
-    <select id="checkEmailUnique" resultType="UpmsUserDO">
-        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id`
-          from upms_user
-         where email = #{value}
+    <select id="checkEmailUnique" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`,
+        `organization_id`
+        from upms_user
+        where email = #{value}
     </select>
 
-    <select id="checkPhoneUnique" resultType="UpmsUserDO">
-        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`, `organization_id`
+    <select id="checkPhoneUnique" resultType="com.ming.upms.system.domain.UpmsUserDO">
+        select `user_id`,`username`,`password`,`salt`,`realname`,`avatar`,`phone`,`email`,`sex`,`locked`,`ctime`,
+        `organization_id`
         from upms_user
         where phone = #{value}
     </select>

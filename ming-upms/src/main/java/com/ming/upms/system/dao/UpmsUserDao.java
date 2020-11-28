@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * 用户
+ *
  * @author ming
  * @email jie_ming514@163.com
  * @date 2020-05-01 15:23:25
@@ -15,38 +16,39 @@ import java.util.Map;
 @Mapper
 public interface UpmsUserDao {
 
-	UpmsUserDO get(Long userId);
-	
-	List<UpmsUserDO> list(Map<String,Object> map);
-	
-	int count(Map<String,Object> map);
-	
-	int save(UpmsUserDO upmsUser);
-	
-	int update(UpmsUserDO upmsUser);
-	
-	int remove(Long user_id);
-	
-	int batchRemove(Long[] userIds);
+    UpmsUserDO get(Long userId);
 
-	UpmsUserDO getUserByusername(String username);
+    List<UpmsUserDO> list(Map<String, Object> map);
 
-	UpmsUserDO selectUserByUserId(Long userId);
+    int count(Map<String, Object> map);
 
-	int selectUserCountByRole(Map<String,Object> map);
+    int save(UpmsUserDO upmsUser);
 
-	List<UpmsUserDO> selectUserByRole(Map<String,Object> map);
+    int update(UpmsUserDO upmsUser);
+
+    int remove(Long user_id);
+
+    int batchRemove(Long[] userIds);
+
+    UpmsUserDO getUserByusername(String username);
+
+    UpmsUserDO selectUserByUserId(Long userId);
+
+    int selectUserCountByRole(Map<String, Object> map);
+
+    List<UpmsUserDO> selectUserByRole(Map<String, Object> map);
 
 
-	/**
-	 * 校验email是否唯一
-	 * @return
-	 */
-	UpmsUserDO checkEmailUnique(String email);
+    /**
+     * 校验email是否唯一
+     *
+     * @return
+     */
+    UpmsUserDO checkEmailUnique(String email);
 
-	/**
-	 * 校验手机号是否唯一
-	 */
-	UpmsUserDO checkPhoneUnique(String email);
+    /**
+     * 校验手机号是否唯一
+     */
+    UpmsUserDO checkPhoneUnique(String email);
 
 }

@@ -3,94 +3,99 @@
 
 <mapper namespace="com.ming.upms.system.dao.UpmsRolePermissionDao">
 
-	<select id="get" resultType="com.ming.upms.system.domain.UpmsRolePermissionDO">
-		select `role_permission_id`,`role_id`,`permission_id` from upms_role_permission where role_permission_id = #{value}
-	</select>
+    <select id="get" resultType="com.ming.upms.system.domain.UpmsRolePermissionDO">
+        select `role_permission_id`,`role_id`,`permission_id` from upms_role_permission where role_permission_id =
+        #{value}
+    </select>
 
-	<select id="list" resultType="com.ming.upms.system.domain.UpmsRolePermissionDO">
-		select `role_permission_id`,`role_id`,`permission_id` from upms_role_permission
-        <where>  
-		  		  <if test="rolePermissionId != null and rolePermissionId != ''"> and role_permission_id = #{rolePermissionId} </if>
-		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
-		  		  <if test="permissionId != null and permissionId != ''"> and permission_id = #{permissionId} </if>
-		  		</where>
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsRolePermissionDO">
+        select `role_permission_id`,`role_id`,`permission_id` from upms_role_permission
+        <where>
+            <if test="rolePermissionId != null and rolePermissionId != ''">and role_permission_id =
+                #{rolePermissionId}
+            </if>
+            <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
+            <if test="permissionId != null and permissionId != ''">and permission_id = #{permissionId}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by role_permission_id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from upms_role_permission
-		 <where>  
-		  		  <if test="rolePermissionId != null and rolePermissionId != ''"> and role_permission_id = #{rolePermissionId} </if>
-		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
-		  		  <if test="permissionId != null and permissionId != ''"> and permission_id = #{permissionId} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsRolePermissionDO">
-		insert into upms_role_permission
-		(
-			`role_permission_id`, 
-			`role_id`, 
-			`permission_id`
-		)
-		values
-		(
-			#{rolePermissionId}, 
-			#{roleId}, 
-			#{permissionId}
-		)
-	</insert>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<insert id="batchInsert" parameterType="java.util.List">
-		insert into upms_role_permission
-		(
-		`role_permission_id`,
-		`role_id`,
-		`permission_id`
-		)
-		values
-		<foreach item="rolePermission" collection="upmsRolePermissionDOList" separator =",">
-			(#{rolePermission.rolePermissionId},#{rolePermission.roleId},#{rolePermission.permissionId})
-		</foreach>
-	</insert>
-	 
-	<update id="update" parameterType="com.ming.upms.system.domain.UpmsRolePermissionDO">
-		update upms_role_permission 
-		<set>
-			<if test="roleId != null">`role_id` = #{roleId}, </if>
-			<if test="permissionId != null">`permission_id` = #{permissionId}</if>
-		</set>
-		where role_permission_id = #{rolePermissionId}
-	</update>
-	
-	<delete id="remove">
-		delete from upms_role_permission where role_permission_id = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from upms_role_permission where role_permission_id in 
-		<foreach item="rolePermissionId" collection="array" open="(" separator="," close=")">
-			#{rolePermissionId}
-		</foreach>
-	</delete>
+    <select id="count" resultType="int">
+        select count(*) from upms_role_permission
+        <where>
+            <if test="rolePermissionId != null and rolePermissionId != ''">and role_permission_id =
+                #{rolePermissionId}
+            </if>
+            <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
+            <if test="permissionId != null and permissionId != ''">and permission_id = #{permissionId}</if>
+        </where>
+    </select>
 
-	<select id="selectRolePermissionByRoleId" resultType="UpmsRolePermissionDO">
-		select urp.`role_permission_id`,urp.`role_id`,urp.`permission_id` from upms_role_permission urp
-		 where urp.role_id = #{value}
-	</select>
+    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsRolePermissionDO">
+        insert into upms_role_permission
+        (
+        `role_permission_id`,
+        `role_id`,
+        `permission_id`
+        )
+        values
+        (
+        #{rolePermissionId},
+        #{roleId},
+        #{permissionId}
+        )
+    </insert>
 
-	<delete id="deleteRolePermissionByRoleId">
-		delete from upms_role_permission where role_id = #{value}
-	</delete>
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into upms_role_permission
+        (
+        `role_permission_id`,
+        `role_id`,
+        `permission_id`
+        )
+        values
+        <foreach item="rolePermission" collection="upmsRolePermissionDOList" separator=",">
+            (#{rolePermission.rolePermissionId},#{rolePermission.roleId},#{rolePermission.permissionId})
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.ming.upms.system.domain.UpmsRolePermissionDO">
+        update upms_role_permission
+        <set>
+            <if test="roleId != null">`role_id` = #{roleId},</if>
+            <if test="permissionId != null">`permission_id` = #{permissionId}</if>
+        </set>
+        where role_permission_id = #{rolePermissionId}
+    </update>
+
+    <delete id="remove">
+        delete from upms_role_permission where role_permission_id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from upms_role_permission where role_permission_id in
+        <foreach item="rolePermissionId" collection="array" open="(" separator="," close=")">
+            #{rolePermissionId}
+        </foreach>
+    </delete>
+
+    <select id="selectRolePermissionByRoleId" resultType="com.ming.upms.system.domain.UpmsRolePermissionDO">
+        select urp.`role_permission_id`,urp.`role_id`,urp.`permission_id` from upms_role_permission urp
+        where urp.role_id = #{value}
+    </select>
+
+    <delete id="deleteRolePermissionByRoleId">
+        delete from upms_role_permission where role_id = #{value}
+    </delete>
 
 </mapper>

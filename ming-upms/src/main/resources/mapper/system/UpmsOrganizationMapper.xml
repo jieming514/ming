@@ -3,95 +3,97 @@
 
 <mapper namespace="com.ming.upms.system.dao.UpmsOrganizationDao">
 
-	<select id="get" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
-		select `organization_id`,`pid`,`name`,`description`,`ctime` from upms_organization where organization_id = #{value}
-	</select>
+    <select id="get" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
+        select `organization_id`,`pid`,`name`,`description`,`ctime` from upms_organization where organization_id =
+        #{value}
+    </select>
 
-	<select id="list" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
-		select `organization_id`,`pid`,`name`,`description`,`ctime` from upms_organization
-        <where>  
-		  		  <if test="organizationId != null and organizationId != ''"> and organization_id = #{organizationId} </if>
-		  		  <if test="pid != null and pid != ''"> and pid = #{pid} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
-		  		</where>
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
+        select `organization_id`,`pid`,`name`,`description`,`ctime` from upms_organization
+        <where>
+            <if test="organizationId != null and organizationId != ''">and organization_id = #{organizationId}</if>
+            <if test="pid != null and pid != ''">and pid = #{pid}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by organization_id asc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from upms_organization
-		 <where>  
-		  		  <if test="organizationId != null and organizationId != ''"> and organization_id = #{organizationId} </if>
-		  		  <if test="pid != null and pid != ''"> and pid = #{pid} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="ctime != null and ctime != ''"> and ctime = #{ctime} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsOrganizationDO" useGeneratedKeys="true" keyProperty="organizationId">
-		insert into upms_organization
-		(
-			`pid`, 
-			`name`, 
-			`description`, 
-			`ctime`
-		)
-		values
-		(
-			#{pid}, 
-			#{name}, 
-			#{description}, 
-			now()
-		)
-	</insert>
-	 
-	<update id="update" parameterType="com.ming.upms.system.domain.UpmsOrganizationDO">
-		update upms_organization 
-		<set>
-			<if test="pid != null">`pid` = #{pid}, </if>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="description != null">`description` = #{description}, </if>
-		</set>
-		where organization_id = #{organizationId}
-	</update>
-	
-	<delete id="remove">
-		delete from upms_organization where organization_id = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from upms_organization where organization_id in 
-		<foreach item="organizationId" collection="array" open="(" separator="," close=")">
-			#{organizationId}
-		</foreach>
-	</delete>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<select id="getOrganizationById" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
-		SELECT
-			uo1.`organization_id`,
-			uo1.`name`,
-			uo1.`pid`,
-			uo2.name pName,
-			uo1.`description`,
-			uo1.`ctime`
-		FROM
-			upms_organization uo1
-		LEFT JOIN
-			upms_organization uo2 ON uo1.pid = uo2.organization_id
-		WHERE
-			uo1.organization_id = #{value}
-	</select>
+    <select id="count" resultType="int">
+        select count(*) from upms_organization
+        <where>
+            <if test="organizationId != null and organizationId != ''">and organization_id = #{organizationId}</if>
+            <if test="pid != null and pid != ''">and pid = #{pid}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsOrganizationDO" useGeneratedKeys="true"
+            keyProperty="organizationId">
+        insert into upms_organization
+        (
+        `pid`,
+        `name`,
+        `description`,
+        `ctime`
+        )
+        values
+        (
+        #{pid},
+        #{name},
+        #{description},
+        now()
+        )
+    </insert>
+
+    <update id="update" parameterType="com.ming.upms.system.domain.UpmsOrganizationDO">
+        update upms_organization
+        <set>
+            <if test="pid != null">`pid` = #{pid},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="description != null">`description` = #{description},</if>
+        </set>
+        where organization_id = #{organizationId}
+    </update>
+
+    <delete id="remove">
+        delete from upms_organization where organization_id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from upms_organization where organization_id in
+        <foreach item="organizationId" collection="array" open="(" separator="," close=")">
+            #{organizationId}
+        </foreach>
+    </delete>
+
+    <select id="getOrganizationById" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
+        SELECT
+        uo1.`organization_id`,
+        uo1.`name`,
+        uo1.`pid`,
+        uo2.name pName,
+        uo1.`description`,
+        uo1.`ctime`
+        FROM
+        upms_organization uo1
+        LEFT JOIN
+        upms_organization uo2 ON uo1.pid = uo2.organization_id
+        WHERE
+        uo1.organization_id = #{value}
+    </select>
 
 </mapper>

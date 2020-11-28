@@ -3,120 +3,124 @@
 
 <mapper namespace="com.ming.upms.system.dao.UpmsLogDao">
 
-	<select id="get" resultType="com.ming.upms.system.domain.UpmsLogDO">
-		select `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions` from upms_log where log_id = #{value}
-	</select>
+    <select id="get" resultType="com.ming.upms.system.domain.UpmsLogDO">
+        select
+        `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions`
+        from upms_log where log_id = #{value}
+    </select>
 
-	<select id="list" resultType="com.ming.upms.system.domain.UpmsLogDO">
-		select `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions` from upms_log
-        <where>  
-		  		  <if test="logId != null and logId != ''"> and log_id = #{logId} </if>
-		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
-		  		  <if test="spendTime != null and spendTime != ''"> and spend_time = #{spendTime} </if>
-		  		  <if test="basePath != null and basePath != ''"> and base_path = #{basePath} </if>
-		  		  <if test="uri != null and uri != ''"> and uri = #{uri} </if>
-		  		  <if test="method != null and method != ''"> and method = #{method} </if>
-		  		  <if test="parameter != null and parameter != ''"> and parameter = #{parameter} </if>
-		  		  <if test="userAgent != null and userAgent != ''"> and user_agent = #{userAgent} </if>
-		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
-		  		  <if test="result != null and result != ''"> and result = #{result} </if>
-		  		  <if test="permissions != null and permissions != ''"> and permissions = #{permissions} </if>
-		  		</where>
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsLogDO">
+        select
+        `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions`
+        from upms_log
+        <where>
+            <if test="logId != null and logId != ''">and log_id = #{logId}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="username != null and username != ''">and username = #{username}</if>
+            <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
+            <if test="spendTime != null and spendTime != ''">and spend_time = #{spendTime}</if>
+            <if test="basePath != null and basePath != ''">and base_path = #{basePath}</if>
+            <if test="uri != null and uri != ''">and uri = #{uri}</if>
+            <if test="method != null and method != ''">and method = #{method}</if>
+            <if test="parameter != null and parameter != ''">and parameter = #{parameter}</if>
+            <if test="userAgent != null and userAgent != ''">and user_agent = #{userAgent}</if>
+            <if test="ip != null and ip != ''">and ip = #{ip}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="permissions != null and permissions != ''">and permissions = #{permissions}</if>
+        </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by log_id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from upms_log
-		 <where>  
-		  		  <if test="logId != null and logId != ''"> and log_id = #{logId} </if>
-		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
-		  		  <if test="spendTime != null and spendTime != ''"> and spend_time = #{spendTime} </if>
-		  		  <if test="basePath != null and basePath != ''"> and base_path = #{basePath} </if>
-		  		  <if test="uri != null and uri != ''"> and uri = #{uri} </if>
-		  		  <if test="method != null and method != ''"> and method = #{method} </if>
-		  		  <if test="parameter != null and parameter != ''"> and parameter = #{parameter} </if>
-		  		  <if test="userAgent != null and userAgent != ''"> and user_agent = #{userAgent} </if>
-		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
-		  		  <if test="result != null and result != ''"> and result = #{result} </if>
-		  		  <if test="permissions != null and permissions != ''"> and permissions = #{permissions} </if>
-		  		</where>
-	</select>
-	 
-	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsLogDO" useGeneratedKeys="true" keyProperty="logId">
-		insert into upms_log
-		(
-			`description`, 
-			`username`, 
-			`start_time`, 
-			`spend_time`, 
-			`base_path`, 
-			`uri`,
-			`method`, 
-			`parameter`, 
-			`user_agent`, 
-			`ip`, 
-			`result`, 
-			`permissions`
-		)
-		values
-		(
-			#{description}, 
-			#{username}, 
-			#{startTime}, 
-			#{spendTime}, 
-			#{basePath}, 
-			#{uri},
-			#{method}, 
-			#{parameter}, 
-			#{userAgent}, 
-			#{ip}, 
-			#{result}, 
-			#{permissions}
-		)
-	</insert>
-	 
-	<update id="update" parameterType="com.ming.upms.system.domain.UpmsLogDO">
-		update upms_log 
-		<set>
-			<if test="description != null">`description` = #{description}, </if>
-			<if test="username != null">`username` = #{username}, </if>
-			<if test="startTime != null">`start_time` = #{startTime}, </if>
-			<if test="spendTime != null">`spend_time` = #{spendTime}, </if>
-			<if test="basePath != null">`base_path` = #{basePath}, </if>
-			<if test="uri != null">`uri` = #{uri}, </if>
-			<if test="method != null">`method` = #{method}, </if>
-			<if test="parameter != null">`parameter` = #{parameter}, </if>
-			<if test="userAgent != null">`user_agent` = #{userAgent}, </if>
-			<if test="ip != null">`ip` = #{ip}, </if>
-			<if test="result != null">`result` = #{result}, </if>
-			<if test="permissions != null">`permissions` = #{permissions}</if>
-		</set>
-		where log_id = #{logId}
-	</update>
-	
-	<delete id="remove">
-		delete from upms_log where log_id = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from upms_log where log_id in 
-		<foreach item="logId" collection="array" open="(" separator="," close=")">
-			#{logId}
-		</foreach>
-	</delete>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from upms_log
+        <where>
+            <if test="logId != null and logId != ''">and log_id = #{logId}</if>
+            <if test="description != null and description != ''">and description = #{description}</if>
+            <if test="username != null and username != ''">and username = #{username}</if>
+            <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
+            <if test="spendTime != null and spendTime != ''">and spend_time = #{spendTime}</if>
+            <if test="basePath != null and basePath != ''">and base_path = #{basePath}</if>
+            <if test="uri != null and uri != ''">and uri = #{uri}</if>
+            <if test="method != null and method != ''">and method = #{method}</if>
+            <if test="parameter != null and parameter != ''">and parameter = #{parameter}</if>
+            <if test="userAgent != null and userAgent != ''">and user_agent = #{userAgent}</if>
+            <if test="ip != null and ip != ''">and ip = #{ip}</if>
+            <if test="result != null and result != ''">and result = #{result}</if>
+            <if test="permissions != null and permissions != ''">and permissions = #{permissions}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.ming.upms.system.domain.UpmsLogDO" useGeneratedKeys="true" keyProperty="logId">
+        insert into upms_log
+        (
+        `description`,
+        `username`,
+        `start_time`,
+        `spend_time`,
+        `base_path`,
+        `uri`,
+        `method`,
+        `parameter`,
+        `user_agent`,
+        `ip`,
+        `result`,
+        `permissions`
+        )
+        values
+        (
+        #{description},
+        #{username},
+        #{startTime},
+        #{spendTime},
+        #{basePath},
+        #{uri},
+        #{method},
+        #{parameter},
+        #{userAgent},
+        #{ip},
+        #{result},
+        #{permissions}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.ming.upms.system.domain.UpmsLogDO">
+        update upms_log
+        <set>
+            <if test="description != null">`description` = #{description},</if>
+            <if test="username != null">`username` = #{username},</if>
+            <if test="startTime != null">`start_time` = #{startTime},</if>
+            <if test="spendTime != null">`spend_time` = #{spendTime},</if>
+            <if test="basePath != null">`base_path` = #{basePath},</if>
+            <if test="uri != null">`uri` = #{uri},</if>
+            <if test="method != null">`method` = #{method},</if>
+            <if test="parameter != null">`parameter` = #{parameter},</if>
+            <if test="userAgent != null">`user_agent` = #{userAgent},</if>
+            <if test="ip != null">`ip` = #{ip},</if>
+            <if test="result != null">`result` = #{result},</if>
+            <if test="permissions != null">`permissions` = #{permissions}</if>
+        </set>
+        where log_id = #{logId}
+    </update>
+
+    <delete id="remove">
+        delete from upms_log where log_id = #{value}
+    </delete>
+
+    <delete id="batchRemove">
+        delete from upms_log where log_id in
+        <foreach item="logId" collection="array" open="(" separator="," close=")">
+            #{logId}
+        </foreach>
+    </delete>
 
 </mapper>
