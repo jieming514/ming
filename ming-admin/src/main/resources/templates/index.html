@@ -20,6 +20,7 @@
     <link href="../static/plugins/toastr/css/toastr.min.css" th:href="@{/plugins/toastr/css/toastr.min.css}"
           rel="stylesheet"/>
     <link href="../static/css/style.css?v=4.1.0" th:href="@{/css/style.css?v=4.1.0}" rel="stylesheet"/>
+    <link href="../static/plugins/fullPage/jquery.fullPage.css" th:href="@{/plugins/fullPage/jquery.fullPage.css}" rel="stylesheet"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
       style="overflow: hidden">
@@ -85,6 +86,11 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a title="全屏显示" href="javascript:fullPage();">
+                            <i class="fa fa-arrows-alt"></i> 全屏显示
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" title="通知">
                             <i class="fa fa-envelope"></i>
@@ -282,10 +288,10 @@
 <script type="text/javascript" src="../static/js/contabs.js" th:src="@{/js/contabs.js}"></script>
 <!-- 第三方插件 -->
 <script src="../static/plugins/pace/js/pace.min.js" th:src="@{/plugins/pace/js/pace.min.js}"></script>
+<script src="../static/plugins/fullPage/jquery.fullPage.js" th:src="@{/plugins/fullPage/jquery.fullPage.js}"></script>
+<script src="../static/plugins/fullPage/jquery.jdirk.min.js" th:src="@{/plugins/fullPage/jquery.jdirk.min.js}"></script>
 <!-- vue -->
-<script type="text/javascript" src="../static/plugins/vue/js/vue.min.js" th:src="@{/plugins/vue/js/vue.min.js}">
-
-</script>
+<script type="text/javascript" src="../static/plugins/vue/js/vue.min.js" th:src="@{/plugins/vue/js/vue.min.js}"></script>
 <!-- Toastr script -->
 <script src="../static/plugins/toastr/js/toastr.min.js" th:src="@{/plugins/toastr/js/toastr.min.js}"></script>
 <script type="text/javascript">
