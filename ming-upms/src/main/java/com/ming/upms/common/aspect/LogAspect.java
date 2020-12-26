@@ -1,9 +1,9 @@
 package com.ming.upms.common.aspect;
 
-import com.ming.upms.common.annotation.Log;
 import com.ming.common.utils.HttpContextUtils;
 import com.ming.common.utils.IPUtils;
 import com.ming.common.utils.JSONUtils;
+import com.ming.common.annotation.Log;
 import com.ming.upms.common.util.ShiroUtils;
 import com.ming.upms.system.domain.UpmsLogDO;
 import com.ming.upms.system.domain.UpmsUserDO;
@@ -32,7 +32,7 @@ public class LogAspect {
     UpmsLogService logService;
 
 
-    @Pointcut("@annotation(com.ming.upms.common.annotation.Log)")
+    @Pointcut("@annotation(com.ming.common.annotation.Log)")
     public void logPointCut() {
     }
 

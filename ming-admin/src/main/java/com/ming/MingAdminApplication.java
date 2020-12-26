@@ -2,7 +2,6 @@ package com.ming;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 
@@ -10,7 +9,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  * @author jie_ming514
  */
 @ServletComponentScan
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication()
 public class MingAdminApplication {
 
     public static void main(String[] args) {

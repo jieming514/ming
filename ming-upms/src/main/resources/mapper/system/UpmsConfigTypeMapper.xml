@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.upms.system.dao.UpmsConfigTypeDao">
+
+	<select id="get" resultType="com.ming.upms.system.domain.UpmsConfigTypeDO">
+		select `config_type_id`,`type_name`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark` from upms_config_type where config_type_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.ming.upms.system.domain.UpmsConfigTypeDO">
+		select `config_type_id`,`type_name`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark` from upms_config_type
+        <where>  
+		  		  <if test="configTypeId != null and configTypeId != ''"> and config_type_id = #{configTypeId} </if>
+		  		  <if test="typeName != null and typeName != ''"> and type_name = #{typeName} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by config_type_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from upms_config_type
+		 <where>  
+		  		  <if test="configTypeId != null and configTypeId != ''"> and config_type_id = #{configTypeId} </if>
+		  		  <if test="typeName != null and typeName != ''"> and type_name = #{typeName} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsConfigTypeDO">
+		insert into upms_config_type
+		(
+			`config_type_id`, 
+			`type_name`, 
+			`status`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`, 
+			`remark`
+		)
+		values
+		(
+			#{configTypeId}, 
+			#{typeName}, 
+			#{status}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateTime}, 
+			#{remark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ming.upms.system.domain.UpmsConfigTypeDO">
+		update upms_config_type 
+		<set>
+			<if test="typeName != null">`type_name` = #{typeName}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="remark != null">`remark` = #{remark}</if>
+		</set>
+		where config_type_id = #{configTypeId}
+	</update>
+	
+	<delete id="remove">
+		delete from upms_config_type where config_type_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from upms_config_type where config_type_id in 
+		<foreach item="configTypeId" collection="array" open="(" separator="," close=")">
+			#{configTypeId}
+		</foreach>
+	</delete>
+
+</mapper>

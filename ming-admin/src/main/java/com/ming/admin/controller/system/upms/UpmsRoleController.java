@@ -4,7 +4,7 @@ import com.ming.admin.controller.common.BaseController;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
-import com.ming.upms.common.annotation.Log;
+import com.ming.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsRoleDO;
 import com.ming.upms.system.domain.UpmsRolePermissionDO;
 import com.ming.upms.system.domain.UpmsUserDO;

@@ -5,7 +5,7 @@ import com.ming.common.utils.MD5Utils;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
-import com.ming.upms.common.annotation.Log;
+import com.ming.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserRoleService;
 import com.ming.upms.system.service.UpmsUserService;

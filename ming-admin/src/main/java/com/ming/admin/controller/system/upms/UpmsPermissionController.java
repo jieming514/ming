@@ -3,7 +3,7 @@ package com.ming.admin.controller.system.upms;
 import com.ming.admin.controller.common.BaseController;
 import com.ming.common.domain.Tree;
 import com.ming.common.utils.R;
-import com.ming.upms.common.annotation.Log;
+import com.ming.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsPermissionDO;
 import com.ming.upms.system.domain.UpmsSystemDO;
 import com.ming.upms.system.service.UpmsPermissionService;

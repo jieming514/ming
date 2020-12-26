@@ -1,57 +1,47 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
---
--- Host: localhost    Database: ming
--- ------------------------------------------------------
--- Server version	8.0.11
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Position to start replication or point-in-time recovery from
+-- Table structure for table `upma_config_type`
 --
 
--- CHANGE MASTER TO MASTER_LOG_FILE='binlog.000030', MASTER_LOG_POS=155;
+drop table if exists upma_config_type;
+create table upma_config_type
+(
+  config_type_id   bigint(10)      not null auto_increment    comment '参数类型主键',
+  type_name        varchar(100)    default ''                 comment '参数类型名称',
+  status           char(1)         default '0'                comment '状态（0正常 1停用）',
+  create_by        varchar(64)     default ''                 comment '创建者',
+  create_time      datetime                                   comment '创建时间',
+  update_by        varchar(64)     default ''                 comment '更新者',
+  update_time      datetime                                   comment '更新时间',
+  remark           varchar(500)    default null               comment '备注',
+  primary key (config_type_id)
+) engine=innodb auto_increment=100 comment = '参数配置类型表';
 
 --
 -- Table structure for table `upms_config`
 --
 
-DROP TABLE IF EXISTS `upms_config`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `upms_config` (
+DROP TABLE IF EXISTS `upms_config_data`;
+CREATE TABLE `upms_config_data` (
   `config_id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
-  `system_id` bigint(10) NOT NULL COMMENT '系统ID',
   `config_name` varchar(100) DEFAULT '' COMMENT '参数名称',
   `config_key` varchar(100) DEFAULT '' COMMENT '参数键名',
   `config_value` varchar(500) DEFAULT '' COMMENT '参数键值',
-  `config_type` char(1) DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+  `config_type` char(10) DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
   `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`config_id`),
-  KEY `FK_CONFIG_SYSTEM_ID_idx` (`system_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='参数配置表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+  PRIMARY KEY (`config_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='参数配置明细表';
+
 
 --
 -- Table structure for table `upms_log`
 --
 
 DROP TABLE IF EXISTS `upms_log`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_log` (
   `log_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `description` varchar(100) DEFAULT NULL COMMENT '操作描述',
@@ -66,18 +56,14 @@ CREATE TABLE `upms_log` (
   `user_agent` varchar(500) DEFAULT NULL COMMENT '用户标识',
   `ip` varchar(30) DEFAULT NULL COMMENT 'IP地址',
   `result` tinyint(2) DEFAULT NULL COMMENT '响应状态',
-  PRIMARY KEY (`log_id`),
-  KEY `log_id` (`log_id`)
+  PRIMARY KEY (`log_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8 COMMENT='操作日志';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_organization`
 --
 
 DROP TABLE IF EXISTS `upms_organization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_organization` (
   `organization_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `pid` int(10) DEFAULT NULL COMMENT '所属上级',
@@ -86,7 +72,6 @@ CREATE TABLE `upms_organization` (
   `ctime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`organization_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='组织';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_permission`
@@ -109,15 +94,12 @@ CREATE TABLE `upms_permission` (
   `orders` bigint(20) NOT NULL COMMENT '排序',
   PRIMARY KEY (`permission_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='权限';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_role`
 --
 
 DROP TABLE IF EXISTS `upms_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_role` (
   `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` varchar(20) NOT NULL COMMENT '角色名称',
@@ -127,15 +109,12 @@ CREATE TABLE `upms_role` (
   `orders` bigint(20) NOT NULL COMMENT '排序',
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='角色';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_role_permission`
 --
 
 DROP TABLE IF EXISTS `upms_role_permission`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_role_permission` (
   `role_permission_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `role_id` int(10) unsigned NOT NULL COMMENT '角色编号',
@@ -146,15 +125,12 @@ CREATE TABLE `upms_role_permission` (
   CONSTRAINT `FK_urp_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `upms_permission` (`permission_id`),
   CONSTRAINT `FK_urp_role_id` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_system`
 --
 
 DROP TABLE IF EXISTS `upms_system`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_system` (
   `system_id` bigint(10) unsigned NOT NULL COMMENT '编号',
   `icon` varchar(50) DEFAULT NULL COMMENT '图标',
@@ -169,15 +145,12 @@ CREATE TABLE `upms_system` (
   `orders` bigint(20) NOT NULL COMMENT '排序',
   PRIMARY KEY (`system_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_user`
 --
 
 DROP TABLE IF EXISTS `upms_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `username` varchar(20) NOT NULL COMMENT '帐号',
@@ -193,15 +166,12 @@ CREATE TABLE `upms_user` (
   `organization_id` int(10) DEFAULT NULL COMMENT '所属组织机构',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='用户';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_user_organization`
 --
 
 DROP TABLE IF EXISTS `upms_user_organization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_user_organization` (
   `user_organization_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
@@ -212,15 +182,12 @@ CREATE TABLE `upms_user_organization` (
   CONSTRAINT `FK_uuo_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `upms_organization` (`organization_id`),
   CONSTRAINT `FK_uuo_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户组织关联表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `upms_user_role`
 --
 
 DROP TABLE IF EXISTS `upms_user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upms_user_role` (
   `user_role_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `user_id` int(10) unsigned NOT NULL COMMENT '用户编号',
@@ -231,15 +198,3 @@ CREATE TABLE `upms_user_role` (
   CONSTRAINT `FK_uur_role_id_1` FOREIGN KEY (`role_id`) REFERENCES `upms_role` (`role_id`),
   CONSTRAINT `FK_uur_user_id` FOREIGN KEY (`user_id`) REFERENCES `upms_user` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2020-11-28 16:01:30

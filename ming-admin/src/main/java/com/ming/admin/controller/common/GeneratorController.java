@@ -1,4 +1,4 @@
-package com.ming.upms.common.controller;
+package com.ming.admin.controller.common;
 
 import com.ming.upms.common.service.GeneratorService;
 import org.apache.commons.io.IOUtils;
@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author jie_ming514
+ */
 @RestController
 @RequestMapping("/common/generator")
 public class GeneratorController {
