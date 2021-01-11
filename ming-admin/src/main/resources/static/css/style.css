@@ -264,7 +264,7 @@ body.body-small .navbar-top-links li:last-child {
 
 .count-info .label {
     line-height: 12px;
-    padding: 1px 5px;
+    padding: 5px 5px;
     position: absolute;
     right: 6px;
     top: 12px;
@@ -1843,11 +1843,12 @@ table.dataTable thead .sorting:after {
     border-radius: 1px;
     color: inherit;
     display: block;
-    padding: 6px 12px;
+    padding: 6px 10px;
     -webkit-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s  ease-in-out 0s;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s  ease-in-out 0s;
     width: 100%;
     font-size: 14px;
+    border-radius: 5px;
 }
 
 .form-control:focus, .single-line:focus {
@@ -3210,6 +3211,7 @@ video {
     margin-top: 5px;
 }
 
+
 ul.unstyled, ol.unstyled {
     list-style: none outside none;
     margin-left: 0;
@@ -3468,7 +3470,7 @@ nav.page-tabs .page-tabs-content {
 
 .ibox-content.text-box {
     padding-bottom: 0px;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .border-left-right {
@@ -3662,7 +3664,7 @@ code {
 .ibox-content {
     background-color: #ffffff;
     color: inherit;
-    padding: 15px 20px 20px 20px;
+    padding: 10px 10px;
     border-color: #e7eaec;
     -webkit-border-image: none;
     -o-border-image: none;

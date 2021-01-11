@@ -1,63 +1,81 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="col-sm-12">
-			<div class="ibox">
-				<div class="ibox-content">
-					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="system:upmsOrganization:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button>
-							<button shiro:hasPermission="system:upmsOrganization:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
-							</button>
-						</div>
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="searchName" type="text" class="form-control"
-								placeholder="">
-						</div>
-					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--shiro控制bootstraptable行内按钮看见性 -->
-		<div>
-			<script type="text/javascript">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-content">
+                <form id="userForm" class="form-horizontal m-t">
+                    <input id="organizationId" name="organizationId" class="form-control" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" for="name">角色名称:</label>
+                        <div class="col-sm-2">
+                            <input id="name" name="name" class="form-control" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" id="serachBtn" class="btn btn-success"
+                                    onclick="javascript:reLoad()">
+                                <i class="fa fa-search" aria-hidden="true"></i>查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button shiro:hasPermission="system:upmsOrganization:add" type="button" class="btn  btn-primary"
+                                onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                        <button shiro:hasPermission="system:upmsOrganization:batchRemove" type="button"
+                                class="btn  btn-danger"
+                                onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 -->
+<div>
+    <script type="text/javascript">
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
 				var s_resetPwd_h = 'hidden';
-			</script>
-		</div>
-		<div shiro:hasPermission="system:upmsOrganization:edit">
-			<script type="text/javascript">
+
+    </script>
+</div>
+<div shiro:hasPermission="system:upmsOrganization:edit">
+    <script type="text/javascript">
 				s_edit_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="system:upmsOrganization:remove">
-			<script type="text/javascript">
+
+    </script>
+</div>
+<div shiro:hasPermission="system:upmsOrganization:remove">
+    <script type="text/javascript">
 				var s_remove_h = '';
-			</script>
-		</div>
-		<div shiro:hasPermission="system:upmsOrganization:resetPwd">
-			<script type="text/javascript">
+
+    </script>
+</div>
+<div shiro:hasPermission="system:upmsOrganization:resetPwd">
+    <script type="text/javascript">
 				var s_resetPwd_h = '';
-			</script>
-		</div>
-	</div>
-	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="../../../static/js/appjs/system/upmsOrganization/upmsOrganization.js"
-			th:src="@{/js/appjs/system/upmsOrganization/upmsOrganization.js}"></script>
+
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="../../../static/js/appjs/system/upmsOrganization/upmsOrganization.js"
+        th:src="@{/js/appjs/system/upmsOrganization/upmsOrganization.js}"></script>
 </body>
 </html>
