@@ -5,21 +5,24 @@ $(function() {
 });
 
 function load() {
-	$('#exampleTable')
+	var treeTable = $('#exampleTable')
 			.bootstrapTreeTable(
 					{
+					    toolbar : '#table-toolbar',
 						id: 'permissionId',
-                        code: 'permissionId',
                         parentCode: 'pid',
                         type: "GET", // 请求数据的ajax类型
                         url: prefix + '/list', // 请求数据的ajax的url
                         ajaxParams: {sort:'orders'}, // 请求数据的ajax的data属性
-                        expandColumn: '2',// 在哪一列上面显示展开按钮
+                        expandColumn: 1,// 在哪一列上面显示展开按钮
                         striped: false, // 是否各行渐变色
                         expandAll: false, // 是否全部展开
-						columns : [
+						columns : [{
+                                    field: 'selectItem',
+                                    radio: true
+                                },
 								{
-									field : 'permissionId', 
+									field : 'permissionId',
 									title : '编号',
 									visible: false,
                                     align: 'center',
@@ -35,17 +38,24 @@ function load() {
                                 },
 								{
 									field : 'name',
-									valign: 'center',
 									title : '名称',
-									width: '12%'
+									width: '12%',
+									fixed: true,
+                                    formatter: function(value,row, index) {
+                                        if (row == "") {
+                                            return row.name;
+                                        } else {
+                                            return '</i> <span class="nav-label">' + row.name + '</span>';
+                                        }
+                                    }
 								},
-																{
+								{
 									field : 'type', 
 									title : '类型',
 									align: 'center',
 									valign: 'center',
 									width: '5%',
-                                    formatter : function(item, index) {
+                                    formatter: function(value,item, index) {
                                         if(item.type == 1) {
                                             return "<span class='label label-success'>目录</span>";
                                         }else if(item.type == 2) {
@@ -83,7 +93,7 @@ function load() {
 									valign: 'center',
 									title : '状态',
 									width: '4%',
-                                    formatter : function(item, index) {
+                                    formatter: function(value,item, index) {
                                         if(item.status == 0) {
                                             return "<span class='label label-warning'>禁用</span>";
                                         }else if(item.status == 1) {
@@ -103,7 +113,7 @@ function load() {
 									title : '操作',
 									field : 'id',
 									align : 'center',
-									formatter : function(item, index) {
+									formatter: function(value,item, index) {
 									    var a = '<a class="btn btn-info btn-sm '+s_add_h+'" href="#" mce_href="#" title="添加子节点" onclick="add('
                                                 + item.permissionId
                                                 + ')"><i class="fa fa-plus"></i></a> ';

@@ -5,45 +5,54 @@ $(function() {
 });
 
 function load() {
-	$('#exampleTable')
+	var treeTable = $('#exampleTable')
 			.bootstrapTreeTable(
 					{
+					    toolbar : '#table-toolbar',
 						type : 'get', // 服务器数据的请求方式 get or post
 						url : prefix + "/list", // 服务器数据的加载地址
                         id: 'organizationId',
-                        code: 'organizationId',
-                        parentCode: 'pid',
-                        expandColumn: '1',// 在哪一列上面显示展开按钮
+                        parentId: 'pid',
+                        expandColumn: 1,// 在哪一列上面显示展开按钮
                         striped: false, // 是否各行渐变色
                         bordered: true, // 是否显示边框
                         expandAll: false, // 是否全部展开
                         expandFirst: true, // 是否默认第一级展开--expandAll为false时生效
-						columns : [
+						columns : [{
+                                    field: 'selectItem',
+                                    radio: true
+						        },
 								{
-									field : 'organizationId', 
-									title : '编号',
-                                    visible: false,
-                                    align: 'center',
-                                    valign: 'center',
-                                    width: '3%'
-								},
-																{
 									field : 'name', 
-									title : '组织名称' 
+									title : '组织名称',
+									fixed: true,
+                                    formatter: function(value,row, index) {
+                                        if (row == "") {
+                                            return row.name;
+                                        } else {
+                                            return '</i> <span class="nav-label">' + row.name + '</span>';
+                                        }
+                                    }
 								},
-																{
+                                {
+                                    field : 'organizationId',
+                                    title : '编号ID',
+                                    align: 'center',
+                                    valign: 'center'
+                                },
+								{
 									field : 'description', 
 									title : '组织描述' 
 								},
-																{
+								{
 									field : 'ctime', 
 									title : '创建时间' 
 								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
-									formatter : function(item, index) {
+									formatter: function(value,item, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit('
 												+ item.organizationId
 												+ ')"><i class="fa fa-edit"></i></a> ';

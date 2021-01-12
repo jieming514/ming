@@ -9,20 +9,13 @@
 			<div class="ibox">
 				<div class="ibox-content">
 					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
+						<div id="table-toolbar" class="columns pull-left">
 							<button shiro:hasPermission="system:upmsPermission:add" type="button" class="btn  btn-primary" onclick="add(0)" title="添加根目录">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
 							<button type="button" class="btn  btn-info" id="expandAllBtn" title="展开/折叠">
 								<i class="fa fa-exchange" aria-hidden="true"></i>展开/折叠
 							</button>
-						</div>
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="searchName" type="text" class="form-control"
-								placeholder="">
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
