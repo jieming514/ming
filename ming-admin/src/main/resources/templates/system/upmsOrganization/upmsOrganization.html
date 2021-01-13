@@ -11,13 +11,13 @@
                 <form id="userForm" class="form-horizontal m-t">
                     <input id="organizationId" name="organizationId" class="form-control" type="hidden">
                     <div class="form-group">
-                        <label class="col-sm-1 control-label" for="name">角色名称:</label>
+                        <label class="col-sm-1 control-label" for="name">组织名称:</label>
                         <div class="col-sm-2">
                             <input id="name" name="name" class="form-control" type="text">
                         </div>
                         <div class="col-sm-2">
                             <button type="button" id="serachBtn" class="btn btn-success"
-                                    onclick="javascript:reLoad()">
+                                    onclick="reLoad()">
                                 <i class="fa fa-search" aria-hidden="true"></i>查询
                             </button>
                         </div>
@@ -28,7 +28,7 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div class="fixed-table-toolbar">
-                    <div id="table-toolbar" class="columns pull-left btn-group">
+                    <div id="table-toolbar" class="columns pull-left">
                         <button shiro:hasPermission="system:upmsOrganization:add" type="button" class="btn  btn-primary"
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
@@ -37,6 +37,9 @@
                                 class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                        <button type="button" class="btn  btn-info" onclick="expandAll()" title="展开/折叠">
+                            <i class="fa fa-exchange" aria-hidden="true"></i>展开/折叠
                         </button>
                     </div>
                 </div>

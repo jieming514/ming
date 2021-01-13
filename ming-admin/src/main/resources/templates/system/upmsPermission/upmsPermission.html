@@ -8,12 +8,32 @@
 		<div class="col-sm-12">
 			<div class="ibox">
 				<div class="ibox-content">
+					<form id="userForm" class="form-horizontal m-t">
+						<input id="organizationId" name="organizationId" class="form-control" type="hidden">
+						<div class="form-group">
+							<label class="col-sm-1 control-label" for="name">资源名称:</label>
+							<div class="col-sm-2">
+								<input id="name" name="name" class="form-control" type="text">
+							</div>
+							<div class="col-sm-2">
+								<button type="button" id="serachBtn" class="btn btn-success"
+										onclick="reLoad()">
+									<i class="fa fa-search" aria-hidden="true"></i>查询
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="ibox">
+				<div class="ibox-content">
 					<div class="fixed-table-toolbar">
 						<div id="table-toolbar" class="columns pull-left">
-							<button shiro:hasPermission="system:upmsPermission:add" type="button" class="btn  btn-primary" onclick="add(0)" title="添加根目录">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							<button shiro:hasPermission="system:upmsPermission:add" type="button"
+									class="btn  btn-primary" onclick="add(0)" title="添加根目录">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加一级目录
 							</button>
-							<button type="button" class="btn  btn-info" id="expandAllBtn" title="展开/折叠">
+							<button type="button" class="btn  btn-info" onclick="expandAll()" title="展开/折叠">
 								<i class="fa fa-exchange" aria-hidden="true"></i>展开/折叠
 							</button>
 						</div>

@@ -1,34 +1,53 @@
 var prefix = ctx + "/system/upmsPermission";
+// 是否全部展开
+var _expandFlag_all = false;
 
 $(function() {
-	load();
+    load();
 });
 
 function load() {
-	var treeTable = $('#exampleTable')
-			.bootstrapTreeTable(
-					{
-					    toolbar : '#table-toolbar',
-						id: 'permissionId',
-                        parentCode: 'pid',
+    var treeTable = $('#exampleTable')
+            .bootstrapTreeTable(
+                    {
+                        id: 'permissionId',
+                        parentId: 'pid',
                         type: "GET", // 请求数据的ajax类型
                         url: prefix + '/list', // 请求数据的ajax的url
-                        ajaxParams: {sort:'orders'}, // 请求数据的ajax的data属性
-                        expandColumn: 1,// 在哪一列上面显示展开按钮
+                        ajaxParams: {
+                            name : $('#name').val(),
+                            sort:'orders'
+                        }, // 请求数据的ajax的data属性
+                        expandColumn: 2,// 在哪一列上面显示展开按钮
                         striped: false, // 是否各行渐变色
                         expandAll: false, // 是否全部展开
-						columns : [{
-                                    field: 'selectItem',
-                                    radio: true
+                        bordered: true, // 是否显示边框
+                        expandAll: false, // 是否全部展开
+                        expandFirst: true, // 是否默认第一级展开--expandAll为false时生效
+                        columns : [{
+                                   field: 'selectItem',
+                                   radio: true
                                 },
-								{
-									field : 'permissionId',
-									title : '编号',
-									visible: false,
+                                {
+                                    field : 'permissionId',
+                                    title : '编号',
                                     align: 'center',
                                     valign: 'center',
                                     width: '5%'
-								},
+                                },{
+                                    field : 'name',
+                                    title : '资源名称',
+                                    width: '12%',
+                                    fixed: true,
+                                    formatter: function(value,row, index) {
+                                        if (row == "") {
+                                            return row.name;
+                                        } else {
+                                            return '<span class="nav-label">' + row.name + '</span>';
+                                        }
+                                    }
+                                },
+
                                 {
                                     field : 'systemName',
                                     align: 'center',
@@ -36,25 +55,12 @@ function load() {
                                     title : '所属系统',
                                     width: '10%'
                                 },
-								{
-									field : 'name',
-									title : '名称',
-									width: '12%',
-									fixed: true,
-                                    formatter: function(value,row, index) {
-                                        if (row == "") {
-                                            return row.name;
-                                        } else {
-                                            return '</i> <span class="nav-label">' + row.name + '</span>';
-                                        }
-                                    }
-								},
-								{
-									field : 'type', 
-									title : '类型',
-									align: 'center',
-									valign: 'center',
-									width: '5%',
+                                {
+                                    field : 'type',
+                                    title : '类型',
+                                    align: 'center',
+                                    valign: 'center',
+                                    width: '5%',
                                     formatter: function(value,item, index) {
                                         if(item.type == 1) {
                                             return "<span class='label label-success'>目录</span>";
@@ -65,34 +71,34 @@ function load() {
                                          }
                                         return "<span class='label label-danger'>未知</span>";
                                     }
-								},
-																{
-									field : 'permissionValue',
-									valign: 'center',
-									title : '权限值',
-									width: '12%'
-								},
-																{
-									field : 'uri', 
-									title : '路径',
-									width: '20%'
-								},
-																{
-									field : 'icon',
-									align: 'center',
-									valign: 'center',
-									title : '图标',
-									width: '5%',
-									formatter : function(item, index) {
-									    return "<i class='" + item.icon + "' aria-hidden='true'></i>";
-									}
-								},
-																{
-									field : 'status',
-									align: 'center',
-									valign: 'center',
-									title : '状态',
-									width: '4%',
+                                },
+                                                                {
+                                    field : 'permissionValue',
+                                    valign: 'center',
+                                    title : '权限值',
+                                    width: '12%'
+                                },
+                                                                {
+                                    field : 'uri',
+                                    title : '路径',
+                                    width: '20%'
+                                },
+                                                                {
+                                    field : 'icon',
+                                    align: 'center',
+                                    valign: 'center',
+                                    title : '图标',
+                                    width: '5%',
+                                    formatter: function(value,item, index) {
+                                        return "<i class='" + item.icon + "' aria-hidden='true'></i>";
+                                    }
+                                },
+                                {
+                                    field : 'status',
+                                    align: 'center',
+                                    valign: 'center',
+                                    title : '状态',
+                                    width: '4%',
                                     formatter: function(value,item, index) {
                                         if(item.status == 0) {
                                             return "<span class='label label-warning'>禁用</span>";
@@ -101,62 +107,65 @@ function load() {
                                         }
                                         return "<span class='label label-danger'>未知</span>";
                                     }
-								},
-								{
-									field : 'ctime',
-									align: 'center',
-									valign: 'center',
-									title : '创建时间',
-									width: '8%'
-								},
-								{
-									title : '操作',
-									field : 'id',
-									align : 'center',
-									formatter: function(value,item, index) {
-									    var a = '<a class="btn btn-info btn-sm '+s_add_h+'" href="#" mce_href="#" title="添加子节点" onclick="add('
+                                },
+                                {
+                                    field : 'ctime',
+                                    align: 'center',
+                                    valign: 'center',
+                                    title : '创建时间',
+                                    width: '8%'
+                                },
+                                {
+                                    title : '操作',
+                                    field : 'id',
+                                    align : 'center',
+                                    formatter: function(value,item, index) {
+                                        var a = '<a class="btn btn-info btn-sm '+s_add_h+'" href="#" mce_href="#" title="添加子节点" onclick="add('
                                                 + item.permissionId
                                                 + ')"><i class="fa fa-plus"></i></a> ';
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit('
-												+ item.permissionId
-												+ ')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-danger btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove('
-												+ item.permissionId
-												+ ')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ item.permissionId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										if(item.type == 3) {
-										    return e + d ;
-										}
-										return a + e + d ;
-									}
-								} ]
-					});
+                                        var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit('
+                                                + item.permissionId
+                                                + ')"><i class="fa fa-edit"></i></a> ';
+                                        var d = '<a class="btn btn-danger btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove('
+                                                + item.permissionId
+                                                + ')"><i class="fa fa-remove"></i></a> ';
+                                        var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+                                                + item.permissionId
+                                                + '\')"><i class="fa fa-key"></i></a> ';
+                                        if(item.type == 3) {
+                                            return e + d ;
+                                        }
+                                        return a + e + d ;
+                                    }
+                                } ]
+                    });
 }
 function reLoad() {
-	load();
+    var params = {
+        name : $("#name").val()
+    };
+    $('#exampleTable').bootstrapTreeTable('refresh',params);
 }
 //上一级目录
 function add(pid) {
-	layer.open({
-		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/add/' +pid // iframe的url
-	});
+    layer.open({
+        type : 2,
+        title : '增加',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/add/' +pid // iframe的url
+    });
 }
 function edit(id) {
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
-	});
+    layer.open({
+        type : 2,
+        title : '编辑',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '520px' ],
+        content : prefix + '/edit/' + id // iframe的url
+    });
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
@@ -214,3 +223,14 @@ function batchRemove() {
 
 	});
 }
+
+// 展开和关闭
+function expandAll() {
+    if(_expandFlag_all){
+        $('#exampleTable').bootstrapTreeTable('expandAll');
+    }else{
+        $('#exampleTable').bootstrapTreeTable('collapseAll');
+    }
+    _expandFlag_all = _expandFlag_all?false:true;
+}
+

@@ -30,10 +30,10 @@ function load() {
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+                                //name:$('#searchName').val(),
+                                username:$('#username').val(),
 								limit: params.limit,
 								offset:params.offset
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
