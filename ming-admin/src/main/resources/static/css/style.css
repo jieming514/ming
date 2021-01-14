@@ -52,6 +52,22 @@ a:focus {
     outline: none;
 }
 
+table {
+    table-layout: fixed;
+}
+
+table td{
+    border: 1px solid #eef2e9;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+table td:hover {
+    overflow:auto;
+    text-overflow:clip;
+}
+
 .nav>li>a {
     color: #a7b1c2;
     font-weight: 600;
