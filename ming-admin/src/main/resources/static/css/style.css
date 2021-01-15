@@ -52,21 +52,6 @@ a:focus {
     outline: none;
 }
 
-table {
-    table-layout: fixed;
-}
-
-table td{
-    border: 1px solid #eef2e9;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-table td:hover {
-    overflow:auto;
-    text-overflow:clip;
-}
 
 .nav>li>a {
     color: #a7b1c2;
@@ -7386,3 +7371,93 @@ body.skin-3 {
     border-color: #cccccc!important;
 }
 
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0,20%,0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        transform: translateY(-20px)
+    }
+
+    100% {
+        transform: translateY(0)
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-20%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(20%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+}
+
+@keyframes jump {
+    from {
+        transform: scale3d(1,1,1) translateY(0)
+    }
+
+    5% {
+        transform: scale3d(1.03,0.97,1) translateY(-1px)
+    }
+
+    12.5% {
+        transform: scale3d(1,1,1) translateY(-10px)
+    }
+
+    20% {
+        transform: scale3d(0.98,1.02,1) translateY(-1px)
+    }
+
+    25% {
+        transform: scale3d(1.06,0.94,1) translateY(4px)
+    }
+
+    32.5% {
+        transform: scale3d(0.97,1.03,1) translateY(-4px)
+    }
+
+    40% {
+        transform: scale3d(1,1,1) translateY(0)
+    }
+
+    100% {
+        transform: scale3d(1,1,1) translateY(0)
+    }
+}

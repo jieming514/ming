@@ -44,52 +44,68 @@ function load() {
 						// 返回false将会终止请求
 						columns : [
 								{
-									checkbox : true
+									checkbox : true,
+									width : '4%',
 								},
 																{
 									field : 'logId', 
 									title : '编号',
+									width : '8%',
 									align : 'center'
 								},
 																{
 									field : 'description', 
-									title : '操作描述' 
+									title : '操作描述',
+									width : '10%'
 								},
 																{
 									field : 'username', 
-									title : '操作用户' 
+									title : '操作用户',
+									align : 'center',
+									width : '12%'
 								},
-																{
+								{
 									field : 'startTime', 
 									title : '操作时间',
-									align : 'center'
+									align : 'center',
+									width : '16%'
 								},
-																{
+								{
 									field : 'spendTime', 
-									title : '消耗时间(ms)',
-									align : 'center'
+									title : '消耗时间',
+									align : 'center',
+									width : '8%',
+									formatter : function(value, row, index) {
+									    return value + "ms";
+									}
 								},
-																{
+								{
 									field : 'basePath', 
-									title : '根路径'
+									title : '根路径',
+									width : '14%'
 								},
 																{
 									field : 'uri', 
-									title : 'URI' 
+									title : 'URI',
+									width : '10%'
 								},
 																{
 									field : 'method', 
 									title : '请求类型',
-									align : 'center'
+									align : 'center',
+									width : '6%'
 								},
 																{
 									field : 'ip', 
 									title : 'IP地址',
-									align : 'center'
+									align : 'center',
+									width : '10%'
 								},
 																{
 									field : 'result', 
 									title : '结果',
+									align : 'center',
+									width : '10%',
 									formatter : function(value, row, index) {
                                         if(value == 1) {
                                               return "<span class='label label-danger'>失败</span>";
@@ -103,6 +119,7 @@ function load() {
 								    field : 'id',
 								    title : '操作',
 								    align : 'center',
+								    width : '10%',
                                     formatter : function(value, row, index) {
                                         var s = '<a class="btn btn-primary btn-sm " href="#" mce_href="#" title="详情" onclick="show('
                                                 + row.logId
