@@ -27,6 +27,8 @@ function load() {
 						pageNumber : 1, // 如果设置了分布，首页页码
 						//search : true, // 是否显示搜索框
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+						fixedColumns: true,
+						fixedNumber: 1,
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对

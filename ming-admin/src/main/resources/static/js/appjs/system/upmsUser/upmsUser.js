@@ -53,19 +53,23 @@ function load() {
 								},
 																{
 									field : 'userId',
+									align : 'center',
 									title : '编号'
 								},
 																{
 									field : 'username',
+									align : 'center',
 									title : '帐号' ,
                                     sortable: true
 								},
 																{
 									field : 'realname',
+									align : 'center',
 									title : '姓名' 
 								},
 								{
                                     field : 'sex',
+                                    align : 'center',
                                     title : '性别',
                                     formatter : function(value, row, index) {
                                         if(value == 1) {
@@ -78,14 +82,17 @@ function load() {
                                 },
                                 {
                                     field : 'upmsOrganizationDO.name',
+                                    align : 'center',
                                     title : '组织'
                                 },
 																{
-									field : 'phone', 
+									field : 'phone',
+									align : 'center',
 									title : '电话' 
 								},
 																{
-									field : 'email', 
+									field : 'email',
+									align : 'center',
 									title : '邮箱' 
 								},
 																{
@@ -101,7 +108,8 @@ function load() {
 									}
 								},
 																{
-									field : 'ctime', 
+									field : 'ctime',
+									align : 'center',
 									title : '创建时间' 
 								},
 																{
