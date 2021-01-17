@@ -8,7 +8,7 @@
 <input type="hidden" th:value="${user.userId}" />
 <div class="wrapper wrapper-content">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="ibox float-e-margins">
                 <div class="ibox-title ibox-title-gray dashboard-header">
                     <h5>个人资料</h5>
@@ -27,8 +27,8 @@
                             <b class="font-noraml">用户名称：</b>
                             <p class="pull-right">[[${user.realname}]]</p>
                         </li>
-                        <li class="list-group-item"><i class="fa fa-user"></i>
-                            <b class="font-noraml">性别：</b>
+                        <li class="list-group-item"><i class="fa fa-mars"></i>
+                            <b class="font-noraml">性&emsp;&emsp;别：</b>
                             <p class="pull-right" th:switch="${user.sex}">
                                 <span th:case="'1'">男</span>
                                 <span th:case="'0'">女</span>
@@ -44,7 +44,7 @@
                             <p class="pull-right" >[[${user.email}]]</p>
                         </li>
                         <li class="list-group-item"><i class="fa fa-calendar"></i>
-                            <b  class="font-noraml">创建时间：</b>
+                            <b  class="font-noraml">入职日期：</b>
                             <p class="pull-right" >[[${#dates.format(user.ctime, 'yyyy-MM-dd')}]]</p>
                         </li>
                     </ul>
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="col-sm-9" style="padding-left: 0px">
+        <div class="col-sm-8" style="padding-left: 0px">
             <div class="ibox float-e-margins">
                 <div class="ibox-title ibox-title-gray dashboard-header">
                     <h5>系统资料</h5>
@@ -150,7 +150,7 @@
 </body>
 <div th:include="include :: footer"></div>
 <script src="../../../static/js/plugins/validate/jquery.validate.extend.js"
-        th:src="@{/js/plugins/validate/jquery.validate.extend.js}"></script>
+        th:src="@{/plugins/validate/js/jquery.validate.extend.js}"></script>
 <script type="text/javascript" src="../../../static/js/appjs/system/upmsUser/personal.js"
         th:src="@{/js/appjs/system/upmsUser/personal.js}"></script>
 </body>

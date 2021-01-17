@@ -1,20 +1,6 @@
 /*
- *
- *   H+ - 后台主题UI框架
- *   version 4.0
- *   修改记录
- *	 .checkbox-inline input[type=checkbox] 去掉margin-top:-4px
- *	 .checkbox-inline 添加font-size: 14px;默认是13px
- *   .onoffswitch-inner:before,    ;   /* height: 16px; 两处
- *
- *	.file-control {
- *  	color: inherit;
- * 	 font-size: 14px;
- *	add nopadding class
- *
- *
- *
-*/
+ *    ming 后台主题UI框架
+ */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
 }
@@ -395,7 +381,7 @@ body.mini-navbar .navbar-default .nav>li>.nav-second-level li a {
 }
 
 .navbar-fixed-top, .navbar-static-top {
-    background: #f3f3f4;
+    background: #fff;
 }
 
 .fixed-nav #wrapper {
@@ -691,7 +677,14 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 
 .btn {
-    border-radius: 3px;
+    border-radius: 4px;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 4px;
 }
 
 .float-e-margins .btn {
@@ -999,7 +992,7 @@ button.dim:active:before {
     color: #5e5e5e;
     font-size: 10px;
     font-weight: 600;
-    padding: 3px 8px;
+    padding: 3px 5px;
     text-shadow: none;
 }
 
@@ -7470,4 +7463,10 @@ body.skin-3 {
     100% {
         transform: scale3d(1,1,1) translateY(0)
     }
+}
+
+.ztree {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

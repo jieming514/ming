@@ -14,6 +14,14 @@
                         <div class="col-sm-2">
                             <input id="username" name="username" class="form-control" type="text">
                         </div>
+                        <label class="col-sm-1 control-label">操作日期:</label>
+                        <div class="col-sm-3">
+                            <div class="input-daterange input-group">
+                                <input type="text" class="input-sm form-control" id="startTime" placeholder="yyyy-MM-dd"/>
+                                <span class="input-group-addon">-</span>
+                                <input type="text" class="input-sm form-control" id="endTime" placeholder="yyyy-MM-dd"/>
+                            </div>
+                        </div>
                         <div class="col-sm-2">
                             <button type="button" id="serachBtn" class="btn btn-success"
                                     onclick="javascript:reLoad()">
@@ -45,7 +53,6 @@
 <div>
     <script type="text/javascript">
         var s_remove_h = 'hidden';
-
     </script>
 </div>
 <div shiro:hasPermission="system:upmsLog:remove">

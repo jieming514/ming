@@ -1,6 +1,33 @@
 var prefix = ctx + "/system/upmsLog";
 
 $(function() {
+
+    $("#startTime").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: "month",
+        todayBtn:  true,
+        autoclose: true,
+        endDate : new Date(),
+    }).on('changeDate', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        $('#endTime').datetimepicker('setStartDate', startTime);
+    });
+
+    $("#endTime").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: "month",
+        todayBtn:  true,
+        autoclose: true,
+        endDate : new Date(),
+    }).on('changeDate', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("#startTime").datetimepicker('setEndDate', endTime);
+    });
+
 	load();
 });
 
