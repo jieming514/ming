@@ -12,40 +12,43 @@ import java.util.Map;
 
 
 
+/**
+ * @author jie_ming514
+ */
 @Service
 public class UpmsLogServiceImpl implements UpmsLogService {
-	@Autowired
-	private UpmsLogDao upmsLogDao;
-	
-	@Override
-	public UpmsLogDO get(Long logId){
-		return upmsLogDao.get(logId);
-	}
-	
-	@Override
-	public List<UpmsLogDO> list(Map<String, Object> map){
-		return upmsLogDao.list(map);
-	}
-	
-	@Override
-	public int count(Map<String, Object> map){
-		return upmsLogDao.count(map);
-	}
+    @Autowired
+    private UpmsLogDao upmsLogDao;
 
-	@Async
-	@Override
-	public void save(UpmsLogDO upmsLog){
-		upmsLogDao.save(upmsLog);
-	}
-	
-	@Override
-	public int remove(Long logId){
-		return upmsLogDao.remove(logId);
-	}
-	
-	@Override
-	public int batchRemove(Long[] logIds){
-		return upmsLogDao.batchRemove(logIds);
-	}
-	
+    @Override
+    public UpmsLogDO get(Long logId) {
+        return upmsLogDao.get(logId);
+    }
+
+    @Override
+    public List<UpmsLogDO> list(Map<String, Object> map) {
+        return upmsLogDao.list(map);
+    }
+
+    @Override
+    public int count(Map<String, Object> map) {
+        return upmsLogDao.count(map);
+    }
+
+    @Async
+    @Override
+    public void save(UpmsLogDO upmsLog) {
+        upmsLogDao.save(upmsLog);
+    }
+
+    @Override
+    public int remove(Long logId) {
+        return upmsLogDao.remove(logId);
+    }
+
+    @Override
+    public int batchRemove(Long[] logIds) {
+        return upmsLogDao.batchRemove(logIds);
+    }
+
 }

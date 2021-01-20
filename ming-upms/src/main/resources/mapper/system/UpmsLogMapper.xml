@@ -9,15 +9,19 @@
         from upms_log where log_id = #{value}
     </select>
 
-    <select id="list" resultType="com.ming.upms.system.domain.UpmsLogDO">
-        select
-        `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions`
-        from upms_log
+    <sql id="listWhere">
         <where>
             <if test="logId != null and logId != ''">and log_id = #{logId}</if>
             <if test="description != null and description != ''">and description = #{description}</if>
-            <if test="username != null and username != ''">and username = #{username}</if>
-            <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
+            <if test="username != null and username != ''">
+                and username like concat('%', #{username}, '%')
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and date_format(start_time,'%y-%m-%d') &gt;= date_format(#{startTime}, '%y-%m-%d')
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and date_format(start_time,'%y-%m-%d') &lt;= date_format(#{endTime}, '%y-%m-%d')
+            </if>
             <if test="spendTime != null and spendTime != ''">and spend_time = #{spendTime}</if>
             <if test="basePath != null and basePath != ''">and base_path = #{basePath}</if>
             <if test="uri != null and uri != ''">and uri = #{uri}</if>
@@ -28,6 +32,13 @@
             <if test="result != null and result != ''">and result = #{result}</if>
             <if test="permissions != null and permissions != ''">and permissions = #{permissions}</if>
         </where>
+    </sql>
+
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsLogDO">
+        select
+        `log_id`,`description`,`username`,`start_time`,`spend_time`,`base_path`,`uri`,`method`,`parameter`,`user_agent`,`ip`,`result`,`permissions`
+        from upms_log
+        <include refid="listWhere"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -43,21 +54,7 @@
 
     <select id="count" resultType="int">
         select count(*) from upms_log
-        <where>
-            <if test="logId != null and logId != ''">and log_id = #{logId}</if>
-            <if test="description != null and description != ''">and description = #{description}</if>
-            <if test="username != null and username != ''">and username = #{username}</if>
-            <if test="startTime != null and startTime != ''">and start_time = #{startTime}</if>
-            <if test="spendTime != null and spendTime != ''">and spend_time = #{spendTime}</if>
-            <if test="basePath != null and basePath != ''">and base_path = #{basePath}</if>
-            <if test="uri != null and uri != ''">and uri = #{uri}</if>
-            <if test="method != null and method != ''">and method = #{method}</if>
-            <if test="parameter != null and parameter != ''">and parameter = #{parameter}</if>
-            <if test="userAgent != null and userAgent != ''">and user_agent = #{userAgent}</if>
-            <if test="ip != null and ip != ''">and ip = #{ip}</if>
-            <if test="result != null and result != ''">and result = #{result}</if>
-            <if test="permissions != null and permissions != ''">and permissions = #{permissions}</if>
-        </where>
+        <include refid="listWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ming.upms.system.domain.UpmsLogDO" useGeneratedKeys="true" keyProperty="logId">

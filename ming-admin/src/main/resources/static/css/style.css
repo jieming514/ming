@@ -741,8 +741,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 
 .btn-success {
-    background-color: #1c84c6;
-    border-color: #1c84c6;
+    background-color: #1E9FFF;
+    border-color: #1E9FFF;
     color: #FFFFFF;
 }
 
@@ -7469,4 +7469,12 @@ body.skin-3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.datetimepicker table tr td.old, .datetimepicker table tr td.new, .datetimepicker table tr td.disabled {
+    color: #d1d1d1;
+}
+
+.datetimepicker table tr td.old:hover {
+    color: #000;
 }

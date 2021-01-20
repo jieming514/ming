@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * 操作日志
+ *
  * @author ming
  * @email jie_ming514@163.com
  * @date 2020-04-06 13:31:45
@@ -15,17 +16,17 @@ import java.util.Map;
 @Mapper
 public interface UpmsLogDao {
 
-	UpmsLogDO get(Long logId);
-	
-	List<UpmsLogDO> list(Map<String,Object> map);
-	
-	int count(Map<String,Object> map);
-	
-	int save(UpmsLogDO upmsLog);
-	
-	int update(UpmsLogDO upmsLog);
-	
-	int remove(Long logId);
-	
-	int batchRemove(Long[] logIds);
+    UpmsLogDO get(Long logId);
+
+    List<UpmsLogDO> list(Map<String, Object> map);
+
+    int count(Map<String, Object> map);
+
+    int save(UpmsLogDO upmsLog);
+
+    int update(UpmsLogDO upmsLog);
+
+    int remove(Long logId);
+
+    int batchRemove(Long[] logIds);
 }
