@@ -7,16 +7,24 @@
         select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role where role_id = #{value}
     </select>
 
-    <select id="list" resultType="com.ming.upms.system.domain.UpmsRoleDO">
-        select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role
+    <sql id="listWhere">
         <where>
             <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="title != null and title != ''">and title = #{title}</if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="title != null and title != ''">
+                and title like concat('%', #{title}, '%')
+            </if>
             <if test="description != null and description != ''">and description = #{description}</if>
             <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
             <if test="orders != null and orders != ''">and orders = #{orders}</if>
         </where>
+    </sql>
+
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsRoleDO">
+        select `role_id`,`name`,`title`,`description`,`ctime`,`orders` from upms_role
+        <include refid="listWhere"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -32,14 +40,7 @@
 
     <select id="count" resultType="int">
         select count(*) from upms_role
-        <where>
-            <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="title != null and title != ''">and title = #{title}</if>
-            <if test="description != null and description != ''">and description = #{description}</if>
-            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
-            <if test="orders != null and orders != ''">and orders = #{orders}</if>
-        </where>
+        <include refid="listWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ming.upms.system.domain.UpmsRoleDO" useGeneratedKeys="true"
@@ -93,12 +94,12 @@
 
     <select id="selectRoleByUserId" resultType="com.ming.upms.system.domain.UpmsRoleDO">
         select ur.`role_id`,ur.`name`,ur.`title`,ur.`description`,ur.`ctime`,ur.`orders`
-        <include refid="selectRoleByUserIdWhere"></include>
+        <include refid="selectRoleByUserIdWhere"/>
     </select>
 
     <select id="selectRoleCountByUserId" resultType="int">
         select count(1)
-        <include refid="selectRoleByUserIdWhere"></include>
+        <include refid="selectRoleByUserIdWhere"/>
     </select>
 
 

@@ -8,15 +8,21 @@
         #{value}
     </select>
 
-    <select id="list" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
-        select `organization_id`,`pid`,`name`,`description`,`ctime` from upms_organization
+    <sql id="listWhere">
         <where>
             <if test="organizationId != null and organizationId != ''">and organization_id = #{organizationId}</if>
             <if test="pid != null and pid != ''">and pid = #{pid}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
             <if test="description != null and description != ''">and description = #{description}</if>
             <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
         </where>
+    </sql>
+
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsOrganizationDO">
+        select `organization_id`,`pid`,`name`,`description`,`ctime` from upms_organization
+        <include refid="listWhere"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -32,13 +38,7 @@
 
     <select id="count" resultType="int">
         select count(*) from upms_organization
-        <where>
-            <if test="organizationId != null and organizationId != ''">and organization_id = #{organizationId}</if>
-            <if test="pid != null and pid != ''">and pid = #{pid}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="description != null and description != ''">and description = #{description}</if>
-            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
-        </where>
+        <include refid="listWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ming.upms.system.domain.UpmsOrganizationDO" useGeneratedKeys="true"

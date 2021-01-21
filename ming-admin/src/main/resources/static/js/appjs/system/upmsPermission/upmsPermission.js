@@ -15,8 +15,7 @@ function load() {
                         type: "GET", // 请求数据的ajax类型
                         url: prefix + '/list', // 请求数据的ajax的url
                         ajaxParams: {
-                            name : $('#name').val(),
-                            sort:'orders'
+                            name : $('#name').val()
                         }, // 请求数据的ajax的data属性
                         expandColumn: 2,// 在哪一列上面显示展开按钮
                         striped: false, // 是否各行渐变色

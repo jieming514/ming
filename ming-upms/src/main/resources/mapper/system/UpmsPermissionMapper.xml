@@ -8,14 +8,14 @@
         from upms_permission where permission_id = #{value}
     </select>
 
-    <select id="list" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
-        select `permission_id`,`system_id`,`pid`,`name`,`type`,`permission_value`,`uri`,`icon`,`status`,`ctime`,`orders`
-        from upms_permission
+    <sql id="listWhere">
         <where>
             <if test="permissionId != null and permissionId != ''">and permission_id = #{permissionId}</if>
             <if test="systemId != null and systemId != ''">and system_id = #{systemId}</if>
             <if test="pid != null and pid != ''">and pid = #{pid}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
             <if test="type != null and type != ''">and type = #{type}</if>
             <if test="permissionValue != null and permissionValue != ''">and permission_value = #{permissionValue}</if>
             <if test="uri != null and uri != ''">and uri = #{uri}</if>
@@ -24,6 +24,12 @@
             <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
             <if test="orders != null and orders != ''">and orders = #{orders}</if>
         </where>
+    </sql>
+
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsPermissionDO">
+        select `permission_id`,`system_id`,`pid`,`name`,`type`,`permission_value`,`uri`,`icon`,`status`,`ctime`,`orders`
+        from upms_permission
+        <include refid="listWhere"/>
         order by orders asc, permission_id asc
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
@@ -32,19 +38,7 @@
 
     <select id="count" resultType="int">
         select count(*) from upms_permission
-        <where>
-            <if test="permissionId != null and permissionId != ''">and permission_id = #{permissionId}</if>
-            <if test="systemId != null and systemId != ''">and system_id = #{systemId}</if>
-            <if test="pid != null and pid != ''">and pid = #{pid}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="type != null and type != ''">and type = #{type}</if>
-            <if test="permissionValue != null and permissionValue != ''">and permission_value = #{permissionValue}</if>
-            <if test="uri != null and uri != ''">and uri = #{uri}</if>
-            <if test="icon != null and icon != ''">and icon = #{icon}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
-            <if test="orders != null and orders != ''">and orders = #{orders}</if>
-        </where>
+        <include refid="listWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ming.upms.system.domain.UpmsPermissionDO" useGeneratedKeys="true"

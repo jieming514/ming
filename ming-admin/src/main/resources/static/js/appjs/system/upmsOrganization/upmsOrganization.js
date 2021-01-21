@@ -13,6 +13,9 @@ function load() {
                     {
                         type : 'get', // 服务器数据的请求方式 get or post
                         url : prefix + "/list", // 服务器数据的加载地址
+                        ajaxParams: {
+                            name : $('#name').val()
+                        }, // 请求数据的ajax的data属性
                         id: 'organizationId',
                         parentId: 'pid',
                         expandColumn: 2,// 在哪一列上面显示展开按钮
@@ -119,8 +122,6 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
-}
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {

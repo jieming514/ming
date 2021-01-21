@@ -36,17 +36,23 @@
         uo.`organization_id`,uo.`pid`,uo.`name`,uo.`description`,uo.`ctime`
     </sql>
 
-    <sql id="selectUserVoWhere">
+    <sql id="listWhere">
         from upms_user uu
         left join upms_organization uo on uu.organization_id = uo.organization_id
         <where>
             <if test="userId != null and userId != ''">and uu.user_id = #{userId}</if>
-            <if test="username != null and username != ''">and uu.username like concat('%', #{username}, '%')</if>
+            <if test="username != null and username != ''">
+                and uu.username like concat('%', #{username}, '%')
+            </if>
             <if test="password != null and password != ''">and uu.password = #{password}</if>
             <if test="salt != null and salt != ''">and uu.salt = #{salt}</if>
-            <if test="realname != null and realname != ''">and uu.realname like concat('%', #{realname}, '%')</if>
+            <if test="realname != null and realname != ''">
+                and uu.realname like concat('%', #{realname}, '%')
+            </if>
             <if test="avatar != null and avatar != ''">and uu.avatar = #{avatar}</if>
-            <if test="phone != null and phone != ''">and uu.phone like concat('%', #{phone}, '%')</if>
+            <if test="phone != null and phone != ''">
+                and uu.phone like concat('%', #{phone}, '%')
+            </if>
             <if test="email != null and email != ''">and uu.email = #{email}</if>
             <if test="sex != null and sex != ''">and uu.sex = #{sex}</if>
             <if test="organizationId != null and organizationId != ''">and uu.organization_id = #{organizationId}</if>
@@ -63,7 +69,7 @@
 
     <select id="list" resultMap="UpmsUserResult">
         <include refid="selectUserVo"/>
-        <include refid="selectUserVoWhere"/>
+        <include refid="listWhere"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -79,7 +85,7 @@
 
     <select id="count" resultType="int">
         select count(1)
-        <include refid="selectUserVoWhere"/>
+        <include refid="listWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ming.upms.system.domain.UpmsUserDO"

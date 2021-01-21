@@ -8,9 +8,7 @@
         from upms_system where system_id = #{value}
     </select>
 
-    <select id="list" resultType="com.ming.upms.system.domain.UpmsSystemDO">
-        select `system_id`,`icon`,`banner`,`theme`,`basepath`,`status`,`name`,`title`,`description`,`ctime`,`orders`
-        from upms_system
+    <sql id="listWhere">
         <where>
             <if test="systemId != null and systemId != ''">and system_id = #{systemId}</if>
             <if test="icon != null and icon != ''">and icon = #{icon}</if>
@@ -18,12 +16,22 @@
             <if test="theme != null and theme != ''">and theme = #{theme}</if>
             <if test="basepath != null and basepath != ''">and basepath = #{basepath}</if>
             <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="title != null and title != ''">and title = #{title}</if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="title != null and title != ''">
+                and title like concat('%', #{title}, '%')
+            </if>
             <if test="description != null and description != ''">and description = #{description}</if>
             <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
             <if test="orders != null and orders != ''">and orders = #{orders}</if>
         </where>
+    </sql>
+
+    <select id="list" resultType="com.ming.upms.system.domain.UpmsSystemDO">
+        select `system_id`,`icon`,`banner`,`theme`,`basepath`,`status`,`name`,`title`,`description`,`ctime`,`orders`
+        from upms_system
+        <include refid="listWhere"/>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -39,19 +47,7 @@
 
     <select id="count" resultType="int">
         select count(*) from upms_system
-        <where>
-            <if test="systemId != null and systemId != ''">and system_id = #{systemId}</if>
-            <if test="icon != null and icon != ''">and icon = #{icon}</if>
-            <if test="banner != null and banner != ''">and banner = #{banner}</if>
-            <if test="theme != null and theme != ''">and theme = #{theme}</if>
-            <if test="basepath != null and basepath != ''">and basepath = #{basepath}</if>
-            <if test="status != null and status != ''">and status = #{status}</if>
-            <if test="name != null and name != ''">and name = #{name}</if>
-            <if test="title != null and title != ''">and title = #{title}</if>
-            <if test="description != null and description != ''">and description = #{description}</if>
-            <if test="ctime != null and ctime != ''">and ctime = #{ctime}</if>
-            <if test="orders != null and orders != ''">and orders = #{orders}</if>
-        </where>
+        <include refid="listWhere"/>
     </select>
 
     <insert id="save" parameterType="com.ming.upms.system.domain.UpmsSystemDO">
