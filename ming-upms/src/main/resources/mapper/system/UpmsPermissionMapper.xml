@@ -146,6 +146,9 @@
                     #{systemId}
                 </foreach>
             </if>
+            <if test="name != null and name != ''">
+                and up.name like concat('%', #{name}, '%')
+            </if>
         </where>
         order by up.orders asc
     </select>

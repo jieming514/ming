@@ -88,4 +88,12 @@ public class DateUtils {
         r += "前";
         return r;
     }
+
+    /**
+     * 获取今天日期，时间格式默认
+     * @return
+     */
+    public static String getToday() {
+        return format(new Date());
+    }
 }

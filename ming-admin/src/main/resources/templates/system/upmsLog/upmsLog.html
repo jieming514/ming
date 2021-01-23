@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="ibox">
             <div class="ibox-content">
-                <form id="userForm" class="form-horizontal m-t">
+                <form id="userForm" name="userForm" class="form-horizontal m-t">
                     <input id="organizationId" name="organizationId" class="form-control" type="hidden">
                     <div class="form-group">
                         <label class="col-sm-1 control-label" for="username">操作用户:</label>
@@ -17,14 +17,16 @@
                         <label class="col-sm-1 control-label">操作日期:</label>
                         <div class="col-sm-3">
                             <div class="input-daterange input-group">
-                                <input type="text" class="form-control" id="startTime" placeholder="yyyy-MM-dd"/>
+                                <input type="text" class="form-control" id="startTime"
+                                       placeholder="yyyy-MM-dd" autocomplete="off"/>
                                 <span class="input-group-addon">-</span>
-                                <input type="text" class="form-control" id="endTime" placeholder="yyyy-MM-dd"/>
+                                <input type="text" class="form-control" id="endTime"
+                                       placeholder="yyyy-MM-dd" autocomplete="off"/>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <button type="button" id="serachBtn" class="btn btn-success"
-                                    onclick="javascript:reLoad()">
+                                    onclick="reLoad()">
                                 <i class="fa fa-search" aria-hidden="true"></i>查询
                             </button>
                         </div>
@@ -37,9 +39,14 @@
                 <div class="fixed-table-toolbar">
                     <div class="columns pull-left">
                         <button shiro:hasPermission="system:upmsLog:batchRemove" type="button"
-                                class="btn  btn-danger"
+                                class="btn  btn-danger" title="删除"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                        <button shiro:hasPermission="system:upmsLog:download" type="button"
+                                class="btn btn-info" title="导出Excel"
+                                onclick="download()">
+                            <i class="fa fa-download" aria-hidden="true" ></i>导出
                         </button>
                     </div>
                 </div>

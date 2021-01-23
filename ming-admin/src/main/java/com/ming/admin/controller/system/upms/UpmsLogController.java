@@ -1,6 +1,8 @@
 package com.ming.admin.controller.system.upms;
 
+import com.alibaba.excel.EasyExcel;
 import com.ming.admin.controller.common.BaseController;
+import com.ming.common.utils.DateUtils;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
@@ -14,6 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +27,6 @@ import java.util.Map;
  * 用户操作日志
  *
  * @author ming
- * @email jie_ming514@163.com
  * @date 2020-04-06 13:31:45
  */
 @Api(tags = "日志信息管理")
@@ -29,6 +34,8 @@ import java.util.Map;
 @RequestMapping("/system/upmsLog")
 public class UpmsLogController extends BaseController {
 
+    private static final String DOWNLOAD_FILE_NAME = "用户操作日志";
+    private static final String DOWNLOAD_SHEET_NAME = "用户操作日志";
 
     @Autowired
     private UpmsLogService upmsLogService;
@@ -37,7 +44,7 @@ public class UpmsLogController extends BaseController {
     @ApiOperation(value = "用户操作查看页面", notes = "用户操作查看页面")
     @GetMapping()
     @RequiresPermissions("system:upmsLog:read")
-    public String UpmsLog() {
+    public String upmsLog() {
         return "system/upmsLog/upmsLog";
     }
 
@@ -84,6 +91,23 @@ public class UpmsLogController extends BaseController {
         UpmsLogDO upmsLogDO = upmsLogService.get(logId);
         model.addAttribute("upmsLog", upmsLogDO);
         return "system/upmsLog/show";
+    }
+
+
+    @ApiOperation(value = "导出日志", notes = "导出用户操作日志")
+    @GetMapping("/download")
+    public void download(HttpServletRequest request, HttpServletResponse response,
+                         @RequestParam Map<String, Object> params) throws IOException {
+        //查询列表数据
+        List<UpmsLogDO> upmsLogList = upmsLogService.list(params);
+
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode(DOWNLOAD_FILE_NAME + "-" + DateUtils.getToday(), "UTF-8");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), UpmsLogDO.class)
+                .sheet(DOWNLOAD_SHEET_NAME).doWrite(upmsLogList);
     }
 
 

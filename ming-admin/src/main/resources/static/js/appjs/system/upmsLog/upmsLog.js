@@ -1,7 +1,6 @@
 var prefix = ctx + "/system/upmsLog";
 
 $(function() {
-
     $("#startTime").datetimepicker({
         format: 'yyyy-mm-dd',
         minView: "month",
@@ -186,6 +185,7 @@ function remove(id) {
 	})
 }
 
+/* 批量删除 */
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
@@ -235,4 +235,28 @@ function show(logId) {
         }
     });
 
+}
+
+/** 数据导出 */
+function download() {
+    if(downloadRule()) {
+        var data = $('#userForm').serialize();
+        window.location.href = prefix + '/download?' + data;
+    }
+}
+
+/** 下载条件限制 */
+function downloadRule() {
+    var startTime = $('#startTime').val();
+    if(startTime == '') {
+        layer.alert('起始日期不能为空！', {icon: 5});
+        return false;
+    }
+
+    var endTime = $('#endTime').val();
+    if(endTime == '') {
+        layer.alert('结束日期不能为空！', {icon: 5});
+        return false;
+    }
+    return true;
 }
