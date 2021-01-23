@@ -52,10 +52,12 @@ public class LogAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         UpmsLogDO sysLog = new UpmsLogDO();
-        Log syslog = method.getAnnotation(Log.class);
-        if (syslog != null) {
+        Log log = method.getAnnotation(Log.class);
+        if (log != null) {
             // 注解上的描述
-            sysLog.setDescription(syslog.value());
+            sysLog.setDescription(log.value());
+            // 操作功能
+            sysLog.setType(log.type().ordinal());
         }
 
 

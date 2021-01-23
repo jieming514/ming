@@ -1,6 +1,7 @@
 package com.ming.admin.controller.system.upms;
 
 import com.ming.admin.controller.common.BaseController;
+import com.ming.common.enums.LogType;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
@@ -76,7 +77,7 @@ public class UpmsRoleController extends BaseController {
     @ApiOperation(value = "新增角色页面", notes = "新增角色页面")
     @GetMapping("/add")
     @RequiresPermissions("system:upmsRole:add")
-    @Log("添加角色")
+    @Log("添加角色页面")
     public String add() {
         return "system/upmsRole/add";
     }
@@ -96,7 +97,7 @@ public class UpmsRoleController extends BaseController {
     @ApiOperation(value = "新增角色接口", notes = "新增角色接口")
     @ResponseBody
     @PostMapping("/save")
-    @Log("保存角色信息")
+    @Log(value = "保存角色信息", type = LogType.INSERT)
     @RequiresPermissions("system:upmsRole:add")
     public R save(UpmsRoleDO upmsRole) {
         if (upmsRoleService.save(upmsRole) > 0) {
@@ -109,7 +110,7 @@ public class UpmsRoleController extends BaseController {
     @ApiOperation(value = "更新角色接口", notes = "更新角色接口")
     @ResponseBody
     @RequestMapping("/update")
-    @Log("修改角色信息")
+    @Log(value = "修改角色信息", type = LogType.UPDATE)
     @RequiresPermissions("system:upmsRole:edit")
     public R update(UpmsRoleDO upmsRole, Long[] permissionArr) {
         List<UpmsRolePermissionDO> upmsRolePermissionDOList = new ArrayList<UpmsRolePermissionDO>();
@@ -129,7 +130,7 @@ public class UpmsRoleController extends BaseController {
     @ApiOperation(value = "删除角色接口", notes = "删除角色接口")
     @PostMapping("/remove")
     @ResponseBody
-    @Log("删除角色")
+    @Log(value = "删除角色", type = LogType.DELETE)
     @RequiresPermissions("system:upmsRole:remove")
     public R remove(Long roleId) {
         if (upmsRoleService.remove(roleId) > 0) {
@@ -142,7 +143,7 @@ public class UpmsRoleController extends BaseController {
     @ApiOperation(value = "批量删除角色信息接口", notes = "批量删除角色信息接口")
     @PostMapping("/batchRemove")
     @ResponseBody
-    @Log("批量删除角色")
+    @Log(value = "批量删除角色", type = LogType.DELETE)
     @RequiresPermissions("system:upmsRole:remove")
     public R remove(@RequestParam("ids[]") Long[] roleIds) {
         upmsRoleService.batchRemove(roleIds);
@@ -178,7 +179,7 @@ public class UpmsRoleController extends BaseController {
 
     @ApiOperation(value = "删除角色的用户", notes = "删除角色的用户")
     @PostMapping("/deleteUserRoleInfo")
-    @Log("删除角色的用户")
+    @Log(value = "删除角色的用户", type = LogType.DELETE)
     @ResponseBody
     public R deleteUserRoleInfo(Long roleId, Long userId) {
         if (upmsUserRoleService.deleteUserRoleInfo(roleId, userId) > 0) {
@@ -190,7 +191,7 @@ public class UpmsRoleController extends BaseController {
 
     @ApiOperation(value = "批量删除角色的用户", notes = "批量删除角色的用户")
     @PostMapping("/batchRemoveRole")
-    @Log("批量删除角色的用户")
+    @Log(value = "批量删除角色的用户", type = LogType.DELETE)
     @ResponseBody
     public R batchRemoveRole(@RequestParam("roleId") Long roleId,
                              @RequestParam("ids[]") Long[] userIds) {
@@ -216,7 +217,7 @@ public class UpmsRoleController extends BaseController {
 
     @ApiOperation(value = "添加角色拥有用户", notes = "添加角色拥有用户")
     @PostMapping("/addRoleForUser")
-    @Log("添加角色拥有用户")
+    @Log(value = "添加角色拥有用户", type = LogType.INSERT)
     @ResponseBody
     public R addRoleForUser(@RequestParam("roleId") Long roleId,
                             @RequestParam("ids[]") Long[] userIds) {

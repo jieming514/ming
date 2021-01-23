@@ -2,6 +2,7 @@ package com.ming.admin.controller.system.upms;
 
 import com.ming.admin.controller.common.BaseController;
 import com.ming.common.domain.Tree;
+import com.ming.common.enums.LogType;
 import com.ming.common.utils.R;
 import com.ming.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsOrganizationDO;
@@ -42,7 +43,7 @@ public class UpmsOrganizationController extends BaseController {
         return "system/upmsOrganization/upmsOrganization";
     }
 
-    
+
     @ApiOperation(value = "组织列表接口", notes = "组织列表接口")
     @ResponseBody
     @GetMapping("/list")
@@ -56,7 +57,7 @@ public class UpmsOrganizationController extends BaseController {
     @ApiOperation(value = "新增组织页面", notes = "新增组织页面")
     @GetMapping("/add")
     @RequiresPermissions("system:upmsOrganization:add")
-    @Log("添加组织")
+    @Log(value = "添加组织", type = LogType.SELECT)
     public String add() {
         return "system/upmsOrganization/add";
     }
@@ -76,7 +77,7 @@ public class UpmsOrganizationController extends BaseController {
     @ApiOperation(value = "新增组织信息接口", notes = "新增组织信息接口")
     @ResponseBody
     @PostMapping("/save")
-    @Log("保存组织")
+    @Log(value = "保存组织", type = LogType.INSERT)
     @RequiresPermissions("system:upmsOrganization:add")
     public R save(UpmsOrganizationDO upmsOrganization) {
         if (upmsOrganizationService.save(upmsOrganization) > 0) {
@@ -87,7 +88,7 @@ public class UpmsOrganizationController extends BaseController {
 
 
     @ApiOperation(value = "删除组织信息接口", notes = "删除组织信息接口")
-    @Log("删除组织")
+    @Log(value = "删除组织", type = LogType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("system:upmsOrganization:remove")
@@ -100,7 +101,7 @@ public class UpmsOrganizationController extends BaseController {
 
 
     @ApiOperation(value = "批量删除组织信息接口", notes = "批量删除组织信息接口")
-    @Log("批量删除组织")
+    @Log(value = "批量删除组织", type = LogType.DELETE)
     @PostMapping("/batchRemove")
     @ResponseBody
     @RequiresPermissions("system:upmsOrganization:remove")
@@ -129,7 +130,7 @@ public class UpmsOrganizationController extends BaseController {
 
 
     @ApiOperation(value = "修改组织信息接口", notes = "修改组织信息接口")
-    @Log("更新组织")
+    @Log(value = "更新组织", type = LogType.UPDATE)
     @RequiresPermissions("system:upmsOrganization:edit")
     @RequestMapping("/update")
     @ResponseBody

@@ -1,6 +1,7 @@
 package com.ming.admin.controller.system.upms;
 
 import com.ming.admin.controller.common.BaseController;
+import com.ming.common.enums.LogType;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
@@ -81,7 +82,7 @@ public class UpmsSystemController extends BaseController {
     @ApiOperation(value = "新增系统接口", notes = "新增系统接口")
     @ResponseBody
     @PostMapping("/save")
-    @Log("保存系统")
+    @Log(value = "保存系统", type = LogType.INSERT)
     @RequiresPermissions("system:upmsSystem:add")
     public R save(UpmsSystemDO upmsSystem) {
         if (upmsSystemService.save(upmsSystem) > 0) {
@@ -93,7 +94,7 @@ public class UpmsSystemController extends BaseController {
 
     @ApiOperation(value = "更新系统接口", notes = "更新系统接口")
     @ResponseBody
-    @Log("更新系统")
+    @Log(value = "更新系统", type = LogType.UPDATE)
     @RequestMapping("/update")
     @RequiresPermissions("system:upmsSystem:edit")
     public R update(UpmsSystemDO upmsSystem) {
@@ -105,7 +106,7 @@ public class UpmsSystemController extends BaseController {
     @ApiOperation(value = "删除系统接口", notes = "删除系统接口")
     @PostMapping("/remove")
     @ResponseBody
-    @Log("删除系统")
+    @Log(value = "删除系统", type = LogType.DELETE)
     @RequiresPermissions("system:upmsSystem:remove")
     public R remove(Long systemId) {
         if (upmsSystemService.remove(systemId) > 0) {
@@ -118,7 +119,7 @@ public class UpmsSystemController extends BaseController {
     @ApiOperation(value = "批量删除系统信息接口", notes = "批量删除系统信息接口")
     @PostMapping("/batchRemove")
     @ResponseBody
-    @Log("批量系统")
+    @Log(value = "批量删除系统", type = LogType.DELETE)
     @RequiresPermissions("system:upmsSystem:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] systemIds) {
         upmsSystemService.batchRemove(systemIds);

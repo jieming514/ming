@@ -75,6 +75,10 @@ public class UpmsLogDO implements Serializable {
     @ApiModelProperty(value = "权限值")
     private String permissions;
 
+    @ExcelIgnore
+    @ApiModelProperty(value = "操作类型")
+    private Integer type;
+
     /**
      * 设置：编号
      */
@@ -255,6 +259,15 @@ public class UpmsLogDO implements Serializable {
      */
     public String getPermissions() {
         return permissions;
+    }
+
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     @Override

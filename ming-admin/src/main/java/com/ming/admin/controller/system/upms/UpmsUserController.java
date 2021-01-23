@@ -1,11 +1,12 @@
 package com.ming.admin.controller.system.upms;
 
 import com.ming.admin.controller.common.BaseController;
+import com.ming.common.annotation.Log;
+import com.ming.common.enums.LogType;
 import com.ming.common.utils.MD5Utils;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
-import com.ming.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsUserRoleService;
 import com.ming.upms.system.service.UpmsUserService;
@@ -67,7 +68,6 @@ public class UpmsUserController extends BaseController {
 
     @ApiOperation(value = "新增用户页面", notes = "新增用户页面")
     @GetMapping("/add")
-    @Log("添加用户")
     @RequiresPermissions("system:upmsUser:add")
     public String add() {
         return "system/upmsUser/add";
@@ -76,7 +76,6 @@ public class UpmsUserController extends BaseController {
 
     @ApiOperation(value = "编辑用户页面", notes = "编辑用户页面")
     @GetMapping("/edit/{userId}")
-    @Log("编辑用户")
     @RequiresPermissions("system:upmsUser:edit")
     public String edit(@PathVariable("userId") Long userId, Model model) {
         UpmsUserDO upmsUser = upmsUserService.selectUserByUserId(userId);
@@ -88,7 +87,7 @@ public class UpmsUserController extends BaseController {
     @ApiOperation(value = "新增用户接口", notes = "新增用户接口")
     @ResponseBody
     @PostMapping("/save")
-    @Log("保存用户")
+    @Log(value = "保存用户", type = LogType.INSERT)
     @RequiresPermissions("system:upmsUser:add")
     public R save(UpmsUserDO upmsUser) {
         String salt = RandomStringUtils.randomAlphanumeric(30);
@@ -105,7 +104,7 @@ public class UpmsUserController extends BaseController {
     @ApiOperation(value = "更新用户接口", notes = "更新用户接口")
     @ResponseBody
     @RequestMapping("/update")
-    @Log("更新用户")
+    @Log(value = "更新用户", type = LogType.UPDATE)
     @RequiresPermissions("system:upmsUser:edit")
     public R update(UpmsUserDO upmsUser) {
         upmsUserService.update(upmsUser);
@@ -116,7 +115,7 @@ public class UpmsUserController extends BaseController {
     @ApiOperation(value = "删除用户接口", notes = "删除用户接口")
     @PostMapping("/remove")
     @ResponseBody
-    @Log("删除用户")
+    @Log(value = "删除用户", type = LogType.DELETE)
     @RequiresPermissions("system:upmsUser:remove")
     public R remove(Long userId) {
         if (upmsUserService.remove(userId) > 0) {
@@ -129,7 +128,7 @@ public class UpmsUserController extends BaseController {
     @ApiOperation(value = "批量删除用户信息接口", notes = "批量删除用户信息接口")
     @PostMapping("/batchRemove")
     @ResponseBody
-    @Log("批量删除用户")
+    @Log(value = "批量删除用户", type = LogType.DELETE)
     @RequiresPermissions("system:upmsUser:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] userIds) {
         upmsUserService.batchRemove(userIds);
@@ -181,6 +180,7 @@ public class UpmsUserController extends BaseController {
     @ApiOperation(value = "重置密码接口", notes = "重置密码接口")
     @PostMapping("/resetPwd")
     @ResponseBody
+    @Log(value = "重置密码", type = LogType.UPDATE)
     public R resetPwd(UpmsUserDO user) {
         if (!getUserId().equals(user.getUserId())) {
             return R.error("非用户本人操作！");

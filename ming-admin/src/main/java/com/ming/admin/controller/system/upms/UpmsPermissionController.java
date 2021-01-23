@@ -2,6 +2,7 @@ package com.ming.admin.controller.system.upms;
 
 import com.ming.admin.controller.common.BaseController;
 import com.ming.common.domain.Tree;
+import com.ming.common.enums.LogType;
 import com.ming.common.utils.R;
 import com.ming.common.annotation.Log;
 import com.ming.upms.system.domain.UpmsPermissionDO;
@@ -63,7 +64,7 @@ public class UpmsPermissionController extends BaseController {
     @ApiOperation(value = "新增资源页面", notes = "新增资源页面")
     @GetMapping("/add/{pid}")
     @RequiresPermissions("system:upmsPermission:add")
-    @Log("添加资源")
+    @Log("添加资源页面")
     public String add(@PathVariable("pid") Long pid, Model model) {
         List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
         UpmsPermissionDO pPermissionDO = upmsPermissionService.get(pid);
@@ -81,7 +82,7 @@ public class UpmsPermissionController extends BaseController {
     @ApiOperation(value = "编辑资源页面", notes = "编辑资源页面")
     @GetMapping("/edit/{permissionId}")
     @RequiresPermissions("system:upmsPermission:edit")
-    @Log("编辑资源")
+    @Log("编辑资源页面")
     public String edit(@PathVariable("permissionId") Long permissionId, Model model) {
         UpmsPermissionDO upmsPermission = upmsPermissionService.get(permissionId);
         List<UpmsSystemDO> systemList = upmsSystemService.getAvalidList(new HashMap<>());
@@ -109,7 +110,7 @@ public class UpmsPermissionController extends BaseController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("system:upmsPermission:add")
-    @Log("保存资源")
+    @Log(value = "保存资源", type = LogType.INSERT)
     public R save(UpmsPermissionDO upmsPermission) {
         if (upmsPermissionService.save(upmsPermission) > 0) {
             return R.ok();
@@ -121,7 +122,7 @@ public class UpmsPermissionController extends BaseController {
     @ApiOperation(value = "更新资源接口", notes = "更新资源接口")
     @ResponseBody
     @RequestMapping("/update")
-    @Log("修改资源")
+    @Log(value = "修改资源", type = LogType.UPDATE)
     @RequiresPermissions("system:upmsPermission:edit")
     public R update(UpmsPermissionDO upmsPermission) {
         upmsPermissionService.update(upmsPermission);
@@ -132,7 +133,7 @@ public class UpmsPermissionController extends BaseController {
     @ApiOperation(value = "删除资源接口", notes = "删除资源接口")
     @PostMapping("/remove")
     @ResponseBody
-    @Log("删除资源")
+    @Log(value = "删除资源", type = LogType.DELETE)
     @RequiresPermissions("system:upmsPermission:remove")
     public R remove(Long permissionId) {
         if (upmsPermissionService.remove(permissionId) > 0) {
@@ -145,7 +146,7 @@ public class UpmsPermissionController extends BaseController {
     @ApiOperation(value = "批量删除资源信息接口", notes = "批量删除资源信息接口")
     @PostMapping("/batchRemove")
     @ResponseBody
-    @Log("批量删除资源")
+    @Log(value = "批量删除资源", type = LogType.DELETE)
     @RequiresPermissions("system:upmsPermission:batchRemove")
     public R remove(@RequestParam("ids[]") Long[] permissionIds) {
         upmsPermissionService.batchRemove(permissionIds);
