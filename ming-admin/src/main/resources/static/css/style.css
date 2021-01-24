@@ -1878,6 +1878,12 @@ table.dataTable thead .sorting:after {
     color: #ed5565;
 }
 
+.control-group .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
 .input-group-addon {
     background-color: #fff;
     border: 1px solid #E5E6E7;
@@ -1886,7 +1892,7 @@ table.dataTable thead .sorting:after {
     font-size: 14px;
     font-weight: 400;
     line-height: 1;
-    padding: 6px 12px;
+    padding: 6px 10px;
     text-align: center;
 }
 
@@ -2350,6 +2356,12 @@ label.error {
 .form-control.error {
     border: 1px dotted #cc5965;
 }
+
+.form-control.laydate {
+    background: url(../img/calendar.png) no-repeat right;
+}
+
+
 /* ngGrid */
 .gridStyle {
     border: 1px solid #d4d4d4;
@@ -3773,7 +3785,7 @@ table.table-mail tr td {
 }
 
 .blue-bg {
-    background-color: #1c84c6;
+    background-color: #1ca7ff;
     color: #ffffff;
 }
 
@@ -7478,4 +7490,9 @@ body.skin-3 {
 
 .datetimepicker table tr td.old:hover {
     color: #000;
+}
+
+.panel-context {
+    padding : 10px;
+    line-height : 1.5
 }

@@ -1,33 +1,34 @@
 var prefix = ctx + "/system/upmsLog";
 
 $(function() {
-    $("#startTime").datetimepicker({
-        format: 'yyyy-mm-dd',
-        minView: "month",
-        todayBtn:  true,
-        autoclose: true,
-        endDate : new Date(),
-    }).on('changeDate', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var startTime = event.date;
-        $('#endTime').datetimepicker('setStartDate', startTime);
-    });
+    load();
+});
 
-    $("#endTime").datetimepicker({
-        format: 'yyyy-mm-dd',
-        minView: "month",
-        todayBtn:  true,
-        autoclose: true,
-        endDate : new Date(),
-    }).on('changeDate', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var endTime = event.date;
-        $("#startTime").datetimepicker('setEndDate', endTime);
-    });
+layui.use('laydate', function(){
+    var laydate = layui.laydate;
+    startTime = laydate.render({
+        elem: '#startTime', //指定元素
+        max : 0,
+        done:function(value,date){
+            endTime.config.min={
+                year:date.year,
+                month:date.month-1,//关键
+                date:date.date
+            };
+        }
 
-	load();
+    });
+    endTime = laydate.render({
+        elem: '#endTime', //指定元素
+        max : 0,
+        done: function(value,date) {
+            startTime.config.max={
+                year:date.year,
+                month:date.month-1,//关键
+                date:date.date
+            };
+        }
+    });
 });
 
 function load() {
