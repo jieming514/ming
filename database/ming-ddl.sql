@@ -1,41 +1,47 @@
 
 --
--- Table structure for table `upma_config_type`
+-- Table structure for table `upms_dict_type`
 --
 
-drop table if exists upma_config_type;
-create table upma_config_type
+drop table if exists `upms_dict_type`;
+create table upms_dict_type
 (
-  config_type_id   bigint(10)      not null auto_increment    comment '参数类型主键',
-  type_name        varchar(100)    default ''                 comment '参数类型名称',
+  dict_id          bigint(20)      not null auto_increment    comment '字典主键',
+  dict_name        varchar(100)    default ''                 comment '字典名称',
+  dict_type        varchar(100)    default ''                 comment '字典类型',
   status           char(1)         default '0'                comment '状态（0正常 1停用）',
   create_by        varchar(64)     default ''                 comment '创建者',
   create_time      datetime                                   comment '创建时间',
   update_by        varchar(64)     default ''                 comment '更新者',
   update_time      datetime                                   comment '更新时间',
   remark           varchar(500)    default null               comment '备注',
-  primary key (config_type_id)
-) engine=innodb auto_increment=100 comment = '参数配置类型表';
+  primary key (dict_id),
+  unique (dict_type)
+) engine=innodb auto_increment=100 comment = '字典类型表';
 
 --
--- Table structure for table `upms_config`
+-- Table structure for table `upms_dict_data`
 --
 
-DROP TABLE IF EXISTS `upms_config_data`;
-CREATE TABLE `upms_config_data` (
-  `config_id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
-  `config_name` varchar(100) DEFAULT '' COMMENT '参数名称',
-  `config_key` varchar(100) DEFAULT '' COMMENT '参数键名',
-  `config_value` varchar(500) DEFAULT '' COMMENT '参数键值',
-  `config_type` char(10) DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
-  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`config_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='参数配置明细表';
-
+drop table if exists `upms_dict_data`;
+create table upms_dict_data
+(
+  dict_code        bigint(20)      not null auto_increment    comment '字典编码',
+  dict_sort        int(4)          default 0                  comment '字典排序',
+  dict_label       varchar(100)    default ''                 comment '字典标签',
+  dict_value       varchar(100)    default ''                 comment '字典键值',
+  dict_type        varchar(100)    default ''                 comment '字典类型',
+  css_class        varchar(100)    default null               comment '样式属性（其他样式扩展）',
+  list_class       varchar(100)    default null               comment '表格回显样式',
+  is_default       char(1)         default 'N'                comment '是否默认（Y是 N否）',
+  status           char(1)         default '0'                comment '状态（0正常 1停用）',
+  create_by        varchar(64)     default ''                 comment '创建者',
+  create_time      datetime                                   comment '创建时间',
+  update_by        varchar(64)     default ''                 comment '更新者',
+  update_time      datetime                                   comment '更新时间',
+  remark           varchar(500)    default null               comment '备注',
+  primary key (dict_code)
+) engine=innodb auto_increment=100 comment = '字典数据表';
 
 --
 -- Table structure for table `upms_log`

@@ -9,47 +9,53 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-						<input id="config_type_id" name="config_type_id" th:value="${upmsConfigType.config_type_id}"  type="hidden">
+						<input id="dict_id" name="dict_id" th:value="${upmsDictType.dict_id}"  type="hidden">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">参数类型名称：</label>
+								<label class="col-sm-3 control-label">字典名称：</label>
 								<div class="col-sm-8">
-									<input id="typeName" name="typeName" th:value="${upmsConfigType.typeName}" class="form-control" type="text">
+									<input id="dictName" name="dictName" th:value="${upmsDictType.dictName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">字典类型：</label>
+								<div class="col-sm-8">
+									<input id="dictType" name="dictType" th:value="${upmsDictType.dictType}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">状态（0正常 1停用）：</label>
 								<div class="col-sm-8">
-									<input id="status" name="status" th:value="${upmsConfigType.status}" class="form-control" type="text">
+									<input id="status" name="status" th:value="${upmsDictType.status}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">创建者：</label>
 								<div class="col-sm-8">
-									<input id="createBy" name="createBy" th:value="${upmsConfigType.createBy}" class="form-control" type="text">
+									<input id="createBy" name="createBy" th:value="${upmsDictType.createBy}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">创建时间：</label>
 								<div class="col-sm-8">
-									<input id="createTime" name="createTime" th:value="${upmsConfigType.createTime}" class="form-control" type="text">
+									<input id="createTime" name="createTime" th:value="${upmsDictType.createTime}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">更新者：</label>
 								<div class="col-sm-8">
-									<input id="updateBy" name="updateBy" th:value="${upmsConfigType.updateBy}" class="form-control" type="text">
+									<input id="updateBy" name="updateBy" th:value="${upmsDictType.updateBy}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">更新时间：</label>
 								<div class="col-sm-8">
-									<input id="updateTime" name="updateTime" th:value="${upmsConfigType.updateTime}" class="form-control" type="text">
+									<input id="updateTime" name="updateTime" th:value="${upmsDictType.updateTime}" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">备注：</label>
 								<div class="col-sm-8">
-									<input id="remark" name="remark" th:value="${upmsConfigType.remark}" class="form-control" type="text">
+									<input id="remark" name="remark" th:value="${upmsDictType.remark}" class="form-control" type="text">
 								</div>
 							</div>
 																					<div class="form-group">
@@ -64,7 +70,7 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/upmsConfigType/edit.js">
+	<script type="text/javascript" src="/js/appjs/system/upmsDictType/edit.js">
 	</script>
 </body>
 </html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="dict_code" name="dict_code" th:value="${upmsDictData.dict_code}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">字典排序：</label>
+								<div class="col-sm-8">
+									<input id="dictSort" name="dictSort" th:value="${upmsDictData.dictSort}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">字典标签：</label>
+								<div class="col-sm-8">
+									<input id="dictLabel" name="dictLabel" th:value="${upmsDictData.dictLabel}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">字典键值：</label>
+								<div class="col-sm-8">
+									<input id="dictValue" name="dictValue" th:value="${upmsDictData.dictValue}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">字典类型：</label>
+								<div class="col-sm-8">
+									<input id="dictType" name="dictType" th:value="${upmsDictData.dictType}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">样式属性（其他样式扩展）：</label>
+								<div class="col-sm-8">
+									<input id="cssClass" name="cssClass" th:value="${upmsDictData.cssClass}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">表格回显样式：</label>
+								<div class="col-sm-8">
+									<input id="listClass" name="listClass" th:value="${upmsDictData.listClass}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否默认（Y是 N否）：</label>
+								<div class="col-sm-8">
+									<input id="isDefault" name="isDefault" th:value="${upmsDictData.isDefault}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">状态（0正常 1停用）：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" th:value="${upmsDictData.status}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建者：</label>
+								<div class="col-sm-8">
+									<input id="createBy" name="createBy" th:value="${upmsDictData.createBy}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${upmsDictData.createTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">更新者：</label>
+								<div class="col-sm-8">
+									<input id="updateBy" name="updateBy" th:value="${upmsDictData.updateBy}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">更新时间：</label>
+								<div class="col-sm-8">
+									<input id="updateTime" name="updateTime" th:value="${upmsDictData.updateTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${upmsDictData.remark}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/upmsDictData/edit.js">
+	</script>
+</body>
+</html>

@@ -34,6 +34,11 @@ h3, h4, h5 {
     font-weight: 600;
 }
 
+a {
+    cursor: pointer;
+    color: #337ab7;
+}
+
 a:focus {
     outline: none;
 }
@@ -3676,7 +3681,7 @@ code {
 .ibox-content {
     background-color: #ffffff;
     color: inherit;
-    padding: 10px 10px;
+    padding: 15px 15px;
     border-color: #e7eaec;
     -webkit-border-image: none;
     -o-border-image: none;

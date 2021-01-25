@@ -1,5 +1,5 @@
 
-var prefix = "/system/upmsConfigData"
+var prefix = "/system/upmsDictData"
 $(function() {
 	load();
 });
@@ -48,24 +48,40 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'configId', 
-									title : '参数主键' 
+									field : 'dictCode', 
+									title : '字典编码' 
 								},
 																{
-									field : 'configName', 
-									title : '参数名称' 
+									field : 'dictSort', 
+									title : '字典排序' 
 								},
 																{
-									field : 'configKey', 
-									title : '参数键名' 
+									field : 'dictLabel', 
+									title : '字典标签' 
 								},
 																{
-									field : 'configValue', 
-									title : '参数键值' 
+									field : 'dictValue', 
+									title : '字典键值' 
 								},
 																{
-									field : 'configType', 
-									title : '系统内置（Y是 N否）' 
+									field : 'dictType', 
+									title : '字典类型' 
+								},
+																{
+									field : 'cssClass', 
+									title : '样式属性（其他样式扩展）' 
+								},
+																{
+									field : 'listClass', 
+									title : '表格回显样式' 
+								},
+																{
+									field : 'isDefault', 
+									title : '是否默认（Y是 N否）' 
+								},
+																{
+									field : 'status', 
+									title : '状态（0正常 1停用）' 
 								},
 																{
 									field : 'createBy', 
@@ -93,13 +109,13 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.configId
+												+ row.dictCode
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.configId
+												+ row.dictCode
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.configId
+												+ row.dictCode
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -137,7 +153,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'configId' : id
+				'dictCode' : id
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -166,7 +182,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['configId'];
+			ids[i] = row['dictCode'];
 		});
 		$.ajax({
 			type : 'POST',

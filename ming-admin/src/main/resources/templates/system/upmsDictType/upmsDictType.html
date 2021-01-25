@@ -10,13 +10,13 @@
                 <form id="userForm" class="form-horizontal m-t">
                     <input id="organizationId" name="organizationId" class="form-control" type="hidden">
                     <div class="form-group">
-                        <label class="col-sm-1 control-label" for="name">系统名称:</label>
+                        <label class="col-sm-1 control-label" for="dictName">字典名称:</label>
                         <div class="col-sm-2">
-                            <input id="name" name="name" class="form-control" type="text">
+                            <input id="dictName" name="dictName" class="form-control" type="text">
                         </div>
-                        <label class="col-sm-1 control-label" for="title">系统标题:</label>
+                        <label class="col-sm-1 control-label" for="dictType">字典类型:</label>
                         <div class="col-sm-2">
-                            <input id="title" name="title" class="form-control" type="text">
+                            <input id="dictType" name="dictType" class="form-control" type="text">
                         </div>
                         <div class="col-sm-2">
                             <button type="button" id="serachBtn" class="btn btn-success"
@@ -49,32 +49,37 @@
         </div>
     </div>
 </div>
-
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 <div>
     <script type="text/javascript">
-        var s_edit_h = 'hidden';
-        var s_remove_h = 'hidden';
-        var s_resetPwd_h = 'hidden';
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+
     </script>
 </div>
-<div shiro:hasPermission="system:upmsSystem:edit">
+<div shiro:hasPermission="system:upmsDictType:edit">
     <script type="text/javascript">
-        s_edit_h = '';
+				s_edit_h = '';
+
     </script>
 </div>
-<div shiro:hasPermission="system:upmsSystem:remove">
+<div shiro:hasPermission="system:upmsDictType:remove">
     <script type="text/javascript">
-        var s_remove_h = '';
+				var s_remove_h = '';
+
     </script>
 </div>
-<div shiro:hasPermission="system:upmsSystem:resetPwd">
+<div shiro:hasPermission="system:upmsDictType:resetPwd">
     <script type="text/javascript">
-        var s_resetPwd_h = '';
+				var s_resetPwd_h = '';
+
     </script>
 </div>
 </div>
 <div th:include="include :: footer"></div>
-<script type="text/javascript" src="../../../static/js/appjs/system/upmsSystem/upmsSystem.js"
-        th:src="@{/js/appjs/system/upmsSystem/upmsSystem.js}"></script>
+<script type="text/javascript" src="/js/appjs/system/upmsDictType/upmsDictType.js"
+        th:src="@{/js/appjs/system/upmsDictType/upmsDictType.js}"></script>
+
 </body>
 </html>

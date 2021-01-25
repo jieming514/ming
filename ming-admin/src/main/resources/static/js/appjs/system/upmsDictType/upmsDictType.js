@@ -1,5 +1,6 @@
+var prefix =  ctx + "/system/upmsDictType"
 
-var prefix = "/system/upmsConfigType"
+
 $(function() {
 	load();
 });
@@ -10,9 +11,9 @@ function load() {
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
 						url : prefix + "/list", // 服务器数据的加载地址
-					//	showRefresh : true,
-					//	showToggle : true,
-					//	showColumns : true,
+					    showRefresh : true,
+                        showToggle : true,
+					    showColumns : true,
 						iconSize : 'outline',
 						toolbar : '#exampleToolbar',
 						striped : true, // 设置为true会有隔行变色效果
@@ -32,9 +33,9 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
+								offset:params.offset,
+					            dictName:$('#dictName').val(),
+					            dictType:$('#dictType').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -48,12 +49,16 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'configTypeId', 
-									title : '参数类型主键' 
+									field : 'dictId', 
+									title : '字典主键' 
 								},
 																{
-									field : 'typeName', 
-									title : '参数类型名称' 
+									field : 'dictName', 
+									title : '字典名称' 
+								},
+																{
+									field : 'dictType', 
+									title : '字典类型' 
 								},
 																{
 									field : 'status', 
@@ -85,13 +90,13 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.configTypeId
+												+ row.dictId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.configTypeId
+												+ row.dictId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.configTypeId
+												+ row.dictId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -129,7 +134,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'configTypeId' : id
+				'dictId' : id
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -143,8 +148,6 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
-}
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
@@ -158,7 +161,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['configTypeId'];
+			ids[i] = row['dictId'];
 		});
 		$.ajax({
 			type : 'POST',

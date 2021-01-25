@@ -10,27 +10,51 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">参数名称：</label>
+								<label class="col-sm-3 control-label">字典排序：</label>
 								<div class="col-sm-8">
-									<input id="configName" name="configName" class="form-control" type="text">
+									<input id="dictSort" name="dictSort" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">参数键名：</label>
+								<label class="col-sm-3 control-label">字典标签：</label>
 								<div class="col-sm-8">
-									<input id="configKey" name="configKey" class="form-control" type="text">
+									<input id="dictLabel" name="dictLabel" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">参数键值：</label>
+								<label class="col-sm-3 control-label">字典键值：</label>
 								<div class="col-sm-8">
-									<input id="configValue" name="configValue" class="form-control" type="text">
+									<input id="dictValue" name="dictValue" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">系统内置（Y是 N否）：</label>
+								<label class="col-sm-3 control-label">字典类型：</label>
 								<div class="col-sm-8">
-									<input id="configType" name="configType" class="form-control" type="text">
+									<input id="dictType" name="dictType" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">样式属性（其他样式扩展）：</label>
+								<div class="col-sm-8">
+									<input id="cssClass" name="cssClass" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">表格回显样式：</label>
+								<div class="col-sm-8">
+									<input id="listClass" name="listClass" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否默认（Y是 N否）：</label>
+								<div class="col-sm-8">
+									<input id="isDefault" name="isDefault" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">状态（0正常 1停用）：</label>
+								<div class="col-sm-8">
+									<input id="status" name="status" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
@@ -75,7 +99,7 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/upmsConfigData/add.js">
+	<script type="text/javascript" src="/js/appjs/system/upmsDictData/add.js">
 	</script>
 </body>
 </html>

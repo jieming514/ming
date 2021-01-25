@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.upms.system.dao.UpmsDictDataDao">
+
+	<select id="get" resultType="com.ming.upms.system.domain.UpmsDictDataDO">
+		select `dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark` from upms_dict_data where dict_code = #{value}
+	</select>
+
+	<select id="list" resultType="com.ming.upms.system.domain.UpmsDictDataDO">
+		select `dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark` from upms_dict_data
+        <where>  
+		  		  <if test="dictCode != null and dictCode != ''"> and dict_code = #{dictCode} </if>
+		  		  <if test="dictSort != null and dictSort != ''"> and dict_sort = #{dictSort} </if>
+		  		  <if test="dictLabel != null and dictLabel != ''"> and dict_label = #{dictLabel} </if>
+		  		  <if test="dictValue != null and dictValue != ''"> and dict_value = #{dictValue} </if>
+		  		  <if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
+		  		  <if test="cssClass != null and cssClass != ''"> and css_class = #{cssClass} </if>
+		  		  <if test="listClass != null and listClass != ''"> and list_class = #{listClass} </if>
+		  		  <if test="isDefault != null and isDefault != ''"> and is_default = #{isDefault} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by dict_code desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from upms_dict_data
+		 <where>  
+		  		  <if test="dictCode != null and dictCode != ''"> and dict_code = #{dictCode} </if>
+		  		  <if test="dictSort != null and dictSort != ''"> and dict_sort = #{dictSort} </if>
+		  		  <if test="dictLabel != null and dictLabel != ''"> and dict_label = #{dictLabel} </if>
+		  		  <if test="dictValue != null and dictValue != ''"> and dict_value = #{dictValue} </if>
+		  		  <if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
+		  		  <if test="cssClass != null and cssClass != ''"> and css_class = #{cssClass} </if>
+		  		  <if test="listClass != null and listClass != ''"> and list_class = #{listClass} </if>
+		  		  <if test="isDefault != null and isDefault != ''"> and is_default = #{isDefault} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ming.upms.system.domain.UpmsDictDataDO">
+		insert into upms_dict_data
+		(
+			`dict_code`, 
+			`dict_sort`, 
+			`dict_label`, 
+			`dict_value`, 
+			`dict_type`, 
+			`css_class`, 
+			`list_class`, 
+			`is_default`, 
+			`status`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`, 
+			`remark`
+		)
+		values
+		(
+			#{dictCode}, 
+			#{dictSort}, 
+			#{dictLabel}, 
+			#{dictValue}, 
+			#{dictType}, 
+			#{cssClass}, 
+			#{listClass}, 
+			#{isDefault}, 
+			#{status}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateTime}, 
+			#{remark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ming.upms.system.domain.UpmsDictDataDO">
+		update upms_dict_data 
+		<set>
+			<if test="dictSort != null">`dict_sort` = #{dictSort}, </if>
+			<if test="dictLabel != null">`dict_label` = #{dictLabel}, </if>
+			<if test="dictValue != null">`dict_value` = #{dictValue}, </if>
+			<if test="dictType != null">`dict_type` = #{dictType}, </if>
+			<if test="cssClass != null">`css_class` = #{cssClass}, </if>
+			<if test="listClass != null">`list_class` = #{listClass}, </if>
+			<if test="isDefault != null">`is_default` = #{isDefault}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="remark != null">`remark` = #{remark}</if>
+		</set>
+		where dict_code = #{dictCode}
+	</update>
+	
+	<delete id="remove">
+		delete from upms_dict_data where dict_code = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from upms_dict_data where dict_code in 
+		<foreach item="dictCode" collection="array" open="(" separator="," close=")">
+			#{dictCode}
+		</foreach>
+	</delete>
+
+</mapper>

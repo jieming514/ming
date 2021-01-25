@@ -5,19 +5,21 @@ import java.util.Date;
 
 
 /**
- * 参数配置类型表
+ * 字典类型表
  *
  * @author jie_ming514
  * @email jie_ming514@163.com
- * @date 2020-12-20 23:39:54
+ * @date 2021-01-25 23:06:39
  */
-public class UpmsConfigTypeDO implements Serializable {
+public class UpmsDictTypeDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // 参数类型主键
-    private Long configTypeId;
-    // 参数类型名称
-    private String typeName;
+    //字典主键
+    private Long dictId;
+    //字典名称
+    private String dictName;
+    //字典类型
+    private String dictType;
     //状态（0正常 1停用）
     private String status;
     //创建者
@@ -32,31 +34,45 @@ public class UpmsConfigTypeDO implements Serializable {
     private String remark;
 
     /**
-     * 设置：参数类型主键
+     * 设置：字典主键
      */
-    public void setConfigTypeId(Long configTypeId) {
-        this.configTypeId = configTypeId;
+    public void setDictId(Long dictId) {
+        this.dictId = dictId;
     }
 
     /**
-     * 获取：参数类型主键
+     * 获取：字典主键
      */
-    public Long getConfigTypeId() {
-        return configTypeId;
+    public Long getDictId() {
+        return dictId;
     }
 
     /**
-     * 设置：参数类型名称
+     * 设置：字典名称
      */
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setDictName(String dictName) {
+        this.dictName = dictName;
     }
 
     /**
-     * 获取：参数类型名称
+     * 获取：字典名称
      */
-    public String getTypeName() {
-        return typeName;
+    public String getDictName() {
+        return dictName;
+    }
+
+    /**
+     * 设置：字典类型
+     */
+    public void setDictType(String dictType) {
+        this.dictType = dictType;
+    }
+
+    /**
+     * 获取：字典类型
+     */
+    public String getDictType() {
+        return dictType;
     }
 
     /**

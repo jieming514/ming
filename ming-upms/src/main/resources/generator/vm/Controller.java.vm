@@ -36,14 +36,14 @@ public class ${className}Controller {
 	private ${className}Service ${classname}Service;
 	
 	@GetMapping()
-	@RequiresPermissions("${pathName}:${classname}:${classname}")
+	@RequiresPermissions("${pathName}:${classname}:read")
 	String ${className}(){
 	    return "${pathName}/${classname}/${classname}";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("${pathName}:${classname}:${classname}")
+	@RequiresPermissions("${pathName}:${classname}:read")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
