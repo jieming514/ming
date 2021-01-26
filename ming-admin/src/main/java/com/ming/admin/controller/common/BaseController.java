@@ -28,11 +28,17 @@ public class BaseController {
     }
 
     /**
-     * 获取用户姓名
+     * 获取用户账号
      * @return
      */
     public String getUserName() {
         return getUser().getUsername();
     }
 
+    /**
+     * 获取用户真实姓名
+     */
+    public String getRealName() {
+        return getUser().getRealname();
+    }
 }

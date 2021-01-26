@@ -158,4 +158,41 @@ public class UpmsDictTypeDO implements Serializable {
     public String getRemark() {
         return remark;
     }
+
+    /**
+     * 添加创建人
+     * @param creator
+     */
+    public void addCreator(String creator) {
+        this.createBy = creator;
+        this.createTime = new Date();
+        this.updateBy = creator;
+        this.updateTime = new Date();
+    }
+
+    /**
+     * 添加创建人
+     * @param updater
+     */
+    public void addUpdater(String updater) {
+        this.updateBy = updater;
+        this.updateTime = new Date();
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("UpmsDictTypeDO{");
+        sb.append("dictId=").append(dictId);
+        sb.append(", dictName='").append(dictName).append('\'');
+        sb.append(", dictType='").append(dictType).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", createBy='").append(createBy).append('\'');
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateBy='").append(updateBy).append('\'');
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

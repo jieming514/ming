@@ -1,102 +1,106 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">
-								<label class="col-sm-3 control-label">帐号：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="username" name="username" class="form-control" type="text" autocomplete="off">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">密码：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="password" name="password" class="form-control" type="password" autocomplete="off">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">姓名：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="realname" name="realname" class="form-control" type="text" autocomplete="off">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">性别：<strong style="color:red">*</strong></label>
-								<div class="col-sm-3">
-									<select class="form-control" id="sex" name="sex">
-										<option value="1" selected>男</option>
-										<option value="0">女</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group" hidden>
-								<label class="col-sm-3 control-label">组织机构ID：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="organizationId" name="organizationId" class="form-control"
-										   value="0" type="hidden" readonly="true">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">组织机构名称：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="organizationName" name="organizationName" class="form-control" type="text" onclick="getTree()"
-										   readonly="true" placeholder="点击选择组织机构">
-								</div>
-							</div>
-							<div class="form-group" hidden>
-								<label class="col-sm-3 control-label">头像：</label>
-								<div class="col-sm-8">
-									<input id="avatar" name="avatar" class="form-control" type="text"
-									   value="/img/profile_small03.jpg">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">电话：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="phone" name="phone" class="form-control" type="text" autocomplete="off">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">邮箱：<strong style="color:red">*</strong></label>
-								<div class="col-sm-8">
-									<input id="email" name="email" class="form-control" type="text" autocomplete="off">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">状态：</label>
-								<div class="col-sm-8">
-									<label class="radio-inline">
-										<input type="radio" name="locked" value="0" checked/>
-										正常
-									</label> <label class="radio-inline">
-										<input type="radio" name="locked" value="1" />
-										禁用
-									</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="button" class="btn btn-primary" onclick="save()">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-	</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script src="/plugins/validate/js/jquery.validate.extend.js"
-		th:src="@{/plugins/validate/js/jquery.validate.extend.js}"></script>
-	<script type="text/javascript" src="/js/appjs/system/upmsUser/add.js"
-		th:src="@{/js/appjs/system/upmsUser/add.js}">
-	</script>
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">帐号：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="username" name="username" class="form-control" type="text"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="password" name="password" class="form-control" type="password"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">姓名：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="realname" name="realname" class="form-control" type="text"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">性别：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="sex" name="sex">
+                                    <option value="1" selected>男</option>
+                                    <option value="0">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label class="col-sm-3 control-label">组织机构ID：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="organizationId" name="organizationId" class="form-control"
+                                       value="0" type="hidden" readonly="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">组织机构名称：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="organizationName" name="organizationName" class="form-control" type="text"
+                                       onclick="getTree()"
+                                       readonly="true" placeholder="点击选择组织机构">
+                            </div>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label class="col-sm-3 control-label">头像：</label>
+                            <div class="col-sm-8">
+                                <input id="avatar" name="avatar" class="form-control" type="text"
+                                       value="/img/profile_small03.jpg">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">电话：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="phone" name="phone" class="form-control" type="text" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱：<strong style="color:red">*</strong></label>
+                            <div class="col-sm-8">
+                                <input id="email" name="email" class="form-control" type="text" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态：</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="locked" value="0" checked/>
+                                    正常
+                                </label> <label class="radio-inline">
+                                <input type="radio" name="locked" value="1"/>
+                                禁用
+                            </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="button" class="btn btn-primary" onclick="save()">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script src="/plugins/validate/js/jquery.validate.extend.js"
+        th:src="@{/plugins/validate/js/jquery.validate.extend.js}"></script>
+<script type="text/javascript" src="/js/appjs/system/upmsUser/add.js"
+        th:src="@{/js/appjs/system/upmsUser/add.js}">
+</script>
 </body>
 </html>

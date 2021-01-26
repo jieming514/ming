@@ -1,6 +1,5 @@
 var prefix =  ctx + "/system/upmsDictType"
 
-
 $(function() {
 	load();
 });
@@ -62,7 +61,7 @@ function load() {
 								},
 																{
 									field : 'status', 
-									title : '状态（0正常 1停用）' 
+									title : '状态'
 								},
 																{
 									field : 'createBy', 
