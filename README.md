@@ -92,12 +92,12 @@
 
 ## 系统演示截图
 
-| ![登录页面](_doc/show/login.png)  | ![主页面](_doc/show/main.png)  |
+| ![登录页面](doc/show/login.png)  | ![主页面](doc/show/main.png)  |
 |  ----  | ----  |
-| ![用户维护页面](_doc/show/user.png) | ![个人维护页面](_doc/show/personal.png) |
-| ![角色编辑页面](_doc/show/role.png) | ![角色用户管理页面](_doc/show/roleUser.png) |
-| ![资源管理页面](_doc/show/permission.png) |![系统列表页面](_doc/show/system.png)|
-| ![组织树管理](_doc/show/tree.png) | ![日志管理页面](_doc/show/userlog.png) |
+| ![用户维护页面](doc/show/user.png) | ![个人维护页面](doc/show/personal.png) |
+| ![角色编辑页面](doc/show/role.png) | ![角色用户管理页面](doc/show/roleUser.png) |
+| ![资源管理页面](doc/show/permission.png) |![系统列表页面](doc/show/system.png)|
+| ![组织树管理](doc/show/tree.png) | ![日志管理页面](doc/show/userlog.png) |
 
 ## 参与开发
 
