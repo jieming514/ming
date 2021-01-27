@@ -116,4 +116,4 @@
 
 > 项目的发展离不开大家的支持，请作者喝杯奶茶吧！
 
-![微信支付宝捐赠](_doc/show/contribution.png)
+![微信支付宝捐赠](doc/show/contribution.png)

@@ -30,14 +30,14 @@ public class UpmsDictDataController extends BaseController {
     private UpmsDictDataService upmsDictDataService;
 
     @GetMapping()
-    @RequiresPermissions("system:upmsDictData:read")
+    @RequiresPermissions("system:upmsDict:read")
     String UpmsDictData() {
         return "system/upmsDictData/upmsDictData";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("system:upmsDictData:read")
+    @RequiresPermissions("system:upmsDict:read")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -48,13 +48,13 @@ public class UpmsDictDataController extends BaseController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("system:upmsDictData:add")
+    @RequiresPermissions("system:upmsDict:add")
     String add() {
         return "system/upmsDictData/add";
     }
 
     @GetMapping("/edit/{dictCode}")
-    @RequiresPermissions("system:upmsDictData:edit")
+    @RequiresPermissions("system:upmsDict:edit")
     String edit(@PathVariable("dictCode") Long dictCode, Model model) {
         UpmsDictDataDO upmsDictData = upmsDictDataService.get(dictCode);
         model.addAttribute("upmsDictData", upmsDictData);
@@ -66,7 +66,7 @@ public class UpmsDictDataController extends BaseController {
      */
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("system:upmsDictData:add")
+    @RequiresPermissions("system:upmsDict:add")
     public R save(UpmsDictDataDO upmsDictData) {
         if (upmsDictDataService.save(upmsDictData) > 0) {
             return R.ok();
@@ -79,7 +79,7 @@ public class UpmsDictDataController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("system:upmsDictData:edit")
+    @RequiresPermissions("system:upmsDict:edit")
     public R update(UpmsDictDataDO upmsDictData) {
         upmsDictDataService.update(upmsDictData);
         return R.ok();
@@ -90,7 +90,7 @@ public class UpmsDictDataController extends BaseController {
      */
     @PostMapping("/remove")
     @ResponseBody
-    @RequiresPermissions("system:upmsDictData:remove")
+    @RequiresPermissions("system:upmsDict:remove")
     public R remove(Long dictCode) {
         if (upmsDictDataService.remove(dictCode) > 0) {
             return R.ok();
@@ -103,7 +103,7 @@ public class UpmsDictDataController extends BaseController {
      */
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("system:upmsDictData:batchRemove")
+    @RequiresPermissions("system:upmsDict:remove")
     public R remove(@RequestParam("ids[]") Long[] dictCodes) {
         upmsDictDataService.batchRemove(dictCodes);
         return R.ok();

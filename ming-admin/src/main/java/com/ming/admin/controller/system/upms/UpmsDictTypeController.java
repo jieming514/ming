@@ -32,14 +32,14 @@ public class UpmsDictTypeController extends BaseController {
     private UpmsDictTypeService upmsDictTypeService;
 
     @GetMapping()
-    @RequiresPermissions("system:upmsDictType:read")
+    @RequiresPermissions("system:upmsDict:read")
     String UpmsDictType() {
         return "system/upmsDictType/upmsDictType";
     }
 
     @ResponseBody
     @GetMapping("/list")
-    @RequiresPermissions("system:upmsDictType:read")
+    @RequiresPermissions("system:upmsDict:read")
     public PageUtils list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -50,13 +50,13 @@ public class UpmsDictTypeController extends BaseController {
     }
 
     @GetMapping("/add")
-    @RequiresPermissions("system:upmsDictType:add")
+    @RequiresPermissions("system:upmsDict:add")
     String add() {
         return "system/upmsDictType/add";
     }
 
     @GetMapping("/edit/{dictId}")
-    @RequiresPermissions("system:upmsDictType:edit")
+    @RequiresPermissions("system:upmsDict:edit")
     String edit(@PathVariable("dictId") Long dictId, Model model) {
         UpmsDictTypeDO upmsDictType = upmsDictTypeService.get(dictId);
         model.addAttribute("upmsDictType", upmsDictType);
@@ -67,7 +67,7 @@ public class UpmsDictTypeController extends BaseController {
     @Log(value = "保存字典类型", type = LogType.INSERT)
     @ResponseBody
     @PostMapping("/save")
-    @RequiresPermissions("system:upmsDictType:add")
+    @RequiresPermissions("system:upmsDict:add")
     public R save(UpmsDictTypeDO upmsDictType) {
         upmsDictType.addCreator(getUserName());
         if (upmsDictTypeService.save(upmsDictType) > 0) {
@@ -79,7 +79,7 @@ public class UpmsDictTypeController extends BaseController {
     @Log(value = "修改字典类型", type = LogType.UPDATE)
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("system:upmsDictType:edit")
+    @RequiresPermissions("system:upmsDict:edit")
     public R update(UpmsDictTypeDO upmsDictType) {
         upmsDictType.addUpdater(getUserName());
         upmsDictTypeService.update(upmsDictType);
@@ -90,7 +90,7 @@ public class UpmsDictTypeController extends BaseController {
     @Log(value = "删除字典类型", type = LogType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    @RequiresPermissions("system:upmsDictType:remove")
+    @RequiresPermissions("system:upmsDict:remove")
     public R remove(Long dictId) {
         if (upmsDictTypeService.remove(dictId) > 0) {
             return R.ok();
@@ -101,7 +101,7 @@ public class UpmsDictTypeController extends BaseController {
     @Log(value = "批量删除字典类型", type = LogType.DELETE)
     @PostMapping("/batchRemove")
     @ResponseBody
-    @RequiresPermissions("system:upmsDictType:remove")
+    @RequiresPermissions("system:upmsDict:remove")
     public R remove(@RequestParam("ids[]") Long[] dictIds) {
         upmsDictTypeService.batchRemove(dictIds);
         return R.ok();

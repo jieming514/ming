@@ -33,11 +33,10 @@ function load() {
                                     title : '编号',
                                     align: 'center',
                                     valign: 'center',
-                                    width: '5%'
+                                    width : '6%',
                                 },{
                                     field : 'name',
                                     title : '资源名称',
-                                    width: '12%',
                                     fixed: true,
                                     formatter: function(value,row, index) {
                                         if (row == "") {
@@ -52,15 +51,14 @@ function load() {
                                     field : 'systemName',
                                     align: 'center',
                                     valign: 'center',
-                                    title : '所属系统',
-                                    width: '10%'
+                                    title : '所属系统'
                                 },
                                 {
                                     field : 'type',
                                     title : '类型',
                                     align: 'center',
                                     valign: 'center',
-                                    width: '5%',
+                                    width : '6%',
                                     formatter: function(value,item, index) {
                                         if(item.type == 1) {
                                             return "<span class='label label-success'>目录</span>";
@@ -75,30 +73,28 @@ function load() {
                                                                 {
                                     field : 'permissionValue',
                                     valign: 'center',
-                                    title : '权限值',
-                                    width: '12%'
+                                    title : '权限值'
                                 },
                                                                 {
                                     field : 'uri',
-                                    title : '路径',
-                                    width: '20%'
+                                    title : '路径'
                                 },
                                                                 {
                                     field : 'icon',
                                     align: 'center',
                                     valign: 'center',
+                                    width : '6%',
                                     title : '图标',
-                                    width: '5%',
                                     formatter: function(value,item, index) {
                                         return "<i class='" + item.icon + "' aria-hidden='true'></i>";
                                     }
                                 },
                                 {
                                     field : 'status',
-                                    align: 'center',
+                                    align : 'center',
                                     valign: 'center',
+                                    width : '6%',
                                     title : '状态',
-                                    width: '4%',
                                     formatter: function(value,item, index) {
                                         if(item.status == 0) {
                                             return "<span class='label label-warning'>禁用</span>";
@@ -109,16 +105,10 @@ function load() {
                                     }
                                 },
                                 {
-                                    field : 'ctime',
-                                    align: 'center',
-                                    valign: 'center',
-                                    title : '创建时间',
-                                    width: '8%'
-                                },
-                                {
                                     title : '操作',
                                     field : 'id',
                                     align : 'center',
+                                    width : '12%',
                                     formatter: function(value,item, index) {
                                         var a = '<a class="btn btn-info btn-sm '+s_add_h+'" href="#" mce_href="#" title="添加子节点" onclick="add('
                                                 + item.permissionId

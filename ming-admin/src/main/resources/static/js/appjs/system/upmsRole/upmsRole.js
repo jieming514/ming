@@ -49,7 +49,8 @@ function load() {
 								{
 									field : 'roleId',
 									align : 'center',
-									title : '编号' 
+									title : '编号',
+									width : '8%'
 								},
 								{
 									field : 'name',
