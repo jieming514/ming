@@ -87,12 +87,30 @@ function load() {
                                                                 {
                                     field : 'isDefault',
                                     title : '是否默认',
-                                    align : 'center'
+                                    align : 'center',
+                                    formatter : function(value, row, index) {
+                                        if(value == "N") {
+                                            return "<span class='label label-success'>是</span>";
+                                        } else if(value == "Y") {
+                                            return "<span class='label label-danger'>否</span>";
+                                        } else {
+                                            return "<span class='label label-warning'>未知</span>";
+                                        }
+                                    }
                                 },
                                                                 {
                                     field : 'status',
                                     title : '状态',
-                                    align : 'center'
+                                    align : 'center',
+                                    formatter : function(value, row, index) {
+                                        if(value == "0") {
+                                            return "<span class='label label-success'>正常</span>";
+                                        } else if(value == "1") {
+                                            return "<span class='label label-danger'>禁用</span>";
+                                        } else {
+                                            return "<span class='label label-warning'>未知</span>";
+                                        }
+                                    }
                                 },
                                                                 {
                                     field : 'dictSort',

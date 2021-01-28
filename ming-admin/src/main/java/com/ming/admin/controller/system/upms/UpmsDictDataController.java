@@ -1,6 +1,8 @@
 package com.ming.admin.controller.system.upms;
 
 import com.ming.admin.controller.common.BaseController;
+import com.ming.common.annotation.Log;
+import com.ming.common.enums.LogType;
 import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
@@ -61,33 +63,29 @@ public class UpmsDictDataController extends BaseController {
         return "system/upmsDictData/edit";
     }
 
-    /**
-     * 保存
-     */
+    @Log(value = "字典数据保存", type = LogType.INSERT)
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("system:upmsDict:add")
     public R save(UpmsDictDataDO upmsDictData) {
+        upmsDictData.addCreator(getUserName());
         if (upmsDictDataService.save(upmsDictData) > 0) {
             return R.ok();
         }
         return R.error();
     }
 
-    /**
-     * 修改
-     */
+    @Log(value = "字典数据更新", type = LogType.UPDATE)
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("system:upmsDict:edit")
     public R update(UpmsDictDataDO upmsDictData) {
+        upmsDictData.addUpdater(getUserName());
         upmsDictDataService.update(upmsDictData);
         return R.ok();
     }
 
-    /**
-     * 删除
-     */
+    @Log(value = "字典数据删除", type = LogType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("system:upmsDict:remove")
@@ -98,9 +96,7 @@ public class UpmsDictDataController extends BaseController {
         return R.error();
     }
 
-    /**
-     * 删除
-     */
+    @Log(value = "字典数据批量删除", type = LogType.DELETE)
     @PostMapping("/batchRemove")
     @ResponseBody
     @RequiresPermissions("system:upmsDict:remove")

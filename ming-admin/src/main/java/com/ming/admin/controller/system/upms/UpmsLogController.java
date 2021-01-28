@@ -104,7 +104,7 @@ public class UpmsLogController extends BaseController {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
-        String fileName = URLEncoder.encode(DOWNLOAD_FILE_NAME + "-" + DateUtils.getToday(), "UTF-8");
+        String fileName = URLEncoder.encode(DOWNLOAD_FILE_NAME + "-" + DateUtils.today(), "UTF-8");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
         EasyExcel.write(response.getOutputStream(), UpmsLogDO.class)
                 .sheet(DOWNLOAD_SHEET_NAME).doWrite(upmsLogList);
