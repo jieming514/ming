@@ -11,9 +11,9 @@
                     <form class="form-horizontal m-t" id="signupForm">
                         <input id="dict_code" name="dictCode" th:value="${upmsDictData.dictCode}" type="hidden">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">字典排序：</label>
+                            <label class="col-sm-3 control-label">字典类型：</label>
                             <div class="col-sm-8">
-                                <input id="dictSort" name="dictSort" th:value="${upmsDictData.dictSort}"
+                                <input id="dictType" name="dictType" th:value="${upmsDictData.dictType}"
                                        class="form-control" type="text">
                             </div>
                         </div>
@@ -32,14 +32,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">字典类型：</label>
+                            <label class="col-sm-3 control-label">备注：</label>
                             <div class="col-sm-8">
-                                <input id="dictType" name="dictType" th:value="${upmsDictData.dictType}"
-                                       class="form-control" type="text">
+                                <input id="remark" name="remark" th:value="${upmsDictData.remark}" class="form-control"
+                                       type="text">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">样式属性（其他样式扩展）：</label>
+                            <label class="col-sm-3 control-label">样式属性：</label>
                             <div class="col-sm-8">
                                 <input id="cssClass" name="cssClass" th:value="${upmsDictData.cssClass}"
                                        class="form-control" type="text">
@@ -47,30 +47,44 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">表格回显样式：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="listClass" name="listClass" onchange="changeLabel()">
+                                    <option value="default" th:field="*{upmsDictData.listClass}">默认</option>
+                                    <option value="primary" th:field="*{upmsDictData.listClass}">主要</option>
+                                    <option value="success" th:field="*{upmsDictData.listClass}">成功</option>
+                                    <option value="info" th:field="*{upmsDictData.listClass}">信息</option>
+                                    <option value="warning" th:field="*{upmsDictData.listClass}">警告</option>
+                                    <option value="danger" th:field="*{upmsDictData.listClass}">危险</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2" style="padding-top: 8px;">
+                                <span id="labelShow" class="label label-default">默认</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否默认：</label>
                             <div class="col-sm-8">
-                                <input id="listClass" name="listClass" th:value="${upmsDictData.listClass}"
+                                <select class="form-control" id="isDefault" name="isDefault">
+                                    <option value="Y" th:field="*{upmsDictData.isDefault}">是</option>
+                                    <option value="N" th:field="*{upmsDictData.isDefault}">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态：</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="status" name="status">
+                                    <option value="1" th:field="*{upmsDictData.status}">正常</option>
+                                    <option value="0" th:field="*{upmsDictData.status}">禁用</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">字典排序：</label>
+                            <div class="col-sm-8">
+                                <input id="dictSort" name="dictSort" th:value="${upmsDictData.dictSort}"
                                        class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">是否默认（Y是 N否）：</label>
-                            <div class="col-sm-8">
-                                <input id="isDefault" name="isDefault" th:value="${upmsDictData.isDefault}"
-                                       class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">状态（0正常 1停用）：</label>
-                            <div class="col-sm-8">
-                                <input id="status" name="status" th:value="${upmsDictData.status}" class="form-control"
-                                       type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">备注：</label>
-                            <div class="col-sm-8">
-                                <input id="remark" name="remark" th:value="${upmsDictData.remark}" class="form-control"
-                                       type="text">
                             </div>
                         </div>
                         <div class="form-group">

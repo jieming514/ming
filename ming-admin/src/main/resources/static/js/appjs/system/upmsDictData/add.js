@@ -32,6 +32,7 @@ function save() {
 	});
 
 }
+
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
@@ -46,4 +47,13 @@ function validateRule() {
 			}
 		}
 	})
+}
+
+//修改标签样式
+function changeLabel() {
+    var labelType = $('#listClass').val();
+    var labelName = $('#listClass').find("option:selected").text();
+    $('#labelShow').removeClass();
+    $('#labelShow').addClass("label label-"+labelType);
+    $('#labelShow').text(labelName);
 }

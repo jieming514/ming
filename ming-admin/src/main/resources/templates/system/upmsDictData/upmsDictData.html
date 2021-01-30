@@ -52,31 +52,27 @@
 <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 <div>
     <script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_resetPwd_h = 'hidden';
 
     </script>
 </div>
 <div shiro:hasPermission="system:upmsDictData:edit">
     <script type="text/javascript">
-				s_edit_h = '';
-
+        s_edit_h = '';
 
     </script>
 </div>
 <div shiro:hasPermission="system:upmsDictData:remove">
     <script type="text/javascript">
-				var s_remove_h = '';
-
+        var s_remove_h = '';
 
     </script>
 </div>
 <div shiro:hasPermission="system:upmsDictData:resetPwd">
     <script type="text/javascript">
-				var s_resetPwd_h = '';
-
+        var s_resetPwd_h = '';
 
     </script>
 </div>

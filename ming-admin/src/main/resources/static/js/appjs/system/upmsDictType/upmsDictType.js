@@ -60,7 +60,7 @@ function load() {
                                     field : 'dictType',
                                     title : '字典类型',
                                     formatter : function(value, row, index) {
-                                        return "<a onclick='showDictData()'>" + value + "</a>"
+                                        return "<a title='点击显示详细内容' onclick='showDictData()'>" + value + "</a>"
                                     }
                                 },
                                                                 {
