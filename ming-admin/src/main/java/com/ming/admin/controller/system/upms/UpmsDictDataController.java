@@ -8,6 +8,7 @@ import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsDictDataDO;
 import com.ming.upms.system.service.UpmsDictDataService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class UpmsDictDataController extends BaseController {
         return "system/upmsDictData/upmsDictData";
     }
 
+    @ApiOperation(value = "字典类型列表（分页）")
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("system:upmsDict:read")
@@ -47,6 +49,15 @@ public class UpmsDictDataController extends BaseController {
         int total = upmsDictDataService.count(query);
         PageUtils pageUtils = new PageUtils(upmsDictDataList, total);
         return pageUtils;
+    }
+
+    @ApiOperation(value = "字典类型列表（不分页）")
+    @ResponseBody
+    @GetMapping("/useList")
+    @RequiresPermissions("system:upmsDict:read")
+    public List<UpmsDictDataDO> useList(@RequestParam Map<String, Object> params) {
+        List<UpmsDictDataDO> upmsDictDataList = upmsDictDataService.list(params);
+        return upmsDictDataList;
     }
 
     @GetMapping("/add")

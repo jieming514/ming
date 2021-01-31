@@ -9,6 +9,8 @@ import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsDictTypeDO;
 import com.ming.upms.system.service.UpmsDictDataService;
 import com.ming.upms.system.service.UpmsDictTypeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import java.util.Map;
  * @date 2021-01-25 23:06:39
  */
 
+@Api(tags = "字典类型管理页面")
 @Controller
 @RequestMapping("/system/upmsDictType")
 public class UpmsDictTypeController extends BaseController {
@@ -43,6 +46,8 @@ public class UpmsDictTypeController extends BaseController {
         return "system/upmsDictType/upmsDictType";
     }
 
+
+    @ApiOperation(value = "字典类型列表（分页）")
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("system:upmsDict:read")
@@ -54,6 +59,7 @@ public class UpmsDictTypeController extends BaseController {
         PageUtils pageUtils = new PageUtils(upmsDictTypeList, total);
         return pageUtils;
     }
+
 
     @GetMapping("/add")
     @RequiresPermissions("system:upmsDict:add")

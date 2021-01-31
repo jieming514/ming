@@ -1,6 +1,9 @@
-var prefix = ctx + "/system/upmsDictData"
+var prefix = ctx + "/system/upmsDictData";
+var dictDataType = "sys_dict_status"
+var dictDataList = {}
 
 $(function() {
+    getDictLabel(dictDataType);
     load();
 });
 
@@ -88,9 +91,9 @@ function load() {
                                 title : '是否默认',
                                 align : 'center',
                                 formatter : function(value, row, index) {
-                                    if(value == "N") {
+                                    if(value == "Y") {
                                         return "<span class='label label-success'>是</span>";
-                                    } else if(value == "Y") {
+                                    } else if(value == "N") {
                                         return "<span class='label label-danger'>否</span>";
                                     } else {
                                         return "<span class='label label-warning'>未知</span>";
@@ -102,13 +105,7 @@ function load() {
                                 title : '状态',
                                 align : 'center',
                                 formatter : function(value, row, index) {
-                                    if(value == "0") {
-                                        return "<span class='label label-success'>正常</span>";
-                                    } else if(value == "1") {
-                                        return "<span class='label label-danger'>禁用</span>";
-                                    } else {
-                                        return "<span class='label label-warning'>未知</span>";
-                                    }
+                                    return selectDictLabel(dictDataList, value);
                                 }
                             },
                                                             {
@@ -217,6 +214,35 @@ function batchRemove() {
 	});
 }
 
+//退回
 function goBack() {
-    window.location = ctx + "/system/upmsDictType"
+    window.location = ctx + "/system/upmsDictType";
+}
+
+
+//获取标签样式
+function getDictLabel(dictType) {
+    $.ajax({
+        type : 'GET',
+        data : {
+            "dictType" : dictType
+        },
+        url : ctx + '/system/upmsDictData/useList',
+        success : function(r) {
+            dictDataList = r.rows;
+        }
+    });
+}
+
+//选择标签样式
+function selectDictLabel(list, value) {
+    if(list == null) {
+        getDictLabel(dictDataType);
+    }
+    for(let index in list) {
+        if(list[index].dictValue == value) {
+            return "<span class='label label-"+ row.listClass +"'>"+row.dictLabel+"</span>";
+        }
+    }
+    return value;
 }

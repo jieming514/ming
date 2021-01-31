@@ -1,6 +1,9 @@
 var prefix =  ctx + "/system/upmsDictType"
+var dictDataType = "sys_dict_status"
+var dictDataList = {}
 
 $(function() {
+    getDictLabel(dictDataType)
     load();
 });
 
@@ -72,12 +75,7 @@ function load() {
                                     title : '状态',
                                     align : 'center',
                                     formatter : function(value, row, index) {
-                                        if(value == 0) {
-                                              return "<span class='label label-success'>正常</span>";
-                                        }else if(value == 1) {
-                                            return "<span class='label label-danger'>禁用</span>";
-                                        }
-                                        return "<b style='color=red'>未知</b>";
+                                        return selectDictLabel(dictDataList, value);
                                     }
                                 },
                                                                 {
@@ -200,4 +198,28 @@ function batchRemove() {
 //跳转到明细页面
 function showDictData(dictId) {
     location.href = prefix + "/detail/"+dictId;
+}
+
+//获取标签样式
+function getDictLabel(dictType) {
+    $.ajax({
+        type : 'GET',
+        data : {
+            "dictType" : dictType
+        },
+        url : ctx + '/system/upmsDictData/useList',
+        success : function(r) {
+            dictDataList = r.rows;
+        }
+    });
+}
+
+//选择标签样式
+function selectDictLabel(list, value) {
+    for(let index in list) {
+        if(list[index].dictValue == value) {
+            return "<span class='label label-"+ row.listClass +"'>"+row.dictLabel+"</span>";
+        }
+    }
+    return value;
 }
