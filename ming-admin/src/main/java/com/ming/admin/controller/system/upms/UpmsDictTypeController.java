@@ -7,11 +7,13 @@ import com.ming.common.utils.PageUtils;
 import com.ming.common.utils.Query;
 import com.ming.common.utils.R;
 import com.ming.upms.system.domain.UpmsDictTypeDO;
+import com.ming.upms.system.service.UpmsDictDataService;
 import com.ming.upms.system.service.UpmsDictTypeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,8 +30,12 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/upmsDictType")
 public class UpmsDictTypeController extends BaseController {
+
     @Autowired
     private UpmsDictTypeService upmsDictTypeService;
+
+    @Autowired
+    private UpmsDictDataService upmsDictDataService;
 
     @GetMapping()
     @RequiresPermissions("system:upmsDict:read")
@@ -106,5 +112,17 @@ public class UpmsDictTypeController extends BaseController {
         upmsDictTypeService.batchRemove(dictIds);
         return R.ok();
     }
+
+    /**
+     * 查询字典详细
+     */
+    @RequiresPermissions("system:upmsDict:read")
+    @GetMapping("/detail/{dictId}")
+    public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap) {
+        mmap.put("dict", upmsDictTypeService.get(dictId));
+        mmap.put("dictList", upmsDictTypeService.listAll());
+        return "/system/upmsDictData/upmsDictData";
+    }
+
 
 }

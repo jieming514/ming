@@ -10,13 +10,18 @@
                 <form id="userForm" class="form-horizontal m-t">
                     <input id="organizationId" name="organizationId" class="form-control" type="hidden">
                     <div class="form-group">
+                        <label class="col-sm-1 control-label" for="dictType">字典类型:</label>
+                        <div class="col-sm-2">
+                            <select id="dictType" name="dictType" class="form-control">
+                                <option th:each="item:${dictList}"
+                                        th:value="${item.dictType}"
+                                        th:text="${item.dictName}"
+                                        th:field="*{dict.dictType}"></option>
+                            </select>
+                        </div>
                         <label class="col-sm-1 control-label" for="dictName">字典名称:</label>
                         <div class="col-sm-2">
                             <input id="dictName" name="dictName" class="form-control" type="text">
-                        </div>
-                        <label class="col-sm-1 control-label" for="dictType">字典类型:</label>
-                        <div class="col-sm-2">
-                            <input id="dictType" name="dictType" class="form-control" type="text">
                         </div>
                         <div class="col-sm-2">
                             <button type="button" id="serachBtn" class="btn btn-success"
@@ -40,6 +45,9 @@
                                 class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                        <button type="button" class="btn  btn-warning" onclick="goBack()">
+                            <i class="fa fa-reply-all" aria-hidden="true"></i>返回
                         </button>
                     </div>
                 </div>

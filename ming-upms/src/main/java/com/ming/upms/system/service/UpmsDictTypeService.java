@@ -18,6 +18,8 @@ public interface UpmsDictTypeService {
 
     List<UpmsDictTypeDO> list(Map<String, Object> map);
 
+    List<UpmsDictTypeDO> listAll();
+
     int count(Map<String, Object> map);
 
     int save(UpmsDictTypeDO upmsDictType);

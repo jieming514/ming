@@ -26,6 +26,11 @@ public class UpmsDictTypeServiceImpl implements UpmsDictTypeService {
     }
 
     @Override
+    public List<UpmsDictTypeDO> listAll() {
+        return list(null);
+    }
+
+    @Override
     public int count(Map<String, Object> map) {
         return upmsDictTypeDao.count(map);
     }

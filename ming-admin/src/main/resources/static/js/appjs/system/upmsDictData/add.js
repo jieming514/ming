@@ -1,3 +1,5 @@
+var prefix = ctx + "/system/upmsDictData";
+
 $().ready(function() {
 	validateRule();
 });
@@ -11,7 +13,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/upmsDictData/save",
+		url : prefix + "/save",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -34,19 +36,31 @@ function save() {
 }
 
 function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
-		}
-	})
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#signupForm").validate({
+        rules : {
+            dictType : {
+                required : true
+            },
+            dictLabel : {
+                required : true
+            },
+            dictValue : {
+                required : true
+            }
+        },
+        messages : {
+            dictType : {
+                required : icon + "请输入字典类型"
+            },
+            dictLabel : {
+                required : icon + "请输入字典标签"
+            },
+            dictValue : {
+                required : icon + "请输入字典键值"
+            }
+        }
+    });
 }
 
 //修改标签样式
