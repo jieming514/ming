@@ -63,6 +63,7 @@
         var s_edit_h = 'hidden';
         var s_remove_h = 'hidden';
         var s_resetPwd_h = 'hidden';
+        var dictDataList = [[${@upmsDictDataService.getType('sys_dict_status')}]];
 
     </script>
 </div>
@@ -81,7 +82,6 @@
 <div shiro:hasPermission="system:upmsDictData:resetPwd">
     <script type="text/javascript">
         var s_resetPwd_h = '';
-
     </script>
 </div>
 </div>

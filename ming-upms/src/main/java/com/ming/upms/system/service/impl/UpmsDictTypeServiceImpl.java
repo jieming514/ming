@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Service
+@Service("upmsDictTypeService")
 public class UpmsDictTypeServiceImpl implements UpmsDictTypeService {
     @Autowired
     private UpmsDictTypeDao upmsDictTypeDao;

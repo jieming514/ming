@@ -4,6 +4,7 @@ import com.ming.upms.common.util.ShiroUtils;
 import com.ming.upms.system.domain.UpmsUserDO;
 import com.ming.upms.system.service.UpmsPermissionService;
 import com.ming.upms.system.service.UpmsUserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 /**
  * 自定义Realm 处理登录 权限
+ * @author jie_ming514
  * @param
  * @return
  */
@@ -72,5 +74,12 @@ public class UserRealm extends AuthorizingRealm {
         }
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
         return info;
+    }
+
+    /**
+     * 清理缓存权限
+     */
+    public void clearCachedAuthorizationInfo() {
+        this.clearCachedAuthorizationInfo(SecurityUtils.getSubject().getPrincipals());
     }
 }
