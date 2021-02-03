@@ -1,8 +1,5 @@
 package com.ming.upms.system.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -264,21 +261,22 @@ public class UpmsDictDataDO implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("dictCode", dictCode)
-                .append("dictSort", dictSort)
-                .append("dictLabel", dictLabel)
-                .append("dictValue", dictValue)
-                .append("dictType", dictType)
-                .append("cssClass", cssClass)
-                .append("listClass", listClass)
-                .append("isDefault", isDefault)
-                .append("status", status)
-                .append("createBy", createBy)
-                .append("createTime", createTime)
-                .append("updateBy", updateBy)
-                .append("updateTime", updateTime)
-                .append("remark", remark)
-                .toString();
+        final StringBuffer sb = new StringBuffer("UpmsDictDataDO{");
+        sb.append("dictCode=").append(dictCode);
+        sb.append(", dictSort=").append(dictSort);
+        sb.append(", dictLabel='").append(dictLabel).append('\'');
+        sb.append(", dictValue='").append(dictValue).append('\'');
+        sb.append(", dictType='").append(dictType).append('\'');
+        sb.append(", cssClass='").append(cssClass).append('\'');
+        sb.append(", listClass='").append(listClass).append('\'');
+        sb.append(", isDefault='").append(isDefault).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", createBy='").append(createBy).append('\'');
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateBy='").append(updateBy).append('\'');
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", remark='").append(remark).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

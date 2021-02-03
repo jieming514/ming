@@ -1,6 +1,7 @@
 package com.ming.upms.common.config;
 
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.ming.upms.common.shiro.UserRealm;
 import net.sf.ehcache.CacheManager;
 import org.apache.commons.io.IOUtils;
@@ -28,6 +29,7 @@ import java.util.LinkedHashMap;
 
 /**
  * Shiro 配置类
+ *
  * @author jie_ming514
  */
 @Configuration
@@ -154,5 +156,13 @@ public class ShiroConfig {
     @Bean("cacheManager2")
     CacheManager cacheManager() {
         return CacheManager.create();
+    }
+
+    /**
+     * thymeleaf模板引擎和shiro框架的整合
+     */
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 }
