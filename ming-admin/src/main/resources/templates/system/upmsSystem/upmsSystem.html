@@ -36,7 +36,7 @@
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
-                        <button shiro:hasPermission="system:upmsSystem:batchRemove" type="button"
+                        <button shiro:hasPermission="system:upmsSystem:remove" type="button"
                                 class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
@@ -54,7 +54,6 @@
     <script type="text/javascript">
         var s_edit_h = 'hidden';
         var s_remove_h = 'hidden';
-        var s_resetPwd_h = 'hidden';
     </script>
 </div>
 <div shiro:hasPermission="system:upmsSystem:edit">
@@ -65,11 +64,6 @@
 <div shiro:hasPermission="system:upmsSystem:remove">
     <script type="text/javascript">
         var s_remove_h = '';
-    </script>
-</div>
-<div shiro:hasPermission="system:upmsSystem:resetPwd">
-    <script type="text/javascript">
-        var s_resetPwd_h = '';
     </script>
 </div>
 </div>

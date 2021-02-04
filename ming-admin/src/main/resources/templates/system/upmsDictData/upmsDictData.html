@@ -41,7 +41,7 @@
                                 onclick="add()">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
-                        <button shiro:hasPermission="system:upmsSystem:batchRemove" type="button"
+                        <button shiro:hasPermission="system:upmsSystem:remove" type="button"
                                 class="btn  btn-danger"
                                 onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
@@ -59,12 +59,9 @@
 </div>
 
 <div>
-    <script type="text/javascript">
+    <script>
         var s_edit_h = 'hidden';
         var s_remove_h = 'hidden';
-        var s_resetPwd_h = 'hidden';
-        var dictDataList = [[${@upmsDictDataService.getType('sys_dict_status')}]];
-
     </script>
 </div>
 <div shiro:hasPermission="system:upmsDictData:edit">
@@ -77,11 +74,6 @@
     <script type="text/javascript">
         var s_remove_h = '';
 
-    </script>
-</div>
-<div shiro:hasPermission="system:upmsDictData:resetPwd">
-    <script type="text/javascript">
-        var s_resetPwd_h = '';
     </script>
 </div>
 </div>

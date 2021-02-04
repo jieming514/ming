@@ -6,6 +6,7 @@
 	body{height:auto;font-family: "Microsoft YaHei";}
 	button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
 
+
 </style>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
@@ -50,7 +51,7 @@
                                     onclick="add()">
                                 <i class="fa fa-plus" aria-hidden="true"></i>添加
                             </button>
-                            <button shiro:hasPermission="system:upmsUser:batchRemove" type="button"
+                            <button shiro:hasPermission="system:upmsUser:remove" type="button"
                                     class="btn  btn-danger"
                                     onclick="batchRemove()">
                                 <i class="fa fa-trash" aria-hidden="true"></i>删除
@@ -67,29 +68,20 @@
 
 <div>
     <script type="text/javascript">
-				var s_edit_h = 'hidden';
-				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
-
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
     </script>
 </div>
 <div shiro:hasPermission="system:upmsUser:edit">
     <script type="text/javascript">
-				s_edit_h = '';
-
+        s_edit_h = '';
     </script>
 </div>
 <div shiro:hasPermission="system:upmsUser:remove">
     <script type="text/javascript">
-				var s_remove_h = '';
-
+        var s_remove_h = '';
     </script>
 </div>
-<div shiro:hasPermission="system:upmsUser:resetPwd">
-    <script type="text/javascript">
-				var s_resetPwd_h = '';
-
-    </script>
 </div>
 </div>
 <div th:include="include :: footer"></div>
