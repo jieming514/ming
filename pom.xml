@@ -30,7 +30,7 @@
         <commons.fileupload.version>1.3.3</commons.fileupload.version>
         <easyexcel.version>2.2.6</easyexcel.version>
         <velocity.version>1.7</velocity.version>
-        <jsoup.version>1.8.3</jsoup.version>
+        <jsoup.version>1.14.2</jsoup.version>
     </properties>
 
     <!-- 依赖声明 -->
